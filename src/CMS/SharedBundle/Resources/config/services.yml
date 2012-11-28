@@ -1,0 +1,7 @@
+parameters:
+#    cms_shared.example.class: CMS\SharedBundle\Example
+
+services:
+#    cms_shared.example:
+#        class: %cms_shared.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

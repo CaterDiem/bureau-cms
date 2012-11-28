@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Defence CMS{% endblock %}</title>
+        <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />       
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/cmsshared/css/default.css') }}" />     
+            <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />    
+        
+        {% endblock %}                  
+            
+        {% stylesheets 
+            '@CMSSharedBundle/Resources/public/less/*.less' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />                 
+        {% endstylesheets %}                  
+        
+    </head>
+    <body>
+        <section id="page-wrapper">                        
+                
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+            <section class="flash-message">
+                <em>Notice</em>: {{ flashMessage }}
+            </section>
+            {% endfor %}
+            
+            <section id="page-topbar">
+                <div>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.email}, 'FOSUserBundle') }} |
+                        <a href="{{ path('fos_user_security_logout') }}">
+                            <span class="icon">&#59201;</span>
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}"><span class="icon">&#59200;</span>{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                    {% endif %}                                            
+                </div>
+            </section>
+            <header>
+            {% block content_header %}
+                <div id="logo">
+                <a href="{{ path('cms_shared_homepage') }}">
+                    <img src="{{ asset('bundles/cmsshared/images/bureau-logo.png') }}" alt="Bureau of Meteorology logo" />
+                </a>           
+                </div>                                    
+                
+
+                <nav id="top-menu">
+                    <ul>
+                        {% block content_header_more %}
+                            <li><a href="{{ path('cms_shared_homepage') }}">Home</a></li>
+                            <li><a href="{{ path('cms_page_view') }}">CMS</a></li>
+                        {% endblock %}
+                    </ul>
+                </nav>
+                
+            {% endblock %}
+            </header>
+            
+            <section id="page-content">
+                {% block content %}
+                {% endblock %}
+            </section>
+
+        </section>
+            
+        {% block javascripts %}
+        {% endblock %}      
+    </body>
+</html>

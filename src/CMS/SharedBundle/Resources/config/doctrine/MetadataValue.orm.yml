@@ -1,0 +1,35 @@
+CMS\SharedBundle\Entity\MetadataValue:
+    type: entity
+    table: metadata_value
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        value:
+            type: string
+            length: 45
+            fixed: false
+            nullable: true
+    manyToMany:
+        product:
+            targetEntity: Product
+            cascade: {  }
+            mappedBy: metadataValue
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    manyToOne:
+        metadata:
+            targetEntity: Metadata
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                metadata_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

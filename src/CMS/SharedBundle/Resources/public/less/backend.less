@@ -1,0 +1,163 @@
+
+/* 
+    Document   : backend.less
+    Created on : 23/10/2012, 12:03:44 PM
+    Author     : jtemplet
+    Description:
+        Backend styles. Icons, etc.
+*/
+
+// import our own stuff, which also includes elements.less
+@import "base-functions.less";
+
+// base page size stuff
+@page-width: 1000px;
+@page-padding: 20px;
+@internal-width: @page-width - @page-padding;
+
+
+// colours
+@bureau-white: #fafafa;
+@bureau-black: #0c0c0c;
+@bureau-blue: #165C7D;
+@bureau-light-blue: #00AFD7;
+@bureau-green:  #C4D600;
+@bureau-orange: #FFA300;
+@bureau-grey: #54585A;
+
+@button-inactive: @bureau-black;
+@button-active: @bureau-orange;
+@button-background: lighten(@bureau-grey, 65%);
+@button-border: lighten(@bureau-grey, 50%);
+@button-highlight: desaturate(@button-active,10%);
+@button-highlight-position: top;
+@button-highlight-size: 4px;
+
+root { 
+    display: block;
+}
+
+body {
+    width: 100%;
+    padding: 0px;
+    padding-top: 40px;
+    margin: 0px;
+    color: @bureau-black;
+}
+
+.icon {
+    font-family: EntypoRegular, entypo, sans-serif;        
+    font-size: 2em;    
+    line-height: 1px;
+    color: black;
+    position: relative;
+    top: 0.07em; // lol
+}
+
+.nav-button {
+    .rounded(3px);
+    .drop-shadow(0, 0, 5px, 10%);    
+    float:left;
+    display: block;
+    overflow: hidden;
+    border: 1px solid @button-border;
+
+    a {
+        display: block;        
+        padding: 0em 0.7em 0em 0.7em;
+        height: 40px;
+        min-width: 30px;
+        .gradient(@button-background, darken(@button-background, 2%), lighten(@button-background, 2%));
+        color: @button-inactive;
+        
+        overflow: hidden;           
+        border-bottom: @button-highlight-size solid darken(@button-background, 2%);    
+        border-left: 1px solid @button-border;
+        
+        margin: auto;
+
+        &:first-child {
+            border-left: 0px;
+        }
+
+        float: left;
+        
+        &:hover {
+            .transition-duration(0.1s);
+            .gradient(@button-background, lighten(@button-background, 22%), lighten(@button-background, 35%));
+            //.inner-shadow(0px, 2px, 6px, 0.2);
+            
+            color: @button-active;
+            cursor: pointer;
+            text-decoration: none;            
+            border-bottom: @button-highlight-size solid @button-highlight;                
+            overflow: hidden;          
+        }
+
+        .nav-icon {            
+            font-family: Entypo, sans-serif;        
+            line-height: 1;
+            font-size:3em;
+            display: block; float: left;                        
+            &:hover {
+                color: @button-active;
+            }
+        }
+        
+        .nav-label {
+            display: block;
+            float: left;
+            margin: 0.9em 0.5em;
+        }
+
+    }
+    
+}
+
+.box { 
+  color: @bureau-black;
+  border-color: lighten(@bureau-blue, 30%);
+  div { .drop-shadow(0, 0, 5px, 30%) }
+}
+
+#page-topbar
+{
+    margin: 0px;
+    padding: 10px 25px;    
+    position: fixed;    
+   
+    top: 0px;
+    left: 0px;
+    
+    width: 100%;
+    color: @bureau-white;
+    background-color: @bureau-blue;
+    border-bottom: 1px solid @bureau-black;
+    .inner-shadow(0, -2px, 5px, 30%);    
+    .gradient(@bureau-blue, @bureau-blue, lighten(@bureau-blue, 5%));
+    
+    a {
+        color: @bureau-white;
+        text-decoration: none;
+        &:hover {
+            color: @bureau-orange;     
+        }    
+    }
+}
+
+#page-wrapper
+{
+    width:  @internal-width;
+    margin: 0 auto;
+}
+
+#page-content
+{
+    background-color: @bureau-white;
+    border-color: lighten(@bureau-blue, 40%);
+    padding: 50px;
+    .rounded(10px);
+    .drop-shadow(0, 0, 5px, 30%);
+    margin-bottom: 20px;
+    word-wrap: break-word;    
+}

@@ -1,0 +1,63 @@
+CMS\SharedBundle\Entity\PageRevision:
+    type: entity
+    table: page_revision
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        revision:
+            type: integer
+            unsigned: true
+            nullable: true
+        created:
+            type: datetime
+            nullable: false
+        updated:
+            type: datetime
+            nullable: false
+        publishApproved:
+            type: boolean
+            nullable: false
+            column: publish_approved
+    manyToOne:
+        page:
+            targetEntity: Page
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                page_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        editor:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                editor_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        rootContainer:
+            targetEntity: Container
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                root_container_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        approver:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                approver_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

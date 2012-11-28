@@ -1,0 +1,21 @@
+// import elements.less, it provides basic css2/3 fancy things
+@import "elements.less";
+
+// simulate a text stroke / outline
+
+
+.text-shadow(@width: 1px, @height: 1px, @colour: lighten(black, 50%), @blur: 3px){
+  text-shadow:@width @width @blur @colour;
+}
+
+.text-outline (@width: 1px, @colour: black, @blur: 3px){      
+    text-shadow:
+    -@width -@width @blur @colour,  
+    @width -@width @blur @colour,  
+    -@width @width @blur @colour,  
+    @width @width @blur @colour;      
+}
+
+.text-glow(@size: 2px, @colour: white, @blur: 3px){
+    .text-outline(@size, @colour, @blur);
+}

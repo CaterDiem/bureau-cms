@@ -1,0 +1,111 @@
+<?php
+
+namespace CMS\SharedBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CMS\SharedBundle\Entity\PageCategoryChild
+ */
+class PageCategoryChild
+{
+    /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
+     * @var integer $sortOrder
+     */
+    private $sortOrder;
+
+    /**
+     * @var CMS\SharedBundle\Entity\PageCategory
+     */
+    private $page;
+
+    /**
+     * @var CMS\SharedBundle\Entity\PageCategory
+     */
+    private $child;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set sortOrder
+     *
+     * @param integer $sortOrder
+     * @return PageCategoryChild
+     */
+    public function setSortOrder($sortOrder)
+    {
+        $this->sortOrder = $sortOrder;
+    
+        return $this;
+    }
+
+    /**
+     * Get sortOrder
+     *
+     * @return integer 
+     */
+    public function getSortOrder()
+    {
+        return $this->sortOrder;
+    }
+
+    /**
+     * Set page
+     *
+     * @param CMS\SharedBundle\Entity\PageCategory $page
+     * @return PageCategoryChild
+     */
+    public function setPage(\CMS\SharedBundle\Entity\PageCategory $page = null)
+    {
+        $this->page = $page;
+    
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return CMS\SharedBundle\Entity\PageCategory 
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * Set child
+     *
+     * @param CMS\SharedBundle\Entity\PageCategory $child
+     * @return PageCategoryChild
+     */
+    public function setChild(\CMS\SharedBundle\Entity\PageCategory $child = null)
+    {
+        $this->child = $child;
+    
+        return $this;
+    }
+
+    /**
+     * Get child
+     *
+     * @return CMS\SharedBundle\Entity\PageCategory 
+     */
+    public function getChild()
+    {
+        return $this->child;
+    }
+}

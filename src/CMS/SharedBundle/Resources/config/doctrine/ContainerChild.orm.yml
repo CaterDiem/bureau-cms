@@ -1,0 +1,36 @@
+CMS\SharedBundle\Entity\ContainerChild:
+    type: entity
+    table: container_child
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        sortOrder:
+            type: integer
+            unsigned: true
+            nullable: true
+            column: sort_order
+    manyToOne:
+        container:
+            targetEntity: Container
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                container_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        child:
+            targetEntity: Container
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                child_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,251 @@
+<?php
+
+namespace CMS\SharedBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CMS\SharedBundle\Entity\PageRevision
+ */
+class PageRevision
+{
+    /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
+     * @var integer $revision
+     */
+    private $revision;
+
+    /**
+     * @var \DateTime $created
+     */
+    private $created;
+
+    /**
+     * @var \DateTime $updated
+     */
+    private $updated;
+
+    /**
+     * @var boolean $publishApproved
+     */
+    private $publishApproved;
+
+    /**
+     * @var CMS\SharedBundle\Entity\Page
+     */
+    private $page;
+
+    /**
+     * @var CMS\SharedBundle\Entity\User
+     */
+    private $editor;
+
+    /**
+     * @var CMS\SharedBundle\Entity\Container
+     */
+    private $rootContainer;
+
+    /**
+     * @var CMS\SharedBundle\Entity\User
+     */
+    private $approver;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set revision
+     *
+     * @param integer $revision
+     * @return PageRevision
+     */
+    public function setRevision($revision)
+    {
+        $this->revision = $revision;
+    
+        return $this;
+    }
+
+    /**
+     * Get revision
+     *
+     * @return integer 
+     */
+    public function getRevision()
+    {
+        return $this->revision;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return PageRevision
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return PageRevision
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set publishApproved
+     *
+     * @param boolean $publishApproved
+     * @return PageRevision
+     */
+    public function setPublishApproved($publishApproved)
+    {
+        $this->publishApproved = $publishApproved;
+    
+        return $this;
+    }
+
+    /**
+     * Get publishApproved
+     *
+     * @return boolean 
+     */
+    public function getPublishApproved()
+    {
+        return $this->publishApproved;
+    }
+
+    /**
+     * Set page
+     *
+     * @param CMS\SharedBundle\Entity\Page $page
+     * @return PageRevision
+     */
+    public function setPage(\CMS\SharedBundle\Entity\Page $page = null)
+    {
+        $this->page = $page;
+    
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return CMS\SharedBundle\Entity\Page 
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * Set editor
+     *
+     * @param CMS\SharedBundle\Entity\User $editor
+     * @return PageRevision
+     */
+    public function setEditor(\CMS\SharedBundle\Entity\User $editor = null)
+    {
+        $this->editor = $editor;
+    
+        return $this;
+    }
+
+    /**
+     * Get editor
+     *
+     * @return CMS\SharedBundle\Entity\User 
+     */
+    public function getEditor()
+    {
+        return $this->editor;
+    }
+
+    /**
+     * Set rootContainer
+     *
+     * @param CMS\SharedBundle\Entity\Container $rootContainer
+     * @return PageRevision
+     */
+    public function setRootContainer(\CMS\SharedBundle\Entity\Container $rootContainer = null)
+    {
+        $this->rootContainer = $rootContainer;
+    
+        return $this;
+    }
+
+    /**
+     * Get rootContainer
+     *
+     * @return CMS\SharedBundle\Entity\Container 
+     */
+    public function getRootContainer()
+    {
+        return $this->rootContainer;
+    }
+
+    /**
+     * Set approver
+     *
+     * @param CMS\SharedBundle\Entity\User $approver
+     * @return PageRevision
+     */
+    public function setApprover(\CMS\SharedBundle\Entity\User $approver = null)
+    {
+        $this->approver = $approver;
+    
+        return $this;
+    }
+
+    /**
+     * Get approver
+     *
+     * @return CMS\SharedBundle\Entity\User 
+     */
+    public function getApprover()
+    {
+        return $this->approver;
+    }
+}

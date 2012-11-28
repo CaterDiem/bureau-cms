@@ -1,0 +1,27 @@
+CMS\SharedBundle\Entity\Template:
+    type: entity
+    table: template
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        name:
+            type: string
+            length: 45
+            fixed: false
+            nullable: true
+    manyToOne:
+        rootContainer:
+            targetEntity: Container
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                root_container_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

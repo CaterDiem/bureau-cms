@@ -1,0 +1,128 @@
+<?php
+
+namespace CMS\SharedBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CMS\SharedBundle\Entity\MetadataValue
+ */
+class MetadataValue
+{
+    /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
+     * @var string $value
+     */
+    private $value;
+
+    /**
+     * @var CMS\SharedBundle\Entity\Metadata
+     */
+    private $metadata;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $product;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->product = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set value
+     *
+     * @param string $value
+     * @return MetadataValue
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+    
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return string 
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Set metadata
+     *
+     * @param CMS\SharedBundle\Entity\Metadata $metadata
+     * @return MetadataValue
+     */
+    public function setMetadata(\CMS\SharedBundle\Entity\Metadata $metadata = null)
+    {
+        $this->metadata = $metadata;
+    
+        return $this;
+    }
+
+    /**
+     * Get metadata
+     *
+     * @return CMS\SharedBundle\Entity\Metadata 
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * Add product
+     *
+     * @param CMS\SharedBundle\Entity\Product $product
+     * @return MetadataValue
+     */
+    public function addProduct(\CMS\SharedBundle\Entity\Product $product)
+    {
+        $this->product[] = $product;
+    
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param CMS\SharedBundle\Entity\Product $product
+     */
+    public function removeProduct(\CMS\SharedBundle\Entity\Product $product)
+    {
+        $this->product->removeElement($product);
+    }
+
+    /**
+     * Get product
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+}

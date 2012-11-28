@@ -1,0 +1,12 @@
+CMS\SharedBundle\Entity\ContainerType:
+    type: entity
+    table: container_type
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+    lifecycleCallbacks: {  }

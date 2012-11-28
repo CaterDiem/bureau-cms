@@ -1,0 +1,40 @@
+# route to handle base requests to /
+# routes to CMS/PageBundle/View index
+system_main:    
+    pattern: /
+    defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index' }
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+CMSPageBundle:
+    resource: "@CMSPageBundle/Resources/config/routing.yml"
+    prefix:   /cms/page/
+
+CMSSecurityBundle:
+    resource: "@CMSSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+cms_shared:
+    resource: "@CMSSharedBundle/Resources/config/routing.yml"
+    prefix:   /
+
+CMSAdminBundle:
+    resource: "@CMSAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+# Internal routing configuration to handle ESI
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal

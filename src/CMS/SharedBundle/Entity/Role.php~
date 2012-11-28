@@ -1,0 +1,128 @@
+<?php
+
+namespace CMS\SharedBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CMS\SharedBundle\Entity\Role
+ */
+class Role
+{
+    /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
+     * @var string $name
+     */
+    private $name;
+
+    /**
+     * @var string $permission
+     */
+    private $permission;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $group;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->group = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Role
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set permission
+     *
+     * @param string $permission
+     * @return Role
+     */
+    public function setPermission($permission)
+    {
+        $this->permission = $permission;
+    
+        return $this;
+    }
+
+    /**
+     * Get permission
+     *
+     * @return string 
+     */
+    public function getPermission()
+    {
+        return $this->permission;
+    }
+
+    /**
+     * Add group
+     *
+     * @param CMS\SharedBundle\Entity\Group $group
+     * @return Role
+     */
+    public function addGroup(\CMS\SharedBundle\Entity\Group $group)
+    {
+        $this->group[] = $group;
+    
+        return $this;
+    }
+
+    /**
+     * Remove group
+     *
+     * @param CMS\SharedBundle\Entity\Group $group
+     */
+    public function removeGroup(\CMS\SharedBundle\Entity\Group $group)
+    {
+        $this->group->removeElement($group);
+    }
+
+    /**
+     * Get group
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+}

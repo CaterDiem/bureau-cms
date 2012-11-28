@@ -1,0 +1,36 @@
+CMS\SharedBundle\Entity\PageCategoryChild:
+    type: entity
+    table: page_category_child
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        sortOrder:
+            type: integer
+            unsigned: true
+            nullable: true
+            column: sort_order
+    manyToOne:
+        page:
+            targetEntity: PageCategory
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                page_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        child:
+            targetEntity: PageCategory
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                child_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

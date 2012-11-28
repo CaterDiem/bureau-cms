@@ -1,0 +1,26 @@
+parameters:
+#    cms_admin.example.class: CMS\AdminBundle\Example
+
+services:
+#    cms_admin.example:
+#        class: %cms_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+  sonata.admin.page:
+    class: CMS\AdminBundle\Admin\PageAdmin
+    arguments: [null, 'CMS\SharedBundle\Entity\Page', 'SonataAdminBundle:CRUD']
+    calls:
+        - [setTranslationDomain, [CMSAdminBundle]]
+    tags:
+        - { name: sonata.admin, manager_type: orm, group: CMS, label: Pages }
+
+  sonata.admin.containers:
+    class: CMS\AdminBundle\Admin\ContainerAdmin
+    arguments: [null, 'CMS\SharedBundle\Entity\Container', 'SonataAdminBundle:CRUD']
+    calls:
+        - [setTranslationDomain, [CMSAdminBundle]]        
+        - [setTemplates, [@layout: CMSAdminBundle::layout.html.twig]]
+    tags:
+        - { name: sonata.admin, manager_type: orm, group: CMS, label: Containers }
+
+
+       

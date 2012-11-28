@@ -1,0 +1,11 @@
+CMS\SharedBundle\Entity\User:
+    type: entity
+    table: user
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY

@@ -1,0 +1,25 @@
+CMS\SharedBundle\Entity\PageCategory:
+    type: entity
+    table: page_category
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        name:
+            type: string
+            length: 45
+            fixed: false
+            nullable: true
+    manyToMany:
+        page:
+            targetEntity: Page
+            cascade: {  }
+            mappedBy: pageCategory
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

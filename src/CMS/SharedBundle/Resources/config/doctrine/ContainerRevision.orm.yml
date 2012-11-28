@@ -1,0 +1,41 @@
+CMS\SharedBundle\Entity\ContainerRevision:
+    type: entity
+    table: container_revision
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        revision:
+            type: integer
+            unsigned: true
+            nullable: true
+        created:
+            type: datetime
+            nullable: false
+        updated:
+            type: datetime
+            nullable: false
+    manyToOne:
+        container:
+            targetEntity: Container
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                container_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        editor:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                editor_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,32 @@
+{# src/CMS/PageBundle/Resources/views/Default/renderPage.html.twig #}
+{# author: jtemplet #}
+
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ page.slug }}{% endblock%}
+
+{% block content %}
+<h1><span class="icon">&#59201;</span>{{page.slug}}</h1>
+
+<nav class="nav-button">
+    <a href="#" title="login" >
+        <span class='nav-icon'>&#59200;</span>
+        <span class='nav-label'>Login</span>
+    </a>
+    
+    <a href="#">
+        <span class='nav-icon'>&#59140;</span>
+        <span class='nav-label'>Help</span>
+    </a>
+        
+    <a href="#">
+        <span class='nav-icon'>&#59136;</span>
+        <span class='nav-label'>Add User</span>
+    </a>
+        
+    <a href="#">
+        <span class='nav-icon'>&#59200;</span>        
+    </a>
+        
+</nav>
+{% endblock %}

@@ -1,0 +1,7 @@
+cms_shared_homepage:
+    pattern:  /layout/
+    defaults: { _controller: CMSSharedBundle:Default:layoutTest }
+
+cms_shared_dbtest:
+    pattern:  /dbtest/
+    defaults: { _controller: CMSSharedBundle:DatabaseTest:databaseTest }

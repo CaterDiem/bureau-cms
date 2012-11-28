@@ -1,0 +1,54 @@
+CMS\SharedBundle\Entity\Page:
+    type: entity
+    repositoryClass: CMS\SharedBundle\Entity\PageRepository
+    table: page
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        name:
+            type: string
+            length: 45
+            fixed: false
+            nullable: true
+    manyToMany:
+        pageCategory:
+            targetEntity: PageCategory
+            cascade: {  }
+            mappedBy: null
+            inversedBy: page
+            joinTable:
+                name: page_page_category
+                joinColumns:
+                    -
+                        name: page_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: page_category_id
+                        referencedColumnName: id
+            orderBy: null
+    manyToOne:
+        author:
+            targetEntity: User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                author_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        currentPageRevision:
+            targetEntity: PageRevision
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                current_page_revision_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,29 @@
+CMS\SharedBundle\Entity\Product:
+    type: entity
+    table: product
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+    manyToMany:
+        metadataValue:
+            targetEntity: MetadataValue
+            cascade: {  }
+            mappedBy: null
+            inversedBy: product
+            joinTable:
+                name: product_metadata_value
+                joinColumns:
+                    -
+                        name: product_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: metadata_value_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }
