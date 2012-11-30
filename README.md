@@ -7,6 +7,7 @@ Random header!
 ----------------------------------
 
 Here goes some content.
+
     When you indent stuff it looks purty.
 
   * dot points
