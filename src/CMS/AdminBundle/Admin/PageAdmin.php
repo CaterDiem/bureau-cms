@@ -18,6 +18,7 @@ class PageAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
                 ->add('name')
+                ->add('slug')
                 ->add('author')
                 ->add('currentPageRevision')
         ;
@@ -26,6 +27,7 @@ class PageAdmin extends Admin {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
         $datagridMapper
                 ->add('name')
+                ->add('slug')
                 ->add('author')
                 
         ;
@@ -34,6 +36,7 @@ class PageAdmin extends Admin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 ->addIdentifier('name')
+                ->add('slug')
                 ->add('author')
                 ->add('current_page_revision')                
         ;
