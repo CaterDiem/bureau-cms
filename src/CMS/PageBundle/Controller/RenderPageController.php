@@ -2,10 +2,9 @@
 
 namespace CMS\PageBundle\Controller;
 
-// example: namespace CMS\SIMS\DatabaseBundle\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use CMS\SharedBundle\Entity\Page as Page;
 /**
  * Description of RenderPageController
  *
@@ -13,6 +12,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class RenderPageController extends Controller {
 
+    protected $request;
+    protected $response;    
+    
+    public function __construct(){          
+
+    }    
     /**
      * View / Render a page.
      * Generally this will load the pre-rendered/cached page.
@@ -20,10 +25,21 @@ class RenderPageController extends Controller {
      * @author jtemplet
      */
     public function viewAction($pageSlug) {        
-        $page = new \stdClass();
-        $page->slug = $pageSlug;
+     
+        $this->response = $this->container->get('response');        
+       
+        $pageManager = $this->get('page_manager');
+        $pageManager->loadBySlug($pageSlug);
+        if($pageManager->pageIsLoaded()){                        
+            return $this->render('CMSPageBundle:Default:renderPage.html.twig', array('page' => $pageManager->page));
+        }
+        // otherwise page not found. 404 time.        
+        $this->response->setStatusCode('404');
+        $this->response->setContent($this->render('CMSPageBundle:Default:errorPage.html.twig', array('pageSlug' => $pageSlug)));        
         
-        return $this->render('CMSPageBundle:Default:renderPage.html.twig', array('page' => $page));
+        return $this->response;
+        
+        
     }
     
     /**

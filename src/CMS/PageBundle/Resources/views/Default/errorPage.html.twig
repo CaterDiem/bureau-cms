@@ -1,12 +1,12 @@
-{# src/CMS/PageBundle/Resources/views/Default/renderPage.html.twig #}
+{# src/CMS/PageBundle/Resources/views/Default/errorPage.html.twig #}
 {# author: jtemplet #}
 
 {% extends '::base.html.twig' %}
 
-{% block title %}{{ page.name }}{% endblock%}
+{% block title %}{{ pageSlug }}{% endblock%}
 
 {% block content %}
-<div><h1><span class="icon">&#59201;</span>{{page.name}}</h1> - {{page.slug}}</div>
+<h1><span class="icon">&#59201;</span>Error: Page {{pageSlug}} does not exist. </h1>
 
 <nav class="nav-button">
     <a href="#" title="login" >
