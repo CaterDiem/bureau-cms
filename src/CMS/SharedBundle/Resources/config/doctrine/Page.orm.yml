@@ -1,6 +1,5 @@
 CMS\SharedBundle\Entity\Page:
     type: entity
-    repositoryClass: CMS\SharedBundle\Entity\PageRepository
     table: page
     fields:
         id:
@@ -12,7 +11,12 @@ CMS\SharedBundle\Entity\Page:
                 strategy: IDENTITY
         name:
             type: string
-            length: 45
+            length: 512
+            fixed: false
+            nullable: true
+        slug:
+            type: string
+            length: 512
             fixed: false
             nullable: true
     manyToMany:
