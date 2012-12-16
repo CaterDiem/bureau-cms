@@ -166,4 +166,32 @@ class ContainerRevision
     {
         return $this->editor;
     }
+    /**
+     * @var string
+     */
+    private $content;
+
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     * @return ContainerRevision
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 }

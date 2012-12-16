@@ -108,4 +108,32 @@ class Container
     {
         return $this->containerType;
     }
+    /**
+     * @var \CMS\SharedBundle\Entity\ContainerRevision
+     */
+    private $currentRevision;
+
+
+    /**
+     * Set currentRevision
+     *
+     * @param \CMS\SharedBundle\Entity\ContainerRevision $currentRevision
+     * @return Container
+     */
+    public function setCurrentRevision(\CMS\SharedBundle\Entity\ContainerRevision $currentRevision = null)
+    {
+        $this->currentRevision = $currentRevision;
+    
+        return $this;
+    }
+
+    /**
+     * Get currentRevision
+     *
+     * @return \CMS\SharedBundle\Entity\ContainerRevision 
+     */
+    public function getCurrentRevision()
+    {
+        return $this->currentRevision;
+    }
 }

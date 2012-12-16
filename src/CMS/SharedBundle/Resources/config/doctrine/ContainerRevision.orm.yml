@@ -13,6 +13,9 @@ CMS\SharedBundle\Entity\ContainerRevision:
             type: integer
             unsigned: true
             nullable: true
+        content:
+            type: text
+            nullable: true
         created:
             type: datetime
             nullable: false

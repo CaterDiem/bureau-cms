@@ -18,7 +18,7 @@ CMS\SharedBundle\Entity\Container:
             type: string
             length: 1024
             fixed: false
-            nullable: true            
+            nullable: true                    
     manyToOne:
         containerType:
             targetEntity: ContainerType
@@ -29,4 +29,13 @@ CMS\SharedBundle\Entity\Container:
                 container_type_id:
                     referencedColumnName: id
             orphanRemoval: false
+        currentRevision:
+            targetEntity: ContainerRevision
+            cascade: {  }
+            mappedBy: null
+            inversedBy: ContainerRevision
+            joinColumns:
+                container_revision_id:
+                    referencedColumnName: id
+            orphanRemoval: false            
     lifecycleCallbacks: {  }
