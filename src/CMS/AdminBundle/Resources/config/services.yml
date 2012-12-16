@@ -17,10 +17,6 @@ services:
     class: CMS\AdminBundle\Admin\ContainerAdmin
     arguments: [null, 'CMS\SharedBundle\Entity\Container', 'SonataAdminBundle:CRUD']
     calls:
-        - [setTranslationDomain, [CMSAdminBundle]]        
-        - [setTemplates, [@layout: CMSAdminBundle::layout.html.twig]]
+        - [setTranslationDomain, [CMSAdminBundle]]               
     tags:
         - { name: sonata.admin, manager_type: orm, group: CMS, label: Containers }
-
-
-       
