@@ -1,0 +1,22 @@
+{% block container %}
+<div id="container">
+    <!-- Begin: Breadcrumb -->
+    {% block breadcrumb %}
+    <p id="breadcrumb"><a href="/index.shtml">Bureau Home</a> &gt; <strong>{{ title }}</strong></p>
+    {% endblock %}
+    <!-- End: Breadcrumb -->
+
+    <h1>{{ title }}</h1>
+    <!-- Start: Content -->
+    {% block content %}
+    <div id="content"><!--Page content goes here--></div>
+    {% endblock %}
+    <!-- End: Content -->
+
+    <!-- Begin: Right Column -->
+    {% block rightColumn %}
+    <div id="right-column"><!--Right column/sidebar/supplemental navigation content goes here--></div>
+    {% endblock %}
+    <!-- End: Right Column -->
+</div>
+{% endblock %}

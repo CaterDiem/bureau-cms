@@ -1,0 +1,34 @@
+<div id="pageheight">
+    <div id="pagewrap">
+        <!-- Start: Header -->
+               {% block header %}
+
+               {% endblock %}
+        <!-- <div style="margin: 12px 20px 12px 23px;" class="service-notice">
+        </div> -->
+
+        <!-- End: Header -->
+
+        <!-- Start: Columns -->
+        <div id="columns">
+            
+            <!-- Start: Container -->
+            {% block container %}
+            {% endblock %}
+            <!-- End: Container -->
+
+            <!-- Begin: Left Column -->
+            {% block leftColumn %}                
+            {% endblock %}
+            <!-- End: Left Column -->
+
+            <div class="clr"><!-- clear columns --></div>
+        </div>
+        <!-- End: Columns -->
+    </div>
+    <!-- End: pagewrap -->
+    <!-- Start: Footer -->
+            {% block footer %}
+            {% endblock %}
+    <!-- End: Footer -->
+</div>

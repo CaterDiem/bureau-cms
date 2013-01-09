@@ -1,0 +1,34 @@
+{% block header %}
+<div id="header">
+    <div class="l_content">
+        <div id="header-logo">
+            <img class="bannerprint" width="1" height="1" alt="Print Background" src="/images/ui/bannerprint.gif" />
+            <a id="logo" href="/index.shtml?ref=logo"><img src="/images/ui/bom_logo_clr.gif" title="Australian Government - Bureau of Meteorology" alt="Australian Government - Bureau of Meteorology" /></a>
+        </div>
+        <div id="header-main">
+            <div class="l_top">
+                <div id="header-search">
+                    <form action="http://agencysearch.australia.gov.au/search/search.cgi" method="get" class="searchform" enctype="application/x-www-form-urlencoded (default)">
+                        <label for="query">Search</label><input type="text" id="query" name="query" size="30" value="" />
+                        <input type="hidden" name="collection" value="agencies" />
+                        <input type="hidden" name="form" value="simple" />
+                        <input type="hidden" name="profile" value="bom" />
+                        <input type="hidden" name="scope_disable" value="off" />
+                        <input type="submit" value="Search" name="Submit" alt="Search" class="search" />
+                    </form>
+                </div>
+                <ul>
+                    <li><a href="/index.shtml?ref=hdr">Home</a></li>
+                    <li><a href="/inside/index.shtml?ref=hdr">About</a></li>
+                    <li class="last"><a href="/inside/contacts.shtml?ref=hdr">Contacts</a></li>
+                </ul>
+            </div>
+            <div class="l_bottom">
+                {% block menu %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class="l_shadow"></div>
+</div>
+{% endblock %}
