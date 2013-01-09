@@ -1,111 +1,25 @@
 <?php
 
 namespace CMS\SharedBundle\Entity;
-
+use FOS\UserBundle\Entity\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
-
+ 
 /**
- * CMS\SharedBundle\Entity\Group
+ * @ORM\Entity
+ * @ORM\Table(name="usergroup")
  */
-class Group
+class Group extends BaseGroup
 {
     /**
-     * @var integer $id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $role;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $user;
-
-    /**
-     * Constructor
-     */
+    protected $id;
+ 
     public function __construct()
     {
-        $this->role = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add role
-     *
-     * @param CMS\SharedBundle\Entity\Role $role
-     * @return Group
-     */
-    public function addRole(\CMS\SharedBundle\Entity\Role $role)
-    {
-        $this->role[] = $role;
-    
-        return $this;
-    }
-
-    /**
-     * Remove role
-     *
-     * @param CMS\SharedBundle\Entity\Role $role
-     */
-    public function removeRole(\CMS\SharedBundle\Entity\Role $role)
-    {
-        $this->role->removeElement($role);
-    }
-
-    /**
-     * Get role
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * Add user
-     *
-     * @param CMS\SharedBundle\Entity\User $user
-     * @return Group
-     */
-    public function addUser(\CMS\SharedBundle\Entity\User $user)
-    {
-        $this->user[] = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param CMS\SharedBundle\Entity\User $user
-     */
-    public function removeUser(\CMS\SharedBundle\Entity\User $user)
-    {
-        $this->user->removeElement($user);
-    }
-
-    /**
-     * Get user
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getUser()
-    {
-        return $this->user;
+        parent::__construct();
+        // your own logic
     }
 }

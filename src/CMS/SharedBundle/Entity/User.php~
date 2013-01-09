@@ -2,8 +2,10 @@
 
 
 namespace CMS\SharedBundle\Entity;
-use FOS\UserBundle\Entity\User as BaseUser;
+use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+//use FOS\UserBundle\Entity\User as BaseUser;
+
 
 /**
  * CMS\SharedBundle\Entity\User
@@ -21,5 +23,15 @@ class User extends BaseUser
     {
         parent::__construct();
         // your own logic
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

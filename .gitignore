@@ -1,3 +1,6 @@
+# Doctrine backups
+*/*.php~
+
 # Bootstrap
 app/bootstrap*
 

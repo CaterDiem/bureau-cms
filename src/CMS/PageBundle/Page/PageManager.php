@@ -40,9 +40,14 @@ class PageManager {
         }
         return FALSE;
     }
-    
+           
     public function getPage(){
         if($this->pageIsLoaded()){
+            // check cached page.
+                        
+            // load and render containers
+                                    
+            // return put together page.
             return $this->page;
         }
         return FALSE;        

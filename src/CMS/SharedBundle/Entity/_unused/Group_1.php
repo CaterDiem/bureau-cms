@@ -5,12 +5,12 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CMS\SharedBundle\Entity\ContainerType
+ * Group
  */
-class ContainerType
+class Group
 {
     /**
-     * @var integer $id
+     * @var integer
      */
     private $id;
 
