@@ -194,4 +194,87 @@ class ContainerRevision
     {
         return $this->content;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $containerSetting;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->containerSetting = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add containerSetting
+     *
+     * @param \CMS\SharedBundle\Entity\containerSetting $containerSetting
+     * @return ContainerRevision
+     */
+    public function addContainerSetting(\CMS\SharedBundle\Entity\containerSetting $containerSetting)
+    {
+        $this->containerSetting[] = $containerSetting;
+    
+        return $this;
+    }
+
+    /**
+     * Remove containerSetting
+     *
+     * @param \CMS\SharedBundle\Entity\containerSetting $containerSetting
+     */
+    public function removeContainerSetting(\CMS\SharedBundle\Entity\containerSetting $containerSetting)
+    {
+        $this->containerSetting->removeElement($containerSetting);
+    }
+
+    /**
+     * Get containerSetting
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContainerSetting()
+    {
+        return $this->containerSetting;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $setting;
+
+
+    /**
+     * Add setting
+     *
+     * @param \CMS\SharedBundle\Entity\ContainerSetting $setting
+     * @return ContainerRevision
+     */
+    public function addSetting(\CMS\SharedBundle\Entity\ContainerSetting $setting)
+    {
+        $this->setting[] = $setting;
+    
+        return $this;
+    }
+
+    /**
+     * Remove setting
+     *
+     * @param \CMS\SharedBundle\Entity\ContainerSetting $setting
+     */
+    public function removeSetting(\CMS\SharedBundle\Entity\ContainerSetting $setting)
+    {
+        $this->setting->removeElement($setting);
+    }
+
+    /**
+     * Get setting
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSetting()
+    {
+        return $this->setting;
+    }
 }

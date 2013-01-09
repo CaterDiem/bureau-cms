@@ -108,4 +108,32 @@ class ContainerChild
     {
         return $this->child;
     }
+    /**
+     * @var \CMS\SharedBundle\Entity\Template
+     */
+    private $template;
+
+
+    /**
+     * Set template
+     *
+     * @param \CMS\SharedBundle\Entity\Template $template
+     * @return ContainerChild
+     */
+    public function setTemplate(\CMS\SharedBundle\Entity\Template $template = null)
+    {
+        $this->template = $template;
+    
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return \CMS\SharedBundle\Entity\Template 
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
 }

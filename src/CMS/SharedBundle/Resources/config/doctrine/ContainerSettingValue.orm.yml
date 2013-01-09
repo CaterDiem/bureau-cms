@@ -1,0 +1,17 @@
+CMS\SharedBundle\Entity\ContainerSettingValue:
+    type: entity
+    table: container_setting_value
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        value:
+            type: string
+            length: '255'
+    manyToOne:
+      setting:
+        targetEntity: ContainerSetting
+        orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -13,7 +13,7 @@ CMS\SharedBundle\Entity\ContainerChild:
             type: integer
             unsigned: true
             nullable: true
-            column: sort_order
+            column: sort_order        
     manyToOne:
         container:
             targetEntity: Container
@@ -33,4 +33,13 @@ CMS\SharedBundle\Entity\ContainerChild:
                 child_id:
                     referencedColumnName: id
             orphanRemoval: false
+        template:
+            targetEntity: Template
+            casecade: { }
+            mappedBy: null
+            inversedBy: null
+            joinColumns: 
+                template_id:
+                    referencedColumnName: id
+            orphanRemoval: false               
     lifecycleCallbacks: {  }

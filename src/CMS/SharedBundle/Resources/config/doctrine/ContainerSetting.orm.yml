@@ -1,0 +1,22 @@
+CMS\SharedBundle\Entity\ContainerSetting:
+    type: entity
+    table: container_setting
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: '255'
+    manyToOne:
+      revision:
+          targetEntity: ContainerRevision                                        
+          orphanRemoval: false    
+          inversedBy: containerRevision
+    oneToMany:
+        value:
+            targetEntity: ContainerSettingValue
+            mappedBy: containerSettingValue
+    lifecycleCallbacks: {  }

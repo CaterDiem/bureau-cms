@@ -41,4 +41,9 @@ CMS\SharedBundle\Entity\ContainerRevision:
                 editor_id:
                     referencedColumnName: id
             orphanRemoval: false
+    oneToMany:
+        setting:
+            targetEntity: ContainerSetting              
+            mappedBy: setting
+          
     lifecycleCallbacks: {  }
