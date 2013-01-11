@@ -19,6 +19,18 @@ CMS\SharedBundle\Entity\Page:
             length: 512
             fixed: false
             nullable: true
+        created:
+            type: datetime
+            nullable: false
+            gedmo:
+              timestampable:
+                on: create
+        updated:
+            type: datetime
+            nullable: false
+            gedmo:
+              timestampable:
+                on: update                                     
     manyToMany:
         pageCategory:
             targetEntity: PageCategory
@@ -45,7 +57,7 @@ CMS\SharedBundle\Entity\Page:
             joinColumns:
                 author_id:
                     referencedColumnName: id
-            orphanRemoval: false
+            orphanRemoval: false        
         currentPageRevision:
             targetEntity: PageRevision
             cascade: {  }
@@ -54,5 +66,10 @@ CMS\SharedBundle\Entity\Page:
             joinColumns:
                 current_page_revision_id:
                     referencedColumnName: id
+            orphanRemoval: false
+    oneToMany:
+      revisions:
+            targetEntity: PageRevision
+            mappedBy: PageRevision
             orphanRemoval: false
     lifecycleCallbacks: {  }

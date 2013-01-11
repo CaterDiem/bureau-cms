@@ -10,6 +10,18 @@ CMS\SharedBundle\Entity\ContainerSetting:
         name:
             type: string
             length: '255'
+        created:
+            type: datetime
+            nullable: false
+            gedmo:
+              timestampable:
+                on: create
+        updated:
+            type: datetime
+            nullable: false
+            gedmo:
+              timestampable:
+                on: update                        
     manyToOne:
       revision:
           targetEntity: ContainerRevision                                        

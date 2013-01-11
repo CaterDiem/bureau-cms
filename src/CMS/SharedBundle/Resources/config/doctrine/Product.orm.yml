@@ -9,6 +9,18 @@ CMS\SharedBundle\Entity\Product:
             nullable: false
             generator:
                 strategy: IDENTITY
+        created:
+            type: datetime
+            nullable: false
+            gedmo:
+              timestampable:
+                on: create
+        updated:
+            type: datetime
+            nullable: false
+            gedmo:
+              timestampable:
+                on: update                            
     manyToMany:
         metadataValue:
             targetEntity: MetadataValue

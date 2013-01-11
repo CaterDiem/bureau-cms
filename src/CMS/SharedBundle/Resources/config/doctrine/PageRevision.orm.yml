@@ -8,17 +8,19 @@ CMS\SharedBundle\Entity\PageRevision:
             unsigned: true
             nullable: false
             generator:
-                strategy: IDENTITY
-        revision:
-            type: integer
-            unsigned: true
-            nullable: true
+                strategy: IDENTITY        
         created:
             type: datetime
             nullable: false
+            gedmo:
+              timestampable:
+                on: create
         updated:
             type: datetime
             nullable: false
+            gedmo:
+              timestampable:
+                on: update            
         publishApproved:
             type: boolean
             nullable: false
@@ -59,5 +61,5 @@ CMS\SharedBundle\Entity\PageRevision:
             joinColumns:
                 approver_id:
                     referencedColumnName: id
-            orphanRemoval: false
+            orphanRemoval: false        
     lifecycleCallbacks: {  }

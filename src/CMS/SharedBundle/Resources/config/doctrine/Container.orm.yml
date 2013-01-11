@@ -19,6 +19,18 @@ CMS\SharedBundle\Entity\Container:
             length: 1024
             fixed: false
             nullable: true                    
+        created:
+            type: datetime
+            nullable: false
+            gedmo:
+              timestampable:
+                on: create
+        updated:
+            type: datetime
+            nullable: false
+            gedmo:
+              timestampable:
+                on: update                        
     manyToOne:
         containerType:
             targetEntity: ContainerType

@@ -3,7 +3,7 @@
 namespace CMS\SharedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * CMS\SharedBundle\Entity\Page
  */
@@ -39,8 +39,10 @@ class Page
      */
     public function __construct()
     {
-        $this->pageCategory = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pageCategory = new ArrayCollection();
+        $this->containers = new ArrayCollection();
     }
+        
     
     /**
      * Get id
@@ -152,13 +154,7 @@ class Page
     public function getPageCategory()
     {
         return $this->pageCategory;
-    }
-    
-    
-    public function _construct(){
-        $this->containers = new ArrayCollection();
-    }
-    
+    }   
    
     /**
      * @var string
@@ -187,5 +183,99 @@ class Page
     public function getSlug()
     {
         return $this->slug;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated;
+
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Page
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Page
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $revisions;
+
+
+    /**
+     * Add revisions
+     *
+     * @param \CMS\SharedBundle\Entity\PageRevision $revisions
+     * @return Page
+     */
+    public function addRevision(\CMS\SharedBundle\Entity\PageRevision $revisions)
+    {
+        $this->revisions[] = $revisions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove revisions
+     *
+     * @param \CMS\SharedBundle\Entity\PageRevision $revisions
+     */
+    public function removeRevision(\CMS\SharedBundle\Entity\PageRevision $revisions)
+    {
+        $this->revisions->removeElement($revisions);
+    }
+
+    /**
+     * Get revisions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRevisions()
+    {
+        return $this->revisions;
     }
 }
