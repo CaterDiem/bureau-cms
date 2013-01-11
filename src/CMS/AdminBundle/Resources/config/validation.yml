@@ -1,0 +1,3 @@
+#       - Sonata\AdminBundle\Validator\Constraints\InlineConstraint:
+#            service: sonata.admin.page
+#            method: validateBlock

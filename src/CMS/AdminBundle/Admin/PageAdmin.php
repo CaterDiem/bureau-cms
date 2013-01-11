@@ -3,10 +3,10 @@
 namespace CMS\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
 
 /**
  * Description of PageAdmin
@@ -20,7 +20,6 @@ class PageAdmin extends Admin {
                 ->add('name')
                 ->add('slug')
                 ->add('author')
-                ->add('currentPageRevision')
         ;
     }
 
@@ -29,7 +28,6 @@ class PageAdmin extends Admin {
                 ->add('name')
                 ->add('slug')
                 ->add('author')
-                
         ;
     }
 
@@ -43,10 +41,17 @@ class PageAdmin extends Admin {
     }
 
     public function validate(ErrorElement $errorElement, $object) {
-        $errorElement
-                ->with('name')                
+        // WORK THIS SHIT OUT
+        /*$errorElement
+                ->with('name')    
+                    ->assertNotBlank()
                 ->end()
-        ;
+                ->with('slug')                    
+                ->end()
+                ->with('author')
+                    ->addViolation("You need to select an author")
+                ->end()
+        ;*/
     }
 
 }
