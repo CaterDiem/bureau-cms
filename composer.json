@@ -20,6 +20,7 @@
         "jms/di-extra-bundle": "1.1.*",
 	"friendsofsymfony/user-bundle": "*",
         "gedmo/doctrine-extensions": ">=2.3.0",
+        "stof/doctrine-extensions-bundle": "dev-master",        
         
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/easy-extends-bundle": "dev-master",
