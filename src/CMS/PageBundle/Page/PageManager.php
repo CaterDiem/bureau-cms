@@ -34,25 +34,42 @@ class PageManager {
         return FALSE;
     }
     
-    public function pageIsLoaded(){
+    public function isLoaded(){
         if($this->page){
             return TRUE;
         }
         return FALSE;
     }
            
-    public function getPage(){
+    /**
+     * Is the rendered version of this page currently cached?
+     * 
+     * @return boolean Whether the rendered page exists in the cache
+     */
+    public function isCached(){
+        
+        return FALSE;
+    }
+    
+    /**
+     * Render the page to HTML
+     * @return mixed Returns the HTML of the rendered page, or FALSE on failure.
+     */
+    public function render(){
         if($this->pageIsLoaded()){
             // check cached page.
                         
-            // load and render containers
-                                    
+            // grab the root container and throw it to the mercy of the containerManager!
+            
+            $this->containerManager->loadRootContainer($this->page->root_container);
+            $this->containerManager->doThatFunkyShit();
+            
+            
             // return put together page.
             return $this->page;
         }
         return FALSE;        
-    }
-
+    }       
 }
 
 ?>

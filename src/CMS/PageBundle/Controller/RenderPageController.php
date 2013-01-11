@@ -37,9 +37,7 @@ class RenderPageController extends Controller {
         $this->response->setStatusCode('404');
         $this->response->setContent($this->render('CMSPageBundle:Default:errorPage.html.twig', array('pageSlug' => $pageSlug)));        
         
-        return $this->response;
-        
-        
+        return $this->response;        
     }
     
     /**
