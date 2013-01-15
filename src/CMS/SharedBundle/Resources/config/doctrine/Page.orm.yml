@@ -32,10 +32,9 @@ CMS\SharedBundle\Entity\Page:
               timestampable:
                 on: update                                     
     manyToMany:
-        pageCategory:
+        category:
             targetEntity: PageCategory
             cascade: {  }
-            mappedBy: null
             inversedBy: page
             joinTable:
                 name: page_page_category
@@ -52,17 +51,13 @@ CMS\SharedBundle\Entity\Page:
         author:
             targetEntity: User
             cascade: {  }
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 author_id:
                     referencedColumnName: id
             orphanRemoval: false        
-        currentPageRevision:
+        currentRevision:
             targetEntity: PageRevision
             cascade: {  }
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 current_page_revision_id:
                     referencedColumnName: id

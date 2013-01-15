@@ -16,4 +16,4 @@ cms_page_edit_process:
     pattern: /{pageSlug}/edit/
     defaults: { _controller: CMSPageBundle:RenderPage:edit, pageSlug: 'index' }
     requirements:
-        _method:  POST                
+        _method:  POST                   

@@ -3,7 +3,7 @@
 namespace CMS\SharedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * CMS\SharedBundle\Entity\Page
  */
@@ -39,8 +39,10 @@ class Page
      */
     public function __construct()
     {
-        $this->pageCategory = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pageCategory = new ArrayCollection();
+        $this->containers = new ArrayCollection();
     }
+        
     
     /**
      * Get id
@@ -152,13 +154,7 @@ class Page
     public function getPageCategory()
     {
         return $this->pageCategory;
-    }
-    
-    
-    public function _construct(){
-        $this->containers = new ArrayCollection();
-    }
-    
+    }   
    
     /**
      * @var string
@@ -243,5 +239,109 @@ class Page
     public function getUpdated()
     {
         return $this->updated;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $revisions;
+
+
+    /**
+     * Add revisions
+     *
+     * @param \CMS\SharedBundle\Entity\PageRevision $revisions
+     * @return Page
+     */
+    public function addRevision(\CMS\SharedBundle\Entity\PageRevision $revisions)
+    {
+        $this->revisions[] = $revisions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove revisions
+     *
+     * @param \CMS\SharedBundle\Entity\PageRevision $revisions
+     */
+    public function removeRevision(\CMS\SharedBundle\Entity\PageRevision $revisions)
+    {
+        $this->revisions->removeElement($revisions);
+    }
+
+    /**
+     * Get revisions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRevisions()
+    {
+        return $this->revisions;
+    }
+    /**
+     * @var \CMS\SharedBundle\Entity\PageRevision
+     */
+    private $currentRevision;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $category;
+
+
+    /**
+     * Set currentRevision
+     *
+     * @param \CMS\SharedBundle\Entity\PageRevision $currentRevision
+     * @return Page
+     */
+    public function setCurrentRevision(\CMS\SharedBundle\Entity\PageRevision $currentRevision = null)
+    {
+        $this->currentRevision = $currentRevision;
+    
+        return $this;
+    }
+
+    /**
+     * Get currentRevision
+     *
+     * @return \CMS\SharedBundle\Entity\PageRevision 
+     */
+    public function getCurrentRevision()
+    {
+        return $this->currentRevision;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \CMS\SharedBundle\Entity\PageCategory $category
+     * @return Page
+     */
+    public function addCategory(\CMS\SharedBundle\Entity\PageCategory $category)
+    {
+        $this->category[] = $category;
+    
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \CMS\SharedBundle\Entity\PageCategory $category
+     */
+    public function removeCategory(\CMS\SharedBundle\Entity\PageCategory $category)
+    {
+        $this->category->removeElement($category);
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

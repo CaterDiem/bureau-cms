@@ -20,9 +20,28 @@ class CMSPageExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
+        
         $config = $this->processConfiguration($configuration, $configs);
-
+        
+        
+        
+        if (!isset($config['default_template'])) {
+            throw new \InvalidArgumentException('The "default_template" option must be set');
+        }else{
+            $container->setParameter("default_template", $config['default_template']);
+        }
+        
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+    }
+    
+    public function getXsdValidationBasePath()
+    {
+        return __DIR__.'/../Resources/config/';
+    }
+
+    public function getNamespace()
+    {
+        return 'http://www.example.com/symfony/schema/';
     }
 }

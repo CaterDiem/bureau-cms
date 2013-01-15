@@ -22,17 +22,17 @@ class ContainerChild
     /**
      * @var \CMS\SharedBundle\Entity\Container
      */
-    private $parent;
-
-    /**
-     * @var \CMS\SharedBundle\Entity\Template
-     */
-    private $template;
+    private $container;
 
     /**
      * @var \CMS\SharedBundle\Entity\Container
      */
     private $child;
+
+    /**
+     * @var \CMS\SharedBundle\Entity\Template
+     */
+    private $template;
 
 
     /**
@@ -69,49 +69,26 @@ class ContainerChild
     }
 
     /**
-     * Set parent
+     * Set container
      *
-     * @param \CMS\SharedBundle\Entity\Container $parent
+     * @param \CMS\SharedBundle\Entity\Container $container
      * @return ContainerChild
      */
-    public function setParent(\CMS\SharedBundle\Entity\Container $parent = null)
+    public function setContainer(\CMS\SharedBundle\Entity\Container $container = null)
     {
-        $this->parent = $parent;
+        $this->container = $container;
     
         return $this;
     }
 
     /**
-     * Get parent
+     * Get container
      *
      * @return \CMS\SharedBundle\Entity\Container 
      */
-    public function getParent()
+    public function getContainer()
     {
-        return $this->parent;
-    }
-
-    /**
-     * Set template
-     *
-     * @param \CMS\SharedBundle\Entity\Template $template
-     * @return ContainerChild
-     */
-    public function setTemplate(\CMS\SharedBundle\Entity\Template $template = null)
-    {
-        $this->template = $template;
-    
-        return $this;
-    }
-
-    /**
-     * Get template
-     *
-     * @return \CMS\SharedBundle\Entity\Template 
-     */
-    public function getTemplate()
-    {
-        return $this->template;
+        return $this->container;
     }
 
     /**
@@ -135,5 +112,28 @@ class ContainerChild
     public function getChild()
     {
         return $this->child;
+    }
+
+    /**
+     * Set template
+     *
+     * @param \CMS\SharedBundle\Entity\Template $template
+     * @return ContainerChild
+     */
+    public function setTemplate(\CMS\SharedBundle\Entity\Template $template = null)
+    {
+        $this->template = $template;
+    
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return \CMS\SharedBundle\Entity\Template 
+     */
+    public function getTemplate()
+    {
+        return $this->template;
     }
 }

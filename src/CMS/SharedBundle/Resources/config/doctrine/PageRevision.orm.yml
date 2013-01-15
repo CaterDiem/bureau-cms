@@ -9,6 +9,10 @@ CMS\SharedBundle\Entity\PageRevision:
             nullable: false
             generator:
                 strategy: IDENTITY        
+        revision:
+            type: integer            
+            unsigned: true
+            nullable: false
         created:
             type: datetime
             nullable: false

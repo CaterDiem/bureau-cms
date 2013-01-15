@@ -9,6 +9,10 @@ CMS\SharedBundle\Entity\ContainerRevision:
             nullable: false
             generator:
                 strategy: IDENTITY
+        revision: 
+            type: integer
+            unsigned: true
+            nullable: false
         content:
             type: text
             nullable: true
@@ -28,8 +32,6 @@ CMS\SharedBundle\Entity\ContainerRevision:
         container:
             targetEntity: Container
             cascade: {  }
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 container_id:
                     referencedColumnName: id
@@ -37,12 +39,13 @@ CMS\SharedBundle\Entity\ContainerRevision:
         editor:
             targetEntity: User
             cascade: {  }
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 editor_id:
                     referencedColumnName: id
             orphanRemoval: false
+        template:
+            targetEntity: Template
+            inversedBy: template            
     oneToMany:
         setting:
             targetEntity: ContainerSetting              

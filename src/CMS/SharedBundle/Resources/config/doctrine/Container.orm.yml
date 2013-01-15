@@ -31,23 +31,25 @@ CMS\SharedBundle\Entity\Container:
             gedmo:
               timestampable:
                 on: update                        
-    manyToOne:
-        containerType:
-            targetEntity: ContainerType
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
+    oneToMany:
+        parent:
+          targetEntity: ContainerChild
+          mappedBy: parent
+        child: 
+          targetEntity: ContainerChild
+          mappedBy: child
+    manyToOne:      
+        type:
+            targetEntity: ContainerType                        
             joinColumns:
                 container_type_id:
                     referencedColumnName: id
             orphanRemoval: false
         currentRevision:
-            targetEntity: ContainerRevision
-            cascade: {  }
-            mappedBy: null
-            inversedBy: ContainerRevision
+            targetEntity: ContainerRevision            
+            inversedBy: containerRevision
             joinColumns:
-                container_revision_id:
+                current_revision_id:
                     referencedColumnName: id
-            orphanRemoval: false            
+            orphanRemoval: false                   
     lifecycleCallbacks: {  }

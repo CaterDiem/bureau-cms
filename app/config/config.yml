@@ -18,6 +18,11 @@ framework:
     session:         ~
     translator:      ~
 
+# CMSPagebundle config
+cms_page:
+    default_template: CMSPageBundle:Default:renderPage.html.twig
+  
+
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
@@ -27,7 +32,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ ]
+    #bundles:        [ ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~         
@@ -163,4 +168,5 @@ stof_doctrine_extensions:
         default: 
           timestampable: true
           loggable: true
-    
+          sortable: true
+          uploadable: true

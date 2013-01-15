@@ -136,4 +136,88 @@ class Template
     {
         return $this->updated;
     }
+    /**
+     * @var \CMS\SharedBundle\Entity\ContainerRevision
+     */
+    private $container;
+
+
+    /**
+     * Set container
+     *
+     * @param \CMS\SharedBundle\Entity\ContainerRevision $container
+     * @return Template
+     */
+    public function setContainer(\CMS\SharedBundle\Entity\ContainerRevision $container = null)
+    {
+        $this->container = $container;
+    
+        return $this;
+    }
+
+    /**
+     * Get container
+     *
+     * @return \CMS\SharedBundle\Entity\ContainerRevision 
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @var string
+     */
+    private $filepath;
+
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Template
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set filepath
+     *
+     * @param string $filepath
+     * @return Template
+     */
+    public function setFilepath($filepath)
+    {
+        $this->filepath = $filepath;
+    
+        return $this;
+    }
+
+    /**
+     * Get filepath
+     *
+     * @return string 
+     */
+    public function getFilepath()
+    {
+        return $this->filepath;
+    }
 }

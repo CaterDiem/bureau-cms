@@ -1,32 +1,7 @@
 {# src/CMS/PageBundle/Resources/views/Default/renderPage.html.twig #}
 {# author: jtemplet #}
-
-{% extends '::base.html.twig' %}
-
-{% block title %}{{ page.name }}{% endblock%}
+{# This is a wrapper template. Containers do the real work, using their layouts and templates and so on. #}
 
 {% block content %}
-<div><h1><span class="icon">&#59201;</span>{{page.name}}</h1> - {{page.slug}}</div>
-
-<nav class="nav-button">
-    <a href="#" title="login" >
-        <span class='nav-icon'>&#59200;</span>
-        <span class='nav-label'>Login</span>
-    </a>
-    
-    <a href="#">
-        <span class='nav-icon'>&#59140;</span>
-        <span class='nav-label'>Help</span>
-    </a>
-        
-    <a href="#">
-        <span class='nav-icon'>&#59136;</span>
-        <span class='nav-label'>Add User</span>
-    </a>
-        
-    <a href="#">
-        <span class='nav-icon'>&#59200;</span>        
-    </a>
-        
-</nav>
-{% endblock %}
+{{ content|raw }}
+{% endblock content %}

@@ -5,27 +5,32 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CMS\SharedBundle\Entity\ContainerChild
+ * ContainerChild
  */
 class ContainerChild
 {
     /**
-     * @var integer $id
+     * @var integer
      */
     private $id;
 
     /**
-     * @var integer $sortOrder
+     * @var integer
      */
     private $sortOrder;
 
     /**
-     * @var CMS\SharedBundle\Entity\Container
+     * @var \CMS\SharedBundle\Entity\Container
      */
-    private $container;
+    private $parent;
 
     /**
-     * @var CMS\SharedBundle\Entity\Container
+     * @var \CMS\SharedBundle\Entity\Template
+     */
+    private $template;
+
+    /**
+     * @var \CMS\SharedBundle\Entity\Container
      */
     private $child;
 
@@ -64,55 +69,27 @@ class ContainerChild
     }
 
     /**
-     * Set container
+     * Set parent
      *
-     * @param CMS\SharedBundle\Entity\Container $container
+     * @param \CMS\SharedBundle\Entity\Container $parent
      * @return ContainerChild
      */
-    public function setContainer(\CMS\SharedBundle\Entity\Container $container = null)
+    public function setParent(\CMS\SharedBundle\Entity\Container $parent = null)
     {
-        $this->container = $container;
+        $this->parent = $parent;
     
         return $this;
     }
 
     /**
-     * Get container
+     * Get parent
      *
-     * @return CMS\SharedBundle\Entity\Container 
+     * @return \CMS\SharedBundle\Entity\Container 
      */
-    public function getContainer()
+    public function getParent()
     {
-        return $this->container;
+        return $this->parent;
     }
-
-    /**
-     * Set child
-     *
-     * @param CMS\SharedBundle\Entity\Container $child
-     * @return ContainerChild
-     */
-    public function setChild(\CMS\SharedBundle\Entity\Container $child = null)
-    {
-        $this->child = $child;
-    
-        return $this;
-    }
-
-    /**
-     * Get child
-     *
-     * @return CMS\SharedBundle\Entity\Container 
-     */
-    public function getChild()
-    {
-        return $this->child;
-    }
-    /**
-     * @var \CMS\SharedBundle\Entity\Template
-     */
-    private $template;
-
 
     /**
      * Set template
@@ -135,5 +112,28 @@ class ContainerChild
     public function getTemplate()
     {
         return $this->template;
+    }
+
+    /**
+     * Set child
+     *
+     * @param \CMS\SharedBundle\Entity\Container $child
+     * @return ContainerChild
+     */
+    public function setChild(\CMS\SharedBundle\Entity\Container $child = null)
+    {
+        $this->child = $child;
+    
+        return $this;
+    }
+
+    /**
+     * Get child
+     *
+     * @return \CMS\SharedBundle\Entity\Container 
+     */
+    public function getChild()
+    {
+        return $this->child;
     }
 }

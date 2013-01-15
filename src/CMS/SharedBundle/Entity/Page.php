@@ -278,4 +278,70 @@ class Page
     {
         return $this->revisions;
     }
+    /**
+     * @var \CMS\SharedBundle\Entity\PageRevision
+     */
+    private $currentRevision;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $category;
+
+
+    /**
+     * Set currentRevision
+     *
+     * @param \CMS\SharedBundle\Entity\PageRevision $currentRevision
+     * @return Page
+     */
+    public function setCurrentRevision(\CMS\SharedBundle\Entity\PageRevision $currentRevision = null)
+    {
+        $this->currentRevision = $currentRevision;
+    
+        return $this;
+    }
+
+    /**
+     * Get currentRevision
+     *
+     * @return \CMS\SharedBundle\Entity\PageRevision 
+     */
+    public function getCurrentRevision()
+    {
+        return $this->currentRevision;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \CMS\SharedBundle\Entity\PageCategory $category
+     * @return Page
+     */
+    public function addCategory(\CMS\SharedBundle\Entity\PageCategory $category)
+    {
+        $this->category[] = $category;
+    
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \CMS\SharedBundle\Entity\PageCategory $category
+     */
+    public function removeCategory(\CMS\SharedBundle\Entity\PageCategory $category)
+    {
+        $this->category->removeElement($category);
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

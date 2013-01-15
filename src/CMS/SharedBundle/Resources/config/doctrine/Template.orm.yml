@@ -13,7 +13,17 @@ CMS\SharedBundle\Entity\Template:
             type: string
             length: 45
             fixed: false
+            nullable: false
+        description:
+            type: string
+            length: 512
+            fixed: false
             nullable: true
+        filepath:
+            type: string
+            length: 512
+            fixed: false
+            nullable: false
         created:
             type: datetime
             nullable: false
@@ -27,13 +37,8 @@ CMS\SharedBundle\Entity\Template:
               timestampable:
                 on: update                        
     manyToOne:
-        rootContainer:
-            targetEntity: Container
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                root_container_id:
-                    referencedColumnName: id
+        container:
+            targetEntity: ContainerRevision            
+            mappedBy: containerRevision                        
             orphanRemoval: false
     lifecycleCallbacks: {  }

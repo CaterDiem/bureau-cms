@@ -2,12 +2,9 @@
 
 namespace CMS\PageBundle\Page;
 
-use Doctrine\ORM\EntityManager;
-
-use CMS\SharedBundle\Entity\Page;
-use CMS\SharedBundle\Entity\Container;
-
 use CMS\PageBundle\Container\ContainerManager;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Templating\EngineInterface;
 
 /**
  * PageManager is used to find, load and modify pages.
@@ -18,18 +15,27 @@ class PageManager {
     
     protected $em;
     protected $containerManager;
-    public $page;
+    protected $engine;
+    
+    protected $page;    
+    
+    protected $generatedContent;
 
-    public function __construct(EntityManager $em, ContainerManager $containerManager) {
+    public function __construct(EntityManager $em, ContainerManager $containerManager, EngineInterface $templating) {
         $this->em = $em;
+        $this->engine = $templating;
         $this->containerManager = $containerManager;
         $this->page = FALSE;
+        $this->generatedContent = FALSE;
     }
 
     public function loadBySlug($pageSlug) {
         $this->page = $this->em->getRepository('CMSSharedBundle:Page')->findOneBySlug($pageSlug);
         if ($this->page) {         
-            return TRUE;
+            $this->currentRevision = $this->page->getCurrentRevision();
+            if($this->currentRevision){
+                return TRUE;
+            }                        
         }
         return FALSE;
     }
@@ -53,23 +59,31 @@ class PageManager {
     
     /**
      * Render the page to HTML
-     * @return mixed Returns the HTML of the rendered page, or FALSE on failure.
+     * @return boolean Returns TRUE on success, or FALSE on failure.
      */
     public function render(){
-        if($this->pageIsLoaded()){
+        if($this->isLoaded()){
             // check cached page.
                         
-            // grab the root container and throw it to the mercy of the containerManager!
+            // grab the root container and throw it to the mercy of the containerManager!            
+            if($this->page->getCurrentRevision()){                
+                
+                $this->containerManager->loadContainerTree($this->currentRevision->getRootContainer());            
+                
+                $this->generatedContent = $this->containerManager->generate();                
+                
+                if($this->generatedContent){
+                
+                    return TRUE;
+                }
+            }                        
             
-            $this->containerManager->loadRootContainer($this->page->root_container);
-            $this->containerManager->doThatFunkyShit();
             
-            
-            // return put together page.
-            return $this->page;
         }
         return FALSE;        
     }       
+    
+    public function getContent(){
+        return $this->generatedContent;
+    }       
 }
-
-?>

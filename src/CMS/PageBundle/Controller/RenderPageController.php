@@ -17,6 +17,7 @@ class RenderPageController extends Controller {
     
     public function __construct(){          
 
+        
     }    
     /**
      * View / Render a page.
@@ -25,14 +26,26 @@ class RenderPageController extends Controller {
      * @author jtemplet
      */
     public function viewAction($pageSlug) {        
-     
+        
         $this->response = $this->container->get('response');        
        
         $pageManager = $this->get('page_manager');
+        
         $pageManager->loadBySlug($pageSlug);
-        if($pageManager->pageIsLoaded()){                        
-            return $this->render('CMSPageBundle:Default:renderPage.html.twig', array('page' => $pageManager->page));
+
+        if($pageManager->isLoaded()){ 
+            
+            if($pageManager->render()){                                        
+                
+                return $this->render($this->container->getParameter("default_template"), array('content' => $pageManager->getContent()));
+            }else{
+                // something went wrong with rendering. throw exception?
+                $this->response->setStatusCode('500');
+                $this->response->setContent($this->render('CMSPageBundle:Default:errorPage.html.twig', array('pageSlug' => $pageSlug)));        
+                return $this->response;
+            }
         }
+        
         // otherwise page not found. 404 time.        
         $this->response->setStatusCode('404');
         $this->response->setContent($this->render('CMSPageBundle:Default:errorPage.html.twig', array('pageSlug' => $pageSlug)));        

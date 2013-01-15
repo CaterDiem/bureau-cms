@@ -2,6 +2,7 @@ parameters:
     container_manager.class: CMS\PageBundle\Container\ContainerManager
     page_manager.class: CMS\PageBundle\Page\PageManager
     
+    
 services:
 #    cms_page.example:
 #        class: %cms_page.example.class%
@@ -11,11 +12,14 @@ services:
         class:        Symfony\Component\HttpFoundation\Response
     request:
         class:        Symfony\Component\HttpFoundation\Request
+
     
     container_manager:
         class: "%container_manager.class%"
-        arguments: [@doctrine.orm.entity_manager]
+        default_template: %cms_page.default_template%
+        arguments: [@doctrine.orm.entity_manager, @templating]
                 
     page_manager:
         class: "%page_manager.class%"
-        arguments: [@doctrine.orm.entity_manager, @container_manager]        
+        default_template: %cms_page.default_template%
+        arguments: [@doctrine.orm.entity_manager, @container_manager, @templating]        

@@ -1,9 +1,9 @@
-{# Bureau standard left-column template #}
-{# author: adevans / AMDISS peeps. Twig'd and HTML5'd by jtemplet #}
-
 <!DOCTYPE html>
 <html>
     <head>
+        {# Bureau standard left-column template #}
+        {# author: adevans / AMDISS peeps. Twig'd and HTML5'd by jtemplet #}
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="language" content="english" />
         <title>{% block title %}Defence CMS{% endblock %}</title>
@@ -31,7 +31,7 @@
            <link rel="stylesheet" href="{{ asset('bundles/cmsshared/css/default.css') }}" />     
            <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />            
            
-           {% stylesheets 
+        {% stylesheets 
             '@CMSSharedBundle/Resources/public/less/*.less' %}
             <link rel="stylesheet" href="{{ asset_url }}" />                 
         {% endstylesheets %}         
@@ -47,6 +47,7 @@
 
         <!-- Start: PageHeight -->
         {% block content %}
+        {{ content|raw }}
         {% endblock %}
         <!-- End: PageHeight -->
         </body>

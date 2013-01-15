@@ -277,4 +277,32 @@ class ContainerRevision
     {
         return $this->setting;
     }
+    /**
+     * @var \CMS\SharedBundle\Entity\Template
+     */
+    private $template;
+
+
+    /**
+     * Set template
+     *
+     * @param \CMS\SharedBundle\Entity\Template $template
+     * @return ContainerRevision
+     */
+    public function setTemplate(\CMS\SharedBundle\Entity\Template $template = null)
+    {
+        $this->template = $template;
+    
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return \CMS\SharedBundle\Entity\Template 
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
 }
