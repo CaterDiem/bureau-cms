@@ -1,12 +1,12 @@
 <?php
 
-namespace CMS\PageBundle\Container;
+namespace CMS\PageBundle\Block;
 
 /**
  * Description of ImageHandler
  *
  * @author jtemplet
  */
-class ImageHandler extends HTMLHandler{
+class ImageHandler extends BlockHandler{
     //put your code here
 }

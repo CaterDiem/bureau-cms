@@ -5,9 +5,9 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PageCategory
+ * BlockSetting
  */
-class PageCategory
+class BlockSetting
 {
     /**
      * @var integer
@@ -32,14 +32,19 @@ class PageCategory
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $page;
+    private $value;
+
+    /**
+     * @var \CMS\SharedBundle\Entity\BlockRevision
+     */
+    private $revision;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->page = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->value = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -56,7 +61,7 @@ class PageCategory
      * Set name
      *
      * @param string $name
-     * @return PageCategory
+     * @return BlockSetting
      */
     public function setName($name)
     {
@@ -79,7 +84,7 @@ class PageCategory
      * Set created
      *
      * @param \DateTime $created
-     * @return PageCategory
+     * @return BlockSetting
      */
     public function setCreated($created)
     {
@@ -102,7 +107,7 @@ class PageCategory
      * Set updated
      *
      * @param \DateTime $updated
-     * @return PageCategory
+     * @return BlockSetting
      */
     public function setUpdated($updated)
     {
@@ -122,35 +127,58 @@ class PageCategory
     }
 
     /**
-     * Add page
+     * Add value
      *
-     * @param \CMS\SharedBundle\Entity\Page $page
-     * @return PageCategory
+     * @param \CMS\SharedBundle\Entity\BlockSettingValue $value
+     * @return BlockSetting
      */
-    public function addPage(\CMS\SharedBundle\Entity\Page $page)
+    public function addValue(\CMS\SharedBundle\Entity\BlockSettingValue $value)
     {
-        $this->page[] = $page;
+        $this->value[] = $value;
     
         return $this;
     }
 
     /**
-     * Remove page
+     * Remove value
      *
-     * @param \CMS\SharedBundle\Entity\Page $page
+     * @param \CMS\SharedBundle\Entity\BlockSettingValue $value
      */
-    public function removePage(\CMS\SharedBundle\Entity\Page $page)
+    public function removeValue(\CMS\SharedBundle\Entity\BlockSettingValue $value)
     {
-        $this->page->removeElement($page);
+        $this->value->removeElement($value);
     }
 
     /**
-     * Get page
+     * Get value
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getPage()
+    public function getValue()
     {
-        return $this->page;
+        return $this->value;
+    }
+
+    /**
+     * Set revision
+     *
+     * @param \CMS\SharedBundle\Entity\BlockRevision $revision
+     * @return BlockSetting
+     */
+    public function setRevision(\CMS\SharedBundle\Entity\BlockRevision $revision = null)
+    {
+        $this->revision = $revision;
+    
+        return $this;
+    }
+
+    /**
+     * Get revision
+     *
+     * @return \CMS\SharedBundle\Entity\BlockRevision 
+     */
+    public function getRevision()
+    {
+        return $this->revision;
     }
 }

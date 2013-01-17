@@ -1,6 +1,6 @@
-CMS\SharedBundle\Entity\Container:
+CMS\SharedBundle\Entity\Block:
     type: entity
-    table: container
+    table: block
     fields:
         id:
             id: true
@@ -33,21 +33,21 @@ CMS\SharedBundle\Entity\Container:
                 on: update                        
     oneToMany:
         parent:
-          targetEntity: ContainerChild
-          mappedBy: parent
+          targetEntity: BlockInstance
+          mappedBy: block          
         child: 
-          targetEntity: ContainerChild
-          mappedBy: child
+          targetEntity: BlockInstance
+          mappedBy: parent          
     manyToOne:      
         type:
-            targetEntity: ContainerType                        
+            targetEntity: BlockType                        
             joinColumns:
-                container_type_id:
+                block_type_id:
                     referencedColumnName: id
             orphanRemoval: false
         currentRevision:
-            targetEntity: ContainerRevision            
-            inversedBy: containerRevision
+            targetEntity: BlockRevision            
+            inversedBy: BlockRevision
             joinColumns:
                 current_revision_id:
                     referencedColumnName: id

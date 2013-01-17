@@ -164,4 +164,60 @@ class Template
     {
         return $this->container;
     }
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @var string
+     */
+    private $filepath;
+
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Template
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set filepath
+     *
+     * @param string $filepath
+     * @return Template
+     */
+    public function setFilepath($filepath)
+    {
+        $this->filepath = $filepath;
+    
+        return $this;
+    }
+
+    /**
+     * Get filepath
+     *
+     * @return string 
+     */
+    public function getFilepath()
+    {
+        return $this->filepath;
+    }
 }

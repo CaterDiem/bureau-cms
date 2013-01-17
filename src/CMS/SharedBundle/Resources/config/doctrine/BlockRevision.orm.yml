@@ -1,6 +1,6 @@
-CMS\SharedBundle\Entity\ContainerRevision:
+CMS\SharedBundle\Entity\BlockRevision:
     type: entity
-    table: container_revision
+    table: block_revision
     fields:
         id:
             id: true
@@ -29,11 +29,11 @@ CMS\SharedBundle\Entity\ContainerRevision:
               timestampable:
                 on: update            
     manyToOne:
-        container:
-            targetEntity: Container
+        block:
+            targetEntity: Block
             cascade: {  }
             joinColumns:
-                container_id:
+                block_id:
                     referencedColumnName: id
             orphanRemoval: false
         editor:
@@ -48,7 +48,7 @@ CMS\SharedBundle\Entity\ContainerRevision:
             inversedBy: template            
     oneToMany:
         setting:
-            targetEntity: ContainerSetting              
+            targetEntity: BlockSetting              
             mappedBy: setting
           
     lifecycleCallbacks: {  }

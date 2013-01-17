@@ -1,5 +1,5 @@
 parameters:
-    container_manager.class: CMS\PageBundle\Container\ContainerManager
+    block_manager.class: CMS\PageBundle\Block\BlockManager
     page_manager.class: CMS\PageBundle\Page\PageManager
     
     
@@ -14,12 +14,12 @@ services:
         class:        Symfony\Component\HttpFoundation\Request
 
     
-    container_manager:
-        class: "%container_manager.class%"
+    block_manager:
+        class: "%block_manager.class%"
         default_template: %cms_page.default_template%
         arguments: [@doctrine.orm.entity_manager, @templating]
                 
     page_manager:
         class: "%page_manager.class%"
         default_template: %cms_page.default_template%
-        arguments: [@doctrine.orm.entity_manager, @container_manager, @templating]        
+        arguments: [@doctrine.orm.entity_manager, @block_manager, @templating]        

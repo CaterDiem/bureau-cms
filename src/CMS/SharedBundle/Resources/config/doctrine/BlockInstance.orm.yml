@@ -1,6 +1,6 @@
-CMS\SharedBundle\Entity\ContainerChild:
+CMS\SharedBundle\Entity\BlockInstance:
     type: entity
-    table: container_child
+    table: block_instance
     fields:
         id:
             id: true
@@ -18,14 +18,12 @@ CMS\SharedBundle\Entity\ContainerChild:
                 - sortablePosition
     manyToOne:
         parent:
-            targetEntity: Container
-            inversedBy: child            
+            targetEntity: Block            
             orphanRemoval: false
         template:
             targetEntity: Template
             orphanRemoval: false               
-        child:
-            targetEntity: Container
-            inversedBy: parent
+        block:
+            targetEntity: Block            
             orphanRemoval: false
     lifecycleCallbacks: {  }

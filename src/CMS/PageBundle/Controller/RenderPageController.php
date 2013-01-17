@@ -14,11 +14,7 @@ class RenderPageController extends Controller {
 
     protected $request;
     protected $response;    
-    
-    public function __construct(){          
-
-        
-    }    
+     
     /**
      * View / Render a page.
      * Generally this will load the pre-rendered/cached page.

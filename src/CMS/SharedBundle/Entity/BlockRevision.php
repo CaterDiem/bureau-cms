@@ -5,9 +5,9 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PageRevision
+ * BlockRevision
  */
-class PageRevision
+class BlockRevision
 {
     /**
      * @var integer
@@ -20,6 +20,11 @@ class PageRevision
     private $revision;
 
     /**
+     * @var string
+     */
+    private $content;
+
+    /**
      * @var \DateTime
      */
     private $created;
@@ -30,14 +35,14 @@ class PageRevision
     private $updated;
 
     /**
-     * @var boolean
+     * @var \Doctrine\Common\Collections\Collection
      */
-    private $publishApproved;
+    private $setting;
 
     /**
-     * @var \CMS\SharedBundle\Entity\Page
+     * @var \CMS\SharedBundle\Entity\Block
      */
-    private $page;
+    private $block;
 
     /**
      * @var \CMS\SharedBundle\Entity\User
@@ -45,16 +50,18 @@ class PageRevision
     private $editor;
 
     /**
-     * @var \CMS\SharedBundle\Entity\Block
+     * @var \CMS\SharedBundle\Entity\Template
      */
-    private $rootBlock;
+    private $template;
 
     /**
-     * @var \CMS\SharedBundle\Entity\User
+     * Constructor
      */
-    private $approver;
-
-
+    public function __construct()
+    {
+        $this->setting = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -69,7 +76,7 @@ class PageRevision
      * Set revision
      *
      * @param integer $revision
-     * @return PageRevision
+     * @return BlockRevision
      */
     public function setRevision($revision)
     {
@@ -89,10 +96,33 @@ class PageRevision
     }
 
     /**
+     * Set content
+     *
+     * @param string $content
+     * @return BlockRevision
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
      * Set created
      *
      * @param \DateTime $created
-     * @return PageRevision
+     * @return BlockRevision
      */
     public function setCreated($created)
     {
@@ -115,7 +145,7 @@ class PageRevision
      * Set updated
      *
      * @param \DateTime $updated
-     * @return PageRevision
+     * @return BlockRevision
      */
     public function setUpdated($updated)
     {
@@ -135,56 +165,66 @@ class PageRevision
     }
 
     /**
-     * Set publishApproved
+     * Add setting
      *
-     * @param boolean $publishApproved
-     * @return PageRevision
+     * @param \CMS\SharedBundle\Entity\BlockSetting $setting
+     * @return BlockRevision
      */
-    public function setPublishApproved($publishApproved)
+    public function addSetting(\CMS\SharedBundle\Entity\BlockSetting $setting)
     {
-        $this->publishApproved = $publishApproved;
+        $this->setting[] = $setting;
     
         return $this;
     }
 
     /**
-     * Get publishApproved
+     * Remove setting
      *
-     * @return boolean 
+     * @param \CMS\SharedBundle\Entity\BlockSetting $setting
      */
-    public function getPublishApproved()
+    public function removeSetting(\CMS\SharedBundle\Entity\BlockSetting $setting)
     {
-        return $this->publishApproved;
+        $this->setting->removeElement($setting);
     }
 
     /**
-     * Set page
+     * Get setting
      *
-     * @param \CMS\SharedBundle\Entity\Page $page
-     * @return PageRevision
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setPage(\CMS\SharedBundle\Entity\Page $page = null)
+    public function getSetting()
     {
-        $this->page = $page;
+        return $this->setting;
+    }
+
+    /**
+     * Set block
+     *
+     * @param \CMS\SharedBundle\Entity\Block $block
+     * @return BlockRevision
+     */
+    public function setBlock(\CMS\SharedBundle\Entity\Block $block = null)
+    {
+        $this->block = $block;
     
         return $this;
     }
 
     /**
-     * Get page
+     * Get block
      *
-     * @return \CMS\SharedBundle\Entity\Page 
+     * @return \CMS\SharedBundle\Entity\Block 
      */
-    public function getPage()
+    public function getBlock()
     {
-        return $this->page;
+        return $this->block;
     }
 
     /**
      * Set editor
      *
      * @param \CMS\SharedBundle\Entity\User $editor
-     * @return PageRevision
+     * @return BlockRevision
      */
     public function setEditor(\CMS\SharedBundle\Entity\User $editor = null)
     {
@@ -204,48 +244,25 @@ class PageRevision
     }
 
     /**
-     * Set rootBlock
+     * Set template
      *
-     * @param \CMS\SharedBundle\Entity\Block $rootBlock
-     * @return PageRevision
+     * @param \CMS\SharedBundle\Entity\Template $template
+     * @return BlockRevision
      */
-    public function setRootBlock(\CMS\SharedBundle\Entity\Block $rootBlock = null)
+    public function setTemplate(\CMS\SharedBundle\Entity\Template $template = null)
     {
-        $this->rootBlock = $rootBlock;
+        $this->template = $template;
     
         return $this;
     }
 
     /**
-     * Get rootBlock
+     * Get template
      *
-     * @return \CMS\SharedBundle\Entity\Block 
+     * @return \CMS\SharedBundle\Entity\Template 
      */
-    public function getRootBlock()
+    public function getTemplate()
     {
-        return $this->rootBlock;
-    }
-
-    /**
-     * Set approver
-     *
-     * @param \CMS\SharedBundle\Entity\User $approver
-     * @return PageRevision
-     */
-    public function setApprover(\CMS\SharedBundle\Entity\User $approver = null)
-    {
-        $this->approver = $approver;
-    
-        return $this;
-    }
-
-    /**
-     * Get approver
-     *
-     * @return \CMS\SharedBundle\Entity\User 
-     */
-    public function getApprover()
-    {
-        return $this->approver;
+        return $this->template;
     }
 }

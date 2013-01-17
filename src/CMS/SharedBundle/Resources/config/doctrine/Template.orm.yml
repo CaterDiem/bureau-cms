@@ -38,7 +38,7 @@ CMS\SharedBundle\Entity\Template:
                 on: update                        
     manyToOne:
         container:
-            targetEntity: ContainerRevision            
-            mappedBy: containerRevision                        
+            targetEntity: BlockRevision            
+            mappedBy: blockRevision                        
             orphanRemoval: false
     lifecycleCallbacks: {  }

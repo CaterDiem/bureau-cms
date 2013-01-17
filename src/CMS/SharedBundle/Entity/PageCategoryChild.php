@@ -5,27 +5,27 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CMS\SharedBundle\Entity\PageCategoryChild
+ * PageCategoryChild
  */
 class PageCategoryChild
 {
     /**
-     * @var integer $id
+     * @var integer
      */
     private $id;
 
     /**
-     * @var integer $sortOrder
+     * @var integer
      */
     private $sortOrder;
 
     /**
-     * @var CMS\SharedBundle\Entity\PageCategory
+     * @var \CMS\SharedBundle\Entity\PageCategory
      */
     private $page;
 
     /**
-     * @var CMS\SharedBundle\Entity\PageCategory
+     * @var \CMS\SharedBundle\Entity\PageCategory
      */
     private $child;
 
@@ -66,7 +66,7 @@ class PageCategoryChild
     /**
      * Set page
      *
-     * @param CMS\SharedBundle\Entity\PageCategory $page
+     * @param \CMS\SharedBundle\Entity\PageCategory $page
      * @return PageCategoryChild
      */
     public function setPage(\CMS\SharedBundle\Entity\PageCategory $page = null)
@@ -79,7 +79,7 @@ class PageCategoryChild
     /**
      * Get page
      *
-     * @return CMS\SharedBundle\Entity\PageCategory 
+     * @return \CMS\SharedBundle\Entity\PageCategory 
      */
     public function getPage()
     {
@@ -89,7 +89,7 @@ class PageCategoryChild
     /**
      * Set child
      *
-     * @param CMS\SharedBundle\Entity\PageCategory $child
+     * @param \CMS\SharedBundle\Entity\PageCategory $child
      * @return PageCategoryChild
      */
     public function setChild(\CMS\SharedBundle\Entity\PageCategory $child = null)
@@ -102,7 +102,7 @@ class PageCategoryChild
     /**
      * Get child
      *
-     * @return CMS\SharedBundle\Entity\PageCategory 
+     * @return \CMS\SharedBundle\Entity\PageCategory 
      */
     public function getChild()
     {

@@ -2,7 +2,7 @@
 
 namespace CMS\PageBundle\Page;
 
-use CMS\PageBundle\Container\ContainerManager;
+use CMS\PageBundle\Block\BlockManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Templating\EngineInterface;
 
@@ -14,17 +14,17 @@ use Symfony\Component\Templating\EngineInterface;
 class PageManager {
     
     protected $em;
-    protected $containerManager;
+    protected $blockManager;
     protected $engine;
     
     protected $page;    
     
     protected $generatedContent;
 
-    public function __construct(EntityManager $em, ContainerManager $containerManager, EngineInterface $templating) {
+    public function __construct(EntityManager $em, BlockManager $blockManager, EngineInterface $templating) {
         $this->em = $em;
         $this->engine = $templating;
-        $this->containerManager = $containerManager;
+        $this->blockManager = $blockManager;
         $this->page = FALSE;
         $this->generatedContent = FALSE;
     }
@@ -65,12 +65,12 @@ class PageManager {
         if($this->isLoaded()){
             // check cached page.
                         
-            // grab the root container and throw it to the mercy of the containerManager!            
+            // grab the root block and throw it to the mercy of the blockManager!            
             if($this->page->getCurrentRevision()){                
                 
-                $this->containerManager->loadContainerTree($this->currentRevision->getRootContainer());            
+                $this->blockManager->load($this->currentRevision->getRootBlock());            
                 
-                $this->generatedContent = $this->containerManager->generate();                
+                $this->generatedContent = $this->blockManager->generate();                
                 
                 if($this->generatedContent){
                 

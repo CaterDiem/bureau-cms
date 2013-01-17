@@ -1,6 +1,6 @@
-CMS\SharedBundle\Entity\ContainerSetting:
+CMS\SharedBundle\Entity\BlockSetting:
     type: entity
-    table: container_setting
+    table: block_setting
     fields:
         id:
             type: integer
@@ -24,11 +24,11 @@ CMS\SharedBundle\Entity\ContainerSetting:
                 on: update                        
     manyToOne:
       revision:
-          targetEntity: ContainerRevision                                        
+          targetEntity: BlockRevision                                        
           orphanRemoval: false    
-          inversedBy: containerRevision
+          inversedBy: blockRevision
     oneToMany:
         value:
-            targetEntity: ContainerSettingValue
-            mappedBy: containerSettingValue
+            targetEntity: BlockSettingValue
+            mappedBy: blockSettingValue
     lifecycleCallbacks: {  }

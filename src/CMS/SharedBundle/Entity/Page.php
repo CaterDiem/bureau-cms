@@ -3,46 +3,65 @@
 namespace CMS\SharedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+
 /**
- * CMS\SharedBundle\Entity\Page
+ * Page
  */
 class Page
 {
     /**
-     * @var integer $id
+     * @var integer
      */
     private $id;
 
     /**
-     * @var string $name
+     * @var string
      */
     private $name;
 
     /**
-     * @var CMS\SharedBundle\Entity\User
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * @var \DateTime
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $revisions;
+
+    /**
+     * @var \CMS\SharedBundle\Entity\User
      */
     private $author;
 
     /**
-     * @var CMS\SharedBundle\Entity\PageRevision
+     * @var \CMS\SharedBundle\Entity\PageRevision
      */
-    private $currentPageRevision;
+    private $currentRevision;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var \Doctrine\Common\Collections\Collection
      */
-    private $pageCategory;
+    private $category;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->pageCategory = new ArrayCollection();
-        $this->containers = new ArrayCollection();
+        $this->revisions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
     }
-        
     
     /**
      * Get id
@@ -78,91 +97,6 @@ class Page
     }
 
     /**
-     * Set author
-     *
-     * @param CMS\SharedBundle\Entity\User $author
-     * @return Page
-     */
-    public function setAuthor(\CMS\SharedBundle\Entity\User $author = null)
-    {
-        $this->author = $author;
-    
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return CMS\SharedBundle\Entity\User 
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * Set currentPageRevision
-     *
-     * @param CMS\SharedBundle\Entity\PageRevision $currentPageRevision
-     * @return Page
-     */
-    public function setCurrentPageRevision(\CMS\SharedBundle\Entity\PageRevision $currentPageRevision = null)
-    {
-        $this->currentPageRevision = $currentPageRevision;
-    
-        return $this;
-    }
-
-    /**
-     * Get currentPageRevision
-     *
-     * @return CMS\SharedBundle\Entity\PageRevision 
-     */
-    public function getCurrentPageRevision()
-    {
-        return $this->currentPageRevision;
-    }
-
-    /**
-     * Add pageCategory
-     *
-     * @param CMS\SharedBundle\Entity\PageCategory $pageCategory
-     * @return Page
-     */
-    public function addPageCategory(\CMS\SharedBundle\Entity\PageCategory $pageCategory)
-    {
-        $this->pageCategory[] = $pageCategory;
-    
-        return $this;
-    }
-
-    /**
-     * Remove pageCategory
-     *
-     * @param CMS\SharedBundle\Entity\PageCategory $pageCategory
-     */
-    public function removePageCategory(\CMS\SharedBundle\Entity\PageCategory $pageCategory)
-    {
-        $this->pageCategory->removeElement($pageCategory);
-    }
-
-    /**
-     * Get pageCategory
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getPageCategory()
-    {
-        return $this->pageCategory;
-    }   
-   
-    /**
-     * @var string
-     */
-    private $slug;
-
-
-    /**
      * Set slug
      *
      * @param string $slug
@@ -184,16 +118,6 @@ class Page
     {
         return $this->slug;
     }
-    /**
-     * @var \DateTime
-     */
-    private $created;
-
-    /**
-     * @var \DateTime
-     */
-    private $updated;
-
 
     /**
      * Set created
@@ -240,11 +164,6 @@ class Page
     {
         return $this->updated;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $revisions;
-
 
     /**
      * Add revisions
@@ -278,16 +197,29 @@ class Page
     {
         return $this->revisions;
     }
-    /**
-     * @var \CMS\SharedBundle\Entity\PageRevision
-     */
-    private $currentRevision;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * Set author
+     *
+     * @param \CMS\SharedBundle\Entity\User $author
+     * @return Page
      */
-    private $category;
+    public function setAuthor(\CMS\SharedBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+    
+        return $this;
+    }
 
+    /**
+     * Get author
+     *
+     * @return \CMS\SharedBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
 
     /**
      * Set currentRevision

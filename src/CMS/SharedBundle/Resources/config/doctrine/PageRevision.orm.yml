@@ -48,13 +48,13 @@ CMS\SharedBundle\Entity\PageRevision:
                 editor_id:
                     referencedColumnName: id
             orphanRemoval: false
-        rootContainer:
-            targetEntity: Container
+        rootBlock:
+            targetEntity: Block
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                root_container_id:
+                root_block_id:
                     referencedColumnName: id
             orphanRemoval: false
         approver:

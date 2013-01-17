@@ -1,6 +1,6 @@
-CMS\SharedBundle\Entity\ContainerType:
+CMS\SharedBundle\Entity\BlockType:
     type: entity
-    table: container_type
+    table: block_type
     fields:
         id:
             id: true

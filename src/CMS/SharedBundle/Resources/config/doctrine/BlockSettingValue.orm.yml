@@ -1,6 +1,6 @@
-CMS\SharedBundle\Entity\ContainerSettingValue:
+CMS\SharedBundle\Entity\BlockSettingValue:
     type: entity
-    table: container_setting_value
+    table: block_setting_value
     fields:
         id:
             type: integer
@@ -12,6 +12,6 @@ CMS\SharedBundle\Entity\ContainerSettingValue:
             length: '255'
     manyToOne:
       setting:
-        targetEntity: ContainerSetting
+        targetEntity: BlockSetting
         orphanRemoval: false
     lifecycleCallbacks: {  }
