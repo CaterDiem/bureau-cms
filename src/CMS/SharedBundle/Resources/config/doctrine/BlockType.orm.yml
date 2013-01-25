@@ -9,4 +9,12 @@ CMS\SharedBundle\Entity\BlockType:
             nullable: false
             generator:
                 strategy: IDENTITY
+        name:
+          type: string
+          length: 64
+    oneToMany:
+        block:
+          targetEntity: Block
+          mappedBy: type
+          
     lifecycleCallbacks: {  }

@@ -1,0 +1,39 @@
+CMS\SharedBundle\Entity\Content:
+    type: entity
+    table: content
+    gedmo: 
+        loggable: true
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY        
+        content:
+            type: text
+            nullable: true
+            gedmo:
+                - versioned
+        created:
+            type: datetime
+            nullable: false
+            gedmo:                            
+              timestampable:
+                on: create
+        updated:
+            type: datetime
+            nullable: false
+            gedmo:                            
+              timestampable:
+                on: update      
+    manyToOne: 
+        editor:
+            targetEntity: User                            
+    oneToMany:
+        blocks:
+            targetEntity: Block
+            mappedBy: content
+            orphanRemoval: true                                                 
+    lifecycleCallbacks: {  }

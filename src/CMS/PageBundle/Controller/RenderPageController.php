@@ -27,7 +27,7 @@ class RenderPageController extends Controller {
        
         $pageManager = $this->get('page_manager');
         
-        $pageManager->loadBySlug($pageSlug);
+        $pageManager->loadBySlug($pageSlug);        
 
         if($pageManager->isLoaded()){ 
             

@@ -5,52 +5,52 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CMS\SharedBundle\Entity\PageRevision
+ * PageRevision
  */
 class PageRevision
 {
     /**
-     * @var integer $id
+     * @var integer
      */
     private $id;
 
     /**
-     * @var integer $revision
+     * @var integer
      */
     private $revision;
 
     /**
-     * @var \DateTime $created
+     * @var \DateTime
      */
     private $created;
 
     /**
-     * @var \DateTime $updated
+     * @var \DateTime
      */
     private $updated;
 
     /**
-     * @var boolean $publishApproved
+     * @var boolean
      */
     private $publishApproved;
 
     /**
-     * @var CMS\SharedBundle\Entity\Page
+     * @var \CMS\SharedBundle\Entity\Page
      */
     private $page;
 
     /**
-     * @var CMS\SharedBundle\Entity\User
+     * @var \CMS\SharedBundle\Entity\User
      */
     private $editor;
 
     /**
-     * @var CMS\SharedBundle\Entity\Container
+     * @var \CMS\SharedBundle\Entity\Block
      */
-    private $rootContainer;
+    private $rootBlock;
 
     /**
-     * @var CMS\SharedBundle\Entity\User
+     * @var \CMS\SharedBundle\Entity\User
      */
     private $approver;
 
@@ -160,7 +160,7 @@ class PageRevision
     /**
      * Set page
      *
-     * @param CMS\SharedBundle\Entity\Page $page
+     * @param \CMS\SharedBundle\Entity\Page $page
      * @return PageRevision
      */
     public function setPage(\CMS\SharedBundle\Entity\Page $page = null)
@@ -173,7 +173,7 @@ class PageRevision
     /**
      * Get page
      *
-     * @return CMS\SharedBundle\Entity\Page 
+     * @return \CMS\SharedBundle\Entity\Page 
      */
     public function getPage()
     {
@@ -183,7 +183,7 @@ class PageRevision
     /**
      * Set editor
      *
-     * @param CMS\SharedBundle\Entity\User $editor
+     * @param \CMS\SharedBundle\Entity\User $editor
      * @return PageRevision
      */
     public function setEditor(\CMS\SharedBundle\Entity\User $editor = null)
@@ -196,7 +196,7 @@ class PageRevision
     /**
      * Get editor
      *
-     * @return CMS\SharedBundle\Entity\User 
+     * @return \CMS\SharedBundle\Entity\User 
      */
     public function getEditor()
     {
@@ -204,32 +204,32 @@ class PageRevision
     }
 
     /**
-     * Set rootContainer
+     * Set rootBlock
      *
-     * @param CMS\SharedBundle\Entity\Container $rootContainer
+     * @param \CMS\SharedBundle\Entity\Block $rootBlock
      * @return PageRevision
      */
-    public function setRootContainer(\CMS\SharedBundle\Entity\Container $rootContainer = null)
+    public function setRootBlock(\CMS\SharedBundle\Entity\Block $rootBlock = null)
     {
-        $this->rootContainer = $rootContainer;
+        $this->rootBlock = $rootBlock;
     
         return $this;
     }
 
     /**
-     * Get rootContainer
+     * Get rootBlock
      *
-     * @return CMS\SharedBundle\Entity\Container 
+     * @return \CMS\SharedBundle\Entity\Block 
      */
-    public function getRootContainer()
+    public function getRootBlock()
     {
-        return $this->rootContainer;
+        return $this->rootBlock;
     }
 
     /**
      * Set approver
      *
-     * @param CMS\SharedBundle\Entity\User $approver
+     * @param \CMS\SharedBundle\Entity\User $approver
      * @return PageRevision
      */
     public function setApprover(\CMS\SharedBundle\Entity\User $approver = null)
@@ -242,7 +242,7 @@ class PageRevision
     /**
      * Get approver
      *
-     * @return CMS\SharedBundle\Entity\User 
+     * @return \CMS\SharedBundle\Entity\User 
      */
     public function getApprover()
     {

@@ -37,12 +37,22 @@ class Block
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $parent;
+    private $instances;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $child;
+    private $parents;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $pages;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $settings;
 
     /**
      * @var \CMS\SharedBundle\Entity\BlockType
@@ -50,17 +60,19 @@ class Block
     private $type;
 
     /**
-     * @var \CMS\SharedBundle\Entity\BlockRevision
+     * @var \CMS\SharedBundle\Entity\Content
      */
-    private $currentRevision;
+    private $content;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->parent = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->child = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->instances = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->parents = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->settings = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -166,69 +178,135 @@ class Block
     }
 
     /**
-     * Add parent
+     * Add instances
      *
-     * @param \CMS\SharedBundle\Entity\BlockInstance $parent
+     * @param \CMS\SharedBundle\Entity\BlockInstance $instances
      * @return Block
      */
-    public function addParent(\CMS\SharedBundle\Entity\BlockInstance $parent)
+    public function addInstance(\CMS\SharedBundle\Entity\BlockInstance $instances)
     {
-        $this->parent[] = $parent;
+        $this->instances[] = $instances;
     
         return $this;
     }
 
     /**
-     * Remove parent
+     * Remove instances
      *
-     * @param \CMS\SharedBundle\Entity\BlockInstance $parent
+     * @param \CMS\SharedBundle\Entity\BlockInstance $instances
      */
-    public function removeParent(\CMS\SharedBundle\Entity\BlockInstance $parent)
+    public function removeInstance(\CMS\SharedBundle\Entity\BlockInstance $instances)
     {
-        $this->parent->removeElement($parent);
+        $this->instances->removeElement($instances);
     }
 
     /**
-     * Get parent
+     * Get instances
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getParent()
+    public function getInstances()
     {
-        return $this->parent;
+        return $this->instances;
     }
 
     /**
-     * Add child
+     * Add parents
      *
-     * @param \CMS\SharedBundle\Entity\BlockInstance $child
+     * @param \CMS\SharedBundle\Entity\BlockInstance $parents
      * @return Block
      */
-    public function addChild(\CMS\SharedBundle\Entity\BlockInstance $child)
+    public function addParent(\CMS\SharedBundle\Entity\BlockInstance $parents)
     {
-        $this->child[] = $child;
+        $this->parents[] = $parents;
     
         return $this;
     }
 
     /**
-     * Remove child
+     * Remove parents
      *
-     * @param \CMS\SharedBundle\Entity\BlockInstance $child
+     * @param \CMS\SharedBundle\Entity\BlockInstance $parents
      */
-    public function removeChild(\CMS\SharedBundle\Entity\BlockInstance $child)
+    public function removeParent(\CMS\SharedBundle\Entity\BlockInstance $parents)
     {
-        $this->child->removeElement($child);
+        $this->parents->removeElement($parents);
     }
 
     /**
-     * Get child
+     * Get parents
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getChild()
+    public function getParents()
     {
-        return $this->child;
+        return $this->parents;
+    }
+
+    /**
+     * Add pages
+     *
+     * @param \CMS\SharedBundle\Entity\PageRevision $pages
+     * @return Block
+     */
+    public function addPage(\CMS\SharedBundle\Entity\PageRevision $pages)
+    {
+        $this->pages[] = $pages;
+    
+        return $this;
+    }
+
+    /**
+     * Remove pages
+     *
+     * @param \CMS\SharedBundle\Entity\PageRevision $pages
+     */
+    public function removePage(\CMS\SharedBundle\Entity\PageRevision $pages)
+    {
+        $this->pages->removeElement($pages);
+    }
+
+    /**
+     * Get pages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * Add settings
+     *
+     * @param \CMS\SharedBundle\Entity\BlockSetting $settings
+     * @return Block
+     */
+    public function addSetting(\CMS\SharedBundle\Entity\BlockSetting $settings)
+    {
+        $this->settings[] = $settings;
+    
+        return $this;
+    }
+
+    /**
+     * Remove settings
+     *
+     * @param \CMS\SharedBundle\Entity\BlockSetting $settings
+     */
+    public function removeSetting(\CMS\SharedBundle\Entity\BlockSetting $settings)
+    {
+        $this->settings->removeElement($settings);
+    }
+
+    /**
+     * Get settings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSettings()
+    {
+        return $this->settings;
     }
 
     /**
@@ -255,25 +333,25 @@ class Block
     }
 
     /**
-     * Set currentRevision
+     * Set content
      *
-     * @param \CMS\SharedBundle\Entity\BlockRevision $currentRevision
+     * @param \CMS\SharedBundle\Entity\Content $content
      * @return Block
      */
-    public function setCurrentRevision(\CMS\SharedBundle\Entity\BlockRevision $currentRevision = null)
+    public function setContent(\CMS\SharedBundle\Entity\Content $content = null)
     {
-        $this->currentRevision = $currentRevision;
+        $this->content = $content;
     
         return $this;
     }
 
     /**
-     * Get currentRevision
+     * Get content
      *
-     * @return \CMS\SharedBundle\Entity\BlockRevision 
+     * @return \CMS\SharedBundle\Entity\Content 
      */
-    public function getCurrentRevision()
+    public function getContent()
     {
-        return $this->currentRevision;
+        return $this->content;
     }
 }

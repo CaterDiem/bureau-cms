@@ -36,9 +36,9 @@ CMS\SharedBundle\Entity\Template:
             gedmo:
               timestampable:
                 on: update                        
-    manyToOne:
-        container:
-            targetEntity: BlockRevision            
-            mappedBy: blockRevision                        
+    oneToMany:
+        blockInstance:
+            targetEntity: BlockInstance
+            mappedBy: template                        
             orphanRemoval: false
     lifecycleCallbacks: {  }

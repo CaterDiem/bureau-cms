@@ -5,6 +5,7 @@ namespace CMS\PageBundle\Page;
 use CMS\PageBundle\Block\BlockManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Templating\EngineInterface;
+use Symfony\Bridge\Monolog\Logger;
 
 /**
  * PageManager is used to find, load and modify pages.
@@ -16,17 +17,20 @@ class PageManager {
     protected $em;
     protected $blockManager;
     protected $engine;
+    protected $container; 
     
     protected $page;    
     
     protected $generatedContent;
 
-    public function __construct(EntityManager $em, BlockManager $blockManager, EngineInterface $templating) {
+    public function __construct(EntityManager $em, BlockManager $blockManager, $container, Logger $logger) {
         $this->em = $em;
-        $this->engine = $templating;
+        $this->container = $container;
+        $this->engine = $this->container->get('templating');
         $this->blockManager = $blockManager;
         $this->page = FALSE;
         $this->generatedContent = FALSE;
+        $this->logger = $logger;
     }
 
     public function loadBySlug($pageSlug) {
@@ -70,10 +74,12 @@ class PageManager {
                 
                 $this->blockManager->load($this->currentRevision->getRootBlock());            
                 
-                $this->generatedContent = $this->blockManager->generate();                
+                if($this->blockManager->generate()){
+                    $this->generatedContent .= $this->blockManager->getGeneratedContent();
+                }
                 
                 if($this->generatedContent){
-                
+                    
                     return TRUE;
                 }
             }                        
@@ -83,7 +89,7 @@ class PageManager {
         return FALSE;        
     }       
     
-    public function getContent(){
+    public function getContent(){        
         return $this->generatedContent;
     }       
 }

@@ -18,12 +18,15 @@ CMS\SharedBundle\Entity\BlockInstance:
                 - sortablePosition
     manyToOne:
         parent:
-            targetEntity: Block            
-            orphanRemoval: false
+            targetEntity: Block   
+            inversedBy: instances
+            orphanRemoval: true
         template:
             targetEntity: Template
-            orphanRemoval: false               
+            inversedBy: blockInstance
+            orphanRemoval: true
         block:
             targetEntity: Block            
-            orphanRemoval: false
+            inversedBy: parents
+            orphanRemoval: true
     lifecycleCallbacks: {  }

@@ -1,6 +1,6 @@
 <?php
 
-namespace CMS\PageBundle\Block;
+namespace CMS\PageBundle\Block\Handlers;
 
 /**
  * Description of HTMLHandler
@@ -11,17 +11,17 @@ class HTMLHandler extends BlockHandler{
     //put your code here
     
     public function render(){
+    // TODO FIX THIS SHIT        
+                
+        $this->renderedContent = $this->engine->render(
+            $this->template->getFilepath(),
+            array(
+                'content' => $this->block->getContent()->getContent(),   
+                'block' => $this->block,
+            )
+        );            
         
-        if($block && $blockInstance->getCurrentRevision()){
-            $blockHandler = BlockHandler::create($blockInstance);
-            $child->generatedContent = $blockHandler->render();
-
-            $child->generatedContent = $this->engine->render("CMSPageBundle:Default:renderPage.html.twig", array(
-                'content' => $child->getBlock()->getCurrentRevision()->getContent(),                
-            ));            
-            $this->blockContent .= $child->generatedContent;                    
-        }
-
+        return TRUE;
     }
     
     public function getContents(){
@@ -32,5 +32,3 @@ class HTMLHandler extends BlockHandler{
         ;
     }
 }
-
-?>

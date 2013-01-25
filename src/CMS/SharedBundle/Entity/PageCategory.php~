@@ -5,22 +5,32 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CMS\SharedBundle\Entity\PageCategory
+ * PageCategory
  */
 class PageCategory
 {
     /**
-     * @var integer $id
+     * @var integer
      */
     private $id;
 
     /**
-     * @var string $name
+     * @var string
      */
     private $name;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var \DateTime
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
      */
     private $page;
 
@@ -66,9 +76,55 @@ class PageCategory
     }
 
     /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return PageCategory
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return PageCategory
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
      * Add page
      *
-     * @param CMS\SharedBundle\Entity\Page $page
+     * @param \CMS\SharedBundle\Entity\Page $page
      * @return PageCategory
      */
     public function addPage(\CMS\SharedBundle\Entity\Page $page)
@@ -81,7 +137,7 @@ class PageCategory
     /**
      * Remove page
      *
-     * @param CMS\SharedBundle\Entity\Page $page
+     * @param \CMS\SharedBundle\Entity\Page $page
      */
     public function removePage(\CMS\SharedBundle\Entity\Page $page)
     {
@@ -91,7 +147,7 @@ class PageCategory
     /**
      * Get page
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getPage()
     {

@@ -30,7 +30,7 @@ CMS\SharedBundle\Entity\PageCategory:
         page:
             targetEntity: Page
             cascade: {  }
-            mappedBy: pageCategory
+            mappedBy: category
             inversedBy: null
             joinTable: null
             orderBy: null

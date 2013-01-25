@@ -5,26 +5,53 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CMS\SharedBundle\Entity\Template
+ * Template
  */
 class Template
 {
     /**
-     * @var integer $id
+     * @var integer
      */
     private $id;
 
     /**
-     * @var string $name
+     * @var string
      */
     private $name;
 
     /**
-     * @var CMS\SharedBundle\Entity\Container
+     * @var string
      */
-    private $rootContainer;
+    private $description;
 
+    /**
+     * @var string
+     */
+    private $filepath;
 
+    /**
+     * @var \DateTime
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $blockInstance;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->blockInstance = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -59,37 +86,50 @@ class Template
     }
 
     /**
-     * Set rootContainer
+     * Set description
      *
-     * @param CMS\SharedBundle\Entity\Container $rootContainer
+     * @param string $description
      * @return Template
      */
-    public function setRootContainer(\CMS\SharedBundle\Entity\Container $rootContainer = null)
+    public function setDescription($description)
     {
-        $this->rootContainer = $rootContainer;
+        $this->description = $description;
     
         return $this;
     }
 
     /**
-     * Get rootContainer
+     * Get description
      *
-     * @return CMS\SharedBundle\Entity\Container 
+     * @return string 
      */
-    public function getRootContainer()
+    public function getDescription()
     {
-        return $this->rootContainer;
+        return $this->description;
     }
-    /**
-     * @var \DateTime
-     */
-    private $created;
 
     /**
-     * @var \DateTime
+     * Set filepath
+     *
+     * @param string $filepath
+     * @return Template
      */
-    private $updated;
+    public function setFilepath($filepath)
+    {
+        $this->filepath = $filepath;
+    
+        return $this;
+    }
 
+    /**
+     * Get filepath
+     *
+     * @return string 
+     */
+    public function getFilepath()
+    {
+        return $this->filepath;
+    }
 
     /**
      * Set created
@@ -136,88 +176,37 @@ class Template
     {
         return $this->updated;
     }
-    /**
-     * @var \CMS\SharedBundle\Entity\ContainerRevision
-     */
-    private $container;
-
 
     /**
-     * Set container
+     * Add blockInstance
      *
-     * @param \CMS\SharedBundle\Entity\ContainerRevision $container
+     * @param \CMS\SharedBundle\Entity\BlockInstance $blockInstance
      * @return Template
      */
-    public function setContainer(\CMS\SharedBundle\Entity\ContainerRevision $container = null)
+    public function addBlockInstance(\CMS\SharedBundle\Entity\BlockInstance $blockInstance)
     {
-        $this->container = $container;
+        $this->blockInstance[] = $blockInstance;
     
         return $this;
     }
 
     /**
-     * Get container
+     * Remove blockInstance
      *
-     * @return \CMS\SharedBundle\Entity\ContainerRevision 
+     * @param \CMS\SharedBundle\Entity\BlockInstance $blockInstance
      */
-    public function getContainer()
+    public function removeBlockInstance(\CMS\SharedBundle\Entity\BlockInstance $blockInstance)
     {
-        return $this->container;
-    }
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var string
-     */
-    private $filepath;
-
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Template
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    
-        return $this;
+        $this->blockInstance->removeElement($blockInstance);
     }
 
     /**
-     * Get description
+     * Get blockInstance
      *
-     * @return string 
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getDescription()
+    public function getBlockInstance()
     {
-        return $this->description;
-    }
-
-    /**
-     * Set filepath
-     *
-     * @param string $filepath
-     * @return Template
-     */
-    public function setFilepath($filepath)
-    {
-        $this->filepath = $filepath;
-    
-        return $this;
-    }
-
-    /**
-     * Get filepath
-     *
-     * @return string 
-     */
-    public function getFilepath()
-    {
-        return $this->filepath;
+        return $this->blockInstance;
     }
 }

@@ -1,7 +1,9 @@
-{# src/CMS/PageBundle/Resources/views/Default/renderPage.html.twig #}
+{# src/CMS/PageBundle/Resources/views/Default/plainHTML.html.twig #}
 {# author: jtemplet #}
 {# This is a wrapper template. Containers do the real work, using their layouts and templates and so on. #}
 
 {% block content %}
-{{ content|raw }}
+<div id="{{ block.name }}">
+    {{ content|raw }}
+</div>
 {% endblock content %}

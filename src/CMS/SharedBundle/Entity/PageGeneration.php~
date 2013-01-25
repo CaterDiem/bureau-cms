@@ -5,22 +5,22 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CMS\SharedBundle\Entity\PageGeneration
+ * PageGeneration
  */
 class PageGeneration
 {
     /**
-     * @var integer $id
+     * @var integer
      */
     private $id;
 
     /**
-     * @var \DateTime $timeGenerated
+     * @var \DateTime
      */
     private $timeGenerated;
 
     /**
-     * @var CMS\SharedBundle\Entity\PageRevision
+     * @var \CMS\SharedBundle\Entity\PageRevision
      */
     private $pageRevision;
 
@@ -61,7 +61,7 @@ class PageGeneration
     /**
      * Set pageRevision
      *
-     * @param CMS\SharedBundle\Entity\PageRevision $pageRevision
+     * @param \CMS\SharedBundle\Entity\PageRevision $pageRevision
      * @return PageGeneration
      */
     public function setPageRevision(\CMS\SharedBundle\Entity\PageRevision $pageRevision = null)
@@ -74,7 +74,7 @@ class PageGeneration
     /**
      * Get pageRevision
      *
-     * @return CMS\SharedBundle\Entity\PageRevision 
+     * @return \CMS\SharedBundle\Entity\PageRevision 
      */
     public function getPageRevision()
     {

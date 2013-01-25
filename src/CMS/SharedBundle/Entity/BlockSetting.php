@@ -35,9 +35,9 @@ class BlockSetting
     private $value;
 
     /**
-     * @var \CMS\SharedBundle\Entity\BlockRevision
+     * @var \CMS\SharedBundle\Entity\Block
      */
-    private $revision;
+    private $block;
 
     /**
      * Constructor
@@ -160,25 +160,25 @@ class BlockSetting
     }
 
     /**
-     * Set revision
+     * Set block
      *
-     * @param \CMS\SharedBundle\Entity\BlockRevision $revision
+     * @param \CMS\SharedBundle\Entity\Block $block
      * @return BlockSetting
      */
-    public function setRevision(\CMS\SharedBundle\Entity\BlockRevision $revision = null)
+    public function setBlock(\CMS\SharedBundle\Entity\Block $block = null)
     {
-        $this->revision = $revision;
+        $this->block = $block;
     
         return $this;
     }
 
     /**
-     * Get revision
+     * Get block
      *
-     * @return \CMS\SharedBundle\Entity\BlockRevision 
+     * @return \CMS\SharedBundle\Entity\Block 
      */
-    public function getRevision()
+    public function getBlock()
     {
-        return $this->revision;
+        return $this->block;
     }
 }

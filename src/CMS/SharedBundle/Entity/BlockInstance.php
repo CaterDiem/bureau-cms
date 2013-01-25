@@ -32,7 +32,7 @@ class BlockInstance
     /**
      * @var \CMS\SharedBundle\Entity\Block
      */
-    private $child;
+    private $block;
 
 
     /**
@@ -113,41 +113,6 @@ class BlockInstance
     {
         return $this->template;
     }
-
-   
-    /**
-     * @var \CMS\SharedBundle\Entity\Block
-     */
-    private $container;
-
-
-    /**
-     * Set container
-     *
-     * @param \CMS\SharedBundle\Entity\Block $container
-     * @return BlockInstance
-     */
-    public function setContainer(\CMS\SharedBundle\Entity\Block $container = null)
-    {
-        $this->container = $container;
-    
-        return $this;
-    }
-
-    /**
-     * Get container
-     *
-     * @return \CMS\SharedBundle\Entity\Block 
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-    /**
-     * @var \CMS\SharedBundle\Entity\Block
-     */
-    private $block;
-
 
     /**
      * Set block

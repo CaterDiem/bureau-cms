@@ -2,10 +2,10 @@
 
 namespace CMS\PageBundle\Block;
 
+use CMS\PageBundle\Block\Handlers\BlockHandler as BlockHandler;
 use CMS\SharedBundle\Entity\Block;
-use CMS\PageBundle\Block\Handlers\BlockHandler;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Templating\EngineInterface;
+use Symfony\Bridge\Monolog\Logger;
 
 /**
  * BlockManager is used to find, load and modify blocks.
@@ -23,12 +23,14 @@ class BlockManager {
     private $generatedContent;
     protected $isLoaded = FALSE;
 
-    public function __construct(EntityManager $em, EngineInterface $templating) {        
+    public function __construct(EntityManager $em, $container, Logger $logger) {        
         $this->em = $em;
-        $this->engine = $templating;
+        $this->container = $container;
+        $this->engine = $this->container->get('templating');
         $this->block = FALSE;
         $this->generatedContent = FALSE;
         $this->blockContent = '';
+        $this->logger = $logger;
         
     }
     
@@ -41,10 +43,10 @@ class BlockManager {
      * @params Block $block The block to load. Doesn't need to be a root block.
      * @return boolean TRUE on success or FALSE on failure
      */
-    public function loadBlock(Block $block){         
+    public function load(Block $block){         
         if($block->getName()){
-            $this->isLoaded = TRUE;
-            $block->numChildren = $block->getChild()->count();
+            $block->isLoaded = TRUE;
+            $block->numChildren = $block->getInstances()->count();
             $this->block = $block;            
         }
                 
@@ -52,18 +54,29 @@ class BlockManager {
     }
             
     public function generate(){
-        $blockHandler = BlockHandler::create($block);
-        
-        $this->generatedContent = $blockHandler->render();        
-        
-        if($this->generatedContent){
-            return TRUE;
+        //$blockHandler = BlockHandler::create($this->block, $this->engine);
+        if($this->block){            
+            
+            $this->logger->info("Loaded rootblock {$this->block->getName()}");
+            
+            // render all instances in this block. 
+            foreach($this->block->getInstances() as $instance){
+                
+                $instanceHandler= BlockHandler::create($instance->getBlock(), $this->engine, $instance->getTemplate());                
+                if($instanceHandler->render()){
+                    $this->generatedContent .= $instanceHandler->getRenderedContent();
+                }
+            }
+            
+            if($this->generatedContent){
+                return TRUE;
+            }            
         }
         return FALSE;
     }
     
     public function getGeneratedContent(){
-        return $this->generatedContent();        
+        return $this->generatedContent;        
     }
     
 }

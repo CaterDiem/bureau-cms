@@ -1,6 +1,7 @@
 parameters:
     block_manager.class: CMS\PageBundle\Block\BlockManager
     page_manager.class: CMS\PageBundle\Page\PageManager
+    block_handler.class: CMS\PageBundle\Block\Handler\BlockHandler
     
     
 services:
@@ -17,9 +18,14 @@ services:
     block_manager:
         class: "%block_manager.class%"
         default_template: %cms_page.default_template%
-        arguments: [@doctrine.orm.entity_manager, @templating]
+        arguments: [@doctrine.orm.entity_manager, @service_container, @logger]
                 
     page_manager:
         class: "%page_manager.class%"
         default_template: %cms_page.default_template%
-        arguments: [@doctrine.orm.entity_manager, @block_manager, @templating]        
+        arguments: [@doctrine.orm.entity_manager, @block_manager, @service_container, @logger]        
+        
+    block_handler:
+        class: "%page_manager.class%"
+        default_template: %cms_page.default_template%
+        arguments: [@doctrine.orm.entity_manager, @service_container, @logger]                  

@@ -35,14 +35,14 @@ class BlockRevision
     private $updated;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $setting;
-
-    /**
      * @var \CMS\SharedBundle\Entity\Block
      */
-    private $block;
+    private $currentBlock;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $settings;
 
     /**
      * @var \CMS\SharedBundle\Entity\User
@@ -50,16 +50,16 @@ class BlockRevision
     private $editor;
 
     /**
-     * @var \CMS\SharedBundle\Entity\Template
+     * @var \CMS\SharedBundle\Entity\Block
      */
-    private $template;
+    private $block;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->setting = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->settings = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -165,59 +165,59 @@ class BlockRevision
     }
 
     /**
-     * Add setting
+     * Set currentBlock
      *
-     * @param \CMS\SharedBundle\Entity\BlockSetting $setting
+     * @param \CMS\SharedBundle\Entity\Block $currentBlock
      * @return BlockRevision
      */
-    public function addSetting(\CMS\SharedBundle\Entity\BlockSetting $setting)
+    public function setCurrentBlock(\CMS\SharedBundle\Entity\Block $currentBlock = null)
     {
-        $this->setting[] = $setting;
+        $this->currentBlock = $currentBlock;
     
         return $this;
     }
 
     /**
-     * Remove setting
-     *
-     * @param \CMS\SharedBundle\Entity\BlockSetting $setting
-     */
-    public function removeSetting(\CMS\SharedBundle\Entity\BlockSetting $setting)
-    {
-        $this->setting->removeElement($setting);
-    }
-
-    /**
-     * Get setting
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSetting()
-    {
-        return $this->setting;
-    }
-
-    /**
-     * Set block
-     *
-     * @param \CMS\SharedBundle\Entity\Block $block
-     * @return BlockRevision
-     */
-    public function setBlock(\CMS\SharedBundle\Entity\Block $block = null)
-    {
-        $this->block = $block;
-    
-        return $this;
-    }
-
-    /**
-     * Get block
+     * Get currentBlock
      *
      * @return \CMS\SharedBundle\Entity\Block 
      */
-    public function getBlock()
+    public function getCurrentBlock()
     {
-        return $this->block;
+        return $this->currentBlock;
+    }
+
+    /**
+     * Add settings
+     *
+     * @param \CMS\SharedBundle\Entity\BlockSetting $settings
+     * @return BlockRevision
+     */
+    public function addSetting(\CMS\SharedBundle\Entity\BlockSetting $settings)
+    {
+        $this->settings[] = $settings;
+    
+        return $this;
+    }
+
+    /**
+     * Remove settings
+     *
+     * @param \CMS\SharedBundle\Entity\BlockSetting $settings
+     */
+    public function removeSetting(\CMS\SharedBundle\Entity\BlockSetting $settings)
+    {
+        $this->settings->removeElement($settings);
+    }
+
+    /**
+     * Get settings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSettings()
+    {
+        return $this->settings;
     }
 
     /**
@@ -244,25 +244,25 @@ class BlockRevision
     }
 
     /**
-     * Set template
+     * Set block
      *
-     * @param \CMS\SharedBundle\Entity\Template $template
+     * @param \CMS\SharedBundle\Entity\Block $block
      * @return BlockRevision
      */
-    public function setTemplate(\CMS\SharedBundle\Entity\Template $template = null)
+    public function setBlock(\CMS\SharedBundle\Entity\Block $block = null)
     {
-        $this->template = $template;
+        $this->block = $block;
     
         return $this;
     }
 
     /**
-     * Get template
+     * Get block
      *
-     * @return \CMS\SharedBundle\Entity\Template 
+     * @return \CMS\SharedBundle\Entity\Block 
      */
-    public function getTemplate()
+    public function getBlock()
     {
-        return $this->template;
+        return $this->block;
     }
 }

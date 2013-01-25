@@ -1,6 +1,8 @@
 CMS\SharedBundle\Entity\BlockSettingValue:
     type: entity
     table: block_setting_value
+    gedmo: 
+      loggable: true
     fields:
         id:
             type: integer
@@ -10,8 +12,11 @@ CMS\SharedBundle\Entity\BlockSettingValue:
         value:
             type: string
             length: '255'
+            gedmo:
+                - versioned
     manyToOne:
       setting:
         targetEntity: BlockSetting
-        orphanRemoval: false
+        inversedBy: value
+        orphanRemoval: true
     lifecycleCallbacks: {  }

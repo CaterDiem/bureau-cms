@@ -5,9 +5,9 @@ namespace CMS\SharedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PageCategory
+ * Content
  */
-class PageCategory
+class Content
 {
     /**
      * @var integer
@@ -17,7 +17,7 @@ class PageCategory
     /**
      * @var string
      */
-    private $name;
+    private $content;
 
     /**
      * @var \DateTime
@@ -32,14 +32,19 @@ class PageCategory
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $page;
+    private $blocks;
+
+    /**
+     * @var \CMS\SharedBundle\Entity\User
+     */
+    private $editor;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->page = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->blocks = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -53,33 +58,33 @@ class PageCategory
     }
 
     /**
-     * Set name
+     * Set content
      *
-     * @param string $name
-     * @return PageCategory
+     * @param string $content
+     * @return Content
      */
-    public function setName($name)
+    public function setContent($content)
     {
-        $this->name = $name;
+        $this->content = $content;
     
         return $this;
     }
 
     /**
-     * Get name
+     * Get content
      *
      * @return string 
      */
-    public function getName()
+    public function getContent()
     {
-        return $this->name;
+        return $this->content;
     }
 
     /**
      * Set created
      *
      * @param \DateTime $created
-     * @return PageCategory
+     * @return Content
      */
     public function setCreated($created)
     {
@@ -102,7 +107,7 @@ class PageCategory
      * Set updated
      *
      * @param \DateTime $updated
-     * @return PageCategory
+     * @return Content
      */
     public function setUpdated($updated)
     {
@@ -122,35 +127,58 @@ class PageCategory
     }
 
     /**
-     * Add page
+     * Add blocks
      *
-     * @param \CMS\SharedBundle\Entity\Page $page
-     * @return PageCategory
+     * @param \CMS\SharedBundle\Entity\Block $blocks
+     * @return Content
      */
-    public function addPage(\CMS\SharedBundle\Entity\Page $page)
+    public function addBlock(\CMS\SharedBundle\Entity\Block $blocks)
     {
-        $this->page[] = $page;
+        $this->blocks[] = $blocks;
     
         return $this;
     }
 
     /**
-     * Remove page
+     * Remove blocks
      *
-     * @param \CMS\SharedBundle\Entity\Page $page
+     * @param \CMS\SharedBundle\Entity\Block $blocks
      */
-    public function removePage(\CMS\SharedBundle\Entity\Page $page)
+    public function removeBlock(\CMS\SharedBundle\Entity\Block $blocks)
     {
-        $this->page->removeElement($page);
+        $this->blocks->removeElement($blocks);
     }
 
     /**
-     * Get page
+     * Get blocks
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getPage()
+    public function getBlocks()
     {
-        return $this->page;
+        return $this->blocks;
+    }
+
+    /**
+     * Set editor
+     *
+     * @param \CMS\SharedBundle\Entity\User $editor
+     * @return Content
+     */
+    public function setEditor(\CMS\SharedBundle\Entity\User $editor = null)
+    {
+        $this->editor = $editor;
+    
+        return $this;
+    }
+
+    /**
+     * Get editor
+     *
+     * @return \CMS\SharedBundle\Entity\User 
+     */
+    public function getEditor()
+    {
+        return $this->editor;
     }
 }

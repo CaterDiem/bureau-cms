@@ -1,6 +1,6 @@
 <?php
 
-namespace CMS\PageBundle\Block;
+namespace CMS\PageBundle\Block\Handlers;
 
 /**
  * Description of ImageHandler

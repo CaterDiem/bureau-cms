@@ -23,12 +23,12 @@ CMS\SharedBundle\Entity\BlockSetting:
               timestampable:
                 on: update                        
     manyToOne:
-      revision:
-          targetEntity: BlockRevision                                        
-          orphanRemoval: false    
-          inversedBy: blockRevision
+        block:
+            targetEntity: Block
+            inversedBy: settings
+            orphanRemoval: true    
     oneToMany:
         value:
             targetEntity: BlockSettingValue
-            mappedBy: blockSettingValue
+            mappedBy: setting
     lifecycleCallbacks: {  }

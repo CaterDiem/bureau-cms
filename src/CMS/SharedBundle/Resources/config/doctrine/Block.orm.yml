@@ -32,24 +32,25 @@ CMS\SharedBundle\Entity\Block:
               timestampable:
                 on: update                        
     oneToMany:
-        parent:
-          targetEntity: BlockInstance
-          mappedBy: block          
-        child: 
-          targetEntity: BlockInstance
-          mappedBy: parent          
+        instances: 
+            targetEntity: BlockInstance
+            mappedBy: parent
+        parents:
+            targetEntity: BlockInstance
+            mappedBy: block
+        pages:
+            targetEntity: PageRevision
+            mappedBy: rootBlock        
+        settings:
+            targetEntity: BlockSetting              
+            mappedBy: block           
     manyToOne:      
         type:
             targetEntity: BlockType                        
-            joinColumns:
-                block_type_id:
-                    referencedColumnName: id
-            orphanRemoval: false
-        currentRevision:
-            targetEntity: BlockRevision            
-            inversedBy: BlockRevision
-            joinColumns:
-                current_revision_id:
-                    referencedColumnName: id
-            orphanRemoval: false                   
+            inversedBy: block
+            orphanRemoval: true    
+        content:
+            targetEntity: Content
+            inversedBy: blocks            
+            orphanRemoval: true
     lifecycleCallbacks: {  }

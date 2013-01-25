@@ -46,9 +46,14 @@
         </ul>
 
         <!-- Start: PageHeight -->
-        {% block content %}
-        {{ content|raw }}
-        {% endblock %}
+        <div id="pageheight">
+            <div id="pagewrap">
+                {% block content %}
+                {{ content|raw }}
+                {% endblock %}        
+            </div>
+        </div>
         <!-- End: PageHeight -->
+        
         </body>
     </html>

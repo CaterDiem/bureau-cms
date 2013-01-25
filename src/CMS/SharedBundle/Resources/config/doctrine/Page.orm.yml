@@ -65,6 +65,6 @@ CMS\SharedBundle\Entity\Page:
     oneToMany:
       revisions:
             targetEntity: PageRevision
-            mappedBy: PageRevision
+            mappedBy: page
             orphanRemoval: false
     lifecycleCallbacks: {  }

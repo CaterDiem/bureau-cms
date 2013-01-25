@@ -32,27 +32,15 @@ CMS\SharedBundle\Entity\PageRevision:
     manyToOne:
         page:
             targetEntity: Page
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                page_id:
-                    referencedColumnName: id
-            orphanRemoval: false
+            inversedBy: revisions
+            orphanRemoval: true
         editor:
             targetEntity: User
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                editor_id:
-                    referencedColumnName: id
+            inversedBy: null            
             orphanRemoval: false
         rootBlock:
             targetEntity: Block
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
+            inversedBy: pages
             joinColumns:
                 root_block_id:
                     referencedColumnName: id
