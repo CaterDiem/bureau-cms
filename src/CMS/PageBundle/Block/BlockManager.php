@@ -61,8 +61,8 @@ class BlockManager {
             
             // render all instances in this block. 
             foreach($this->block->getInstances() as $instance){
-                
-                $instanceHandler= BlockHandler::create($instance->getBlock(), $this->engine, $instance->getTemplate());                
+                $blockHandler = $this->container->get('block_handler');
+                $instanceHandler = $blockHandler->get_handler($instance->getBlock(), $instance->getTemplate());                
                 if($instanceHandler->render()){
                     $this->generatedContent .= $instanceHandler->getRenderedContent();
                 }

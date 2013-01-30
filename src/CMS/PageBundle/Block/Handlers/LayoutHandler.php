@@ -35,7 +35,7 @@ class LayoutHandler extends BlockHandler {
         $renderedContent = "";
         
         foreach($this->block->getInstances() as $instance){
-            $childBlock = BlockHandler::create($instance->getBlock(), $this->engine, $instance->getTemplate());
+            $childBlock = $this->get_handler($instance->getBlock(), $instance->getTemplate());
             
             if($childBlock->render()){
                 $renderedContent .= $childBlock->getRenderedContent();                
