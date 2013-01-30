@@ -19,9 +19,7 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-            
-
-            
+                        
             new CMS\PageBundle\CMSPageBundle(),
             new CMS\SecurityBundle\CMSSecurityBundle(),
             new CMS\AdminBundle\CMSAdminBundle(),
@@ -29,9 +27,13 @@ class AppKernel extends Kernel
             
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             
-            new FOS\UserBundle\FOSUserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),                       
             
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Craue\FormFlowBundle\CraueFormFlowBundle(),
+            
             
             new Sonata\BlockBundle\SonataBlockBundle(),            
             new Sonata\jQueryBundle\SonatajQueryBundle(),

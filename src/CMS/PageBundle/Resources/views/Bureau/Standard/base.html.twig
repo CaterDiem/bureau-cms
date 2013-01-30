@@ -1,3 +1,4 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,29 +15,28 @@
         <meta name="DC.Rights" scheme="URI" content="http://www.bom.gov.au/other/copyright.shtml" />
         <meta name="DC.Language" scheme="RFC1766" content="en" />
         <meta name="AGLS.Audience" scheme="BoM_audience list" content="All" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link rel="stylesheet" type="text/css" href="/css/core.css" />
         <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/css/core-ie.css" /><![endif]-->
-        <script type="text/javascript" src="/scripts/utilities.js"></script>
-        <script type="text/javascript" src="/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="/libs/jquery/external/plugins/superfish/1.4.8/superfish.js"></script>
-        <script type="text/javascript" src="/libs/jquery/external/plugins/superfish/1.4.8/hoverIntent.js"></script>
-        <script type="text/javascript" src="/scripts/header-menus.js"></script>
-        {% block scripts %}
-           <link rel="stylesheet" href="{{ asset('bundles/cmsshared/css/default.css') }}" />     
-           <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />            
-        {% endblock %}                  
-        
-        
+
         {% block stylesheets %}
            <link rel="stylesheet" href="{{ asset('bundles/cmsshared/css/default.css') }}" />     
            <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />            
            
-        {% stylesheets 
-            '@CMSSharedBundle/Resources/public/less/*.less' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />                 
-        {% endstylesheets %}         
+            {% stylesheets filter='yui_css'
+                '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+                '@CMSSharedBundle/Resources/public/less/backend.less' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />                 
+            {% endstylesheets %}         
         {% endblock %}                  
-            
+
+        <script type="text/javascript" src="/scripts/utilities.js"></script>
+        <script type="text/javascript" src="/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/libs/jquery/external/plugins/superfish/1.4.8/superfish.js"></script>
+        <script type="text/javascript" src="/libs/jquery/external/plugins/superfish/1.4.8/hoverIntent.js"></script>
+        <script type="text/javascript" src="/scripts/header-menus.js"></script>                
         
         <link rel="shortcut icon" href="/favicon.ico" />
     </head>
@@ -46,7 +46,7 @@
         </ul>
 
         <!-- Start: PageHeight -->
-        <div id="pageheight">
+        <div id="pageheight" class="container-fluid">
             <div id="pagewrap">
                 {% block content %}
                 {{ content|raw }}
@@ -55,5 +55,28 @@
         </div>
         <!-- End: PageHeight -->
         
+  {# To only use a subset or add more js overwrite and copy paste this block
+    To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
+    Otherwise the regeneration is done on every load in dev more with use_controller: true
+     #}
+    {% javascripts filter='closure,?yui_js'        
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-transition.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-modal.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-dropdown.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-scrollspy.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-tab.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-tooltip.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-popover.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-alert.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-button.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-collapse.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-carousel.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-typeahead.js'
+        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
         </body>
     </html>
