@@ -14,12 +14,19 @@ use Sonata\AdminBundle\Validator\ErrorElement;
  * @author jtemplet
  */
 class PageAdmin extends Admin {
+    
+    protected $pageManager;
 
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper
+            ->with('Page')
                 ->add('name')
                 ->add('slug')
                 ->add('author')
+            ->end()
+            ->with('Revision')
+                //->add('current_page_revision', 'array')                
+            ->end()
         ;
     }
 
@@ -52,6 +59,18 @@ class PageAdmin extends Admin {
                     ->addViolation("You need to select an author")
                 ->end()
         ;*/
+    }
+    
+    public function postPersist($page){
+        $this->getPageManager()->createInitialPageRevision($page);
+    }
+    
+    public function setPageManager(\CMS\PageBundle\Page\PageManager $pageManager){        
+        $this->pageManager = $pageManager;
+    }
+    
+    public function getPageManager(){
+        return $this->pageManager;
     }
 
 }

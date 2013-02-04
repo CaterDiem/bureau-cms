@@ -47,7 +47,7 @@ class BlockManager {
         if($block->getName()){
             $block->isLoaded = TRUE;
             $block->numChildren = $block->getInstances()->count();
-            $this->block = $block;            
+            $this->block = $block;                        
         }
                 
         return $this->isLoaded();
@@ -77,6 +77,13 @@ class BlockManager {
     
     public function getGeneratedContent(){
         return $this->generatedContent;        
+    }
+    
+    public function createRootBlock($name){
+        $block = new Block();
+        $block->setName("{$name}Root");
+        $this->em->persist($block);
+        return $block;               
     }
     
 }

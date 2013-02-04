@@ -59,13 +59,26 @@ class BlockHandler{
     public function render(){}
         
     protected function setBlock(Block $block){
-        $this->block = $block;
+        $this->block = $block;        
         return TRUE;
     }
     
     protected function setTemplate(Template $template){
         $this->template = $template;
         return TRUE;
+    }
+    
+    /** 
+     * Return the status of whether the current user can edit this block 
+     * @return boolean Whether current user can edit this block or not
+     */
+    public function blockIsEditable()
+    {
+        $this->securityContext = $this->container->get('security.context');
+        if($this->securityContext->isGranted('EDIT', $this->block) ){
+            return TRUE;
+        }
+        return FALSE;
     }
     
     public function getContents(){}    

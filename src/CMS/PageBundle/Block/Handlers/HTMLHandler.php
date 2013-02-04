@@ -8,16 +8,15 @@ namespace CMS\PageBundle\Block\Handlers;
  * @author jtemplet
  */
 class HTMLHandler extends BlockHandler{
-    //put your code here
-    
-    public function render(){
-    // TODO FIX THIS SHIT        
+      
+    public function render(){    
                 
         $this->renderedContent = $this->engine->render(
             $this->template->getFilepath(),
             array(
                 'content' => $this->block->getContent()->getContent(),   
                 'block' => $this->block,
+                'handler' => $this
             )
         );            
         

@@ -7,6 +7,13 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Bridge\Monolog\Logger;
 
+use CMS\SharedBundle\Entity\Page;
+use CMS\SharedBundle\Entity\PageRevision;
+use CMS\SharedBundle\Entity\PageCategory;
+use CMS\SharedBundle\Entity\Block;
+use CMS\SharedBundle\Entity\BlockRevision;
+
+
 /**
  * PageManager is used to find, load and modify pages.
  *
@@ -92,4 +99,18 @@ class PageManager {
     public function getContent(){        
         return $this->generatedContent;
     }       
+    
+    public function createInitialPageRevision(Page $page){
+        //$currentUser = $this->container->get('security.context')->getToken()->getUser();
+                
+        $pageRevision = new PageRevision();
+        $pageRevision->setRevision('1');
+        $pageRevision->setRootBlock($this->blockManager->createRootBlock($page->getName()));
+        //$pageRevision->setEditor($currentUser);
+        $this->em->persist($pageRevision);
+        $page->setCurrentRevision($pageRevision);
+                
+        return $pageRevision;
+        
+    }
 }

@@ -1,6 +1,6 @@
 parameters:
 #    cms_admin.example.class: CMS\AdminBundle\Example
-
+    
 services:
 #    cms_admin.example:
 #        class: %cms_admin.example.class%
@@ -9,7 +9,8 @@ services:
     class: CMS\AdminBundle\Admin\PageAdmin
     arguments: [null, 'CMS\SharedBundle\Entity\Page', 'SonataAdminBundle:CRUD']
     calls:
-        - [setTranslationDomain, [CMSAdminBundle]]
+        pageManager: [setPageManager, [@page_manager]]
+        translator: [setTranslationDomain, [CMSAdminBundle]]
     tags:
         - { name: sonata.admin, manager_type: orm, group: CMS, label: Pages }
 
