@@ -1,0 +1,159 @@
+// tehBootstrapz
+@import "bootstrap/bootstrap.less";
+@import "bootstrap/responsive.less";
+
+@import "cyborg/variables.less";
+
+// Bureau variables
+
+// colours
+@bureau-white: #fafafa;
+@bureau-black: #0c0c0c;
+@bureau-blue: #165C7D;
+@bureau-light-blue: #00AFD7;
+@bureau-green:  #C4D600;
+@bureau-orange: #FFA300;
+
+@bureau-grey: #54585A;
+@bureau-grey-light: lighten(@bureau-grey, 33%);
+@bureau-grey-lighter: lighten(@bureau-grey, 66%);
+@bureau-grey-dark: darken(@bureau-grey, 33%);
+@bureau-grey-darker: darken(@bureau-grey, 66%);
+
+/*
+ set theme primary colour
+ change this to change a bunch of things.
+ @themePrimaryDark and @themePrimaryLight are also available to override. default to 30% darker or lighter
+*/
+//@themePrimary: darken(@bureau-green, 15%);
+@themePrimary: lighten(@bureau-blue, 25%);
+@bodyBackground: darken(@bureau-black, 5%);
+@featureBackground: lighten(@bodyBackground, 10%);
+// based on the bodyBackground colour, choose the best contrasting colour from black or white
+@textColor: contrast(@bodyBackground, @bureau-black, @bureau-white);
+
+
+// override bootstrap colours
+@gray: @bureau-grey;
+@grayLight: @bureau-grey-light;
+@grayLighter: @bureau-grey-lighter;
+@grayDark: @bureau-grey-dark;
+@grayDarker: @bureau-grey-darker;
+
+@blue: @bureau-blue;
+@blueDark: darken(@bureau-blue, 30%);
+@green: @bureau-green;
+@orange: @bureau-orange;
+@black: @bureau-black;
+@white: @bureau-white;
+
+
+@button-inactive: @bureau-black;
+@button-active: @bureau-orange;
+@button-background: @bureau-grey-darker;
+@button-border: @bureau-grey-lighter;
+@button-highlight: desaturate(@button-active,10%);
+@button-highlight-position: top;
+@button-highlight-size: 4px;
+
+
+@import "cyborg/cyborg.less";
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    
+    .marketing .span4 {
+        text-align: left;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */      
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+      
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+
+      .featurette {
+        height: auto;
+        padding: 0;
+      }
+      .featurette-image.pull-left,
+      .featurette-image.pull-right {
+        display: block;
+        float: none;
+        max-width: 40%;
+        margin: 0 auto 20px;
+      }
+    }
+
+
+    @media (max-width: 767px) {
+
+      .navbar-inner {
+        margin: -20px;
+      }
+
+ 
+      .marketing .span4 + .span4 {
+        margin-top: 40px;
+      }
+
+      .featurette-heading {
+        font-size: 30px;
+      }
+      .featurette .lead {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+    }

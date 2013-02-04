@@ -27,13 +27,14 @@ class AppKernel extends Kernel
             
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             
-            new FOS\UserBundle\FOSUserBundle(),                       
+            new FOS\UserBundle\FOSUserBundle(),    
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
             
-            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
+            //new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Craue\FormFlowBundle\CraueFormFlowBundle(),
-            
+            new Craue\FormFlowBundle\CraueFormFlowBundle(),            
             
             new Sonata\BlockBundle\SonataBlockBundle(),            
             new Sonata\jQueryBundle\SonatajQueryBundle(),
@@ -41,9 +42,7 @@ class AppKernel extends Kernel
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(), 
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-            
-           
-            
+                                  
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -3,7 +3,9 @@
 {# This is a wrapper template. Containers do the real work, using their layouts and templates and so on. #}
 
 {% block content %}
-<div id="{{ block.name }}">
+<div
+    class="cms-block {% if handler.blockIsEditable %}cms-block-editable{% endif %}"
+    id="{{ block.name|lower|replace({' ': '_'}) }}">
     {{ content|raw }}
 </div>
 {% endblock content %}

@@ -3,11 +3,12 @@
 <html>
     <head>
         {# Bureau standard left-column template #}
-        {# author: adevans / AMDISS peeps. Twig'd and HTML5'd by jtemplet #}
+        {# author: adevans / AMDISS peeps. Bootstrap'd, HTML5'd and Twig'd by jtemplet #}
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="language" content="english" />
         <title>{% block title %}Defence CMS{% endblock %}</title>
+        
         <link rel="Schema.AGLS" href="http://www.naa.gov.au/recordkeeping/gov_online/agls/1.2" />
         <meta name="DC.Publisher" content="corporateName=Bureau of Meteorology" />
         <meta name="DC.Format" content="text/html" />
@@ -18,15 +19,14 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="/css/core.css" />
+        <link rel="stylesheet" type="text/css" href="{{ asset("bundles/cmsshared/css/bureau-core.css") }}" />
         <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/css/core-ie.css" /><![endif]-->
 
         {% block stylesheets %}
            <link rel="stylesheet" href="{{ asset('bundles/cmsshared/css/default.css') }}" />     
            <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />            
            
-            {% stylesheets filter='yui_css'
-                '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+            {% stylesheets filter='yui_css'              
                 '@CMSSharedBundle/Resources/public/less/backend.less' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />                 
             {% endstylesheets %}         
@@ -55,28 +55,22 @@
         </div>
         <!-- End: PageHeight -->
         
-  {# To only use a subset or add more js overwrite and copy paste this block
-    To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
-    Otherwise the regeneration is done on every load in dev more with use_controller: true
-     #}
-    {% javascripts filter='closure,?yui_js'        
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-transition.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-modal.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-dropdown.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-scrollspy.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-tab.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-tooltip.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-popover.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-alert.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-button.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-collapse.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-carousel.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-typeahead.js'
-        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
-        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    {% javascripts 
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-transition.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-modal.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-dropdown.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-scrollspy.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-tab.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-tooltip.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-popover.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-alert.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-button.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-collapse.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-carousel.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-typeahead.js'        
     %}
-<script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 
         </body>
     </html>

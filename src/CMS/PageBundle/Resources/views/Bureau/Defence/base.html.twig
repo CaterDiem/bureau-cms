@@ -1,0 +1,1097 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>{% block title %}Defence CMS{% endblock %}</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="language" content="english" />
+
+        <link rel="Schema.AGLS" href="http://www.naa.gov.au/recordkeeping/gov_online/agls/1.2" />
+        <meta name="DC.Publisher" content="corporateName=Bureau of Meteorology" />
+        <meta name="DC.Format" content="text/html" />
+        <meta name="DC.Coverage.jurisdiction" content="Commonwealth of Australia" />
+        <meta name="DC.Rights" scheme="URI" content="http://www.bom.gov.au/other/copyright.shtml" />
+        <meta name="DC.Language" scheme="RFC1766" content="en" />
+        <meta name="AGLS.Audience" scheme="BoM_audience list" content="All" />
+
+        {# le styles #}
+        {% block stylesheets %}        
+        <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />            
+
+        {% stylesheets output='css/compiled/main.css'             
+            
+            '@CMSPageBundle/Resources/public/less/core.less'
+         %}
+        <link rel="stylesheet" href="{{ asset_url }}" />                 
+        {% endstylesheets %}         
+        {% endblock %}                        
+
+        {# HTML5 shim, for IE6-8 support of HTML5 elements #}
+            <!--[if lt IE 9]>
+              <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
+
+        {# Fav and touch icons #}
+        {#
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+          <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                        <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png"> 
+        #}
+        <link rel="shortcut icon" href="{{ asset('bundles/cmsshared/ico/favicon.png') }}">
+    </head>
+
+    <body>
+
+
+
+        <!-- NAVBAR
+        ================================================== -->
+        <div class="navbar-wrapper">
+            <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+            <div class="container" id="main-nav" > 
+
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="#">Defence Weather Services</a>
+                        <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+                        <div class="nav-collapse collapse">
+                        
+                            
+                            {#<ul class="nav">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                                <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li class="nav-header">Nav header</li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                          #}      
+                        <ul class="nav">
+
+                            <li class="dropdown">
+                                <a href="#" title="Radar Images &amp; Loops" class="dropdown-toggle" data-toggle="dropdown">Radar <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/defence/obs/radar/IDR834.loop.shtml" title="Amberley">Amberley</a></li>
+                                    <li><a href="/defence/obs/radar/IDR173.loop.shtml" title="Broome">Broome</a></li>
+                                    <li><a href="/defence/obs/radar/IDR403.loop.shtml" title="Canberra">Canberra</a> </li>
+                                    <li><a href="/defence/obs/radar/IDR193.loop.shtml" title="Cairns">Cairns</a></li>
+                                    <li><a href="/defence/obs/radar/IDR173.loop.shtml" title="Curtin">Curtin</a></li>
+                                    <li><a href="/defence/obs/radar/IDR884.loop.shtml" title="Darwin">Darwin</a></li>
+                                    <li><a href="/defence/obs/radar/IDR804.loop.shtml" title="East Sale">Bairnsdale</a></li>
+                                    <li><a href="/defence/obs/radar/IDR814.loop.shtml" title="Edinburgh">Edinburgh</a>  </li>
+                                    <li><a href="/defence/obs/radar/IDR914.loop.shtml" title="Fairburn">Fairburn</a>  </li>
+                                    <li><a href="/defence/obs/radar/IDR293.loop.shtml" title="Learmonth">Learmonth</a> </li>
+                                    <li><a href="/defence/obs/radar/IDR033.loop.shtml" title="Nowra">Nowra</a></li>
+                                    <li><a href="/defence/obs/radar/IDR864.loop.shtml" title="Oakey">Oakey</a></li>
+                                    <li><a href="/defence/obs/radar/IDR844.loop.shtml" title="Pearce">Pearce</a></li>
+                                    <li><a href="/defence/obs/radar/IDR854.loop.shtml" title="Richmond">Richmond</a></li>
+                                    <li><a href="/defence/obs/radar/IDR924.loop.shtml" title="Scherger">Scherger</a></li>
+                                    <li><a href="/defence/obs/radar/IDR473.loop.shtml" title="Shoalwater Bay">Shoalwater Bay</a>  </li>
+                                    <li><a href="/defence/obs/radar/IDR703.loop.shtml" title="Stirling">Stirling</a></li>
+                                    <li><a href="/defence/obs/radar/IDR874.loop.shtml" title="Tindal">Tindal</a></li>
+                                    <li><a href="/defence/obs/radar/IDR894.loop.shtml" title="Townsville">Townsville</a> </li>
+                                    <li><a href="/defence/obs/radar/IDR553.loop.shtml" title="Wagga">Wagga</a></li>
+                                    <li><a href="/defence/obs/radar/IDR824.loop.shtml" title="Williamtown">Williamtown</a></li>
+                                    <li><a href="/defence/obs/radar/IDR904.loop.shtml" title="Woomera">Woomera</a></li>
+                                    <li><a href="/defence/obs/radar/IDR493.loop.shtml" title="Yarrawonga">Yarrawonga</a></li>
+                                </ul>
+                            </li>                                                	   
+
+                            <li class="dropdown">
+                                <a href="#" title="Exercises" class="dropdown-toggle" data-toggle="dropdown">Satellite <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/defence/obs/satellite/aust_sat.shtml" title="Australia">Australia</a></li>
+                                    <li> <a href=" /cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65048.gif" title="Australian Tropics">Australian Tropics</a></li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65086.gif" title="Queensland">Queensland</a> </li>
+
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65089.gif" title="Nthn Qld" style="text-indent: 5px;">- Nthn Qld</a> </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65030.gif" title="Central Qld" style="text-indent: 5px;">- Central Qld</a> </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65067.gif" title="Sthn Qld" style="text-indent: 5px;">- Sthn Qld</a> </li>
+
+                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65067.gif" title="New South Wales">New South Wales</a></li>
+                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65067.gif" title="Victoria">Victoria</a></li>
+                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65037.gif" title="Victoria">Tasmania</a></li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65084.gif" title="South Australia">South Australia</a></li>
+                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65084.gif" title="Western Australia">Western Australia</a></li>
+                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65042.gif">-
+                                            Northern WA</a></li>
+                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65084.gif">-
+                                            Southern WA</a> </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65042.gif" title="Northern Territory">Northern Territory</a>  </li>
+
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65032.gif" title="Top End" style="text-indent: 5px;">- Top End</a> </li>
+
+                                    <li> <a href=" /cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65079.gif" title="East Timor">East Timor</a>  </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65068.gif" title="PNG">PNG</a>  </li>
+                                    <li> <a href="/gms/reg/tt9700.shtml" title="Solomon Islands">Solomon Islands</a>  </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65091.gif" title="Indonesia">Indonesia</a>  </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65070.gif" title="Malaysia">Malaysia</a>  </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/gms/reg/IDE01106.gif" title="Asia Pacific">Asia Pacific</a>  </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65093.gif" title="Sthn Ocean West">Sthn Ocean West</a>  </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65063.gif" title="Sthn Ocean East">Sthn Ocean East</a>  </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65066.gif" title="Pacific">Pacific</a>  </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65095.gif" title="Middle East">Middle East </a>  </li>
+
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65096.gif" title="Gulf" style="text-indent: 5px;">- Gulf</a> </li>
+                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65094.gif" title="Afghanistan" style="text-indent: 5px;">- Afghanistan</a> </li>
+
+                                </ul>
+                            </li>
+
+
+                            <li class="dropdown">
+                                <a href="#" title="Weather Analysis &amp; Forecast Charts" class="dropdown-toggle" data-toggle="dropdown">Charts <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">Australia</a></li>
+                                    <li><a href="/defence/forecasts/charts/dmsu_synoptic.shtml" title="Aust MSLP">Aust MSLP</a></li>
+                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/IDG00074.gif" title="Aust 4-day MSLP">Aust 4-day MSLP</a></li>
+                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.000.png+
+                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.024.png+
+                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.048.png+
+                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.072.png+
+                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.096.png+
+                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.120.png+
+                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.144.png+
+                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.168.png" title="Aust 7-day">Aust 7-day</a></li>
+                                    <li><a href="/defence/forecasts/charts/charts.shtml" title="Aust Charts">Aust Charts</a></li>
+                                    <li><a href="/defence/forecasts/charts/trop.shtml" title="Aust Tropics">Aust Tropics</a></li>
+                                    <li><a href="/defence/forecasts/charts/pac.shtml" title="Pacific Charts">Pacific Charts</a></li>
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Indonesia</a></li>
+                                    <li><a href="/defence/forecasts/charts/indo-e_chrt.shtml" title="Eastern" style="text-indent: 5px;">- Eastern</a></li>
+                                    <li><a href="/defence/forecasts/charts/indo-w_chrt.shtml" title="Western" style="text-indent: 5px;">- Western</a></li>
+
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Asia Pacific</a></li>
+                                    <li><a href="/defence/forecasts/charts/charts_seasia.shtml" title="SouthEast Asia">SouthEast Asia</a></li>
+                                    <li><a href="/defence/forecasts/charts/oth.shtml" title="Indian Ocean">Indian Ocean</a></li>
+                                    <li><a href="/defence/forecasts/charts/me_charts.shtml" title="Middle East">Middle East</a></li>
+                                    <li><a href="/defence/forecasts/charts/me_charts.shtml" title="SouthWest Asia">SouthWest Asia</a></li>
+                                    <li><a href="/defence/forecasts/marine/marine_charts.shtml" title="Marine Charts">Marine Charts</a></li>
+                                    </ul>
+                                </li>
+
+
+                                <li><a href="/defence/forecasts/warnings_aus.shtml" title="Australian Warnings">Warnings</a></li>
+                            </ul>                                
+
+                        </div><!--/.nav-collapse -->
+                    </div><!-- /.navbar-inner -->
+                </div><!-- /.navbar -->
+
+            </div> <!-- /.container -->
+        </div><!-- /.navbar-wrapper -->
+
+
+
+        <!-- Marketing messaging and featurettes
+        ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+
+        <div class="container marketing">
+
+            <!-- Three columns of text below the carousel -->
+            <div class="row">
+                <div class="span4">
+                    <img class="img-circle" data-src="holder.js/140x140">
+                    <h2>Heading</h2>
+                    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                </div><!-- /.span4 -->
+                <div class="span4">
+                    <img class="img-circle" data-src="holder.js/140x140">
+                    <h2>Heading</h2>
+                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                </div><!-- /.span4 -->
+                <div class="span4">
+                    <img class="img-circle" data-src="holder.js/140x140">
+                    <h2>Heading</h2>
+                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                </div><!-- /.span4 -->
+            </div><!-- /.row -->
+
+<div class="navbar">
+    <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">Project name</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-search pull-left" action="">
+            <input type="text" class="search-query span2" placeholder="Search">
+          </form>
+          <ul class="nav pull-right">
+            <li><a href="#">Link</a></li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+  </div><!-- /navbar -->            
+            
+            {#
+            <!-- START THE FEATURETTES -->
+
+            <hr class="featurette-divider">
+
+            <div class="featurette">
+                <img class="featurette-image pull-right" src="{{ asset('bundles/cmspage/images/browser-icon-chrome.png') }}">
+                <h2 class="featurette-heading">First featurette heading. <span class="muted">It'll blow your mind.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <div class="featurette">
+                <img class="featurette-image pull-left" src="{{ asset('bundles/cmspage/images/browser-icon-firefox.png') }}">
+                <h2 class="featurette-heading">Oh yeah, it's that good. <span class="muted">See for yourself.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <div class="featurette">
+                <img class="featurette-image pull-right" src="{{ asset('bundles/cmspage/images/browser-icon-safari.png') }}">
+                <h2 class="featurette-heading">And lastly, this one. <span class="muted">Checkmate.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <!-- /END THE FEATURETTES -->
+         
+
+            <!-- FOOTER -->
+            <footer>
+                <p class="pull-right"><a href="#">Back to top</a></p>
+                <p>&copy; 2012 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+            </footer>
+   #}
+            
+
+<!-- Typography
+================================================== -->
+<section id="typography">
+  <div class="page-header">
+    <h1>Typography</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span4">
+      <div class="well">
+        <h1>h1. Heading 1</h1>
+        <h2>h2. Heading 2</h2>
+        <h3>h3. Heading 3</h3>
+        <h4>h4. Heading 4</h4>
+        <h5>h5. Heading 5</h5>
+        <h6>h6. Heading 6</h6>
+      </div>
+    </div>
+
+    <div class="span4">
+      <h3>Example body text</h3>
+      <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+    </div>
+
+    <div class="span4">
+      <h3>Example addresses</h3>
+      <address>
+        <strong>Defence Weather Services</strong><br>
+        Bureau of Meteorolgy<br />
+        Level 6, 700 Collins St<br />
+        Docklands, Melbourne 3008<br />
+        <abbr title="Phone">P:</abbr> (03) 9669 4400
+      </address>
+      <address>
+        <strong>Full Name</strong><br>
+        <a href="mailto:#">first.last@gmail.com</a>
+      </address>
+    </div>
+
+  </div>
+  
+  <div class="row">
+    <div class="span6">
+      <blockquote>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+      </blockquote>
+    </div>
+    <div class="span6">
+      <blockquote class="pull-right">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+      </blockquote>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- Navbar
+================================================== -->
+<section id="navbar-demo">
+  <div class="page-header">
+    <h1>Navbars</h1>
+  </div>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">Project name</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-search pull-left" action="">
+            <input type="text" class="search-query span2" placeholder="Search">
+          </form>
+          <ul class="nav pull-right">
+            <li><a href="#">Link</a></li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+  </div><!-- /navbar -->
+
+  <div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">Project name</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-search pull-left" action="">
+            <input type="text" class="search-query span2" placeholder="Search">
+          </form>
+          <ul class="nav pull-right">
+            <li><a href="#">Link</a></li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+  </div><!-- /navbar -->
+
+</section>
+
+
+
+<!-- Buttons
+================================================== -->
+<section id="buttons">
+  <div class="page-header">
+    <h1>Buttons</h1>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Button</th>
+        <th>Large Button</th>
+        <th>Small Button</th>
+        <th>Disabled Button</th>
+    <th>Button with Icon</th>
+    <th>Split Button</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="btn" href="#">Default</a></td>
+        <td><a class="btn btn-large" href="#">Default</a></td>
+        <td><a class="btn btn-small" href="#">Default</a></td>
+        <td><a class="btn disabled" href="#">Default</a></td>
+        <td><a class="btn" href="#"><i class="icon-cog"></i> Default</a></td>
+    <td>
+          <div class="btn-group">
+            <a class="btn" href="#">Default</a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div><!-- /btn-group -->
+    </td>
+      </tr>
+      <tr>
+        <td><a class="btn btn-primary" href="#">Primary</a></td>
+        <td><a class="btn btn-primary btn-large" href="#">Primary</a></td>
+        <td><a class="btn btn-primary btn-small" href="#">Primary</a></td>
+        <td><a class="btn btn-primary disabled" href="#">Primary</a></td>
+        <td><a class="btn btn-primary" href="#"><i class="icon-shopping-cart icon-white"></i> Primary</a></td>
+    <td>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#">Primary</a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div><!-- /btn-group -->
+    </td>
+      </tr>
+      <tr>
+        <td><a class="btn btn-info" href="#">Info</a></td>
+        <td><a class="btn btn-info btn-large" href="#">Info</a></td>
+        <td><a class="btn btn-info btn-small" href="#">Info</a></td>
+        <td><a class="btn btn-info disabled" href="#">Info</a></td>
+        <td><a class="btn btn-info" href="#"><i class="icon-exclamation-sign icon-white"></i> Info</a></td>
+    <td>
+          <div class="btn-group">
+            <a class="btn btn-info" href="#">Info</a>
+            <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div><!-- /btn-group -->
+    </td>
+      </tr>
+      <tr>
+        <td><a class="btn btn-success" href="#">Success</a></td>
+        <td><a class="btn btn-success btn-large" href="#">Success</a></td>
+        <td><a class="btn btn-success btn-small" href="#">Success</a></td>
+        <td><a class="btn btn-success disabled" href="#">Success</a></td>
+        <td><a class="btn btn-success" href="#"><i class="icon-ok icon-white"></i> Success</a></td>
+    <td>
+          <div class="btn-group">
+            <a class="btn btn-success" href="#">Success</a>
+            <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div><!-- /btn-group -->
+    </td>
+      </tr>
+      <tr>
+        <td><a class="btn btn-warning" href="#">Warning</a></td>
+        <td><a class="btn btn-warning btn-large" href="#">Warning</a></td>
+        <td><a class="btn btn-warning btn-small" href="#">Warning</a></td>
+        <td><a class="btn btn-warning disabled" href="#">Warning</a></td>
+        <td><a class="btn btn-warning" href="#"><i class="icon-warning-sign icon-white"></i> Warning</a></td>
+    <td>
+          <div class="btn-group">
+            <a class="btn btn-warning" href="#">Warning</a>
+            <a class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div><!-- /btn-group -->
+    </td>
+      </tr>
+      <tr>
+        <td><a class="btn btn-danger" href="#">Danger</a></td>
+        <td><a class="btn btn-danger btn-large" href="#">Danger</a></td>
+        <td><a class="btn btn-danger btn-small" href="#">Danger</a></td>
+        <td><a class="btn btn-danger disabled" href="#">Danger</a></td>
+        <td><a class="btn btn-danger" href="#"><i class="icon-remove icon-white"></i> Danger</a></td>
+    <td>
+          <div class="btn-group">
+            <a class="btn btn-danger" href="#">Danger</a>
+            <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div><!-- /btn-group -->
+    </td>
+      </tr>
+      <tr>
+        <td><a class="btn btn-inverse" href="#">Inverse</a></td>
+        <td><a class="btn btn-inverse btn-large" href="#">Inverse</a></td>
+        <td><a class="btn btn-inverse btn-small" href="#">Inverse</a></td>
+        <td><a class="btn btn-inverse disabled" href="#">Inverse</a></td>
+        <td><a class="btn btn-inverse" href="#"><i class="icon-random icon-white"></i> Inverse</a></td>
+    <td>
+          <div class="btn-group">
+            <a class="btn btn-inverse" href="#">Inverse</a>
+            <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div><!-- /btn-group -->
+    </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+
+
+<!-- Forms
+================================================== -->
+<section id="forms">
+  <div class="page-header">
+    <h1>Forms</h1>
+  </div>
+
+  <div class="row">
+    <div class="span10 offset1">
+
+      <form class="well form-search">
+        <input type="text" class="input-medium search-query">
+        <button type="submit" class="btn">Search</button>
+      </form>
+
+        <form class="well form-search">
+          <input type="text" class="input-small" placeholder="Email">
+          <input type="password" class="input-small" placeholder="Password">
+          <button type="submit" class="btn">Go</button>
+        </form>
+
+
+      <form class="form-horizontal well">
+        <fieldset>
+          <legend>Controls Bootstrap supports</legend>
+          <div class="control-group">
+            <label class="control-label" for="input01">Text input</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" id="input01">
+              <p class="help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="optionsCheckbox">Checkbox</label>
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" id="optionsCheckbox" value="option1">
+                Option one is this and that&mdash;be sure to include why it's great
+              </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="select01">Select list</label>
+            <div class="controls">
+              <select id="select01">
+                <option>something</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="multiSelect">Multicon-select</label>
+            <div class="controls">
+              <select multiple="multiple" id="multiSelect">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="fileInput">File input</label>
+            <div class="controls">
+              <input class="input-file" id="fileInput" type="file">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="textarea">Textarea</label>
+            <div class="controls">
+              <textarea class="input-xlarge" id="textarea" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="focusedInput">Focused input</label>
+            <div class="controls">
+              <input class="input-xlarge focused" id="focusedInput" type="text" value="This is focused…">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Uneditable input</label>
+            <div class="controls">
+              <span class="input-xlarge uneditable-input">Some value here</span>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="disabledInput">Disabled input</label>
+            <div class="controls">
+              <input class="input-xlarge disabled" id="disabledInput" type="text" placeholder="Disabled input here…" disabled>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="optionsCheckbox2">Disabled checkbox</label>
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" id="optionsCheckbox2" value="option1" disabled>
+                This is a disabled checkbox
+              </label>
+            </div>
+          </div>
+          <div class="control-group warning">
+            <label class="control-label" for="inputWarning">Input with warning</label>
+            <div class="controls">
+              <input type="text" id="inputWarning">
+              <span class="help-inline">Something may have gone wrong</span>
+            </div>
+          </div>
+          <div class="control-group error">
+            <label class="control-label" for="inputError">Input with error</label>
+            <div class="controls">
+              <input type="text" id="inputError">
+              <span class="help-inline">Please correct the error</span>
+            </div>
+          </div>
+          <div class="control-group success">
+            <label class="control-label" for="inputSuccess">Input with success</label>
+            <div class="controls">
+              <input type="text" id="inputSuccess">
+              <span class="help-inline">Woohoo!</span>
+            </div>
+          </div>
+          <div class="control-group success">
+            <label class="control-label" for="selectError">Select with success</label>
+            <div class="controls">
+              <select id="selectError">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              <span class="help-inline">Woohoo!</span>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="reset" class="btn">Cancel</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+<!-- Tables
+================================================== -->
+<section id="tables">
+  <div class="page-header">
+    <h1>Tables</h1>
+  </div>
+  
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- Miscellaneous
+================================================== -->
+<section id="miscellaneous">
+  <div class="page-header">
+    <h1>Miscellaneous</h1>
+  </div>
+
+  <div class="row">
+    <div class="span4">
+
+      <h3 id="breadcrumbs">Breadcrumbs</h3>
+      <ul class="breadcrumb">
+        <li class="active">Home</li>
+      </ul>
+      <ul class="breadcrumb">
+        <li><a href="#">Home</a> <span class="divider">/</span></li>
+        <li><a href="#">Library</a> <span class="divider">/</span></li>
+        <li class="active">Data</li>
+      </ul>
+    </div>
+    <div class="span4">
+      <h3 id="pagination">Pagination</h3>
+      <div class="pagination">
+        <ul>
+          <li><a href="#">&larr;</a></li>
+          <li class="active"><a href="#">10</a></li>
+          <li class="disabled"><a href="#">...</a></li>
+          <li><a href="#">20</a></li>
+          <li><a href="#">&rarr;</a></li>
+        </ul>
+      </div>
+      <div class="pagination pagination-centered">
+        <ul>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="span4">
+      <h3 id="pager">Pagers</h3>
+        
+        <ul class="pager">
+          <li><a href="#">Previous</a></li>
+          <li><a href="#">Next</a></li>
+        </ul>
+        
+        <ul class="pager">
+          <li class="previous disabled"><a href="#">&larr; Older</a></li>
+          <li class="next"><a href="#">Newer &rarr;</a></li>
+        </ul>
+    </div>
+  </div>
+
+
+  <!-- Navs
+  ================================================== -->
+
+  <div class="row">
+    <div class="span4">
+
+      <h3 id="tabs">Tabs</h3>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#A" data-toggle="tab">Section 1</a></li>
+        <li><a href="#B" data-toggle="tab">Section 2</a></li>
+        <li><a href="#C" data-toggle="tab">Section 3</a></li>
+      </ul>
+      <div class="tabbable">
+        <div class="tab-content">
+          <div class="tab-pane active" id="A">
+            <p>I'm in Section A.</p>
+          </div>
+          <div class="tab-pane" id="B">
+            <p>Howdy, I'm in Section B.</p>
+          </div>
+          <div class="tab-pane" id="C">
+            <p>What up girl, this is Section C.</p>
+          </div>
+        </div>
+      </div> <!-- /tabbable -->
+      
+    </div>
+    <div class="span4">
+      <h3 id="pills">Pills</h3>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Profile</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+        <li class="disabled"><a href="#">Disabled link</a></li>
+      </ul>
+    </div>
+    
+    <div class="span4">
+      
+      <h3 id="list">Lists</h3>
+        
+      <div class="well" style="padding: 8px 0;">
+        <ul class="nav nav-list">
+          <li class="nav-header">List header</li>
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Library</a></li>
+          <li><a href="#">Applications</a></li>
+          <li class="nav-header">Another list header</li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Settings</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Labels
+================================================== -->
+
+  <div class="row">
+    <div class="span6">
+      <h3 id="labels">Labels</h3>
+      <span class="label">Default</span>
+      <span class="label label-success">Success</span>
+      <span class="label label-warning">Warning</span>
+      <span class="label label-important">Important</span>
+      <span class="label label-info">Info</span>
+      <span class="label label-inverse">Inverse</span>
+    </div>
+    <div class="span6">
+      <h3 id="badges">Badges</h3>
+      <span class="badge">Default</span>
+      <span class="badge badge-success">Success</span>
+      <span class="badge badge-warning">Warning</span>
+      <span class="badge badge-important">Important</span>
+      <span class="badge badge-info">Info</span>
+      <span class="badge badge-inverse">Inverse</span>
+    </div>
+  </div>
+  <br />
+
+<!-- Progress bars
+================================================== -->
+
+
+  <h3 id="progressbars">Progress bars</h3>
+
+  <div class="row">
+    <div class="span4">
+      <div class="progress">
+        <div class="bar" style="width: 60%;"></div>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="progress progress-info progress-striped">
+        <div class="bar" style="width: 20%;"></div>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="progress progress-danger progress-striped active">
+        <div class="bar" style="width: 45%"></div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+
+<!-- Alerts & Messages
+================================================== -->
+
+
+  <h3 id="alerts">Alerts</h3>
+
+  <div class="row">
+    <div class="span12">
+        <div class="alert alert-block">
+          <a class="close">&times;</a>
+          <h4 class="alert-heading">Alert block</h4>
+          <p>Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <div class="alert alert-error">
+        <a class="close">&times;</a>
+        <strong>Error</strong> Change a few things up and try submitting again.
+      </div>
+    </div>
+    <div class="span4">
+      <div class="alert alert-success">
+        <a class="close">&times;</a>
+        <strong>Success</strong> You successfully read this important alert message.
+      </div>
+    </div>
+    <div class="span4">
+      <div class="alert alert-info">
+        <a class="close">&times;</a>
+        <strong>Information</strong> This alert needs your attention, but it's not super important.
+      </div>
+    </div>
+  </div>
+
+
+</section>
+            
+            
+        </div><!-- /.container -->
+
+
+
+        <!-- Le javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    {% javascripts         
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-transition.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-modal.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-dropdown.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-scrollspy.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-tab.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-tooltip.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-popover.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-alert.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-button.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-collapse.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-carousel.js'
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-typeahead.js'  
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-affix.js'  
+
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}                
+        {# <script>
+          !function ($) {
+            $(function(){
+              // carousel demo
+              $('#myCarousel').carousel()
+            })
+          }(window.jQuery)
+            </script> #}
+        </body>
+    </html>
