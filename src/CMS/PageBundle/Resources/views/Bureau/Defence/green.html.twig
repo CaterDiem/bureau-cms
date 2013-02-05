@@ -1,0 +1,16 @@
+{# ${name} #}
+{# author: ${user} #}
+
+{% extends 'CMSPageBundle:Bureau:Defence/base.html.twig' %}
+
+{% block stylesheets %}        
+<link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />            
+<link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/blokk/blokk.css') }}" />                    
+
+{% stylesheets output='css/compiled/main.css'                         
+    '@CMSPageBundle/Resources/public/less/green.less'
+ %}
+
+<link rel="stylesheet" href="{{ asset_url }}" />                 
+{% endstylesheets %}         
+{% endblock %}        

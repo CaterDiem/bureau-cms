@@ -20,15 +20,17 @@
 @bureau-grey-dark: darken(@bureau-grey, 33%);
 @bureau-grey-darker: darken(@bureau-grey, 66%);
 
-/*
- set theme primary colour
- change this to change a bunch of things.
- @themePrimaryDark and @themePrimaryLight are also available to override. default to 30% darker or lighter
-*/
+// set theme primary colour
+// change this to change a bunch of things.
+// @themePrimaryDark and @themePrimaryLight are also available to override. default to 30% darker or lighter
+// Note: @featureBackground by default is used in a gradient for the page background.
+
 //@themePrimary: darken(@bureau-green, 15%);
-@themePrimary: lighten(@bureau-blue, 25%);
-@bodyBackground: darken(@bureau-black, 5%);
-@featureBackground: lighten(@bodyBackground, 10%);
+@themePrimary: lighten(@bureau-blue, 10%);
+@bodyBackground: @bureau-white;
+@featureBackground: darken(@bureau-white, 10%);
+
+//@featureBackground: lighten(@bodyBackground, 10%);
 // based on the bodyBackground colour, choose the best contrasting colour from black or white
 @textColor: contrast(@bodyBackground, @bureau-black, @bureau-white);
 

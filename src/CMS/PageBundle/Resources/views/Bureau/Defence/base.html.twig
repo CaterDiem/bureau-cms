@@ -22,11 +22,12 @@
         {# le styles #}
         {% block stylesheets %}        
         <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />            
+        <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/blokk/blokk.css') }}" />                    
 
-        {% stylesheets output='css/compiled/main.css'             
-            
+        {% stylesheets output='css/compiled/main.css'                         
             '@CMSPageBundle/Resources/public/less/core.less'
          %}
+        
         <link rel="stylesheet" href="{{ asset_url }}" />                 
         {% endstylesheets %}         
         {% endblock %}                        
@@ -48,9 +49,7 @@
 
     <body>
 
-
-
-        <!-- NAVBAR
+        <!-- NAVBAR        
         ================================================== -->
         <div class="navbar-wrapper">
             <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
@@ -215,25 +214,25 @@
             <!-- Three columns of text below the carousel -->
             <div class="row">
                 <div class="span4">
-                    <img class="img-circle" data-src="holder.js/140x140">
+                    <img class="img-circle" data-src="holder.js/120x120/#165C7D:#fafafa">
                     <h2>Heading</h2>
                     <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
                     <p><a class="btn" href="#">View details &raquo;</a></p>
                 </div><!-- /.span4 -->
                 <div class="span4">
-                    <img class="img-circle" data-src="holder.js/140x140">
+                    <img class="img-circle" data-src="holder.js/90x90/#165C7D:#fafafa">
                     <h2>Heading</h2>
                     <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
                     <p><a class="btn" href="#">View details &raquo;</a></p>
                 </div><!-- /.span4 -->
                 <div class="span4">
-                    <img class="img-circle" data-src="holder.js/140x140">
+                    <img class="img-circle" data-src="holder.js/120x120/#165C7D:#fafafa">
                     <h2>Heading</h2>
                     <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
                     <p><a class="btn" href="#">View details &raquo;</a></p>
                 </div><!-- /.span4 -->
             </div><!-- /.row -->
-
+{#
 <div class="navbar">
     <div class="navbar-inner">
       <div class="container" style="width: auto;">
@@ -242,7 +241,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">Project name</a>
+        <a class="brand" href="#">Defence Layout Example</a>
         <div class="nav-collapse">
           <ul class="nav">
             <li class="active"><a href="#">Home</a></li>
@@ -281,7 +280,7 @@
       </div>
     </div><!-- /navbar-inner -->
   </div><!-- /navbar -->            
-            
+          #}  
             {#
             <!-- START THE FEATURETTES -->
 
@@ -398,7 +397,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">Project name</a>
+        <a class="brand" href="#">Defence Layout Example</a>
         <div class="nav-collapse">
           <ul class="nav">
             <li class="active"><a href="#">Home</a></li>
@@ -446,7 +445,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">Project name</a>
+        <a class="brand" href="#">Defence Layout Example</a>
         <div class="nav-collapse">
           <ul class="nav">
             <li class="active"><a href="#">Home</a></li>
@@ -653,6 +652,188 @@
 
 </section>
 
+{#
+<section id="reguser-demo">
+
+<div class="subheading"> Aviation Warnings and Advices </div>
+      <ul>
+        <li><a href="/products/reg/IDV60235.shtml">Aerodrome Warnings </a></li>
+	  <li><a href="/products/reg/wind_shear_warnings.shtml">Wind Shear Warnings</a></li>
+        <li><a href="/products/reg/IDY01011.shtml">Graphical Australian SIGMET</a> - (High level only. Does not include VA or TC SIGMET) </li>
+        <li><a href="/reguser/by_prod/aviation/national/graphical_sigmet.shtml">Graphical Australian SIGMET</a> - (Trial)</li>
+        
+        <li><a href="/products/reg/IDV60075.shtml">Australian SIGMET </a></li>
+
+        <li><a href="/products/reg/IDV60074.shtml">International SIGMET</a></li>
+        <li><a href="/products/reg/IDD60102.shtml">Volcanic Ash SIGMET (24hrs)</a> </li>
+        <li><a href="/info/vaac/advisories.shtml">Volcanic Ash Advisories (Graphical)</a> </li>
+        <li><a href="/products/Volc_ash_latest.shtml">Volcanic Ash Advisories (24 hrs)</a></li>
+        <li><a href="/products/Volc_ash_recent.shtml">Volcanic Ash Advisories (7 days)</a></li>
+        <li><a href="/weather/cyclone">Tropical Cyclones</a></li>
+	  </ul>
+      <div class="subheading"> Aviation Forecasts</div>
+      <ul>
+        <li><a href="aerodrome.shtml">Aerodrome Briefings</a></li>
+	<li><a href="/products/reg/aviation/display/index_cks.html" target="_blank">Graphical Airport Briefing Display</a></li>
+        <li><a href="/reguser/by_prod/aviation/national/ttf_nat.shtml">Trend Forecasts (TTF) </a></li>
+        <li><a href="/reguser/by_prod/aviation/forecasts/taf/index.shtml">Aerodrome Forecasts (TAF)</a></li>
+        <li><a href="/reguser/by_prod/aviation/forecasts/arfor/index.shtml">Area Forecasts (ARFOR)</a></li>
+        <li><a href="/aviation/forecasts/area-qnh/">Area QNH </a></li>
+        <li><a href="/reguser/by_prod/nwc/av.shtml#SIGWX">Significant Weather Charts (SIGWX), Aust</a> </li>
+        <li><a href="/reguser/by_prod/nwc/av.shtml#GridPointWinds">Grid Point Winds (GPW)</a></li>
+        <li> <a href="/reguser/by_prod/nwc/av.shtml#WIND.TEMP">Wind &amp; Temp Charts (WIND/TEMP)</a> </li>
+        <li><a href="/reguser/by_prod/nwc/av.shtml#RSWT">Route Sector Winds &amp; Temps (RSWT)</a></li>
+				<li><a href="/products/reg/aviation/getTAFS.shtml">Create TAF/METAR Sheet</a></li>
+	  <li><a href="/products/reg/taf_metar_sheet.shtml">TAF/METAR Sheet</a></li>
+      </ul>
+      <div class="subheading">International Forecasts</div>
+      <ul>
+        <li><a href="/reguser/by_prod/aviation/national/inttafs.shtml">International Terminal Aerodrome Forecasts (TAF)</a></li>
+        <li><a href="/reguser/by_prod/aviation/national/avintercharts.shtml#SIGWXINTER">International Significant Weather Charts (SIGWX)</a></li>
+        <li><a href="/reguser/by_user/bomw0250">East Timor Forecast</a> <I> user id:</I> bomw0250, <I>password:</I> aviation</li>
+      </ul>
+
+      <div class="subheading">Automated Thunderstorm Alert Service</div>
+      <ul><li><a href="/products/reg/atsas/index.shtml">ATSAS</a></li></ul>
+
+<!--<ul>
+	<li><a href="/products/reg/IDA40023.shtml">Adelaide</a></li>
+	    <li><a href="/products/reg/IDA40000.shtml">Brisbane</a></li>
+          <li><a href="/products/reg/IDA40012.shtml">Cairns</a></li>
+		<li><a href="/products/reg/IDA40029.shtml">Darwin</a></li>
+		<li><a href="/products/reg/IDA40018.shtml">Gold Coast</a></li>
+	     	<li><a href="/products/reg/IDA40005.shtml">Melbourne</a></li>
+		<li><a href="/products/reg/IDA40026.shtml">Perth</a></li>
+		<li><a href="/products/reg/IDA40003.shtml">Sydney</a></li>
+</ul>
+-->
+      <div class="subheading">Thunderstorm Forecast Charts</div>
+      <ul>
+        <li>Queensland <a href="/products/reg/IDQ65758.shtml">Day 1</a>&nbsp;<a href="/products/reg/IDQ65759.shtml">Day 2</a></li>
+        <li>New South Wales <a href="/products/reg/IDN65158.shtml">Day 1</a>&nbsp;<a href="/products/reg/IDN65159.shtml">Day 2</a></li>
+        <li>Victoria <a href="/products/reg/IDV65758.shtml">Day 1</a>&nbsp;<a href="/products/reg/IDV65759.shtml">Day 2</a></li>
+      </ul>
+      <div class="subheading">Aviation Weather Observations</div>
+      <ul>
+        <li><a href="/reguser/by_prod/aviation/national/metar_nat.shtml"> Aerodrome Weather Reports (METAR/SPECI)</a></li>
+        <li><a href="yssy_cam.shtml">Web Cameras</a>            <ul>
+            <li><a href="yssy_cam.shtml">Sydney Camera  </a></li>
+            </ul>
+        </li>
+      </ul>
+	  <div class="subheading"> General Weather Observations</div>
+      <ul><li><a href="/weather/nsw/observations.shtml">All Latest New South Wales Weather Observations</a></li>
+        <li><a href="/weather/vic/observations.shtml">All Latest Victorian Weather Observations</a></li>
+        <li><a href="/weather/qld/observations.shtml">All Latest Queensland Weather Observations</a></li>
+        <li><a href="/weather/wa/observations.shtml">All Latest Western Australian Weather Observations</a></li>
+        <li><a href="/weather/sa/observations.shtml">All Latest South Australian Weather Observations</a></li>
+        <li><a href="/weather/tas/observations.shtml">All Latest Tasmanian Weather Observations </a></li>
+        <li><a href="/weather/act/observations.shtml">All Latest Australian Capital Territory Weather Weather Observations </a></li>
+        <li><a href="/weather/nt/observations.shtml">All Latest Northern Territory Weather Observations</a></li>
+        <li> <a href="/weather/radar/">Radar Images</a> (Rainfall location and intensity)
+          <ul>
+            <li><a href="/products/reg/IDR00001.shtml">National Radar Mosaic</a></li>
+            <li><a href="/products/IDR503.shtml">Brisbane</a></li>
+		<li><a href="/products/IDR343.shtml">Cairns</a></li>
+            <li><a href="/products/IDR033.shtml">Sydney</a></li>
+            <li><a href="/products/IDR023.shtml">Melbourne</a></li>
+            <li><a href="/products/IDR463.shtml">Adelaide</a></li>
+            <li><a href="/products/IDR703.shtml">Perth</a></li>
+            <li><a href="/products/IDR633.shtml">Darwin</a></li>
+            <li><a href="/products/IDR403.shtml">Canberra</a></li>
+		 </ul>
+	    </li>
+        <li><a href="/weather/satellite/"> Satellite Imagery</a>
+          <ul>
+            <li><a href="/products/IDE00902.loop.shtml">Latest Colour Enhanced Imagery</a> </li>
+            <li><a href="/gms/IDE00006.latest.shtml">Latest Visible Image</a></li>
+            <li><a href="/gms/IDE00005.latest.shtml">Latest Infrared Image</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="subheading"> National Weather Charts </div>
+      <ul>
+        <li><a href="/weather/national/charts/">Weather and Ocean Charts </a></li>
+	    <li><a href="/australia/charts/synoptic_col.shtml">Latest MSLP Analysis</a></li>
+	    <li>MSLP (and 1000-500 hPa Thickness) Forecasts:
+	      <ul>
+	        <li>
+	          <a href="/australia/charts/australia/gmslp.000.shtml">+00Hr</a> |
+	          <a href="/australia/charts/australia/gmslp.024.shtml">+24Hr</a> |
+              <a href="/australia/charts/australia/gmslp.048.shtml">+48Hr</a> |
+              <a href="/australia/charts/australia/gmslp.072.shtml">+72Hr</a> |
+              <a href="/australia/charts/australia/gmslp.096.shtml">+96Hr</a> |
+              </li>
+          </ul>
+<li><a href="/australia/charts/viewer/index.shtml">MSLP (and other elements) Forecast Loop</a></li>
+
+        <li> Upper Level Analyses (Height/Wind Speed/Temperature)
+	      <ul>
+	        <li><a href="/products/IDX0082.shtml">850</a> |
+	        <a href="/products/IDX0079.shtml">700</a> |
+              <a href="/products/IDX0099.shtml">500</a> |
+              <a href="/products/IDX0610.shtml">400</a> |
+              <a href="/products/IDX0100.shtml">300</a> |
+              <a href="/products/IDX0101.shtml">250</a> |
+            <a href="/products/IDX0083.shtml">200</a> (hPa)            </li>
+          </ul>
+		</li>
+      </ul>
+<div class="subheading"> Qantas Diagnostic Charts </div>
+      <ul>
+        <li>Icing Charts            <ul>
+            <li><a href="ice12.shtml">+12Hr</a> | <a href="ice18.shtml">+18Hr</a> | <a href="ice30.shtml">+30Hr</a> | <a href="ice36.shtml">+36Hr</a> | <a href="ice42.shtml">+42Hr</a> </li>
+              </ul>
+        </li>
+        <li>Polar Altimetry Charts (500 hPa)
+          <ul>
+            <li> <a href="/fwo/reg/IDY00071.png">00Z</a> | <a href="/fwo/reg/IDY00072.png">06Z</a> | <a href="/fwo/reg/IDY00073.png">12Z</a> | <a href="/fwo/reg/IDY00074.png">18Z</a></li>
+
+          </ul>
+        </li>
+<li>Minus 70&deg;C Lowest Level Charts
+          <ul>
+            <li> <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00381.gif">+6Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00382.gif">+12Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00383.gif">+18Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00384.gif">+24Hr</a> - Standard Projection</li>
+            <li><a href="/cgi-bin/wrap_fwo_reg.pl?IDY00385.gif">+6Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00386.gif">+12Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00387.gif">+18Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00388.gif">+24Hr</a> - Polar Stereographic Projection</li>
+          </ul>
+        </li>
+
+	<li>Total Air Temperature at 700hPa where -40C < T < 10C and Relative Humidty > 55%
+<br>
+<ul>
+             <li>Australian Area:<br><a href="/cgi-bin/difacs.cgi?1042">Anal</a> | <a href="/cgi-bin/difacs.cgi?IDX1043">+6Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1044">+12Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1045">+18Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1046">+24Hr</a>| <a href="/cgi-bin/difacs.cgi?IDX1047">+30Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1048">+36Hr</a>| <a href="/cgi-bin/difacs.cgi?IDX1049">+42Hr</a> </li>
+
+	     <li>ICAO Area E:<br><a href="/cgi-bin/difacs.cgi?IDX1026">Anal</a> | <a href="/cgi-bin/difacs.cgi?IDX1027">+6Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1028">+12Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1029">+18Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1030">+24Hr</a>| <a href="/cgi-bin/difacs.cgi?IDX1031">+30Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1032">+36Hr</a>| <a href="/cgi-bin/difacs.cgi?IDX1033">+42Hr</a></li>
+	     <li>ICAO Area F:<br><a href="/cgi-bin/difacs.cgi?IDX1034">Anal</a> | <a href="/cgi-bin/difacs.cgi?IDX1035">+6Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1036">+12Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1037">+18Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1038">+24Hr</a>| <a href="/cgi-bin/difacs.cgi?IDX1039">+30Hr</a> | <a href="/cgi-bin/difacs.cgi?IDX1040">+36Hr</a>| <a href="/cgi-bin/difacs.cgi?IDX1041">+42Hr</a></li>
+	 </ul>
+        </li>
+<!--
+	<li><a href="/cgi-bin/wrap_fwo_reg.pl?IDY01781.gif">Airway L-888 HGHTVAR
+            = (forecast height at 400 hPa) - 23500</a>          <ul>
+            <li><a href="/cgi-bin/wrap_fwo_reg.pl?IDY01781.gif">+6Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY01782.gif">+12Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY01783.gif">+18Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY01784.gif">+24Hr</a> -
+            Colour Charts</li>
+            <li><a href="/cgi-bin/wrap_fwo_reg.pl?IDY01785.gif">+6Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY01786.gif">+12Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY01787.gif">+18Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY01788.gif">+24Hr</a> -
+            Black and White Charts</li>
+          </ul>
+        </li>
+        <li><a href="/cgi-bin/wrap_fwo_reg.pl?IDY00031.gif">Airway L-888 FL300
+            Temperature Charts (Areas &lt; -60C (ISA-15) Highlighted)</a>
+          <ul>
+            <li><a href="/cgi-bin/wrap_fwo_reg.pl?IDY00031.gif">+6Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00032.gif">+12Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00033.gif">+18Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00034.gif">+24Hr</a> -
+            Colour</li>
+            <li><a href="/cgi-bin/wrap_fwo_reg.pl?IDY00035.gif">+6Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00036.gif">+12Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00037.gif">+18Hr</a> | <a href="/cgi-bin/wrap_fwo_reg.pl?IDY00038.gif">+24Hr</a> -
+            Black and White</li>
+          </ul>
+        </li>
+-->
+        <li><a href="/fwo/reg/IDTS9100.pdf">Qantas Antarctic Flight Meteorological Services </a> </li>
+      </ul>
+      <div class="subheading"> Climate Information </div>
+      <ul><li><a href="/climate/">General Climate Information</a></li>
+      </ul>
+
+</section>
+#}
 
 <!-- Forms
 ================================================== -->
@@ -822,15 +1003,15 @@
     <tbody>
       <tr>
         <td>1</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td>Jez</td>
+        <td>Templeton</td>
+        <td>jtemplet</td>
       </tr>
       <tr>
         <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
+        <td>Adrian</td>
+        <td>Evans</td>
+        <td>adevans</td>
       </tr>
       <tr>
         <td>3</td>
@@ -922,7 +1103,7 @@
             <p>Howdy, I'm in Section B.</p>
           </div>
           <div class="tab-pane" id="C">
-            <p>What up girl, this is Section C.</p>
+            <p>Whazzup, this is Section C.</p>
           </div>
         </div>
       </div> <!-- /tabbable -->
@@ -1030,7 +1211,7 @@
         <div class="alert alert-block">
           <a class="close">&times;</a>
           <h4 class="alert-heading">Alert block</h4>
-          <p>Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+          <p>Random latin error. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
         </div>
     </div>
   </div>
@@ -1085,6 +1266,7 @@
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}                
+        <script type="text/javascript" src="{{ asset('bundles/cmspage/js/holder.js') }}"></script>
         {# <script>
           !function ($) {
             $(function(){

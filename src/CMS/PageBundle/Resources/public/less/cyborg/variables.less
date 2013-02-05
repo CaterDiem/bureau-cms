@@ -40,6 +40,7 @@
 @bodyBackground:        @white;
 @textColor:             @black;
 @featureBackground:     darken(@bodyBackground, 25%);
+@elementBorder:         contrast(@bodyBackground, darken(@white, 25%), lighten(@black, 25%));
 
 
 // Links
@@ -116,9 +117,9 @@
 // Forms
 // -------------------------
 @inputBackground:               @bodyBackground;
-@inputBorder:                   @featureBackground;
+@inputBorder:                   @elementBorder;
 @inputBorderRadius:             @baseBorderRadius;
-@inputDisabledBackground:       @bureau-grey;
+@inputDisabledBackground:       fade(@inputBorder, 25%);
 @formActionsBackground:         transparent;
 @inputHeight:                   @baseLineHeight + 10px; // base line-height + 8px vertical padding + 2px top/bottom border
 
@@ -157,8 +158,8 @@
 
 // Sprite icons path
 // -------------------------
-@iconSpritePath:          "../img/glyphicons-halflings.png";
-@iconWhiteSpritePath:     "../img/glyphicons-halflings-white.png";
+@iconSpritePath:          "/web/bundles/cmspage/images/glyphicons-halflings.png";
+@iconWhiteSpritePath:     "/web/bundles/cmspage/images/glyphicons-halflings-white.png";
 
 
 // Input placeholder text color
@@ -168,7 +169,7 @@
 
 // Hr border color
 // -------------------------
-@hrBorder:                @grayDark;
+@hrBorder:                @elementBorder;
 
 
 // Horizontal forms & lists
@@ -229,7 +230,7 @@
 
 // Hero unit
 // -------------------------
-@heroUnitBackground:              #131517;
+@heroUnitBackground:              @featureBackground;
 @heroUnitHeadingColor:            inherit;
 @heroUnitLeadColor:               inherit;
 

@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'BLOKKRegular';
+    src: url('blokk.eot');
+    src: url('blokk.eot?#iefix') format('embedded-opentype'),
+         url('blokk.woff') format('woff'),
+         url('blokk.svg#BLOKK') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

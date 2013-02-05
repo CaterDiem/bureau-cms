@@ -21,7 +21,7 @@ class RenderPageController extends Controller {
      * @param type $pageSlug
      * @author jtemplet
      */
-    public function viewAction($pageSlug) {        
+    public function viewAction($pageSlug, $style) {        
         
         $this->response = $this->container->get('response');        
        
@@ -33,7 +33,7 @@ class RenderPageController extends Controller {
             
             if($pageManager->render()){                                        
                 
-                return $this->render($this->container->getParameter("default_template"), array('content' => $pageManager->getContent()));
+                return $this->render($this->container->getParameter("default_template"), array('style' => $style, 'content' => $pageManager->getContent()));
             }else{
                 // something went wrong with rendering. throw exception?
                 $this->response->setStatusCode('500');
