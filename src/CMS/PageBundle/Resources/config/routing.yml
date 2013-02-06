@@ -3,7 +3,7 @@ cms_page_default:
     defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index' }
 
 cms_page_view:
-    pattern: /{pageSlug}
+    pattern: /{pageSlug}/
     defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index', style: 'core' }
     requirements:
       pageSlug: ".+"

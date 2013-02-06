@@ -41,6 +41,8 @@ class PageManager {
     }
 
     public function loadBySlug($pageSlug) {
+        // remove a trailing slash from slug if there is one. otherwise shit goes wrong. (it wont find the page)
+        $pageSlug = preg_replace('{/$}', '', $pageSlug);
         $this->page = $this->em->getRepository('CMSSharedBundle:Page')->findOneBySlug($pageSlug);
         if ($this->page) {         
             $this->currentRevision = $this->page->getCurrentRevision();
