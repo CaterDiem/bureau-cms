@@ -1,6 +1,22 @@
-cms_page_default: 
-    pattern: /
-    defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index' }
+
+        
+# rest routes
+
+blocks:
+  type: rest
+  resource: CMS\PageBundle\Block\BlockCRUDController
+  
+pages:
+  type: rest
+  resource: CMS\PageBundle\Page\PageCRUDController
+  
+templates:
+  type: rest
+  resource: CMS\PageBundle\Template\TemplateCRUDController
+
+
+# standard routes
+
 
 cms_page_view:
     pattern: /{pageSlug}/
@@ -19,3 +35,7 @@ cms_page_edit_process:
     defaults: { _controller: CMSPageBundle:RenderPage:edit, pageSlug: 'index' }
     requirements:
         _method:  POST                   
+        
+cms_page_default: 
+    pattern: /
+    defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index' }

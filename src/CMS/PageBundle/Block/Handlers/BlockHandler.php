@@ -44,7 +44,7 @@ class BlockHandler{
             $handler = new $handlerClass($em, $container, $logger);            
             $handler->setBlock($block);
             $handler->setTemplate($template);
-            $handler->logger->info("Created handler {$handlerClass}:{$handler->block->getName()}[Template:{$handler->template->getName()}]");
+            $handler->logger->debug("Created handler {$handlerClass}:{$handler->block->getName()}[Template:{$handler->template->getName()}]");
             return $handler;            
         }            
         

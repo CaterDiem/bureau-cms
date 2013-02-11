@@ -35,15 +35,19 @@ CMS\SharedBundle\Entity\Block:
         instances: 
             targetEntity: BlockInstance
             mappedBy: parent
+            fetch: LAZY
         parents:
             targetEntity: BlockInstance
             mappedBy: block
+            fetch: LAZY
         pages:
             targetEntity: PageRevision
             mappedBy: rootBlock        
+            fetch: LAZY
         settings:
             targetEntity: BlockSetting              
             mappedBy: block           
+            fetch: LAZY
     manyToOne:      
         type:
             targetEntity: BlockType                        

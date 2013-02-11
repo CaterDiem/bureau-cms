@@ -349,7 +349,7 @@
       <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
     </div>
 
-    <div class="span4">
+    <div class="span4 cms-page-editable">
       <h3>Example addresses</h3>
       <address>
         <strong>Defence Weather Services</strong><br>
@@ -367,13 +367,13 @@
   </div>
   
   <div class="row">
-    <div class="span6">
+    <div class="span6 cms-page-editable">
       <blockquote>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
         <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
       </blockquote>
     </div>
-    <div class="span6">
+    <div class="span6 cms-page-editable">
       <blockquote class="pull-right">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
         <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
@@ -992,7 +992,7 @@
     <h1>Tables</h1>
   </div>
   
-  <table class="table table-bordered table-striped table-hover">
+  <table class="table table-bordered table-striped table-hover cms-page-editable">
     <thead>
       <tr>
         <th>#</th>
@@ -1095,7 +1095,7 @@
         <li><a href="#B" data-toggle="tab">Section 2</a></li>
         <li><a href="#C" data-toggle="tab">Section 3</a></li>
       </ul>
-      <div class="tabbable">
+      <div class="tabbable cms-page-editable" >
         <div class="tab-content">
           <div class="tab-pane active" id="A">
             <p>I'm in Section A.</p>
@@ -1268,14 +1268,12 @@
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-carousel.js'
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-typeahead.js'  
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-affix.js'  
-        '@CMSPageBundle/Resources/public/js/holder.js' 
-        '@CMSPageBundle/Resources/public/js/page-core.js'
+        '@CMSPageBundle/Resources/public/js/holder.js'       
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>        
     {% endjavascripts %}                
         
-    {% javascripts filter="?yui_js,?closure" output="js/compiled/cmspage-frontend.js"  
-        
+    {% javascripts filter="?yui_js,?closure" output="js/compiled/cmspage-frontend.js"          
         '@CMSPageBundle/Resources/public/js/page-rest.js'
         '@CMSPageBundle/Resources/public/js/page-ui.js'
         '@CMSPageBundle/Resources/public/js/page-core.js'
