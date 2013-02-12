@@ -20,7 +20,7 @@ CMS\SharedBundle\Entity\BlockInstance:
         parent:
             targetEntity: Block   
             inversedBy: instances
-            orphanRemoval: true
+            orphanRemoval: true            
         template:
             targetEntity: Template
             inversedBy: blockInstance
