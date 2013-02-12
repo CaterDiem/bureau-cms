@@ -24,6 +24,7 @@
         {# le styles #}
         {% block stylesheets %}        
         <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />            
+        <link rel="stylesheet" href="{{ asset('bundles/cmspage/js/aloha/css/aloha.css') }}" />                    
         <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/blokk/blokk.css') }}" />                    
 
         {% stylesheets output='css/compiled/main.css'             
@@ -201,20 +202,36 @@
         <!-- Start: PageHeight -->
         <div id="pageheight" class="container-fluid">
             <div id="pagewrap">
-                {% block content %}
-                {{ content|raw }}
-                {% endblock %}        
+                {% block contentWrapper %}
+                <section
+                    class="{{ cssClasses }}"    
+                    id="{{ block.name|lower|replace({' ': '_'}) }}{{ block.id }}"
+                    cms-block="true"
+                    cms-block-id="{{ block.id }}"
+                    cms-block-name="{{ block.name|lower|replace({' ': '_'}) }}"    
+                    cms-block-type="{{ type }}"                    
+                    >
+                    {% block content %}
+                    {{ content|raw }}
+                    {% endblock content %}
+                </section>
+                {% endblock contentWrapper %}        
             </div>
         </div>
         <!-- End: PageHeight -->
         </section>
         
        
-        <!-- Le javascript
+               <!-- Le javascript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
-    {% javascripts         
+        
+        <script type="text/javascript" src="{{ asset('/web/bundles  /cmspage/js/aloha/lib/require.js') }}"></script>
+        <script src="{{ asset('/web/bundles/cmspage/js/aloha/lib/aloha.js') }}"
+            data-aloha-plugins="common/ui,common/format,common/paste,common/undo,common/link,common/image"></script>
+        
+    {% javascripts filter="?yui_js,?closure" output="js/compiled/defence.js"    
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-transition.js'
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-modal.js'
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-dropdown.js'
@@ -228,10 +245,17 @@
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-carousel.js'
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-typeahead.js'  
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-affix.js'  
-
+        '@CMSPageBundle/Resources/public/js/holder.js'       
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>        
+    {% endjavascripts %}                
+        
+    {% javascripts filter="?yui_js,?closure" output="js/compiled/cmspage-frontend.js"          
+        '@CMSPageBundle/Resources/public/js/page-rest.js'
+        '@CMSPageBundle/Resources/public/js/page-ui.js'
+        '@CMSPageBundle/Resources/public/js/page-core.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}                
-        <script type="text/javascript" src="{{ asset('bundles/cmspage/js/holder.js') }}"></script>
         </body>
     </html>

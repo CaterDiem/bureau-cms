@@ -2,10 +2,18 @@
 {# author: jtemplet #}
 {# This is a wrapper template. Containers do the real work, using their layouts and templates and so on. #}
 
-{% block content %}
+{% block contentWrapper %}
 <div
-    class="cms-block {% if handler.blockIsEditable %}cms-block-editable{% endif %}"
-    id="{{ block.name|lower|replace({' ': '_'}) }}">
+    class="{{ cssClasses }}"    
+    id="{{ block.name|lower|replace({' ': '_'}) }}{{ block.id }}"
+    cms-block="true"
+    cms-block-id="{{ block.id }}"
+    cms-block-name="{{ block.name|lower|replace({' ': '_'}) }}"    
+    cms-block-type="{{ type }}"
+    {% if handler.blockIsEditable %}cms-block-editable="true"{% endif %}
+    >
+    {% block content %}
     {{ content|raw }}
+    {% endblock content %}
 </div>
-{% endblock content %}
+{% endblock contentWrapper %}
