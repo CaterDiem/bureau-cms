@@ -11,13 +11,12 @@ class HTMLHandler extends BlockHandler{
       
     public function render(){    
                 
+        
+        $this->setVariable('content', $this->block->getContent()->getContent());
+        
         $this->renderedContent = $this->engine->render(
             $this->template->getFilepath(),
-            array(
-                'content' => $this->block->getContent()->getContent(),   
-                'block' => $this->block,
-                'handler' => $this
-            )
+            $this->variables
         );            
         
         return TRUE;

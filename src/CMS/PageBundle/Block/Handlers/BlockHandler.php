@@ -25,12 +25,18 @@ class BlockHandler{
     protected $container;
     
     protected $renderedContent = "";
+    
+    protected $cssClasses = array('span4', 'test');
+    protected $htmlAttributes;
+    protected $options;
+    
         
     public function __construct(\Doctrine\ORM\EntityManager $em, $container, \Symfony\Bridge\Monolog\Logger $logger){        
         $this->container = $container;
         $this->entityManager = $em;
         $this->engine = $this->container->get('templating');            
         $this->logger = $logger;
+        
     }
     /**
      * Return an instance of a BlockHandler implementor, based on the blockType of the passed block.
@@ -38,16 +44,73 @@ class BlockHandler{
      * @return \CMS\PageBundle\Block\handlerClass|boolean
      */
     public static function create(Block $block, Template $template, \Doctrine\ORM\EntityManager $em, $container, \Symfony\Bridge\Monolog\Logger $logger){
-        $handlerClass = "CMS\\PageBundle\\Block\\Handlers\\{$block->getType()->getName()}Handler";        
+        $handlerType = $block->getType()->getName();
+        $handlerClass = "CMS\\PageBundle\\Block\\Handlers\\{$handlerType}Handler";        
                 
         if(class_exists($handlerClass, TRUE)){            
             $handler = new $handlerClass($em, $container, $logger);            
             $handler->setBlock($block);
             $handler->setTemplate($template);
-            $handler->logger->debug("Created handler {$handlerClass}:{$handler->block->getName()}[Template:{$handler->template->getName()}]");
+            $handler->logger->debug("Created handler {$handlerClass}:{$handler->block->getName()}[Template:{$handler->template->getName()}]");            
+            $handler->initialiseVariables();
+            $handler->setVariable('type', $handlerType);
             return $handler;            
         }            
         
+        return FALSE;
+    }
+    
+    public function initialiseVariables(){
+        $this->variables = array(
+                'content' => '',      
+                'cssClasses' => $this->cssClasses,
+                'htmlAttributes' => $this->htmlAttributes,
+                'block' => $this->block,
+                'handler' => $this
+            );
+        return TRUE;
+    }
+    
+    /**
+     * Adds a variable to the array. If a variable with the key $key already exists, it will become an array containing the old and new values.
+     * @param type $key
+     * @param type $value
+     * @return boolean 
+     */
+    public function addVariable($key, $value){
+        array_merge_recursive($this->variables, array($key => $value));
+        return TRUE;
+    }
+    
+    /**
+     * Sets a variable. If a variable with the key $key already exists, any values contained in it will be overwritten.
+     * @param type $key
+     * @param type $value
+     * @return boolean
+     */
+    public function setVariable($key, $value){
+        $this->variables[$key] = $value;
+        return TRUE;
+    }
+    
+    /**
+     * Unsets a variable. It will remove ALL values stored for the passed key.
+     * @param type $key
+     * @return boolean
+     */
+    public function removeVariable($key){    
+        unset($this->variables[$key]);
+        return TRUE;
+    }
+    /**
+     * Gets a variable from the array. If it has no value, FALSE is returned.
+     * @param type $key
+     * @return mixed|boolean The variable if it exists, otherwise FALSE
+     */
+    public function getVariable($key){
+        if(array_key_exists($key, $this->variables)){
+            return $this->variables[$key];
+        }
         return FALSE;
     }
     
@@ -78,7 +141,7 @@ class BlockHandler{
         if($this->securityContext->isGranted('EDIT', $this->block) ){
             return TRUE;
         }
-        return FALSE;
+        return TRUE;
     }
     
     public function getContents(){}    
