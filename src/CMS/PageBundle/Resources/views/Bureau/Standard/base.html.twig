@@ -209,7 +209,8 @@
                     cms-block="true"
                     cms-block-id="{{ block.id }}"
                     cms-block-name="{{ block.name|lower|replace({' ': '_'}) }}"    
-                    cms-block-type="{{ type }}"                    
+                    cms-block-type="{{ type }}"
+                    {% if handler.blockIsEditable %}cms-block-editable="true"{% endif %}
                     >
                     {% block content %}
                     {{ content|raw }}
@@ -227,7 +228,7 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
         
-        <script type="text/javascript" src="{{ asset('/web/bundles  /cmspage/js/aloha/lib/require.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/web/bundles/cmspage/js/aloha/lib/require.js') }}"></script>
         <script src="{{ asset('/web/bundles/cmspage/js/aloha/lib/aloha.js') }}"
             data-aloha-plugins="common/ui,common/format,common/paste,common/undo,common/link,common/image"></script>
         

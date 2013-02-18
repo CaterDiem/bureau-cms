@@ -5,6 +5,10 @@
 blocks:
   type: rest
   resource: CMS\PageBundle\Block\BlockCRUDController
+
+instances:
+  type: rest
+  resource: CMS\PageBundle\Block\BlockCRUDController
   
 pages:
   type: rest

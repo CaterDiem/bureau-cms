@@ -17,6 +17,7 @@ class BlockManager {
     protected $engine;
     
     protected $block;
+    protected $blockInstance;
     
     
     private $generatedContent;
@@ -60,6 +61,27 @@ class BlockManager {
     }
     
     /**
+     * Load a block based on a related instanceID
+     * @param type $id
+     * @return boolean
+     */
+    public function getByInstanceId($id){
+         $blockInstance = $this->em->getRepository('CMSSharedBundle:BlockInstance')->find($id);
+         if($blockInstance){
+            $this->logger->debug("BlockManager:getBlockByInstanceId - Attempting to load blockinstance {$id}");
+            $this->load($blockInstance->getBlock());            
+            
+         }
+         if($this->isLoaded()){             
+            $this->blockInstance = $blockInstance;
+            return TRUE;         
+         }
+         $this->logger->err("BlockManager:getBlockByInstanceId - Unable to load block via blockinstance {$id}");
+         return FALSE;
+    }
+    
+    
+    /**
      * Load the block
      * @params Block $block The block to load. Doesn't need to be a root block.
      * @return boolean TRUE on success or FALSE on failure
@@ -100,6 +122,22 @@ class BlockManager {
         }
         return FALSE;
     }
+        
+    /**
+     * Return a HTML fragment rendered from this block.
+     * @param \CMS\SharedBundle\Entity\Block $block
+     * @param \CMS\SharedBundle\Entity\Template $template
+     * @return type
+     */
+    public function generateBlock(Block $block, \CMS\SharedBundle\Entity\Template $template){
+        $generatedContent = "";
+        $blockHandler = $this->container->get('block_handler');
+        $instanceHandler = $blockHandler->get_handler($block, $template);                
+        if($instanceHandler->render()){
+            $generatedContent .= $instanceHandler->getRenderedContent();
+        }
+        return $generatedContent;
+    }
     
     public function getGeneratedContent(){
         return $this->generatedContent;        
@@ -121,6 +159,14 @@ class BlockManager {
             return $this->block;
         }
         return FALSE;
+    }
+    
+    public function getBlockInstance(){
+        if($this->isLoaded() && $this->blockInstance instanceof \CMS\SharedBundle\Entity\BlockInstance){
+            return $this->blockInstance;
+        }
+        return FALSE;
+        
     }
     
 }
