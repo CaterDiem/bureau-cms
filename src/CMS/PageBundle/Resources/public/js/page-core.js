@@ -10,6 +10,7 @@
  */
 
 var BLOCK_URI = '/web/app_dev.php/cms/page/blocks/';
+var BLOCK_INSTANCE_URI = '/web/app_dev.php/cms/page/instances/';
 var PAGE_URI = '/web/app_dev.php/cms/page/pages/';
 var TEMPLATE_URI = '/web/app_dev.php/cms/page/templates/';
 
@@ -25,17 +26,33 @@ var CMSPageCore = CMSPageCore || {
     // functions
     init: function() {
         this.ui = CMSPageUI;
+        this.ui.initialise();
+        
         this.rest = CMSPageRest;
-    },
-            
-    // block functions
-    getBlock: function(blockID) {
-        response = $.get(BLOCK_URI+blockID)
-        .done(function(response){
-            console.log(response);
-        });
         
     },
+            
+    // block functions   
+    getBlock: function(blockID) {        
+        this.rest.get(
+            BLOCK_URI+blockID, 
+            function(response){
+                console.log(response);
+            }
+        );            
+        
+    },
+        
+    getBlockInstance: function(blockInstanceID) {
+        this.rest.get(
+            BLOCK_INSTANCE_URI+blockInstanceID, 
+            function(data){        
+                $(".cms-page-editable").html(data.html);
+                console.log(data);
+            }
+        );
+    },
+
     saveBlock: function () { },
         
     // editor functions
