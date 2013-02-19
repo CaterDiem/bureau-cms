@@ -8,6 +8,39 @@
  */
 
 var CMSPageUI = CMSPageUI || {
+    
+    defaultEditorDeactivateHandler: function(editable) {
+        var content = Aloha.activeEditable.getContents();
+        var contentId = Aloha.activeEditable.obj[0].id;
+        var pageId = window.location.pathname;
+
+        // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
+        if (contentId.match(/-aloha$/gi)) {
+            contentId = contentId.replace(/-aloha/gi, '');
+        }
+
+        console.log(content, contentId, pageId);
+        /*
+         var request = jQuery.ajax({
+         url: "save.php",
+         type: "POST",
+         data: {
+         content: content,
+         contentId: contentId,
+         pageId: pageId
+         },
+         dataType: "html"
+         });
+         
+         request.done(function(msg) {
+         jQuery("#log").html(msg).show().delay(800).fadeOut();
+         });
+         
+         request.error(function(jqXHR, textStatus) {
+         alert("Request failed: " + textStatus);
+         });*/
+    },
+    
     // properties
     initialise: function() {
         // set up aloha
@@ -44,45 +77,32 @@ var CMSPageUI = CMSPageUI || {
         };
 
         // bind editor deactivate functions
-        Aloha.bind('aloha-editable-deactivated', function() {
-            var content = Aloha.activeEditable.getContents();
-            var contentId = Aloha.activeEditable.obj[0].id;
-            var pageId = window.location.pathname;
-
-            // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
-            if (contentId.match(/-aloha$/gi)) {
-                contentId = contentId.replace(/-aloha/gi, '');
-            }
-        
-            console.log(content, contentId, pageId);
-            /*
-            var request = jQuery.ajax({
-                url: "save.php",
-                type: "POST",
-                data: {
-                    content: content,
-                    contentId: contentId,
-                    pageId: pageId
-                },
-                dataType: "html"
-            });
-
-            request.done(function(msg) {
-                jQuery("#log").html(msg).show().delay(800).fadeOut();
-            });
-
-            request.error(function(jqXHR, textStatus) {
-                alert("Request failed: " + textStatus);
-            });*/
-        });
+        Aloha.bind('aloha-editable-deactivated', this.defaultEditorDeactivateHandler);
     },
-    // block functions
-    getBlock: function(block) {
-    },
-    saveBlock: function() {
+
+    getActiveEditorDetails: function(){
+        element = $('#'+Aloha.activeEditable.obj[0].id);
+        var edObj = {
+            'content' : Aloha.activeEditable.getContents(),
+            'elementId' : element.attr('id'),
+            'blockId' : element.attr('cms-block-id'),
+        };
+        return edObj;
     },
     // editor functions
+    
+    setGlobalEditorDeactivationHandler: function (handlerFunction){
+        Aloha.bind('aloha-editable-deactivated', handlerFunction);      
+    },
+        
+    setEditorDeactivationHandler: function (editorInstance, handlerFunction){
+        editorInstance.bind('aloha-editable-deactivated', handlerFunction);
+    },
     attachEditor: function(block) {
+
     }
+    
+
+
 
 };
