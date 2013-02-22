@@ -28,19 +28,19 @@
         <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/blokk/blokk.css') }}" />                    
 
         {% stylesheets output='css/compiled/main.css'             
-            
+            '@CMSPageBundle/Resources/public/js/toolbar/jquery.toolbars.css' 
             '@CMSPageBundle/Resources/public/less/core.less'
          %}
         
         <link rel="stylesheet" href="{{ asset_url }}" />                 
         {% endstylesheets %}         
-        {% endblock %}        
+        {% endblock stylesheets %}        
        
         <link rel="shortcut icon" href="/favicon.ico" />
     </head>
     <body>
 
-        
+        {% block mainNavbar %}
         <!-- NAVBAR        
         ================================================== -->
         <div class="navbar-wrapper">
@@ -194,7 +194,9 @@
 
             </div> <!-- /.container -->
         </div><!-- /.navbar-wrapper -->
-       <section> 
+       {% endblock mainNavbar %}
+       {% block mainPageContent %}
+        <section> 
         <ul id="jumplinks">
             <li><a href="#content">Skip to main content</a></li>
         </ul>
@@ -221,16 +223,16 @@
         </div>
         <!-- End: PageHeight -->
         </section>
-        
+        {% endblock mainPageContent %}
        
+        {% include 'CMSPageBundle:Default:layoutToolbar.html.twig' %}
+        
                <!-- Le javascript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
         
-        <script type="text/javascript" src="{{ asset('/web/bundles/cmspage/js/aloha/lib/require.js') }}"></script>
-        <script src="{{ asset('/web/bundles/cmspage/js/aloha/lib/aloha.js') }}"
-            data-aloha-plugins="common/ui,common/format,common/paste,common/undo,common/link,common/image"></script>
+        <script type="text/javascript" src="{{ asset('/web/bundles/cmspage/js/aloha/lib/require.js') }}"></script>        
         
     {% javascripts filter="?yui_js,?closure" output="js/compiled/defence.js"    
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-transition.js'
@@ -245,16 +247,13 @@
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-collapse.js'
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-carousel.js'
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-typeahead.js'  
-        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-affix.js'  
+        '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-affix.js'          
         '@CMSPageBundle/Resources/public/js/holder.js'       
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>        
     {% endjavascripts %}                
         
-    {% javascripts filter="?yui_js,?closure" output="js/compiled/cmspage-frontend.js"          
-        '@CMSPageBundle/Resources/public/js/page-rest.js'
-        '@CMSPageBundle/Resources/public/js/page-ui.js'
-        '@CMSPageBundle/Resources/public/js/page-storage.js'
+    {% javascripts filter="?yui_js,?closure" output="js/compiled/cmspage-frontend.js"                  
         '@CMSPageBundle/Resources/public/js/page-core.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>

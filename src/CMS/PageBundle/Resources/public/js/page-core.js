@@ -15,14 +15,9 @@ var PAGE_URI = '/web/app_dev.php/cms/page/pages/';
 var TEMPLATE_URI = '/web/app_dev.php/cms/page/templates/';
 
 var SELECTOR_EDITABLE_HTML_BLOCKS = '[cms-block-type="HTML"][cms-block-editable]';
+var SELECTOR_EDITABLE_LAYOUT_BLOCKS = '[cms-block-type="Layout"][cms-block-editable]';
 
-/*
- require([
- 'web/bundles/cmspage/js/page-ui',
- 'web/bundles/cmspage/js/page-rest',
- 'web/bundles/cmspage/js/page-storage'
- ]);
- */
+
 
 var CMSPageCore = CMSPageCore || {
     // properties
@@ -31,7 +26,7 @@ var CMSPageCore = CMSPageCore || {
     // functions
     init: function() {
         this.ui = CMSPageUI;
-        this.ui.initialise();
+        //this.ui.initialise();
 
         this.rest = CMSPageRest;
 
@@ -80,15 +75,18 @@ var CMSPageCore = CMSPageCore || {
 
 
 };
-
-$(function() {
-    $.ajaxSetup({cache: false});
-
+require([
+    '/web/bundles/cmspage/js/page-ui.js',
+    '/web/bundles/cmspage/js/page-rest.js',
+    '/web/bundles/cmspage/js/page-storage.js',    
+    
+    '/web/bundles/cmspage/js/toolbar/jquery.toolbar.js',
+], function($) {
     CMSPageCore.init();
     CMSPageCore.restoreLocallyStoredChanges();
-    
+
     // set the editor deactivation handler to store blocks in localstorage.
-    CMSPageCore.ui.setGlobalEditorDeactivationHandler(CMSPageCore.storeBlockChangesLocally);        
-    
+    CMSPageCore.ui.setGlobalEditorDeactivationHandler(CMSPageCore.storeBlockChangesLocally);
+
     console.log('READY PLAYER ONE!');
 });

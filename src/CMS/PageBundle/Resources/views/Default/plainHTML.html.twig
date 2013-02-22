@@ -11,7 +11,8 @@
     cms-block-name="{{ block.name|lower|replace({' ': '_'}) }}"    
     cms-block-type="{{ type }}"
     {% if handler.blockIsEditable %}cms-block-editable="true"{% endif %}
-    >
+    contenteditable=true
+    >    
     {% block content %}
     {{ content|raw }}
     {% endblock content %}

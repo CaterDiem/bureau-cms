@@ -56,8 +56,12 @@ var CMSPageUI = CMSPageUI || {
         };
 
         // setup our custom buttons
+        Aloha.require(['common/ui','common/format','common/paste','common/undo','common/link','common/image']);
+        
         Aloha.require(['ui/ui', 'ui/button'], function(Ui, Button) {
             var button = Ui.adopt("myButton", Button, {
+                tooltip: 'Add container',
+                icon: 'aloha-icon aloha-icon-add',                  
                 click: function() {
                     alert("Click!");
                 }
@@ -98,9 +102,13 @@ var CMSPageUI = CMSPageUI || {
     setEditorDeactivationHandler: function (editorInstance, handlerFunction){
         editorInstance.bind('aloha-editable-deactivated', handlerFunction);
     },
+    attachLayoutToolbar: function (element){
+        
+    },    
     attachEditor: function(block) {
 
     }
+
     
 
 

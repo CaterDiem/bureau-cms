@@ -1,0 +1,8 @@
+{% block content %}
+<div
+    class="{{ block.css }} cms-block {% if handler.blockIsEditable %}cms-block-editable{% endif %}"
+    id="{{ block.id }}"
+    name="{{ block.name|lower|replace({' ': '_'}) }}">
+    {{ content|raw }}
+</div>
+{% endblock content %}
