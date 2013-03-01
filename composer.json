@@ -21,7 +21,7 @@
         "sensio/generator-bundle": "2.1.*",
         "jms/security-extra-bundle": "1.4.*@dev",                        
         "jms/di-extra-bundle": "1.3.*@dev",                                
-        "jms/serializer-bundle": "1.0.*",
+        "jms/serializer-bundle": "*@dev",
 	"friendsofsymfony/user-bundle": "*",
         "friendsofsymfony/rest-bundle": "dev-master",
         "gedmo/doctrine-extensions": ">=2.3.0",
