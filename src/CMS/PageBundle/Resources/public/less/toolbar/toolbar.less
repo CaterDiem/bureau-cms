@@ -1,0 +1,86 @@
+.tool-container {	
+	.border-radius(3px);
+	.box-shadow(0px 0px 1px @bureau-grey-light);
+	position: absolute;				
+        .tool-top, .tool-bottom {
+                height: 26px;
+                border-bottom: 1px solid @btnBorder; /* #B1A9A9 */
+        }
+}
+
+.tool-items {
+	height: 100%;	
+}
+
+.tool-item {
+        display: block;				    
+        color: @button-text;
+        text-align: left;
+        .border-radius(1px);
+	height: 100%;
+        > i {
+            margin-top: 5px;
+            margin-right: 6px;
+            height: 18px;
+        }             
+        .tool-top &, .tool-bottom & {            
+            height: 29px;
+            float: left;
+            border-right: 1px solid #e2dfdf;
+            border-left: 1px solid #9f9898;
+            &:last-child:hover {
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+            }
+            &:first-child:hover {
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
+            }
+        }
+        .tool-left &, .tool-right & {            
+            border-top: 1px solid #e2dfdf;
+            border-bottom: 1px solid #9f9898;
+            &:last-child:hover {
+                border-bottom-right-radius: 3px;
+                border-bottom-left-radius: 3px;
+            }
+            &:first-child:hover {
+                border-top-right-radius: 3px;
+                border-top-left-radius: 3px;
+            }
+        }
+}
+
+.tool-container {
+    .arrow {
+	width:0;
+	height:0;
+	position: absolute;	
+	border-width:7px;
+	border-style:solid;
+    }
+    &.tool-top .arrow { 
+        border-color: @featureBackground transparent transparent; 
+        left: 50%;  
+        bottom: -14px;
+        margin-left: -7px;
+    }
+    &.tool-bottom .arrow { 
+        border-color: transparent transparent @featureBackground; 
+        left: 50%;  
+        top: -14px;
+        margin-left: -7px;
+    }
+    &.tool-left .arrow { 
+        border-color: transparent transparent transparent @featureBackground;
+        top: 50%;
+        right: -14px;
+        margin-top: -7px;
+    }
+    &.tool-right .arrow { 
+        border-color: transparent @featureBackground transparent transparent;
+        top: 50%;
+        left: -14px;
+        margin-top: -7px;
+    }   
+}

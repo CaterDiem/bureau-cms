@@ -12,6 +12,7 @@
  * Copyright 2013 Paul Kinzett (http://kinzett.co.nz/)
  * Released under the MIT license.
  * <https://raw.github.com/paulkinzett/toolbar/master/LICENSE.txt>
+ *  
  */
 
 if ( typeof Object.create !== 'function' ) {
@@ -75,7 +76,7 @@ if ( typeof Object.create !== 'function' ) {
         populateContent: function() {
             var self = this;
             var location = self.toolbar.find('.tool-items');
-            var content = $(self.options.content).clone( true ).find('a').addClass('tool-item gradient');
+            var content = $(self.options.content).clone( true ).find('a').addClass('tool-item');
             location.html(content);
             location.find('.tool-item').on('click', function(event) {
                 event.preventDefault();

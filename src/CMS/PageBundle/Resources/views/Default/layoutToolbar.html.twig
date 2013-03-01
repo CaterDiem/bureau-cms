@@ -1,23 +1,17 @@
 {# ${name} #}
 {# author: ${user} #}
 
-
-
-
 <section class="not-hidden"> 
     
     <div id="layout-toolbar">        
-        <a href="#" class="btn" cms-button-action="layout-move-up"><i class="icon-arrow-up"></i></a>
-        <a href="#" class="btn" cms-button-action="layout-move-down"><i class="icon-arrow-down"></i></a>        
-        <a href="#" class="btn" cms-button-action="layout-options"><i class="icon-cog"></i></a>
-        <a href="#" class="btn" cms-button-action="layout-edit"><i class="icon-edit"></i></a>
-        <a href="#" class="btn" cms-button-action="layout-remove"><i class="icon-trash"></i></a>        
+        <a href="#" class="btn btn-small" cms-button-action="layout-move-up" title='move up'><i class="icon-arrow-up"></i></a>
+        <a href="#" class="btn btn-small" cms-button-action="layout-move-down" title='move down'><i class="icon-arrow-down"></i></a>        
+        <a href="#" class="btn btn-small" cms-button-action="layout-options" title='more options'><i class="icon-cog"></i></a>        
     </div>
     
     <div id="layout-toolbar-popup" >
-        <a href="#"><i class="icon-info-sign"></i></a>
-        <a href="#"><i class="icon-edit"></i></a>
-        <a href="#"><i class="icon-remove"></i></a>
-        
+        <a href="#" class="btn btn-small" cms-button-action="toolbar-info"><i class="icon-info-sign"></i>Details</a>
+        <a href="#" class="btn btn-small" cms-button-action="toolbar-edit"><i class="icon-edit"></i>Edit</a>
+        <a href="#" class="btn btn-small" cms-button-action="toolbar-trash"><i class="icon-trash"></i>Delete</a>        
     </div>	
 </section>

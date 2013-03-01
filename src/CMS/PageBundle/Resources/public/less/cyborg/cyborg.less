@@ -340,18 +340,17 @@ div.subnav {
 // BUTTONS
 // -----------------------------------------------------
 
-.btn {
-	
-	.buttonBackground(@white, darken(@white, 10%));
-	color: @themePrimary;
+.btn {	
+	.buttonBackground(@button-background, darken(@button-background, 10%));
+	color: @button-text;
 	text-shadow: none;
 
 	&:hover {
 		text-shadow: none;
-	  	color: @white;
+	  	color: @button-text-active;
 	}
 }
-
+/*WHERETHEFUCK*/
 .btn-primary {
   .buttonBackground(@blue, darken(@blue, 10%));
 }

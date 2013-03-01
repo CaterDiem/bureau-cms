@@ -3,7 +3,9 @@
 @import "bootstrap/responsive.less";
 
 @import "cyborg/variables.less";
-
+/* YOOO TOOLBAR */
+@import "toolbar/toolbar.less";
+/* YOLO */
 // Bureau variables
 
 // colours
@@ -49,11 +51,14 @@
 @black: @bureau-black;
 @white: @bureau-white;
 
+@button-border: @bureau-grey-lighter;
+@button-text: contrast(@button-background, @bureau-black, @bureau-white);
+@button-text-active: @button-text;
 
 @button-inactive: @bureau-black;
-@button-active: @bureau-orange;
-@button-background: @bureau-grey-darker;
-@button-border: @bureau-grey-lighter;
+@button-active: @themePrimary;
+@button-background: @bodyBackground;
+
 @button-highlight: desaturate(@button-active,10%);
 @button-highlight-position: top;
 @button-highlight-size: 4px;
@@ -122,7 +127,7 @@
       }
       .navbar-inner {
         border-radius: 0;
-        margin: -20px 0;
+        
       }
 
       .featurette {
@@ -142,7 +147,7 @@
     @media (max-width: 767px) {
 
       .navbar-inner {
-        margin: -20px;
+        margin: 0px;
       }
 
  
