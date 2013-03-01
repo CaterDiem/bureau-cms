@@ -14,10 +14,10 @@ services:
     tags:
         - { name: sonata.admin, manager_type: orm, group: CMS, label: Pages }
 
-  sonata.admin.containers:
-    class: CMS\AdminBundle\Admin\ContainerAdmin
-    arguments: [null, 'CMS\SharedBundle\Entity\Container', 'SonataAdminBundle:CRUD']
+  sonata.admin.blocks:
+    class: CMS\AdminBundle\Admin\BlockAdmin
+    arguments: [null, 'CMS\SharedBundle\Entity\Block', 'SonataAdminBundle:CRUD']
     calls:
         - [setTranslationDomain, [CMSAdminBundle]]               
     tags:
-        - { name: sonata.admin, manager_type: orm, group: CMS, label: Containers }
+        - { name: sonata.admin, manager_type: orm, group: CMS, label: Blocks }
