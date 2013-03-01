@@ -25,6 +25,6 @@ var CMSPageStorage = CMSPageStorage || {
     },
     remove: function(key) {
         return localStorage.removeItem(key);
-    },
+    }
     
 };

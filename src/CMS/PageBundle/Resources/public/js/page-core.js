@@ -55,7 +55,7 @@ var CMSPageCore = CMSPageCore || {
     },
     // callback function for storing changed block to localstorage
     storeBlockChangesLocally: function(editable) {
-        editor = CMSPageCore.ui.getActiveEditorDetails();
+        editor = CMSPageCore.ui.getActiveEditorDetails(editable);
         console.log(editor);
         CMSPageCore.storage.put(editor.elementId, editor.content);
     },
@@ -75,13 +75,15 @@ var CMSPageCore = CMSPageCore || {
 
 
 };
+/*
 require([
     '/web/bundles/cmspage/js/page-ui.js',
     '/web/bundles/cmspage/js/page-rest.js',
     '/web/bundles/cmspage/js/page-storage.js',    
     
-    '/web/bundles/cmspage/js/toolbar/jquery.toolbar.js',
-], function($) {
+    '/web/bundles/cmspage/js/toolbar/jquery.toolbar.js'
+],
+function($) {*/
     CMSPageCore.init();
     CMSPageCore.restoreLocallyStoredChanges();
 
@@ -89,4 +91,4 @@ require([
     CMSPageCore.ui.setGlobalEditorDeactivationHandler(CMSPageCore.storeBlockChangesLocally);
 
     console.log('READY PLAYER ONE!');
-});
+//});

@@ -9,7 +9,39 @@
 
 var CMSPageUI = CMSPageUI || {
     
+    
     defaultEditorDeactivateHandler: function(editable) {
+        var content = editable.html();
+        var contentId = editable.id;
+        var pageId = window.location.pathname;
+
+        // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
+        //if (contentId.match(/-aloha$/gi)) {
+        //   contentId = contentId.replace(/-aloha/gi, '');
+        //}
+
+        console.log(content, contentId, pageId);
+        /*
+         var request = jQuery.ajax({
+         url: "save.php",
+         type: "POST",
+         data: {
+         content: content,
+         contentId: contentId,
+         pageId: pageId
+         },
+         dataType: "html"
+         });
+         
+         request.done(function(msg) {
+         jQuery("#log").html(msg).show().delay(800).fadeOut();
+         });
+         
+         request.error(function(jqXHR, textStatus) {
+         alert("Request failed: " + textStatus);
+         });*/
+    },
+    defaultAlohaEditorDeactivateHandler: function(editable) {
         var content = Aloha.activeEditable.getContents();
         var contentId = Aloha.activeEditable.obj[0].id;
         var pageId = window.location.pathname;
@@ -84,7 +116,7 @@ var CMSPageUI = CMSPageUI || {
         Aloha.bind('aloha-editable-deactivated', this.defaultEditorDeactivateHandler);
     },
 
-    getActiveEditorDetails: function(){
+    /*getActiveEditorDetails: function(){
         element = $('#'+Aloha.activeEditable.obj[0].id);
         var edObj = {
             'content' : Aloha.activeEditable.getContents(),
@@ -92,11 +124,22 @@ var CMSPageUI = CMSPageUI || {
             'blockId' : element.attr('cms-block-id'),
         };
         return edObj;
+    },*/
+    getActiveEditorDetails: function(editable){
+        element = $('#'+editable.currentTarget.id);
+        console.log(element);
+        var edObj = {
+            'content' : element.html(),
+            'elementId' : element.attr('id'),
+            'blockId' : element.attr('cms-block-id')
+        };
+        return edObj;
     },
     // editor functions
     
     setGlobalEditorDeactivationHandler: function (handlerFunction){
-        Aloha.bind('aloha-editable-deactivated', handlerFunction);      
+        //Aloha.bind('aloha-editable-deactivated', handlerFunction);      
+        $('[contenteditable="true"]').blur(handlerFunction)
     },
         
     setEditorDeactivationHandler: function (editorInstance, handlerFunction){
