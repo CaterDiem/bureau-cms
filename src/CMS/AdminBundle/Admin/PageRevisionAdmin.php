@@ -14,7 +14,7 @@ use CMS\SharedBundle\Entity\Block;
  *
  * @author jtemplet
  */
-class PageAdmin extends Admin {
+class PageRevisionAdmin extends Admin {
     
     protected $pageManager;
 
@@ -26,7 +26,7 @@ class PageAdmin extends Admin {
                 ->add('author')
             ->end()
             ->with('Revision')
-                //->add('current_revision', 'sonata_type_model')                                
+                ->add('current_revision', 'sonata_type_model')                                
             ->end()
         ;
     }
