@@ -27,8 +27,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/cmspage/js/aloha/css/aloha.css') }}" />                    
         <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/blokk/blokk.css') }}" />                    
 
-        {% stylesheets output='css/compiled/main.css'             
-            '@CMSPageBundle/Resources/public/js/toolbar/jquery.toolbars.css' 
+        {% stylesheets filter='?yui_css' output='css/compiled/main.css'                         
             '@CMSPageBundle/Resources/public/less/core.less'
          %}
         
@@ -196,14 +195,14 @@
         </div><!-- /.navbar-wrapper -->
        {% endblock mainNavbar %}
        {% block mainPageContent %}
-        <section> 
+        <section class="container"> 
         <ul id="jumplinks">
             <li><a href="#content">Skip to main content</a></li>
         </ul>
 
         <!-- Start: PageHeight -->
         <div id="pageheight" class="container-fluid">
-            <div id="pagewrap">
+            <div id="pagewrap" class="row-fluid">
                 {% block contentWrapper %}
                 <section
                     class="{{ cssClasses }}"    
@@ -234,7 +233,7 @@
         
         <script type="text/javascript" src="{{ asset('/web/bundles/cmspage/js/aloha/lib/require.js') }}"></script>        
         
-    {% javascripts filter="?yui_js,?closure" output="js/compiled/defence.js"    
+    {% javascripts filter="?closure" output="js/compiled/defence.js"    
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-transition.js'
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-modal.js'
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-dropdown.js'
@@ -253,7 +252,11 @@
         <script type="text/javascript" src="{{ asset_url }}"></script>        
     {% endjavascripts %}                
         
-    {% javascripts filter="?yui_js,?closure" output="js/compiled/cmspage-frontend.js"                  
+    {% javascripts filter="?closure" output="js/compiled/cmspage-frontend.js"                  
+        '@CMSPageBundle/Resources/public/js/toolbar/jquery.toolbar.js'
+        '@CMSPageBundle/Resources/public/js/page-ui.js'
+        '@CMSPageBundle/Resources/public/js/page-storage.js'
+        '@CMSPageBundle/Resources/public/js/page-rest.js'
         '@CMSPageBundle/Resources/public/js/page-core.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
