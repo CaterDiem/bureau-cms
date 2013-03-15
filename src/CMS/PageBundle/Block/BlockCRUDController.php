@@ -31,7 +31,7 @@ class BlockCRUDController extends FOSRestController
                     'content' => $block->getContent()->getContent(),
                 ),
             );
-            $view = $this->view($block, 200);            
+            $view = $this->view($response, 200);            
                 
         }else{
             $view = $this->view(FALSE, 404); 

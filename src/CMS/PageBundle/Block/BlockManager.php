@@ -150,6 +150,7 @@ class BlockManager {
         return $block;               
     }
     
+    
     /**
      * Getter for loaded block
      * @return Block|boolean The block if loaded, otherwise false.
@@ -167,6 +168,16 @@ class BlockManager {
         }
         return FALSE;
         
+    }
+    
+    /**
+     * Returns a deep clone of the block passed in. 
+     * NOTE: Cloned object has NOT been persisted to the DB. You'll need to do that.
+     * @return type
+     */
+    public function getDeepClone(){
+        // recursively load and clone blocks.
+        return $blockClone;
     }
     
 }

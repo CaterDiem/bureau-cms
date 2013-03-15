@@ -10,6 +10,10 @@ instances:
   type: rest
   resource: CMS\PageBundle\Block\BlockCRUDController
   
+layouts:
+  type: rest
+  resource: CMS\PageBundle\Layout\LayoutCRUDController
+  
 pages:
   type: rest
   resource: CMS\PageBundle\Page\PageCRUDController
@@ -27,19 +31,7 @@ cms_page_view:
     defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index', style: 'core' }
     requirements:
       pageSlug: ".+"
-   
-cms_page_edit:
-    pattern: /{pageSlug}/edit/
-    defaults: { _controller: CMSPageBundle:RenderPage:edit, pageSlug: 'index' }
-    requirements:
-        _method:  GET
-    
-cms_page_edit_process:
-    pattern: /{pageSlug}/edit/
-    defaults: { _controller: CMSPageBundle:RenderPage:edit, pageSlug: 'index' }
-    requirements:
-        _method:  POST                   
-        
+           
 cms_page_default: 
     pattern: /
     defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index' }
