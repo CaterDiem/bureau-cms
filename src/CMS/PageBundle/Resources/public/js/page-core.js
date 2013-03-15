@@ -18,7 +18,6 @@ var SELECTOR_EDITABLE_HTML_BLOCKS = '[cms-block-type="HTML"][cms-block-editable]
 var SELECTOR_EDITABLE_LAYOUT_BLOCKS = '[cms-block-type="Layout"][cms-block-editable]';
 
 
-
 var CMSPageCore = CMSPageCore || {
     // properties
 
@@ -72,23 +71,16 @@ var CMSPageCore = CMSPageCore || {
     attachEditor: function(element) {
     }
 
-
-
 };
-/*
-require([
-    '/web/bundles/cmspage/js/page-ui.js',
-    '/web/bundles/cmspage/js/page-rest.js',
-    '/web/bundles/cmspage/js/page-storage.js',    
-    
-    '/web/bundles/cmspage/js/toolbar/jquery.toolbar.js'
-],
-function($) {*/
-    CMSPageCore.init();
-    CMSPageCore.restoreLocallyStoredChanges();
 
-    // set the editor deactivation handler to store blocks in localstorage.
-    CMSPageCore.ui.setGlobalEditorDeactivationHandler(CMSPageCore.storeBlockChangesLocally);
 
-    console.log('READY PLAYER ONE!');
-//});
+CMSPageCore.init();
+CMSPageCore.restoreLocallyStoredChanges();
+
+// set the editor deactivation handler to store blocks in localstorage.
+CMSPageCore.ui.setGlobalEditorDeactivationHandler(CMSPageCore.storeBlockChangesLocally);
+
+// attach default toolbars
+CMSPageCore.ui.attachDefaultToolbars();
+
+console.log('READY PLAYER ONE!');

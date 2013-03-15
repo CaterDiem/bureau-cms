@@ -1,7 +1,13 @@
 {# ${name} #}
 {# author: ${user} #}
 
-<section class="not-hidden"> 
+<section class="hidden"> 
+    
+    <div id="page-toolbar">
+        <a href="#" class="btn " cms-button-action="page-save" title='save page changes'><i class="icon-ok"></i> Save Changes</a>
+        <a href="#" class="btn " cms-button-action="page-info" title='display more page information'><i class="icon-info-sign"></i> Page Information</a>        
+        <a href="#" class="btn " cms-button-action="page-options" title='more options'><i class="icon-cog"></i> More Options</a>        
+    </div>
     
     <div id="layout-toolbar">        
         <a href="#" class="btn btn-small" cms-button-action="layout-move-up" title='move up'><i class="icon-arrow-up"></i></a>
@@ -10,8 +16,9 @@
     </div>
     
     <div id="layout-toolbar-popup" >
-        <a href="#" class="btn btn-small" cms-button-action="toolbar-info"><i class="icon-info-sign"></i>Details</a>
-        <a href="#" class="btn btn-small" cms-button-action="toolbar-edit"><i class="icon-edit"></i>Edit</a>
-        <a href="#" class="btn btn-small" cms-button-action="toolbar-trash"><i class="icon-trash"></i>Delete</a>        
+        <a href="#" class="btn btn-small" cms-button-action="toolbar-popup-info"><i class="icon-info-sign"></i> Details</a>
+        <a href="#" class="btn btn-small" cms-button-action="toolbar-popup-edit"><i class="icon-edit"></i> Edit</a>
+        <a href="#" class="btn btn-small" cms-button-action="toolbar-popup-trash"><i class="icon-trash"></i> Delete</a>        
     </div>	
+    
 </section>
