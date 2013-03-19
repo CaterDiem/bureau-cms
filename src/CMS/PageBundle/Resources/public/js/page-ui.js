@@ -34,13 +34,8 @@ var CMSPageUI = CMSPageUI || {
 
         console.log(content, contentId, pageId);
     },
-            
-    
-    initialise: function() {
-        // set up aloha
-        this.initialiseAloha();
+    initialise: function() {     
     },
-    
     getActiveEditorDetails: function(editable) {
         element = $('#' + editable.currentTarget.id);
         console.log(element);
