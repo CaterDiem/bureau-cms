@@ -24,6 +24,9 @@ var MORE_OPTIONS_DELETE = '[cms-button-action=toolbar-popup-trash]';
 var MORE_OPTIONS_ADD = '[cms-button-action=toolbar-popup-add]';
 
 var CMSPageUI = CMSPageUI || {
+    // properties
+    
+    // functions
     defaultEditorDeactivateHandler: function(editable) {
         var content = editable.html();
         var contentId = editable.id;
@@ -31,60 +34,13 @@ var CMSPageUI = CMSPageUI || {
 
         console.log(content, contentId, pageId);
     },
-    defaultAlohaEditorDeactivateHandler: function(editable) {
-        var content = Aloha.activeEditable.getContents();
-        var contentId = Aloha.activeEditable.obj[0].id;
-        var pageId = window.location.pathname;
-
-        // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
-        if (contentId.match(/-aloha$/gi)) {
-            contentId = contentId.replace(/-aloha/gi, '');
-        }
-
-        console.log(content, contentId, pageId);
-    },
-    // properties
+            
+    
     initialise: function() {
         // set up aloha
         this.initialiseAloha();
     },
-    initialiseAloha: function() {
-        // general aloha setup
-        Aloha.settings = {
-            behaviour: 'topalign',
-            sidebar: {
-                disabled: true
-            }
-        };
-
-        // setup our custom buttons
-        Aloha.require(['common/ui', 'common/format', 'common/paste', 'common/undo', 'common/link', 'common/image']);
-
-        Aloha.require(['ui/ui', 'ui/button'], function(Ui, Button) {
-            var button = Ui.adopt("myButton", Button, {
-                tooltip: 'Add container',
-                icon: 'aloha-icon aloha-icon-add',
-                click: function() {
-                    alert("Click!");
-                }
-            });
-        });
-
-        // setup our toolbars.        
-        Aloha.settings.toolbar = {
-            tabs: [
-                {
-                    label: 'Containers',
-                    components: [
-                        ['myButton']
-                    ]
-                }
-            ]
-        };
-
-        // bind editor deactivate functions
-        Aloha.bind('aloha-editable-deactivated', this.defaultEditorDeactivateHandler);
-    },
+    
     getActiveEditorDetails: function(editable) {
         element = $('#' + editable.currentTarget.id);
         console.log(element);
@@ -103,36 +59,32 @@ var CMSPageUI = CMSPageUI || {
     setEditorDeactivationHandler: function(editorInstance, handlerFunction) {
         editorInstance.bind('aloha-editable-deactivated', handlerFunction);
     },
-    attachToolbar: function(toolbarType, element, events) {
+    /** 
+     * attach a toolbar to an element
+     */
+    attachToolbar: function(toolbarType, element, eventTarget, events) {           
         newToolbar = $("#" + toolbarType).clone();
-        newToolbar.attr('id', element.id + toolbarType);
+        newToolbar.attr('id', eventTarget + toolbarType);
         newToolbar.attr('cms-toolbar-target', element.id);
 
         // bind button events                    
-        for (var ev in events) {
-            CMSPageUI.bindToolbarEvent(newToolbar.children(ev), events[ev].type, element.id, events[ev].callback); // most confusing line ever.            
+        for (var ev in events) {            
+            CMSPageCore.ui.bindToolbarEvent(newToolbar.children(ev), events[ev].event, events[ev].type, eventTarget, events[ev].callback); // most confusing line ever.            
         }
-
-
 
         $(element).before(newToolbar);
         return newToolbar;
     },
+    /**
+     * attach a popup toolbar to an element
+     */
     attachPopupToolbar: function(toolbarType, triggerElement, eventTarget, events) {
-
-        newToolbar = $("#" + toolbarType).clone();        
-        newToolbar.attr('id', toolbar.attr('id') + '-' + toolbarType);
-        newToolbar.attr('cms-toolbar-target', eventTarget.id);
-
-        // bind button events                    
-        for (var ev in events) {
-            CMSPageUI.bindToolbarEvent(newToolbar.children(ev), events[ev].type, eventTarget, events[ev].callback); // most confusing line ever.            
-        }
-
-        // add element to page, but hide it
+        newToolbar = CMSPageCore.ui.attachToolbar(toolbarType, triggerElement, eventTarget, events);
+        
+        // hide the new toolbar that attachToolbar just added to this element, as it'll be a popup. needs to be added to the page for the events to correctly bind.
         newToolbar.hide();
-        $(triggerElement).before(newToolbar);
-        // add as popup on more button
+        
+        // add as popup on triggerElement
         newPopup = $(triggerElement).toolbar({
             content: '#' + newToolbar.attr('id'),
             position: 'right',
@@ -145,51 +97,45 @@ var CMSPageUI = CMSPageUI || {
         // all the haxx.        
         $(SELECTOR_EDITABLE_HTML_BLOCKS).each(function() {            
             var events = {};
-            events[LAYOUT_TOOLBAR_MOVE_UP] = {type: 'click', callback: CMSPageUI.doEdit};
-            events[LAYOUT_TOOLBAR_MOVE_DOWN] = {type: 'click', callback: CMSPageUI.doEdit};
+            events[LAYOUT_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[LAYOUT_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPageCore.blocks.handleEvent};
             
-            toolbar = CMSPageCore.ui.attachToolbar(LAYOUT_TOOLBAR, this, events);
+            toolbar = CMSPageCore.ui.attachToolbar(LAYOUT_TOOLBAR, this,  this.id, events);
             
             // attach popup toolbar
             var popupEvents = {};
-            popupEvents[MORE_OPTIONS_EDIT] = {type: 'click', callback: CMSPageUI.doEdit};
-            popupEvents[MORE_OPTIONS_INFO] = {type: 'click', callback: CMSPageUI.doEdit};
-            popupEvents[MORE_OPTIONS_DELETE] = {type: 'click', callback: CMSPageUI.doEdit};
+            popupEvents[MORE_OPTIONS_EDIT] = {event: 'edit', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            popupEvents[MORE_OPTIONS_INFO] = {event: 'info', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            popupEvents[MORE_OPTIONS_DELETE] = {event: 'delete', type: 'click', callback: CMSPageCore.blocks.handleEvent};
 
-            popupToolbar = CMSPageUI.attachPopupToolbar(EDITABLE_BLOCK_TOOLBAR_POPUP, toolbar.children(LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON), toolbar.attr('cms-toolbar-target'), popupEvents);
+            popupToolbar = CMSPageCore.ui.attachPopupToolbar(EDITABLE_BLOCK_TOOLBAR_POPUP, toolbar.children(LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON), toolbar.attr('cms-toolbar-target'), popupEvents);
         });
         
         $(SELECTOR_EDITABLE_LAYOUT_BLOCKS).each(function() {            
             var events = {};
-            events[LAYOUT_TOOLBAR_MOVE_UP] = {type: 'click', callback: CMSPageUI.doEdit};
-            events[LAYOUT_TOOLBAR_MOVE_DOWN] = {type: 'click', callback: CMSPageUI.doEdit};
+            events[LAYOUT_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[LAYOUT_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPageCore.blocks.handleEvent};
             
-            toolbar = CMSPageCore.ui.attachToolbar(LAYOUT_TOOLBAR, this, events);
+            toolbar = CMSPageCore.ui.attachToolbar(LAYOUT_TOOLBAR, this, this.id, events);
             
             // attach popup toolbar
             var popupEvents = {};
-            popupEvents[MORE_OPTIONS_ADD] = {type: 'click', callback: CMSPageUI.doEdit};
-            popupEvents[MORE_OPTIONS_EDIT] = {type: 'click', callback: CMSPageUI.doEdit};
-            popupEvents[MORE_OPTIONS_INFO] = {type: 'click', callback: CMSPageUI.doEdit};
-            popupEvents[MORE_OPTIONS_DELETE] = {type: 'click', callback: CMSPageUI.doEdit};
+            popupEvents[MORE_OPTIONS_ADD] = {event: 'add', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            popupEvents[MORE_OPTIONS_EDIT] = {event: 'edit', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            popupEvents[MORE_OPTIONS_INFO] = {event: 'info', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            popupEvents[MORE_OPTIONS_DELETE] = {event: 'delete', type: 'click', callback: CMSPageCore.blocks.handleEvent};
 
             popupToolbar = CMSPageUI.attachPopupToolbar(LAYOUT_TOOLBAR_POPUP, toolbar.children(LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON), toolbar.attr('cms-toolbar-target'), popupEvents);
         });
     },
-    bindToolbarEvent: function(button, event, eventTarget, callback) {
-        button.bind(event, function() {
-            callback(eventTarget, button);
+    bindToolbarEvent: function(button, event, eventType, eventTarget, callback) {
+        button.bind(eventType, function() {            
+            callback(eventTarget, event, eventType);
         });
     },
     attachEditor: function(block) {
 
-    },
-    doEdit: function(target, trigger) {
-        console.log(target, trigger);
     }
-
-
-
 
 
 };

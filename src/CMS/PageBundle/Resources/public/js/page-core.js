@@ -31,42 +31,11 @@ var CMSPageCore = CMSPageCore || {
 
         this.storage = CMSPageStorage;
         //this.storage.initialise();
+        
+        this.blocks = CMSPageBlocks;
 
     },
-    // block functions   
-    getBlock: function(blockID) {
-        this.rest.get(
-                BLOCK_URI + blockID,
-                function(response) {
-                    console.log(response);
-                }
-        );
-
-    },
-    getBlockInstance: function(blockInstanceID) {
-        this.rest.get(
-                BLOCK_INSTANCE_URI + blockInstanceID,
-                function(data) {
-                    $(".cms-page-editable").html(data.html);
-                    console.log(data);
-                }
-        );
-    },
-    // callback function for storing changed block to localstorage
-    storeBlockChangesLocally: function(editable) {
-        editor = CMSPageCore.ui.getActiveEditorDetails(editable);
-        console.log(editor);
-        CMSPageCore.storage.put(editor.elementId, editor.content);
-    },
-    restoreLocallyStoredChanges: function() {
-        $(SELECTOR_EDITABLE_HTML_BLOCKS).each(function() {
-            blockContents = CMSPageCore.storage.get($(this).attr('id'));
-            if (blockContents != null) {
-                $(this).html(blockContents);
-            }
-
-        });
-    },
+    
     // editor functions
     attachEditor: function(element) {
     }
@@ -75,10 +44,10 @@ var CMSPageCore = CMSPageCore || {
 
 
 CMSPageCore.init();
-CMSPageCore.restoreLocallyStoredChanges();
+CMSPageCore.blocks.restoreLocallyStoredChanges();
 
 // set the editor deactivation handler to store blocks in localstorage.
-CMSPageCore.ui.setGlobalEditorDeactivationHandler(CMSPageCore.storeBlockChangesLocally);
+CMSPageCore.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);
 
 // attach default toolbars
 CMSPageCore.ui.attachDefaultToolbars();

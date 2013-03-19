@@ -1,9 +1,5 @@
 <?php
 
-/*
- * DONT FORGET TO RENAME THE CLASSFILE to PageCRUDController 
- */
-
 namespace CMS\PageBundle\Page;
 
 use FOS\RestBundle\Controller\FOSRestController;
