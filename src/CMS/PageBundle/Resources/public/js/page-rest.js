@@ -55,7 +55,7 @@ var CMSPageRest = CMSPageRest || {
             var jqxhr = $.ajax(
                     {
                         type: requestType,
-                        url: target+'.'+RESPONSE_TYPE, 
+                        url: CMS_REST_BASE_URL+target+'.'+RESPONSE_TYPE, 
                         data: dataset,
                         cache: false,
                         mimeType: RESPONSE_TYPE

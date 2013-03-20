@@ -7,19 +7,18 @@
  * @date: 2012/03/29
  */
 
-var CMS_ENVIRONMENT_CHECKER_URL = '/';
-
 var CMSPageDebug = CMSPageDebug|| {
     // properties
 
 
     // functions
     init: function() {
-        CMS_ENVIRONMENT = CMSPageCore.debug.getEnvironmentState();
+        this.processEnvironmentState();
+        return this;
     },
                            
     log: function(message) {        
-        if(CMS_ENVIRONMENT == 'development'){
+        if(CMS_DEBUG_STATE == '1'){
             console.log(message);
         }else{
             return false;
@@ -27,14 +26,14 @@ var CMSPageDebug = CMSPageDebug|| {
         
     },
             
-    getEnvironmentState: function(){
-        /*CMSPageCore.rest.get(
-                CMS_ENVIRONMENT_CHECKER_URL,
-                function(data) {
-                    $(".cms-page-editable").html(data.html);
-                    CMSPageCore.debug.log(data);
-                }
-        );*/
-        return 'development';
+    processEnvironmentState: function(){        
+        // check the values of CMS_ENVIRONMENT and CMS_DEBUG_STATE and do things
+        if(CMS_ENVIRONMENT == 'dev' || CMS_ENVIRONMENT == 'test'){
+            CMS_REST_BASE_URL = '/web/app_dev.php/';            
+        }
+        
+        if(CMS_ENVIRONMENT == 'prod'){
+            CMS_REST_BASE_URL = '/web/';
+        }     
     }
 };

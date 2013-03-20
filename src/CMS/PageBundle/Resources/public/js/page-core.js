@@ -9,17 +9,18 @@
  * @date: 2012/02/06
  */
 
+ // default to production. 
 var CMS_ENVIRONMENT = 'production';
+var CMS_REST_BASE_URL = '/web/';
+var CMS_DEBUG_STATE = '0';
 
-
-var BLOCK_URI = '/web/app_dev.php/cms/page/blocks/';
-var BLOCK_INSTANCE_URI = '/web/app_dev.php/cms/page/instances/';
-var PAGE_URI = '/web/app_dev.php/cms/page/pages/';
-var TEMPLATE_URI = '/web/app_dev.php/cms/page/templates/';
+var BLOCK_URI = 'cms/page/blocks/';
+var BLOCK_INSTANCE_URI = 'cms/page/instances/';
+var PAGE_URI = 'cms/page/pages/';
+var TEMPLATE_URI = 'cms/page/templates/';
 
 var SELECTOR_EDITABLE_HTML_BLOCKS = '[cms-block-type="HTML"][cms-block-editable]';
 var SELECTOR_EDITABLE_LAYOUT_BLOCKS = '[cms-block-type="Layout"][cms-block-editable]';
-
 
 var CMSPageCore = CMSPageCore || {
     // properties
@@ -28,7 +29,8 @@ var CMSPageCore = CMSPageCore || {
     // functions
     init: function() {
         // this will also set the environment to development if we're on a development url
-        this.debug = CMSPageDebug;
+        this.debug = CMSPageDebug.init();
+        
         
         this.ui = CMSPageUI;
         //this.ui.initialise();
@@ -41,7 +43,17 @@ var CMSPageCore = CMSPageCore || {
         this.blocks = CMSPageBlocks;
         
         
-        CMS_ENVIRONMENT = this.debug.getEnvironmentState();
+        this.blocks.restoreLocallyStoredChanges();
+
+        // set the editor deactivation handler to store blocks in localstorage.
+        this.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);
+
+        // attach default toolbars
+        this.ui.attachDefaultToolbars();
+
+        this.debug.log('READY PLAYER ONE!');
+
+        
 
     },
     
@@ -50,15 +62,3 @@ var CMSPageCore = CMSPageCore || {
     }
 
 };
-
-
-CMSPageCore.init();
-CMSPageCore.blocks.restoreLocallyStoredChanges();
-
-// set the editor deactivation handler to store blocks in localstorage.
-CMSPageCore.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);
-
-// attach default toolbars
-CMSPageCore.ui.attachDefaultToolbars();
-
-CMSPageCore.debug.log('READY PLAYER ONE!');

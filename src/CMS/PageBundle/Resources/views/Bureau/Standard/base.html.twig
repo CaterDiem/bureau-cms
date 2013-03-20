@@ -229,9 +229,7 @@
                <!-- Le javascript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
-        
-        <script type="text/javascript" src="{{ asset('/web/bundles/cmspage/js/aloha/lib/require.js') }}"></script>        
+        <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>               
         
     {% javascripts filter="?closure" output="js/compiled/defence.js"    
         '@CMSPageBundle/Resources/public/js/bootstrap/bootstrap-transition.js'
@@ -252,6 +250,9 @@
         <script type="text/javascript" src="{{ asset_url }}"></script>        
     {% endjavascripts %}                
         
+    
+
+    
     {% javascripts filter="?closure" output="js/compiled/cmspage-frontend.js"                  
         '@CMSPageBundle/Resources/public/js/toolbar/jquery.toolbar.js'
         '@CMSPageBundle/Resources/public/js/page-ui.js'
@@ -263,5 +264,14 @@
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}                
+        
+        <script type="text/javascript">
+            // get environment/debug state and initialise CMSPageCore.
+            var CMS_ENVIRONMENT  = '{{ app.environment }}';
+            var CMS_DEBUG_STATE = '{{ app.debug }}';
+
+            CMSPageCore.init();
+        </script>   
+        
         </body>
     </html>
