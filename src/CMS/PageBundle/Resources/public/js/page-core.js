@@ -9,6 +9,9 @@
  * @date: 2012/02/06
  */
 
+var CMS_ENVIRONMENT = 'production';
+
+
 var BLOCK_URI = '/web/app_dev.php/cms/page/blocks/';
 var BLOCK_INSTANCE_URI = '/web/app_dev.php/cms/page/instances/';
 var PAGE_URI = '/web/app_dev.php/cms/page/pages/';
@@ -24,6 +27,9 @@ var CMSPageCore = CMSPageCore || {
 
     // functions
     init: function() {
+        // this will also set the environment to development if we're on a development url
+        this.debug = CMSPageDebug;
+        
         this.ui = CMSPageUI;
         //this.ui.initialise();
 
@@ -33,6 +39,9 @@ var CMSPageCore = CMSPageCore || {
         //this.storage.initialise();
         
         this.blocks = CMSPageBlocks;
+        
+        
+        CMS_ENVIRONMENT = this.debug.getEnvironmentState();
 
     },
     
@@ -52,4 +61,4 @@ CMSPageCore.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockC
 // attach default toolbars
 CMSPageCore.ui.attachDefaultToolbars();
 
-console.log('READY PLAYER ONE!');
+CMSPageCore.debug.log('READY PLAYER ONE!');
