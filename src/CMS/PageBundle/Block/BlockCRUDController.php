@@ -25,10 +25,11 @@ class BlockCRUDController extends FOSRestController
                 'id' => $block->getId(),
                 'name' => $block->getName(),
                 'created' => $block->getCreated(),
-                'updated' => $block->getUpdated(),
+                'updated' => $block->getUpdated(),                
+                'editor' => $block->getContent()->getEditor()->getUsername(),
                 'content' => array(
                     'id' => $block->getContent()->getId(), 
-                    'content' => $block->getContent()->getContent(),
+                    'content' => $block->getContent()->getContent(),                    
                 ),
             );
             $view = $this->view($response, 200);            
