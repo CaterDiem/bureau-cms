@@ -16,30 +16,30 @@ var CMSPageRest = CMSPageRest || {
     // default handler functions
     
     requestSuccessHandler: function(data){
-        console.log('Requst completed: '+ data);
+        CMSPageCore.debug.log('Requst completed: '+ data);
     },
     requestFailureHandler: function(jqxhr, statusMessage){
-        console.log('Requst dun fail: '+statusMessage);
+        CMSPageCore.debug.log('Requst dun fail: '+statusMessage);
     },
     
     // functions
     get: function (target, successCallback, failureCallback){
-        console.log("GETting "+target);        
+        CMSPageCore.debug.log("GETting "+target);        
         this.ajaxRequest('GET', target, [], successCallback, failureCallback);
     },
         
     post: function (target, payload, successCallback, failureCallback){
-        console.log("POSTting "+target);        
+        CMSPageCore.debug.log("POSTting "+target);        
         this.ajaxRequest('POST', target, payload, successCallback, failureCallback);
     },
         
     put: function (target, payload, successCallback, failureCallback){
-        console.log("PUTting "+target);        
+        CMSPageCore.debug.log("PUTting "+target);        
         this.ajaxRequest('PUT', target, payload, successCallback, failureCallback);
     },
         
     remove: function (target, payload, successCallback, failureCallback){
-        console.log("DELETEing "+target);        
+        CMSPageCore.debug.log("DELETEing "+target);        
         this.ajaxRequest('DELETE', target, payload, successCallback, failureCallback);
     },
         
@@ -70,7 +70,7 @@ var CMSPageRest = CMSPageRest || {
             ;        
         }else{
             // THROW AN EXCEPTION OR SOMETHING.
-            console.log(requestType+'? really? fuck off - use a valid request type. this is REST, you know.')
+            CMSPageCore.debug.log(requestType+'? Invalid valid request type. This is REST, you know.')
         }
     }
 
