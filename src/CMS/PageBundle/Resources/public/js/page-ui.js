@@ -32,13 +32,13 @@ var CMSPageUI = CMSPageUI || {
         var contentId = editable.id;
         var pageId = window.location.pathname;
 
-        console.log(content, contentId, pageId);
+        CMSPageCore.debug.log(content, contentId, pageId);
     },
     initialise: function() {     
     },
     getActiveEditorDetails: function(editable) {
         element = $('#' + editable.currentTarget.id);
-        console.log(element);
+        CMSPageCore.debug.log(element);
         var edObj = {
             'content': element.html(),
             'elementId': element.attr('id'),
@@ -49,13 +49,18 @@ var CMSPageUI = CMSPageUI || {
     // editor functions   
     setGlobalEditorDeactivationHandler: function(handlerFunction) {
         //Aloha.bind('aloha-editable-deactivated', handlerFunction);      
-        $('[contenteditable="true"]').blur(handlerFunction)
+        $('[contenteditable="true"]').blur(handlerFunction);
     },
     setEditorDeactivationHandler: function(editorInstance, handlerFunction) {
         editorInstance.bind('aloha-editable-deactivated', handlerFunction);
     },
     /** 
      * attach a toolbar to an element
+     * @param toolbarType selector for the toolbar to clone for this element. Use the 'consts' at start of file.
+     * @param element The element to attach the toolbar to
+     * @param eventTarget The target block this toolbar interacts with
+     * @param events Object containing events and callbacks to bind to the toolbar buttons
+     * @returns newToolbar The newly created and attached toolbar
      */
     attachToolbar: function(toolbarType, element, eventTarget, events) {           
         newToolbar = $("#" + toolbarType).clone();
