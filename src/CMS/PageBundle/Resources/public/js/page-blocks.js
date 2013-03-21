@@ -8,8 +8,9 @@
  */
 
 var BLOCK_TYPE_LAYOUT = 'Layout';
+var BLOCK_TYPE_HTML = 'HTML';
 
-var CMSPageBlocks = CMSPageBlocks || {
+var CMSPageBlocks = CMSPageBlocks ||{
     // properties
     
     // functions
@@ -17,7 +18,10 @@ var CMSPageBlocks = CMSPageBlocks || {
         CMSPageCore.rest.get(
                 BLOCK_URI + blockID,
                 function(response) {
-                    responseHandler(blockID, response);
+                    var content = new Content(response.content);
+                    var block = new Block(response);
+                    block.set('content', content);
+                    responseHandler(block);
                 }
         );
 
@@ -58,8 +62,8 @@ var CMSPageBlocks = CMSPageBlocks || {
         return blockDetails;
     },
             
-    displayBlockInfo: function(blockID, blockJSON){
-        CMSPageCore.debug.log(blockJSON);
+    displayBlockInfo: function(block){        
+        CMSPageCore.debug.log(block);
     },
     
     // event handlers

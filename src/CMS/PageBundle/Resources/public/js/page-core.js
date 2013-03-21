@@ -27,33 +27,24 @@ var CMSPageCore = CMSPageCore || {
 
 
     // functions
-    init: function() {
+    init: function() {        
+        // instantiate the core objects.
         // this will also set the environment to development if we're on a development url
-        this.debug = CMSPageDebug.init();
-        
-        
+        this.debug = CMSPageDebug.init();              
         this.ui = CMSPageUI;
-        //this.ui.initialise();
-
         this.rest = CMSPageRest;
-
-        this.storage = CMSPageStorage;
-        //this.storage.initialise();
-        
+        this.storage = CMSPageStorage;      
         this.blocks = CMSPageBlocks;
-        
-        
-        this.blocks.restoreLocallyStoredChanges();
-
+               
         // set the editor deactivation handler to store blocks in localstorage.
         this.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);
 
         // attach default toolbars
         this.ui.attachDefaultToolbars();
 
-        this.debug.log('READY PLAYER ONE!');
+        this.blocks.restoreLocallyStoredChanges();
 
-        
+        this.debug.log('READY PLAYER ONE!');
 
     },
     
