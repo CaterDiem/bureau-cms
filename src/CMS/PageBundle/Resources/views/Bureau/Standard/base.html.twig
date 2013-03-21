@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/cmspage/js/aloha/css/aloha.css') }}" />                    
         <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/blokk/blokk.css') }}" />                    
 
-        {% stylesheets filter='?yui_css' output='css/compiled/main.css'                         
+        {% stylesheets filter='?yui_css' output='css/compiled/main.css'                                     
             '@CMSPageBundle/Resources/public/less/core.less'
          %}
         
@@ -251,10 +251,21 @@
     {% endjavascripts %}                
         
     
+    {% javascripts filter="?closure" output="js/compiled/cmspage-backbone.js"                          
+        '@CMSPageBundle/Resources/public/js/backbone/underscore.js'
+        '@CMSPageBundle/Resources/public/js/backbone/backbone.js'
+        '@CMSPageBundle/Resources/public/js/backbone/forms/backbone-forms.js'
+        '@CMSPageBundle/Resources/public/js/backbone/forms/templates/bootstrap.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}                
 
     
-    {% javascripts filter="?closure" output="js/compiled/cmspage-frontend.js"                  
+    {% javascripts filter="?closure" output="js/compiled/cmspage-frontend.js"                          
         '@CMSPageBundle/Resources/public/js/toolbar/jquery.toolbar.js'
+        '@CMSPageBundle/Resources/public/js/models/*'
+        '@CMSPageBundle/Resources/public/js/views/*'
+        '@CMSPageBundle/Resources/public/js/collections/*'
         '@CMSPageBundle/Resources/public/js/page-ui.js'
         '@CMSPageBundle/Resources/public/js/page-storage.js'
         '@CMSPageBundle/Resources/public/js/page-rest.js'
