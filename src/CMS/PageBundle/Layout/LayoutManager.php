@@ -64,10 +64,7 @@ class LayoutManager {
     public function convertPageToLayout(CMS\SharedBundle\Entity\Page $page){        
         $newBlockTree = $page->getRootBlock();
         
-        
-        
         $layout = new Layout();
-        
                 
         return TRUE;
     }

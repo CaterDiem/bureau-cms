@@ -14,12 +14,12 @@ var CMSPageBlocks = CMSPageBlocks ||{
     // properties
     
     // functions
-    getBlock: function(blockID, responseHandler) {
+    getBlock: function(block, responseHandler) {
         CMSPageCore.rest.get(
-                BLOCK_URI + blockID,
+                BLOCK_URI + block.id,
                 function(response) {
                     var content = new Content(response.content);
-                    var block = new Block(response);
+                    block.set(response);
                     block.set('content', content);
                     responseHandler(block);
                 }
@@ -53,12 +53,12 @@ var CMSPageBlocks = CMSPageBlocks ||{
             
     determineBlock: function(target){
         var block = $('#'+target);
-        var blockDetails = {
+        var blockDetails = new Block({
             id: block.attr('cms-block-id'), 
             name: block.attr('cms-block-name'), 
             type: block.attr('cms-block-type'), 
             editable: block.attr('cms-block-editable')
-        };
+        });
         return blockDetails;
     },
             
@@ -74,7 +74,7 @@ var CMSPageBlocks = CMSPageBlocks ||{
         
         var callback = CMSPageCore.blocks[event]; // fuck eval
         if(typeof callback === 'function') {
-            CMSPageCore.debug.log(event+' event for '+block.name);
+            CMSPageCore.debug.log(event+' event for '+block.get('name'));
             callback(block);
         }else{
             CMSPageCore.debug.log('No event handler for CMSPageCore.blocks.'+event);
@@ -89,7 +89,7 @@ var CMSPageBlocks = CMSPageBlocks ||{
         
     },
     info: function(block){
-        CMSPageCore.blocks.getBlock(block.id, CMSPageCore.blocks.displayBlockInfo);
+        CMSPageCore.blocks.getBlock(block, CMSPageCore.blocks.displayBlockInfo);
         
     },
     edit: function(block){
