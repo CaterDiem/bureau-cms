@@ -20,8 +20,9 @@ class BlockHandler{
     protected $template;
     
     protected $entityManager;
+    protected $pageManager;
     protected $engine;
-    protected $logger;
+    protected $logger;    
     protected $container;
     
     protected $renderedContent = "";
@@ -39,9 +40,14 @@ class BlockHandler{
         
     }
     /**
-     * Return an instance of a BlockHandler implementor, based on the blockType of the passed block.
+     * /**
+     * Return an instance of a BlockHandler implementor, based on the blockType of the passed block.        
      * @param \CMS\SharedBundle\Entity\Block $block
-     * @return \CMS\PageBundle\Block\handlerClass|boolean
+     * @param \CMS\SharedBundle\Entity\Template $template
+     * @param \Doctrine\ORM\EntityManager $em
+     * @param Container $container
+     * @param \Symfony\Bridge\Monolog\Logger $logger
+     * @return \CMS\PageBundle\Block\Handlers\handlerClass|boolean
      */
     public static function create(Block $block, Template $template, \Doctrine\ORM\EntityManager $em, $container, \Symfony\Bridge\Monolog\Logger $logger){
         $handlerType = $block->getType()->getName();
@@ -66,6 +72,7 @@ class BlockHandler{
                 'cssClasses' => $this->cssClasses,
                 'htmlAttributes' => $this->htmlAttributes,
                 'block' => $this->block,
+                'pageManager' => $this->pageManager,
                 'handler' => $this
             );
         return TRUE;
@@ -114,8 +121,9 @@ class BlockHandler{
         return FALSE;
     }
     
-    public function get_handler(Block $block, Template $template){
+    public function getHandler(Block $block, Template $template){
         $handler = BlockHandler::create($block, $template, $this->entityManager, $this->container, $this->logger);        
+        $handler->setPageManager($this->pageManager);
         return $handler;
     }
                     
@@ -131,6 +139,13 @@ class BlockHandler{
         return TRUE;
     }
     
+    public function setPageManager(\CMS\PageBundle\Page\PageManager $pageManager)
+    {
+        $this->pageManager = $pageManager;      
+        $this->setVariable('pageManager', $this->pageManager);
+        return TRUE;
+    }
+    
     /** 
      * Return the status of whether the current user can edit this block 
      * @return boolean Whether current user can edit this block or not
@@ -141,7 +156,7 @@ class BlockHandler{
         if($this->securityContext->isGranted('EDIT', $this->block) ){
             return TRUE;
         }
-        return TRUE;
+        return TRUE; // TODO: make this actually have a chance to be FALSE. IE: fix dis shit.
     }
     
     public function getContents(){}    

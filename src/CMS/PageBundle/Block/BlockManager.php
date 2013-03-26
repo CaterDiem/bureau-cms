@@ -19,6 +19,8 @@ class BlockManager {
     protected $block;
     protected $blockInstance;
     
+    protected $pageManager;
+    
     
     private $generatedContent;
     protected $isLoaded = FALSE;
@@ -30,6 +32,7 @@ class BlockManager {
         $this->block = FALSE;
         $this->generatedContent = FALSE;
         $this->blockContent = '';
+        $this->pageManager = FALSE;
         $this->logger = $logger;
         
     }
@@ -80,6 +83,10 @@ class BlockManager {
          return FALSE;
     }
     
+    public function setPageManager($pageManager){
+        $this->pageManager = $pageManager;
+        return TRUE;
+    }
     
     /**
      * Load the block
@@ -110,7 +117,8 @@ class BlockManager {
             // render all instances in this block. 
             foreach($this->block->getInstances() as $instance){
                 $blockHandler = $this->container->get('block_handler');
-                $instanceHandler = $blockHandler->get_handler($instance->getBlock(), $instance->getTemplate());                
+                $blockHandler->setPageManager($this->pageManager);
+                $instanceHandler = $blockHandler->getHandler($instance->getBlock(), $instance->getTemplate());                
                 if($instanceHandler->render()){
                     $this->generatedContent .= $instanceHandler->getRenderedContent();
                 }
@@ -132,7 +140,7 @@ class BlockManager {
     public function generateBlock(Block $block, \CMS\SharedBundle\Entity\Template $template){
         $generatedContent = "";
         $blockHandler = $this->container->get('block_handler');
-        $instanceHandler = $blockHandler->get_handler($block, $template);                
+        $instanceHandler = $blockHandler->getHandler($block, $template);                
         if($instanceHandler->render()){
             $generatedContent .= $instanceHandler->getRenderedContent();
         }

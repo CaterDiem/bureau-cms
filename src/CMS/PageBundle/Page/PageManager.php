@@ -3,15 +3,10 @@
 namespace CMS\PageBundle\Page;
 
 use CMS\PageBundle\Block\BlockManager;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Templating\EngineInterface;
-use Symfony\Bridge\Monolog\Logger;
-
 use CMS\SharedBundle\Entity\Page;
 use CMS\SharedBundle\Entity\PageRevision;
-use CMS\SharedBundle\Entity\PageCategory;
-use CMS\SharedBundle\Entity\Block;
-use CMS\SharedBundle\Entity\BlockRevision;
+use Doctrine\ORM\EntityManager;
+use Symfony\Bridge\Monolog\Logger;
 
 
 /**
@@ -47,6 +42,7 @@ class PageManager {
         if ($this->page) {         
             $this->currentRevision = $this->page->getCurrentRevision();
             if($this->currentRevision){
+                $this->blockManager->setPageManager($this); // set the page manager context for the BlockManager
                 return TRUE;
             }                        
         }
@@ -67,6 +63,19 @@ class PageManager {
      */
     public function isCached(){
         
+        return FALSE;
+    }
+    
+    /**
+     * Can the current user edit this page?
+     * 
+     * @return boolean
+     */
+    public function isEditable(){
+        $this->securityContext = $this->container->get('security.context');
+        if($this->securityContext->isGranted('EDIT', $this->page) ){
+            return TRUE;
+        }
         return FALSE;
     }
     

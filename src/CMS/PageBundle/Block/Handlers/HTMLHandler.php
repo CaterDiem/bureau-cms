@@ -10,8 +10,7 @@ namespace CMS\PageBundle\Block\Handlers;
 class HTMLHandler extends BlockHandler{
       
     public function render(){    
-                
-        
+                        
         $this->setVariable('content', $this->block->getContent()->getContent());
         
         $this->renderedContent = $this->engine->render(

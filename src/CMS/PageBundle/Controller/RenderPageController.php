@@ -31,9 +31,15 @@ class RenderPageController extends Controller {
 
         if($pageManager->isLoaded()){ 
             
-            if($pageManager->render()){                                        
-                
-                return $this->render($this->container->getParameter("default_template"), array('style' => $style, 'content' => $pageManager->getContent()));
+            if($pageManager->render()){                                                        
+                return $this->render(
+                    $this->container->getParameter("default_template"), 
+                    array(
+                        'style' => $style,
+                        'page' => $pageManager,
+                        'content' => $pageManager->getContent()
+                        )
+                );
             }else{
                 // something went wrong with rendering. throw exception?
                 $this->response->setStatusCode('500');
