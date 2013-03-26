@@ -29,7 +29,7 @@
 
         {% stylesheets filter='?yui_css' output='css/compiled/main.css'                                     
             '@CMSPageBundle/Resources/public/less/core.less'
-         %}
+        %}
         
         <link rel="stylesheet" href="{{ asset_url }}" />                 
         {% endstylesheets %}         
@@ -224,7 +224,6 @@
         </section>
         {% endblock mainPageContent %}
        
-        {% include 'CMSPageBundle:Default:layoutToolbar.html.twig' %}
         
                <!-- Le javascript
         ================================================== -->
@@ -261,28 +260,34 @@
     {% endjavascripts %}                
 
     
-    {% javascripts filter="?closure" output="js/compiled/cmspage-frontend.js"                          
-        '@CMSPageBundle/Resources/public/js/toolbar/jquery.toolbar.js'
-        '@CMSPageBundle/Resources/public/js/models/*'
-        '@CMSPageBundle/Resources/public/js/views/*'
-        '@CMSPageBundle/Resources/public/js/collections/*'
-        '@CMSPageBundle/Resources/public/js/page-ui.js'
-        '@CMSPageBundle/Resources/public/js/page-storage.js'
-        '@CMSPageBundle/Resources/public/js/page-rest.js'
-        '@CMSPageBundle/Resources/public/js/page-blocks.js'
-        '@CMSPageBundle/Resources/public/js/page-debug.js'
-        '@CMSPageBundle/Resources/public/js/page-core.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}                
+    {# add the toolbars and modal skeletons, interactive editing javascript stuff, etc #}
+
+        {% include 'CMSPageBundle:Default:interactiveEditExtras.html.twig' %}
+                
+        {% javascripts filter="?closure" output="js/compiled/cmspage-frontend.js"                          
+            '@CMSPageBundle/Resources/public/js/toolbar/jquery.toolbar.js'
+            '@CMSPageBundle/Resources/public/js/models/*'
+            '@CMSPageBundle/Resources/public/js/views/*'
+            '@CMSPageBundle/Resources/public/js/collections/*'
+            '@CMSPageBundle/Resources/public/js/page-ui.js'
+            '@CMSPageBundle/Resources/public/js/page-storage.js'
+            '@CMSPageBundle/Resources/public/js/page-rest.js'
+            '@CMSPageBundle/Resources/public/js/page-blocks.js'
+            '@CMSPageBundle/Resources/public/js/page-debug.js'
+            '@CMSPageBundle/Resources/public/js/page-core.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}                
         
         <script type="text/javascript">
             // get environment/debug state and initialise CMSPageCore.
             var CMS_ENVIRONMENT  = '{{ app.environment }}';
             var CMS_DEBUG_STATE = '{{ app.debug }}';
+            
 
             CMSPageCore.init();
         </script>   
+    
         
-        </body>
-    </html>
+    </body>
+</html>
