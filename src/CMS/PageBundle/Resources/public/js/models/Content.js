@@ -8,5 +8,11 @@
  */
 
 var Content = Backbone.Model.extend({
-    
+    schema: {
+        name: {type: 'Text', validators: ['required']},
+        created: 'Date',
+        updated: 'Date',
+        editor: {model: 'User'},
+        content: 'Text'
+    }
 });

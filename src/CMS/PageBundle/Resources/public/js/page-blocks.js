@@ -7,20 +7,25 @@
  * @date: 2012/02/19
  */
 
+var BLOCK_ALL_BLOCKS = '[cms-block="true"]';
 var BLOCK_TYPE_LAYOUT = 'Layout';
 var BLOCK_TYPE_HTML = 'HTML';
 
 var CMSPageBlocks = CMSPageBlocks ||{
     // properties
-    
+    BlockCollection: new Blocks(),
+            
     // functions
     getBlock: function(block, responseHandler) {
         CMSPageCore.rest.get(
                 BLOCK_URI + block.id,
                 function(response) {
+                    // update the block. TODO: Should this be done here? I expect most of this stuff will move to backbone's events eventually.                    
                     var content = new Content(response.content);
-                    block.set(response);
-                    block.set('content', content);
+                    block.set('content', content);                    
+                    block.set(response);                                        
+                    
+                    // call responseHandler for further processing.
                     responseHandler(block);
                 }
         );
@@ -35,10 +40,15 @@ var CMSPageBlocks = CMSPageBlocks ||{
                 }
         );
     },
+    // populate Blocks collection with initial blocks from the page.
+    populateInitialModels: function(){
+        $(BLOCK_ALL_BLOCKS).each(function(){
+            CMSPageCore.blocks.BlockCollection.add( CMSPageCore.blocks.determineBlock(this.id) );
+        });   
+    },
     // callback function for storing changed block to localstorage
     storeBlockChangesLocally: function(editable) {
-        editor = CMSPageCore.ui.getActiveEditorDetails(editable);
-        CMSPageCore.debug.log(editor);
+        editor = CMSPageCore.ui.getActiveEditorDetails(editable);      
         CMSPageCore.storage.put(editor.elementId, editor.content);
     },
     restoreLocallyStoredChanges: function() {
@@ -53,17 +63,32 @@ var CMSPageBlocks = CMSPageBlocks ||{
             
     determineBlock: function(target){
         var block = $('#'+target);
+        
+        if( typeof CMSPageCore.blocks.BlockCollection.get({id: block.attr('cms-block-id')}) != 'undefined'){            
+            return CMSPageCore.blocks.BlockCollection.get({id: block.attr('cms-block-id')});
+        }
+        
+        // first time a block is determined this will happen. 
         var blockDetails = new Block({
             id: block.attr('cms-block-id'), 
             name: block.attr('cms-block-name'), 
             type: block.attr('cms-block-type'), 
             editable: block.attr('cms-block-editable')
         });
+        
+        // add to collection
+        CMSPageCore.blocks.BlockCollection.add(blockDetails);
+        
         return blockDetails;
     },
             
     displayBlockInfo: function(block){        
-        CMSPageCore.debug.log(block);
+        var form = new Backbone.Form({
+            model: block
+        }).render();       
+        $('#cms-modal .modal-body').html(form.el);
+        $('#cms-modal #cms-modal-header').html(block.get('name'));
+        $('#cms-modal').modal();                
     },
     
     // event handlers
@@ -85,7 +110,7 @@ var CMSPageBlocks = CMSPageBlocks ||{
     moveUp: function(block){
         
     },
-    moveDown: function(target){
+    moveDown: function(block){
         
     },
     info: function(block){
