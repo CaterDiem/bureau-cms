@@ -532,18 +532,20 @@ legend, label {
 }
 
 .modal {
- 	.border-radius(1px);
+ 	.border-radius(6px);
 	border-top: solid 1px lighten(@grayDark, 5%);
+        border-bottom: solid 1px lighten(@grayDark, 5%);
 	background-color: @featureBackground;
 }
 
 .modal-header {
-	border-bottom: 1px solid @themePrimary;
+        .border-radius(6px 6px 0px 0px);
+	border-bottom: solid 2px lighten(@themePrimary, 25%);        	
 }
 
 .modal-footer {
-	background-color: @grayDark;
-	border-top: 1px solid @grayDark;
+	background-color: contrast(@featureBackground, lighten(@featureBackground, 10%), darken(@featureBackground, 10%));
+	border-top: solid 2px lighten(@themePrimary, 25%);        	
 	.border-radius(0 0 6px 6px);
 	.box-shadow(none);
 }
