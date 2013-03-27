@@ -1,6 +1,6 @@
 /* 
- * Block
- * Model for block data
+ * Blocks
+ * Collection of block models
  * 
  * @author: jtemplet
  * @version: 0.1
@@ -8,5 +8,6 @@
  */
 
 var Blocks = Backbone.Collection.extend({
-    model: Block
+    model: Block,
+    localStorage: new Backbone.LocalStorage("CMSPageCore.blocks.BlocksCollection") 
 });
