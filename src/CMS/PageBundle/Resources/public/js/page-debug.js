@@ -17,9 +17,11 @@ var CMSPageDebug = CMSPageDebug|| {
         return this;
     },
                            
-    log: function(message) {        
+    log: function() {        
         if(CMS_DEBUG_STATE == '1'){
-            console.log(message);
+            for(var i=0; i<arguments.length; i++){
+                console.log(arguments[i]);
+            }
         }else{
             return false;
         }
