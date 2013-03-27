@@ -28,7 +28,12 @@
         <a href="#" class="btn btn-small" cms-button-action="toolbar-popup-edit"><i class="icon-edit"></i> Edit</a>
         <a href="#" class="btn btn-small" cms-button-action="toolbar-popup-trash"><i class="icon-trash"></i> Delete</a>        
     </div>	
+       
 
+</section>
+
+<section class="hidden">
+{# templates for backbone models#}
 
 </section>
 <div id="cms-modal" class="modal hide fade">
@@ -40,7 +45,7 @@
         
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
+        <a href="#" class="btn" data-dismiss="modal" cms-modal-button="cancel">Close</a>
+        <a href="#" class="btn btn-primary" cms-modal-button="confirm">Save changes</a>        
     </div>
-</div>
+</div> 

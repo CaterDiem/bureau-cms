@@ -14,7 +14,7 @@ var BLOCK_TYPE_HTML = 'HTML';
 var CMSPageBlocks = CMSPageBlocks ||{
     // properties
     BlockCollection: new Blocks(),
-            
+             
     // functions
     getBlock: function(block, responseHandler) {
         CMSPageCore.rest.get(
@@ -22,7 +22,7 @@ var CMSPageBlocks = CMSPageBlocks ||{
                 function(response) {
                     // update the block. TODO: Should this be done here? I expect most of this stuff will move to backbone's events eventually.                    
                     var content = new Content(response.content);
-                    block.set('content', content);                    
+                    block.set('savedContent', content);                    
                     block.set(response);                                        
                     
                     // call responseHandler for further processing.
@@ -82,13 +82,23 @@ var CMSPageBlocks = CMSPageBlocks ||{
         return blockDetails;
     },
             
+    showModalForm: function(form, title, events){
+        $('#cms-modal .modal-body').html(form.el);
+        $('#cms-modal #cms-modal-header').html(title);
+        $('#cms-modal').modal();      
+        for(var ev in events){
+            CMSPageCore.debug.log(events[ev], ev, $('[cms-modal-button="'+ev+'"]'));
+            $('[cms-modal-button="'+ev+'"]').unbind('click').one('click', function(){ events[ev](); $('#cms-modal').modal('hide');} );
+        }
+        
+        return true;
+    },
+            
     displayBlockInfo: function(block){        
         var form = new Backbone.Form({
-            model: block
-        }).render();       
-        $('#cms-modal .modal-body').html(form.el);
-        $('#cms-modal #cms-modal-header').html(block.get('name'));
-        $('#cms-modal').modal();                
+            model: block,            
+        }).render();      
+        return CMSPageCore.blocks.showModalForm(form, block.get('name'));        
     },
     
     // event handlers
@@ -123,10 +133,22 @@ var CMSPageBlocks = CMSPageBlocks ||{
     add: function(block){
         // add events only supported for LAYOUT blocks.
         // TODO: add events probably supported for some others later on, like galleries.
-        if(block.type != BLOCK_TYPE_LAYOUT){
-            CMSPageCore.debug.log('Add event called for block '+block.id+':'+block.name+':'+block.type+'. Block is not a '+BLOCK_TYPE_LAYOUT+' block');
+        if(block.get('type') != BLOCK_TYPE_LAYOUT){
+            CMSPageCore.debug.log('Add event called for block '+block.get('id')+':'+block.get('name')+':'+block.get('type')+'. Block is not a '+BLOCK_TYPE_LAYOUT+' block');
             return false;
         }        
+        
+        // create form to collect new block information
+        newBlock = new Block();
+        newBlock.set('parent', block);
+        CMSPageCore.blocks.BlockCollection.add(newBlock);
+        newBlockForm = new Backbone.Form({
+            model: newBlock,
+            schema: newBlock.newBlockSchema,            
+            
+        }).render();
+        //newBlockForm.on('change')
+        return CMSPageCore.blocks.showModalForm(newBlockForm, 'Add a new block', {confirm: function(){ CMSPageCore.debug.log('what'); newBlockForm.commit(); } });
         
     },
     remove: function(block){

@@ -14,6 +14,12 @@ var Block = Backbone.Model.extend({
         updated: 'Date',
         content: {model: 'Content'},
         description: 'Text',
+        blockTemplate: {model: 'Template'}, // note that this actually lives in blockInstance in the DB. haxx!
+        template: _.template($('#cms-block-template').html())
+    },
+    newBlockSchema: {
+        name: {type: 'Text', validators: ['required']},        
+        description: 'Text',
         template: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!
     }
 });
