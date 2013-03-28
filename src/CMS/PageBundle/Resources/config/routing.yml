@@ -21,7 +21,7 @@ pages:
 templates:
   type: rest
   resource: CMS\PageBundle\Template\TemplateCRUDController
-
+  
 
 # standard routes
 

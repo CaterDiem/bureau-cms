@@ -184,7 +184,7 @@ class BlockManager {
      * @return type
      */
     public function getDeepClone(){
-        // recursively load and clone blocks.
+        // TODO: recursively load and clone blocks.
         return $blockClone;
     }
     
