@@ -28,7 +28,7 @@ templates:
 
 cms_page_view:
     pattern: /{pageSlug}/
-    defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index', style: 'core' }
+    defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index'}
     requirements:
       pageSlug: ".+"
            

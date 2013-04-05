@@ -40,10 +40,11 @@ var CMSPageUI = CMSPageUI || {
         element = $('#' + editable.currentTarget.id);
         CMSPageCore.debug.log(element);
         var edObj = {
-            'content': element.html(),
+            'content': element.children('.block-content').html(),
             'elementId': element.attr('id'),
             'blockId': element.attr('cms-block-id')
         };
+        CMSPageCore.debug.log(edObj);
         return edObj;
     },
     // editor functions   
@@ -66,13 +67,14 @@ var CMSPageUI = CMSPageUI || {
         newToolbar = $("#" + toolbarType).clone();
         newToolbar.attr('id', eventTarget + toolbarType);
         newToolbar.attr('cms-toolbar-target', element.id);
+        newToolbar.attr('cms-toolbar-type', toolbarType);
 
         // bind button events                    
         for (var ev in events) {            
             CMSPageCore.ui.bindToolbarEvent(newToolbar.children(ev), events[ev].event, events[ev].type, eventTarget, events[ev].callback); // most confusing line ever.            
         }
 
-        $(element).before(newToolbar);
+        $(element).prepend(newToolbar);
         return newToolbar;
     },
     /**
@@ -80,6 +82,8 @@ var CMSPageUI = CMSPageUI || {
      */
     attachPopupToolbar: function(toolbarType, triggerElement, eventTarget, events) {
         newToolbar = CMSPageCore.ui.attachToolbar(toolbarType, triggerElement, eventTarget, events);
+        
+        newToolbar.attr('cms-toolbar-type', toolbarType);
         
         // hide the new toolbar that attachToolbar just added to this element, as it'll be a popup. needs to be added to the page for the events to correctly bind.
         newToolbar.hide();

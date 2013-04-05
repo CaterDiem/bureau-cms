@@ -13,8 +13,10 @@
     {% if handler.blockIsEditable %}cms-block-editable="true"{% endif %}
     contenteditable=true
     >    
-    {% block content %}
-    {{ content|raw }}
-    {% endblock content %}
+    <div class="block-content"> 
+        {% block content %}
+            {{ content|raw }}
+        {% endblock content %}
+    </div>
 </div>
 {% endblock contentWrapper %}

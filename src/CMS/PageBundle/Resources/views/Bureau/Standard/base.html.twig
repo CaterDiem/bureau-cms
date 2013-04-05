@@ -19,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         {#<link rel="stylesheet" type="text/css" href="{{ asset("bundles/cmsshared/css/bureau-core.css") }}" /> #}
-        <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/css/core-ie.css" /><![endif]-->
+        {#[if lte IE 7]><link rel="stylesheet" type="text/css" href="/css/core-ie.css" /><![endif]#}
 
         {# le styles #}
         {% block stylesheets %}        
@@ -40,159 +40,125 @@
     <body>
 
         {% block mainNavbar %}
-        <!-- NAVBAR        
-        ================================================== -->
+        {# NAVBAR #}
         <div class="navbar-wrapper">
-            <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+            {# Wrap the .navbar in .container to center it within the absolutely positioned parent. #}
             <div class="container" id="main-nav" > 
 
                 <div class="navbar navbar-inverse">
                     <div class="navbar-inner">
-                        <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
                         <a class="brand" href="#">Defence Weather Services</a>
-                        <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
-                        <div class="nav-collapse collapse">
                         
-                            
-                            {#<ul class="nav">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li><a href="#about">About</a></li>
-                                <li><a href="#contact">Contact</a></li>
-                                <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
+                        <div class="nav-collapse collapse">                                                                            
+                            <ul class="nav">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                    <a href="#" title="Radar Images &amp; Loops" class="dropdown-toggle" data-toggle="dropdown">Radar <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
+                                        <li><a href="/defence/obs/radar/IDR834.loop.shtml" title="Amberley">Amberley</a></li>
+                                        <li><a href="/defence/obs/radar/IDR173.loop.shtml" title="Broome">Broome</a></li>
+                                        <li><a href="/defence/obs/radar/IDR403.loop.shtml" title="Canberra">Canberra</a> </li>
+                                        <li><a href="/defence/obs/radar/IDR193.loop.shtml" title="Cairns">Cairns</a></li>
+                                        <li><a href="/defence/obs/radar/IDR173.loop.shtml" title="Curtin">Curtin</a></li>
+                                        <li><a href="/defence/obs/radar/IDR884.loop.shtml" title="Darwin">Darwin</a></li>
+                                        <li><a href="/defence/obs/radar/IDR804.loop.shtml" title="East Sale">Bairnsdale</a></li>
+                                        <li><a href="/defence/obs/radar/IDR814.loop.shtml" title="Edinburgh">Edinburgh</a>  </li>
+                                        <li><a href="/defence/obs/radar/IDR914.loop.shtml" title="Fairburn">Fairburn</a>  </li>
+                                        <li><a href="/defence/obs/radar/IDR293.loop.shtml" title="Learmonth">Learmonth</a> </li>
+                                        <li><a href="/defence/obs/radar/IDR033.loop.shtml" title="Nowra">Nowra</a></li>
+                                        <li><a href="/defence/obs/radar/IDR864.loop.shtml" title="Oakey">Oakey</a></li>
+                                        <li><a href="/defence/obs/radar/IDR844.loop.shtml" title="Pearce">Pearce</a></li>
+                                        <li><a href="/defence/obs/radar/IDR854.loop.shtml" title="Richmond">Richmond</a></li>
+                                        <li><a href="/defence/obs/radar/IDR924.loop.shtml" title="Scherger">Scherger</a></li>
+                                        <li><a href="/defence/obs/radar/IDR473.loop.shtml" title="Shoalwater Bay">Shoalwater Bay</a>  </li>
+                                        <li><a href="/defence/obs/radar/IDR703.loop.shtml" title="Stirling">Stirling</a></li>
+                                        <li><a href="/defence/obs/radar/IDR874.loop.shtml" title="Tindal">Tindal</a></li>
+                                        <li><a href="/defence/obs/radar/IDR894.loop.shtml" title="Townsville">Townsville</a> </li>
+                                        <li><a href="/defence/obs/radar/IDR553.loop.shtml" title="Wagga">Wagga</a></li>
+                                        <li><a href="/defence/obs/radar/IDR824.loop.shtml" title="Williamtown">Williamtown</a></li>
+                                        <li><a href="/defence/obs/radar/IDR904.loop.shtml" title="Woomera">Woomera</a></li>
+                                        <li><a href="/defence/obs/radar/IDR493.loop.shtml" title="Yarrawonga">Yarrawonga</a></li>
+                                    </ul>
+                                </li>                                                	   
+
+                                <li class="dropdown">
+                                    <a href="#" title="Exercises" class="dropdown-toggle" data-toggle="dropdown">Satellite <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/defence/obs/satellite/aust_sat.shtml" title="Australia">Australia</a></li>
+                                        <li> <a href=" /cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65048.gif" title="Australian Tropics">Australian Tropics</a></li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65086.gif" title="Queensland">Queensland</a> </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65089.gif" title="Nthn Qld" style="text-indent: 5px;">- Nthn Qld</a> </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65030.gif" title="Central Qld" style="text-indent: 5px;">- Central Qld</a> </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65067.gif" title="Sthn Qld" style="text-indent: 5px;">- Sthn Qld</a> </li>
+                                        <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65067.gif" title="New South Wales">New South Wales</a></li>
+                                        <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65067.gif" title="Victoria">Victoria</a></li>
+                                        <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65037.gif" title="Victoria">Tasmania</a></li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65084.gif" title="South Australia">South Australia</a></li>
+                                        <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65084.gif" title="Western Australia">Western Australia</a></li>
+                                        <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65042.gif">- Northern WA</a></li>
+                                        <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65084.gif">- Southern WA</a> </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65042.gif" title="Northern Territory">Northern Territory</a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65032.gif" title="Top End" style="text-indent: 5px;">- Top End</a> </li>
+                                        <li> <a href=" /cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65079.gif" title="East Timor">East Timor</a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65068.gif" title="PNG">PNG</a>  </li>
+                                        <li> <a href="/gms/reg/tt9700.shtml" title="Solomon Islands">Solomon Islands</a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65091.gif" title="Indonesia">Indonesia</a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65070.gif" title="Malaysia">Malaysia</a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/gms/reg/IDE01106.gif" title="Asia Pacific">Asia Pacific</a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65093.gif" title="Sthn Ocean West">Sthn Ocean West</a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65063.gif" title="Sthn Ocean East">Sthn Ocean East</a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65066.gif" title="Pacific">Pacific</a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65095.gif" title="Middle East">Middle East </a>  </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65096.gif" title="Gulf" style="text-indent: 5px;">- Gulf</a> </li>
+                                        <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65094.gif" title="Afghanistan" style="text-indent: 5px;">- Afghanistan</a> </li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown">
+                                    <a href="#" title="Weather Analysis &amp; Forecast Charts" class="dropdown-toggle" data-toggle="dropdown">Charts <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-header">Australia</a></li>
+                                        <li><a href="/defence/forecasts/charts/dmsu_synoptic.shtml" title="Aust MSLP">Aust MSLP</a></li>
+                                        <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/IDG00074.gif" title="Aust 4-day MSLP">Aust 4-day MSLP</a></li>
+                                        <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.000.png+
+                                               /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.024.png+
+                                               /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.048.png+
+                                               /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.072.png+
+                                               /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.096.png+
+                                               /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.120.png+
+                                               /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.144.png+
+                                               /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.168.png" title="Aust 7-day">Aust 7-day</a></li>
+                                        <li><a href="/defence/forecasts/charts/charts.shtml" title="Aust Charts">Aust Charts</a></li>
+                                        <li><a href="/defence/forecasts/charts/trop.shtml" title="Aust Tropics">Aust Tropics</a></li>
+                                        <li><a href="/defence/forecasts/charts/pac.shtml" title="Pacific Charts">Pacific Charts</a></li>
                                         <li class="divider"></li>
-                                        <li class="nav-header">Nav header</li>
-                                        <li><a href="#">Separated link</a></li>
-                                        <li><a href="#">One more separated link</a></li>
+                                        <li class="nav-header">Indonesia</a></li>
+                                        <li><a href="/defence/forecasts/charts/indo-e_chrt.shtml" title="Eastern" style="text-indent: 5px;">- Eastern</a></li>
+                                        <li><a href="/defence/forecasts/charts/indo-w_chrt.shtml" title="Western" style="text-indent: 5px;">- Western</a></li>
+
+                                        <li class="divider"></li>
+                                        <li class="nav-header">Asia Pacific</a></li>
+                                        <li><a href="/defence/forecasts/charts/charts_seasia.shtml" title="SouthEast Asia">SouthEast Asia</a></li>
+                                        <li><a href="/defence/forecasts/charts/oth.shtml" title="Indian Ocean">Indian Ocean</a></li>
+                                        <li><a href="/defence/forecasts/charts/me_charts.shtml" title="Middle East">Middle East</a></li>
+                                        <li><a href="/defence/forecasts/charts/me_charts.shtml" title="SouthWest Asia">SouthWest Asia</a></li>
+                                        <li><a href="/defence/forecasts/marine/marine_charts.shtml" title="Marine Charts">Marine Charts</a></li>
                                     </ul>
                                 </li>
-                            </ul>
-                          #}      
-                        <ul class="nav">
-
-                            <li class="dropdown">
-                                <a href="#" title="Radar Images &amp; Loops" class="dropdown-toggle" data-toggle="dropdown">Radar <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/defence/obs/radar/IDR834.loop.shtml" title="Amberley">Amberley</a></li>
-                                    <li><a href="/defence/obs/radar/IDR173.loop.shtml" title="Broome">Broome</a></li>
-                                    <li><a href="/defence/obs/radar/IDR403.loop.shtml" title="Canberra">Canberra</a> </li>
-                                    <li><a href="/defence/obs/radar/IDR193.loop.shtml" title="Cairns">Cairns</a></li>
-                                    <li><a href="/defence/obs/radar/IDR173.loop.shtml" title="Curtin">Curtin</a></li>
-                                    <li><a href="/defence/obs/radar/IDR884.loop.shtml" title="Darwin">Darwin</a></li>
-                                    <li><a href="/defence/obs/radar/IDR804.loop.shtml" title="East Sale">Bairnsdale</a></li>
-                                    <li><a href="/defence/obs/radar/IDR814.loop.shtml" title="Edinburgh">Edinburgh</a>  </li>
-                                    <li><a href="/defence/obs/radar/IDR914.loop.shtml" title="Fairburn">Fairburn</a>  </li>
-                                    <li><a href="/defence/obs/radar/IDR293.loop.shtml" title="Learmonth">Learmonth</a> </li>
-                                    <li><a href="/defence/obs/radar/IDR033.loop.shtml" title="Nowra">Nowra</a></li>
-                                    <li><a href="/defence/obs/radar/IDR864.loop.shtml" title="Oakey">Oakey</a></li>
-                                    <li><a href="/defence/obs/radar/IDR844.loop.shtml" title="Pearce">Pearce</a></li>
-                                    <li><a href="/defence/obs/radar/IDR854.loop.shtml" title="Richmond">Richmond</a></li>
-                                    <li><a href="/defence/obs/radar/IDR924.loop.shtml" title="Scherger">Scherger</a></li>
-                                    <li><a href="/defence/obs/radar/IDR473.loop.shtml" title="Shoalwater Bay">Shoalwater Bay</a>  </li>
-                                    <li><a href="/defence/obs/radar/IDR703.loop.shtml" title="Stirling">Stirling</a></li>
-                                    <li><a href="/defence/obs/radar/IDR874.loop.shtml" title="Tindal">Tindal</a></li>
-                                    <li><a href="/defence/obs/radar/IDR894.loop.shtml" title="Townsville">Townsville</a> </li>
-                                    <li><a href="/defence/obs/radar/IDR553.loop.shtml" title="Wagga">Wagga</a></li>
-                                    <li><a href="/defence/obs/radar/IDR824.loop.shtml" title="Williamtown">Williamtown</a></li>
-                                    <li><a href="/defence/obs/radar/IDR904.loop.shtml" title="Woomera">Woomera</a></li>
-                                    <li><a href="/defence/obs/radar/IDR493.loop.shtml" title="Yarrawonga">Yarrawonga</a></li>
-                                </ul>
-                            </li>                                                	   
-
-                            <li class="dropdown">
-                                <a href="#" title="Exercises" class="dropdown-toggle" data-toggle="dropdown">Satellite <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/defence/obs/satellite/aust_sat.shtml" title="Australia">Australia</a></li>
-                                    <li> <a href=" /cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65048.gif" title="Australian Tropics">Australian Tropics</a></li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65086.gif" title="Queensland">Queensland</a> </li>
-
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65089.gif" title="Nthn Qld" style="text-indent: 5px;">- Nthn Qld</a> </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65030.gif" title="Central Qld" style="text-indent: 5px;">- Central Qld</a> </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65067.gif" title="Sthn Qld" style="text-indent: 5px;">- Sthn Qld</a> </li>
-
-                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65067.gif" title="New South Wales">New South Wales</a></li>
-                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65067.gif" title="Victoria">Victoria</a></li>
-                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65037.gif" title="Victoria">Tasmania</a></li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65084.gif" title="South Australia">South Australia</a></li>
-                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65084.gif" title="Western Australia">Western Australia</a></li>
-                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65042.gif">-
-                                            Northern WA</a></li>
-                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65084.gif">-
-                                            Southern WA</a> </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65042.gif" title="Northern Territory">Northern Territory</a>  </li>
-
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65032.gif" title="Top End" style="text-indent: 5px;">- Top End</a> </li>
-
-                                    <li> <a href=" /cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65079.gif" title="East Timor">East Timor</a>  </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65068.gif" title="PNG">PNG</a>  </li>
-                                    <li> <a href="/gms/reg/tt9700.shtml" title="Solomon Islands">Solomon Islands</a>  </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65091.gif" title="Indonesia">Indonesia</a>  </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65070.gif" title="Malaysia">Malaysia</a>  </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/gms/reg/IDE01106.gif" title="Asia Pacific">Asia Pacific</a>  </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65093.gif" title="Sthn Ocean West">Sthn Ocean West</a>  </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65063.gif" title="Sthn Ocean East">Sthn Ocean East</a>  </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65066.gif" title="Pacific">Pacific</a>  </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65095.gif" title="Middle East">Middle East </a>  </li>
-
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65096.gif" title="Gulf" style="text-indent: 5px;">- Gulf</a> </li>
-                                    <li> <a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/reg/IDJ65094.gif" title="Afghanistan" style="text-indent: 5px;">- Afghanistan</a> </li>
-
-                                </ul>
-                            </li>
-
-
-                            <li class="dropdown">
-                                <a href="#" title="Weather Analysis &amp; Forecast Charts" class="dropdown-toggle" data-toggle="dropdown">Charts <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-header">Australia</a></li>
-                                    <li><a href="/defence/forecasts/charts/dmsu_synoptic.shtml" title="Aust MSLP">Aust MSLP</a></li>
-                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/fwo/IDG00074.gif" title="Aust 4-day MSLP">Aust 4-day MSLP</a></li>
-                                    <li><a href="/cgi-bin/reg/dmsu/wrap_image?id=/charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.000.png+
-                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.024.png+
-                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.048.png+
-                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.072.png+
-                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.096.png+
-                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.120.png+
-                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.144.png+
-                                           /charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.168.png" title="Aust 7-day">Aust 7-day</a></li>
-                                    <li><a href="/defence/forecasts/charts/charts.shtml" title="Aust Charts">Aust Charts</a></li>
-                                    <li><a href="/defence/forecasts/charts/trop.shtml" title="Aust Tropics">Aust Tropics</a></li>
-                                    <li><a href="/defence/forecasts/charts/pac.shtml" title="Pacific Charts">Pacific Charts</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Indonesia</a></li>
-                                    <li><a href="/defence/forecasts/charts/indo-e_chrt.shtml" title="Eastern" style="text-indent: 5px;">- Eastern</a></li>
-                                    <li><a href="/defence/forecasts/charts/indo-w_chrt.shtml" title="Western" style="text-indent: 5px;">- Western</a></li>
-
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Asia Pacific</a></li>
-                                    <li><a href="/defence/forecasts/charts/charts_seasia.shtml" title="SouthEast Asia">SouthEast Asia</a></li>
-                                    <li><a href="/defence/forecasts/charts/oth.shtml" title="Indian Ocean">Indian Ocean</a></li>
-                                    <li><a href="/defence/forecasts/charts/me_charts.shtml" title="Middle East">Middle East</a></li>
-                                    <li><a href="/defence/forecasts/charts/me_charts.shtml" title="SouthWest Asia">SouthWest Asia</a></li>
-                                    <li><a href="/defence/forecasts/marine/marine_charts.shtml" title="Marine Charts">Marine Charts</a></li>
-                                    </ul>
-                                </li>
-
-
+                                
                                 <li><a href="/defence/forecasts/warnings_aus.shtml" title="Australian Warnings">Warnings</a></li>
                             </ul>                                
+                        </div>{#/.nav-collapse #}
+                    </div>{#/.navbar-inner #}
+                </div>{#/.navbar #}
 
-                        </div><!--/.nav-collapse -->
-                    </div><!-- /.navbar-inner -->
-                </div><!-- /.navbar -->
-
-            </div> <!-- /.container -->
-        </div><!-- /.navbar-wrapper -->
+            </div> {#/.container #}
+        </div>{#/.navbar-wrapper #}
        {% endblock mainNavbar %}
        {% block mainPageContent %}
         <section class="container"> 
@@ -200,7 +166,7 @@
             <li><a href="#content">Skip to main content</a></li>
         </ul>
 
-        <!-- Start: PageHeight -->
+        {#Start: PageHeight #}
         <div id="pageheight" class="container-fluid">
             <div id="pagewrap" class="row-fluid">
                 {% block contentWrapper %}
@@ -212,22 +178,25 @@
                     cms-block-name="{{ block.name|lower|replace({' ': '_'}) }}"    
                     cms-block-type="{{ type }}"
                     {% if handler.blockIsEditable %}cms-block-editable="true"{% endif %}
-                    >
-                    {% block content %}
-                    {{ content|raw }}
-                    {% endblock content %}
+                >
+                    <div class="block-content"> 
+                        {% block content %}
+                            {{ content|raw }}
+                        {% endblock content %}
+                    </div>
                 </section>
                 {% endblock contentWrapper %}        
             </div>
         </div>
-        <!-- End: PageHeight -->
+        {#End: PageHeight #}
         </section>
         {% endblock mainPageContent %}
        
+
         
-               <!-- Le javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
+               {#Le javascript
+        ================================================== #}
+        {#Placed at the end of the document so the pages load faster #}
         <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>               
         
     {% javascripts filter="?closure" output="js/compiled/defence.js"    
@@ -264,7 +233,12 @@
     {# add the toolbars and modal skeletons, interactive editing javascript stuff, etc #}
 
         {% include 'CMSPageBundle:Default:interactiveEditExtras.html.twig' %}
-                
+        
+        <section id="block-templates" class="hidden">
+            {# lack of wildcard importing in twig (understandably) prevents this from beng neater. TODO: consider loading these in a seperate include #}
+            {% include 'CMSPageBundle:Default:blockTemplates/html.html.twig' %}        
+        </section>
+                        
         {% javascripts filter="?closure" output="js/compiled/cmspage-frontend.js"                          
             '@CMSPageBundle/Resources/public/js/toolbar/jquery.toolbar.js'
             '@CMSPageBundle/Resources/public/js/models/*'
@@ -288,7 +262,6 @@
 
             CMSPageCore.init();
         </script>   
-    
         
     </body>
 </html>

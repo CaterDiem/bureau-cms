@@ -35,8 +35,7 @@ var CMSPageBlocks = CMSPageBlocks ||{
         CMSPageCore.rest.get(
                 BLOCK_INSTANCE_URI + blockInstanceID,
                 function(data) {
-                    $(".cms-page-editable").html(data.html);
-                    CMSPageCore.debug.log(data);
+                    $(".cms-page-editable").html(data.html);                    
                 }
         );
     },
@@ -53,9 +52,10 @@ var CMSPageBlocks = CMSPageBlocks ||{
     },
     restoreLocallyStoredChanges: function() {
         $(SELECTOR_EDITABLE_HTML_BLOCKS).each(function() {
-            blockContents = CMSPageCore.storage.get($(this).attr('id'));
+            
+            blockContents = CMSPageCore.storage.get($(this).attr('id'));            
             if (blockContents != null) {
-                $(this).html(blockContents);
+                $(this).children('.block-content').html(blockContents);
             }
 
         });
@@ -73,7 +73,8 @@ var CMSPageBlocks = CMSPageBlocks ||{
             id: block.attr('cms-block-id'), 
             name: block.attr('cms-block-name'), 
             type: block.attr('cms-block-type'), 
-            editable: block.attr('cms-block-editable')
+            editable: block.attr('cms-block-editable'),
+            element: block.attr('id')
         });
         
         // add to collection
@@ -142,13 +143,35 @@ var CMSPageBlocks = CMSPageBlocks ||{
         newBlock = new Block();
         newBlock.set('parent', block);
         CMSPageCore.blocks.BlockCollection.add(newBlock);
+        
+
+        
         newBlockForm = new Backbone.Form({
             model: newBlock,
             schema: newBlock.newBlockSchema,            
             
         }).render();
-        //newBlockForm.on('change')
-        return CMSPageCore.blocks.showModalForm(newBlockForm, 'Add a new block', {confirm: function(){ CMSPageCore.debug.log('what'); newBlockForm.commit(); } });
+        
+        return CMSPageCore.blocks.showModalForm(newBlockForm, 'Add a new block', {
+            confirm: function(){                 
+                newBlockForm.commit(); 
+                newBlockView = new BlockView({model: newBlockForm.model}); $('#'+newBlockForm.model.get('parent').get('element')).append(newBlockView.render().el); 
+                
+                var events = {};
+                events[LAYOUT_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+                events[LAYOUT_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+
+                toolbar = CMSPageCore.ui.attachToolbar(LAYOUT_TOOLBAR, newBlockView.$el,  newBlockView.$el.id, events);
+
+                // attach popup toolbar
+                var popupEvents = {};
+                popupEvents[MORE_OPTIONS_EDIT] = {event: 'edit', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+                popupEvents[MORE_OPTIONS_INFO] = {event: 'info', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+                popupEvents[MORE_OPTIONS_DELETE] = {event: 'remove', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+
+                popupToolbar = CMSPageCore.ui.attachPopupToolbar(EDITABLE_BLOCK_TOOLBAR_POPUP, toolbar.children(LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON), toolbar.attr('cms-toolbar-target'), popupEvents);
+        }
+    });
         
     },
     remove: function(block){
