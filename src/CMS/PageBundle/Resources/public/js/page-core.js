@@ -36,13 +36,13 @@ var CMSPageCore = CMSPageCore || {
         this.storage = CMSPageStorage;      
         this.blocks = CMSPageBlocks;
                
+        // init block things.
+        this.blocks.restoreLocallyStoredChanges();
+        this.blocks.populateInitialBlocksFromPage();
+                       
         // set the editor deactivation handler to store blocks in localstorage.
         this.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);
 
-        // attach default toolbars
-        //this.ui.attachDefaultToolbars();
-
-        this.blocks.restoreLocallyStoredChanges();
 
         this.debug.log('READY PLAYER ONE!');
 
