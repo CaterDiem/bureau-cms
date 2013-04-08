@@ -12,7 +12,7 @@ var BlockView = Backbone.View.extend({
     template: _.template($('[cms-template-for=block]').html()),
     
     events: {
-      "mouseover":  "showToolbar",
+      "mouseenter":  "showToolbar",
       "mouseleave": "hideToolbar",
       "click #clear-completed": "clearCompleted",
       "click #toggle-all": "toggleAllComplete"
@@ -21,9 +21,9 @@ var BlockView = Backbone.View.extend({
         this.listenTo(this.model, 'change', this.render);
         this.listenTo(this.model, 'destroy', this.remove);
     },
-    render: function() {
-        CMSPageCore.debug.log(this.$el.html(this.template({data: this.model.toJSON()})));
-        CMSPageCore.debug.log("Rendering block: "+this.model.name+this.model.id);
+    render: function() {        
+        this.$el.html(this.template({data: this.model.toJSON()}));
+        CMSPageCore.debug.log("Rendering block: "+this.model.get('name')+this.model.get('id'));
         return this;
     },
     remove: function() {

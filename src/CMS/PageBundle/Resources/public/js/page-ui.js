@@ -38,13 +38,12 @@ var CMSPageUI = CMSPageUI || {
     },
     getActiveEditorDetails: function(editable) {
         element = $('#' + editable.currentTarget.id);
-        CMSPageCore.debug.log(element);
+        
         var edObj = {
             'content': element.children('.block-content').html(),
             'elementId': element.attr('id'),
             'blockId': element.attr('cms-block-id')
-        };
-        CMSPageCore.debug.log(edObj);
+        };        
         return edObj;
     },
     // editor functions   
@@ -66,7 +65,7 @@ var CMSPageUI = CMSPageUI || {
     attachToolbar: function(toolbarType, element, eventTarget, events) {           
         newToolbar = $("#" + toolbarType).clone();
         newToolbar.attr('id', eventTarget + toolbarType);
-        newToolbar.attr('cms-toolbar-target', element.id);
+        newToolbar.attr('cms-toolbar-target', eventTarget);
         newToolbar.attr('cms-toolbar-type', toolbarType);
 
         // bind button events                    

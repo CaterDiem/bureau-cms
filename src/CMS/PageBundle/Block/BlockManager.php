@@ -105,7 +105,7 @@ class BlockManager {
     }
             
     /**
-     * Generate this block as a html fragment. 
+     * Generate this  block as a html fragment. Should only be called on a rootblock, though this isn't enforced. It will assume this is a rootblock though, and treat it as such.
      * 
      * @return boolean Whether the content for this block has been successfully generated or not
      */

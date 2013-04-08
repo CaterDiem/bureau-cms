@@ -40,7 +40,7 @@ var CMSPageCore = CMSPageCore || {
         this.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);
 
         // attach default toolbars
-        this.ui.attachDefaultToolbars();
+        //this.ui.attachDefaultToolbars();
 
         this.blocks.restoreLocallyStoredChanges();
 
