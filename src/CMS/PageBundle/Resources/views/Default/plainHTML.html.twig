@@ -13,7 +13,7 @@
     {% if handler.blockIsEditable %}cms-block-editable="true"{% endif %}
     contenteditable=true
     >    
-    <div class="block-content"> 
+    <div class="block-content" cms-content-for="{{ block.name|lower|replace({' ': '_'}) }}{{ block.id }}"> 
         {% block content %}
             {{ content|raw }}
         {% endblock content %}

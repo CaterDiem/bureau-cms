@@ -49,6 +49,18 @@ class PageManager {
         return FALSE;
     }
     
+    public function loadById($pageId) {
+        $this->page = $this->em->getRepository('CMSSharedBundle:Page')->findOneById($pageId);
+        if ($this->page) {         
+            $this->currentRevision = $this->page->getCurrentRevision();
+            if($this->currentRevision){
+                $this->blockManager->setPageManager($this); // set the page manager context for the BlockManager
+                return TRUE;
+            }                        
+        }
+        return FALSE;
+    }
+    
     public function isLoaded(){
         if($this->page){
             return TRUE;
@@ -106,6 +118,22 @@ class PageManager {
         }
         return FALSE;        
     }       
+    
+    public function getPage(){
+        if($this->isLoaded()){
+            return $this->page;
+        }
+        
+        return FALSE;
+    }
+    
+    public function getRootBlock(){
+        if($this->isLoaded()){
+            return $this->currentRevision->getRootBlock();
+        }
+        
+        return FALSE;
+    }
     
     public function getContent(){        
         return $this->generatedContent;

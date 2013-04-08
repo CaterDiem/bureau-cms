@@ -1,44 +1,3 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {# Bureau standard left-column template #}
-        {# author: adevans / AMDISS peeps. Bootstrap'd, HTML5'd and Twig'd by jtemplet #}
-
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="language" content="english" />
-        <title>{% block title %}Defence CMS{% endblock %}</title>
-        
-        <link rel="Schema.AGLS" href="http://www.naa.gov.au/recordkeeping/gov_online/agls/1.2" />
-        <meta name="DC.Publisher" content="corporateName=Bureau of Meteorology" />
-        <meta name="DC.Format" content="text/html" />
-        <meta name="DC.Coverage.jurisdiction" content="Commonwealth of Australia" />
-        <meta name="DC.Rights" scheme="URI" content="http://www.bom.gov.au/other/copyright.shtml" />
-        <meta name="DC.Language" scheme="RFC1766" content="en" />
-        <meta name="AGLS.Audience" scheme="BoM_audience list" content="All" />
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        {#<link rel="stylesheet" type="text/css" href="{{ asset("bundles/cmsshared/css/bureau-core.css") }}" /> #}
-        {#[if lte IE 7]><link rel="stylesheet" type="text/css" href="/css/core-ie.css" /><![endif]#}
-
-        {# le styles #}
-        {% block stylesheets %}        
-        <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />            
-        <link rel="stylesheet" href="{{ asset('bundles/cmspage/js/aloha/css/aloha.css') }}" />                    
-        <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/blokk/blokk.css') }}" />                    
-
-        {% stylesheets filter='?yui_css' output='css/compiled/main.css'                                     
-            '@CMSPageBundle/Resources/public/less/core.less'
-        %}
-        
-        <link rel="stylesheet" href="{{ asset_url }}" />                 
-        {% endstylesheets %}         
-        {% endblock stylesheets %}        
-       
-        <link rel="shortcut icon" href="/favicon.ico" />
-    </head>
-    <body>
-
         {% block mainNavbar %}
         {# NAVBAR #}
         <div class="navbar-wrapper">
@@ -179,7 +138,7 @@
                     cms-block-type="{{ type }}"
                     {% if handler.blockIsEditable %}cms-block-editable="true"{% endif %}
                 >
-                    <div class="block-content"> 
+                    <div class="block-content" cms-content-for="{{ block.name|lower|replace({' ': '_'}) }}{{ block.id }}"> 
                         {% block content %}
                             {{ content|raw }}
                         {% endblock content %}
@@ -261,7 +220,4 @@
             
 
             CMSPageCore.init();
-        </script>   
-        
-    </body>
-</html>
+        </script>           

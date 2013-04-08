@@ -36,7 +36,8 @@ class RenderPageController extends Controller {
                     $this->container->getParameter("default_template"), 
                     array(                        
                         'page' => $pageManager,
-                        'content' => $pageManager->getContent()
+                        'content' => $pageManager->getContent(),
+                        'rootblock' => $pageManager->getRootBlock()
                         )
                 );
             }else{
