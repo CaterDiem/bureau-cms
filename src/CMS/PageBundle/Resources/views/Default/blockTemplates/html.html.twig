@@ -10,8 +10,8 @@
     cms-block-name="<%= data.urlname ? data.urlname : data.name %>"
     cms-block-type="<%= data.type %>"
     cms-block-editable="<%= data.editable %>"
-    contenteditable=true
+    
 >                
-    <div class="block-content"><%= data.content %></div>
+    <div class="block-content" contenteditable=true><%= data.content %></div>
 </div>
 </script>
