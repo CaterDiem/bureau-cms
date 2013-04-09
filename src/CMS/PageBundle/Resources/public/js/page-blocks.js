@@ -14,7 +14,7 @@ var BLOCK_TYPE_HTML = 'HTML';
 
 var CMSPageBlocks = CMSPageBlocks || {
     // properties
-    BlockCollection: new Blocks(),
+    BlockCollection: new BlockCollection(),
     // functions
 
     // load a block from the server-side backend. 
@@ -43,6 +43,8 @@ var CMSPageBlocks = CMSPageBlocks || {
     },
     // populate Blocks collection with initial blocks from the page. then attach a view for the block to the element
     populateInitialBlocksFromPage: function() {
+        // fetch blocks from local storage
+        CMSPageCore.blocks.BlockCollection.fetch();
         // this loops through each twice. first time populates the BlockCollection. if the block was readded to the page now, all layout blocks would remove their children and shit would go bad.
         $(BLOCK_ALL_BLOCKS).each(function() {
             block = CMSPageCore.blocks.determineBlock(this.id);            
@@ -56,22 +58,6 @@ var CMSPageBlocks = CMSPageBlocks || {
             }
         });
 
-    },
-    // callback function for storing changed block to localstorage
-    storeBlockChangesLocally: function(editable) {
-        editor = CMSPageCore.ui.getActiveEditorDetails(editable);
-        CMSPageCore.debug.log('Storing block: '+editor.elementId+' with content: '+editor.content+' into local storage.')
-        CMSPageCore.storage.put(editor.elementId, editor.content);
-    },
-    restoreLocallyStoredChanges: function() {
-        $(SELECTOR_EDITABLE_HTML_BLOCKS).each(function() {
-
-            blockContents = CMSPageCore.storage.get($(this).attr('id'));
-            if (blockContents != null) {
-                $(this).children('[cms-content-for=' + $(this).attr('id') + ']').html(blockContents);
-            }
-
-        });
     },
     determineBlock: function(target) {        
         var block = $('#' + target);
@@ -93,8 +79,7 @@ var CMSPageBlocks = CMSPageBlocks || {
             id: block.attr('cms-block-id'),
             name: block.attr('cms-block-name'),
             type: block.attr('cms-block-type'),
-            editable: block.attr('cms-block-editable'),
-            parent: false,
+            editable: block.attr('cms-block-editable'),            
             element: block.attr('id')
         });
 
@@ -111,13 +96,14 @@ var CMSPageBlocks = CMSPageBlocks || {
         if (block.attr('cms-root-block') != 'true') { // not the rootblock           
             parent = $("#" + newBlock.get('element')).parents('[cms-block]').first();
 
-            parentBlock = CMSPageCore.blocks.determineBlock(parent.attr('id'));            
-            newBlock.set('parent', parentBlock);
-
+            parentBlock = CMSPageCore.blocks.determineBlock(parent.attr('id'));
+            console.log(parentBlock);
+            newBlock.get('parent').set(parentBlock);
         }
 
         // add to collection
         CMSPageCore.blocks.BlockCollection.add(newBlock);
+        newBlock.save();
 
         return newBlock;
     },
@@ -181,7 +167,7 @@ var CMSPageBlocks = CMSPageBlocks || {
 
         // create form to collect new block information
         newBlock = new Block();
-        newBlock.set('parent', block);
+        //newBlock.get('parent').set(block);
         CMSPageCore.blocks.BlockCollection.add(newBlock);
 
 
@@ -203,14 +189,16 @@ var CMSPageBlocks = CMSPageBlocks || {
 
     },
     addBlockToPage: function(block) {
-        CMSPageCore.debug.log('Adding block:' + block.get('name') + ' to page element: ' + block.get('parent').get('element'));
+        CMSPageCore.debug.log(block);
+        CMSPageCore.debug.log('Adding block:' + block.get('name') +
+                ' to page element: ' + block.get('parent').first().get('element'));
 
         newBlockView = new BlockView({model: block});
         // if element exists, replace it. otherwise append it to the parent block.
         if($('#' + block.get('element')).length > 0){
             $('#' + block.get('element')).replaceWith(newBlockView.render().el);
         }else{
-            $('#' + block.get('parent').get('element')).append(newBlockView.render().el);
+            $('#' + block.get('parent').first().get('element')).append(newBlockView.render().el);
         }
         
         console.log(newBlockView.$el.html());

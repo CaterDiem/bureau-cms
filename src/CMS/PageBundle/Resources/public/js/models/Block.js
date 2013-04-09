@@ -8,6 +8,7 @@
  */
 
 var Block = Backbone.Model.extend({
+  
     schema: {
         name: {type: 'Text', validators: ['required']},
         created: 'Date',
@@ -24,11 +25,27 @@ var Block = Backbone.Model.extend({
         cssClasses: '',
         urlname: '',
         type: 'html',
-        editable: 'true',
+        editable: 'true',        
     },
     newBlockSchema: {
         name: {type: 'Text', validators: ['required']},        
         description: 'Text',
         blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!
+    },
+    
+    initialize: function(){
+        
+        //var self = this;
+        this.set('parent', new BlockCollection(this.get('parent')));
+        this.set('children', new BlockCollection(this.get('children')));        
+        this.on('sync', this.onSync);
+        
+        
+    },        
+    onSync: function(){
+        // backbone.localStorage (on the collection) saving/sync turns our two collections into arrays as they're serialized. we still want these as collections, so undo that.
+        this.set('parent', new BlockCollection(this.get('parent')));
+        this.set('children', new BlockCollection(this.get('children')));        
     }
+    
 });

@@ -37,7 +37,7 @@ var CMSPageCore = CMSPageCore || {
         this.blocks = CMSPageBlocks;
                
         // init block things.
-        this.blocks.restoreLocallyStoredChanges();
+        //this.blocks.restoreLocallyStoredChanges();
         this.blocks.populateInitialBlocksFromPage();
                        
         // set the editor deactivation handler to store blocks in localstorage.

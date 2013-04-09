@@ -13,9 +13,8 @@ var BlockView = Backbone.View.extend({
     
     events: {
       "mouseenter":  "showToolbar",
-      "mouseleave": "hideToolbar",
-      "click #clear-completed": "clearCompleted",
-      "click #toggle-all": "toggleAllComplete"
+      "mouseleave": "hideToolbar",      
+      "blur .block-content" : "storeContentChanges"
     },
     initialize: function() {
         this.listenTo(this.model, 'change', this.render);
@@ -31,10 +30,14 @@ var BlockView = Backbone.View.extend({
     },
             
     showToolbar: function() {
-        this.$el.children('[cms-toolbar-type='+LAYOUT_TOOLBAR+']').show();
+        this.$el.find('[cms-toolbar-type='+LAYOUT_TOOLBAR+']').show();
     },
     hideToolbar: function() {
-        this.$el.children('[cms-toolbar-type='+LAYOUT_TOOLBAR+']').hide();
+        this.$el.find('[cms-toolbar-type='+LAYOUT_TOOLBAR+']').hide();
     },
+    storeContentChanges: function() {               
+        this.model.set('content', this.$el.find('.block-content').html());
+        this.model.save();
+    }
             
 });
