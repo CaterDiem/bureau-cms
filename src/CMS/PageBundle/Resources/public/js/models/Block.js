@@ -36,7 +36,7 @@ var Block = Backbone.Model.extend({
     initialize: function(){
         
         //var self = this;
-        this.set('parent', new BlockCollection(this.get('parent')));
+        this.set('parent', new BlockCollection(this.get('parent')));        
         this.set('children', new BlockCollection(this.get('children')));        
         this.on('sync', this.onSync);
         
@@ -46,6 +46,5 @@ var Block = Backbone.Model.extend({
         // backbone.localStorage (on the collection) saving/sync turns our two collections into arrays as they're serialized. we still want these as collections, so undo that.
         this.set('parent', new BlockCollection(this.get('parent')));
         this.set('children', new BlockCollection(this.get('children')));        
-    }
-    
+    }    
 });

@@ -15,6 +15,12 @@ var BLOCK_TYPE_HTML = 'HTML';
 var CMSPageBlocks = CMSPageBlocks || {
     // properties
     BlockCollection: new BlockCollection(),
+      
+            
+    init: function() {
+        this.populateInitialBlocksFromPage();                
+        return this;
+    },            
     // functions
 
     // load a block from the server-side backend. 
@@ -45,13 +51,21 @@ var CMSPageBlocks = CMSPageBlocks || {
     populateInitialBlocksFromPage: function() {
         // fetch blocks from local storage
         CMSPageCore.blocks.BlockCollection.fetch();
+        
         // this loops through each twice. first time populates the BlockCollection. if the block was readded to the page now, all layout blocks would remove their children and shit would go bad.
         $(BLOCK_ALL_BLOCKS).each(function() {
             block = CMSPageCore.blocks.determineBlock(this.id);            
         });
+        
         // second time adds it to the page.
         $(BLOCK_ALL_BLOCKS).each(function() {
-        if ($(this).attr('cms-root-block') != 'true') { // not the rootblock           
+            
+            if ($(this).attr('cms-root-block') == 'true') {                
+                console.log(CMSPageCore.blocks.determineBlock(this.id));
+                CMSPageCore.blocks.addChildBlocksToPage(CMSPageCore.blocks.determineBlock(this.id));
+            }
+            
+            if ($(this).attr('cms-root-block') != 'true') { // not the rootblock           
                 CMSPageCore.debug.log('Replacing: '+$(this).attr('cms-block-name')+'');
                 //$(this).remove();
                 CMSPageCore.blocks.addBlockToPage(block);
@@ -59,6 +73,13 @@ var CMSPageBlocks = CMSPageBlocks || {
         });
 
     },
+            
+    // add all child blocks from the collection to the page.
+    // TODO: this might need to be refactored if the way blocks are stored to pages change on the server
+    addChildBlocksToPage: function(block){
+        block.get('children').forEach(CMSPageCore.blocks.addBlockToPage);
+    },
+            
     determineBlock: function(target) {        
         var block = $('#' + target);
         if(block.length > 0){
@@ -66,8 +87,7 @@ var CMSPageBlocks = CMSPageBlocks || {
                 return CMSPageCore.blocks.BlockCollection.get({id: block.attr('cms-block-id')});
             }
 
-            // first time a block is determined this will happen. 
-
+            // first time a block is determined and doesn't exist in the BlockCollection it will be processed as a new block
             return CMSPageCore.blocks.addNewBlockFromPage(block);
         }
 
@@ -167,23 +187,22 @@ var CMSPageBlocks = CMSPageBlocks || {
 
         // create form to collect new block information
         newBlock = new Block();
-        //newBlock.get('parent').set(block);
+        // add block as the parent
+        newBlock.get('parent').set(block);        
         CMSPageCore.blocks.BlockCollection.add(newBlock);
-
-
-
+        
+        // create form based on the model, telling it to use the newBlockSchema instead of the standard block schema.
         newBlockForm = new Backbone.Form({
             model: newBlock,
             schema: newBlock.newBlockSchema,
         }).render();
-
+               
         return CMSPageCore.blocks.showModalForm(newBlockForm, 'Add a new block', {
             confirm: function() {
                 newBlockForm.commit();
                 CMSPageCore.blocks.addBlockToPage(newBlockForm.model);
             }
         });
-
     },
     remove: function(block) {
 
@@ -217,5 +236,8 @@ var CMSPageBlocks = CMSPageBlocks || {
         popupEvents[MORE_OPTIONS_DELETE] = {event: 'remove', type: 'click', callback: CMSPageCore.blocks.handleEvent};
 
         popupToolbar = CMSPageCore.ui.attachPopupToolbar(EDITABLE_BLOCK_TOOLBAR_POPUP, toolbar.children(LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON), toolbar.attr('cms-toolbar-target'), popupEvents);
+        
+        // now add its children
+        block.get('children').forEach(CMSPageCore.blocks.addBlockToPage);
     }
 };
