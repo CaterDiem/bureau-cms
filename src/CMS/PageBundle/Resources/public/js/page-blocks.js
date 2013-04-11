@@ -61,7 +61,7 @@ var CMSPageBlocks = CMSPageBlocks || {
         $(BLOCK_ALL_BLOCKS).each(function() {
             
             if ($(this).attr('cms-root-block') == 'true') {                
-                console.log(CMSPageCore.blocks.determineBlock(this.id));
+                
                 CMSPageCore.blocks.addChildBlocksToPage(CMSPageCore.blocks.determineBlock(this.id));
             }
             
@@ -117,7 +117,7 @@ var CMSPageBlocks = CMSPageBlocks || {
             parent = $("#" + newBlock.get('element')).parents('[cms-block]').first();
 
             parentBlock = CMSPageCore.blocks.determineBlock(parent.attr('id'));
-            console.log(parentBlock);
+            
             newBlock.get('parent').set(parentBlock);
         }
 
@@ -219,8 +219,6 @@ var CMSPageBlocks = CMSPageBlocks || {
         }else{
             $('#' + block.get('parent').first().get('element')).append(newBlockView.render().el);
         }
-        
-        console.log(newBlockView.$el.html());
         
         var events = {};
         events[LAYOUT_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};

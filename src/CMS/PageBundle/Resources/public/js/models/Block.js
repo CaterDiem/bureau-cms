@@ -8,7 +8,6 @@
  */
 
 var Block = Backbone.Model.extend({
-  
     schema: {
         name: {type: 'Text', validators: ['required']},
         created: 'Date',
@@ -17,7 +16,7 @@ var Block = Backbone.Model.extend({
         description: 'Text',
         blockTemplate: {model: 'Template'}, // note that this actually lives in blockInstance in the DB. haxx!        
     },
-    defaults: {        
+    defaults: {
         name: '',
         content: 'Insert content here.',
         description: '',
@@ -25,26 +24,45 @@ var Block = Backbone.Model.extend({
         cssClasses: '',
         urlname: '',
         type: 'html',
-        editable: 'true',        
+        editable: 'true',
     },
     newBlockSchema: {
-        name: {type: 'Text', validators: ['required']},        
+        name: {type: 'Text', validators: ['required']},
         description: 'Text',
         blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!
     },
-    
-    initialize: function(){
-        
+    initialize: function() {
+
         //var self = this;
-        this.set('parent', new BlockCollection(this.get('parent')));        
-        this.set('children', new BlockCollection(this.get('children')));        
+        this.set('parent', new BlockCollection(this.get('parent')));
+        this.set('children', new BlockCollection(this.get('children')));
         this.on('sync', this.onSync);
-        
-        
-    },        
-    onSync: function(){
+        this.on('change:parent', this.parentAdded, this);
+        this.on('change:child', this.childAdded, this);
+    },
+    onSync: function() {
         // backbone.localStorage (on the collection) saving/sync turns our two collections into arrays as they're serialized. we still want these as collections, so undo that.
         this.set('parent', new BlockCollection(this.get('parent')));
-        this.set('children', new BlockCollection(this.get('children')));        
-    }    
+        this.set('children', new BlockCollection(this.get('children')));
+    },
+    parentAdded: function(model) {
+        // this ensures the parent block recognises this as a child block to this block
+        parent = this.get('parent').first();
+        console.log(typeof parent);
+        if (typeof parent != 'undefined') {
+            CMSPageCore.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');
+            CMSPageCore.debug.log(this, model);
+            return parent.get('children').add(this);
+        }
+        return false;
+    },
+    childAdded: function() {
+        // this sets the parent of the child block to this block
+        child = this.get('children');
+        child.forEach(function(block) {
+            block.set('parent', this)
+        });
+        CMSPageCore.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');
+
+    }
 });
