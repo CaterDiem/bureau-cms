@@ -11,11 +11,8 @@ var BlockCollection = Backbone.Collection.extend({
     model: Block,
     localStorage: new Backbone.LocalStorage("CMSPageCore.blocks.BlocksCollection"),
     initialize: function(){        
-         //this.fetch(); // load blocks from local storage.         
-    },
-    // when blocks in collection are update, store block changes to local storage.
-    changed: function(){
-        this.save();
+         //this.fetch(); // load blocks from local storage.                  
     }
+    
     
 });

@@ -30,39 +30,27 @@ var Block = Backbone.Model.extend({
         name: {type: 'Text', validators: ['required']},
         description: 'Text',
         blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!
-    },
+    },    
     initialize: function() {
 
         //var self = this;
         this.set('parent', new BlockCollection(this.get('parent')));
         this.set('children', new BlockCollection(this.get('children')));
         this.on('sync', this.onSync);
-        this.on('change:parent', this.parentAdded, this);
-        this.on('change:child', this.childAdded, this);
+        //this.on('change:parent', this.parentAdded, this);
+        //this.on('change:child', this.childAdded, this);
     },
     onSync: function() {
-        // backbone.localStorage (on the collection) saving/sync turns our two collections into arrays as they're serialized. we still want these as collections, so undo that.
+        // backbone.localStorage (on the collection) saving/sync turns our two collections into arrays as they're serialized. we still want these as collections, so undo that.        
         this.set('parent', new BlockCollection(this.get('parent')));
         this.set('children', new BlockCollection(this.get('children')));
     },
-    parentAdded: function(model) {
-        // this ensures the parent block recognises this as a child block to this block
-        parent = this.get('parent').first();
-        console.log(typeof parent);
-        if (typeof parent != 'undefined') {
-            CMSPageCore.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');
-            CMSPageCore.debug.log(this, model);
-            return parent.get('children').add(this);
-        }
-        return false;
-    },
-    childAdded: function() {
-        // this sets the parent of the child block to this block
-        child = this.get('children');
-        child.forEach(function(block) {
-            block.set('parent', this)
-        });
-        CMSPageCore.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');
-
+    setParent: function(parent){
+        // this ensures the parent block recognises this as a child block to this block        
+        CMSPageCore.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');        
+        this.get('parent').set(parent);
+        //parent.get('children').add(this);
+        
+        return this;
     }
 });

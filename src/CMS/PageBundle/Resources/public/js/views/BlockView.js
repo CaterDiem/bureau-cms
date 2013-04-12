@@ -12,8 +12,8 @@ var BlockView = Backbone.View.extend({
     template: _.template($('[cms-template-for=block]').html()),
     
     events: {
-      "mouseenter":  "showToolbar",
-      "mouseleave": "hideToolbar",      
+      "mouseenter":  "setActive",
+      "mouseleave": "setInactive",      
       "blur .block-content" : "storeContentChanges"
     },
     initialize: function() {
@@ -21,19 +21,22 @@ var BlockView = Backbone.View.extend({
         this.listenTo(this.model, 'destroy', this.remove);
     },
     render: function() {        
-        this.$el.html(this.template({data: this.model.toJSON()}));
-        CMSPageCore.debug.log("Rendering block: "+this.model.get('name')+this.model.get('id'));
+        this.$el.html(this.template({data: this.model.toJSON()}));        
         return this;
     },
     remove: function() {
         return this;
     },
             
-    showToolbar: function() {
+    setActive: function() {
+        //CMSPageCore.debug.log(this.model.get('name')+': now active');
         this.$el.find('[cms-toolbar-type='+LAYOUT_TOOLBAR+']').show();
+        this.$el.addClass('cms-block-active');
     },
-    hideToolbar: function() {
+    setInactive: function() {
+        //CMSPageCore.debug.log(this.model.get('name')+': now inactive');        
         this.$el.find('[cms-toolbar-type='+LAYOUT_TOOLBAR+']').hide();
+        this.$el.removeClass('cms-block-active');
     },
     storeContentChanges: function() {               
         this.model.set('content', this.$el.find('.block-content').html());
