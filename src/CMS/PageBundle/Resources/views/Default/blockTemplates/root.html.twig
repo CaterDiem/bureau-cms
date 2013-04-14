@@ -1,7 +1,7 @@
-{# HTML Block template #}
+{# Root Block template #}
 {# author: jtemplet #}
 
-<script type="text/template" cms-template-for="html">
+<script type="text/template" cms-template-for="root">
 <div
     class="<%= data.cssClasses %>"    
     id="<%= data.name %><%= data.id %>"
@@ -11,6 +11,6 @@
     cms-block-type="<%= data.type %>"
     cms-block-editable="<%= data.editable %>"    
 >                
-    <div class="block-content" contenteditable=true><%= data.content %></div>
+    <div class="block-content"><%= data.content %></div>
 </div>
 </script>

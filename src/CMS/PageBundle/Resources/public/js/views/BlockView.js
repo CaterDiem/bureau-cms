@@ -9,7 +9,7 @@
 
 var BlockView = Backbone.View.extend({
     tag: 'div',
-    template: _.template($('[cms-template-for=block]').html()),
+    template: _.template($('[cms-template-for="html"]').html()),
     
     events: {
       "mouseenter":  "setActive",
@@ -19,6 +19,7 @@ var BlockView = Backbone.View.extend({
     initialize: function() {
         this.listenTo(this.model, 'change', this.render);
         this.listenTo(this.model, 'destroy', this.remove);
+        this.template = _.template($('[cms-template-for="'+this.model.get('type').toLowerCase()+'"]').html())
     },
     render: function() {        
         this.$el.html(this.template({data: this.model.toJSON()}));        
