@@ -194,6 +194,7 @@ var CMSPageBlocks = CMSPageBlocks || {
         return CMSPageCore.blocks.showModalForm(newBlockForm, 'Add a new block', {
             confirm: function() {
                 newBlockForm.commit();
+                CMSPageCore.blocks.BlockCollection.add(newBlockForm.model);
                 CMSPageCore.blocks.addBlockToPage(newBlockForm.model);
             }
         });
