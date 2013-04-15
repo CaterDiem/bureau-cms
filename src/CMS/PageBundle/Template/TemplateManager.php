@@ -86,8 +86,6 @@ class TemplateManager
         return $this->template;
     }
     
-    public 
-    
     public function render(){
         
     }
