@@ -174,8 +174,14 @@ class BlockManager {
         if($this->isLoaded() && $this->blockInstance instanceof \CMS\SharedBundle\Entity\BlockInstance){
             return $this->blockInstance;
         }
-        return FALSE;
-        
+        return FALSE;        
+    }
+    
+    public function getBlockChildren(){
+        if($this->isLoaded() && $this->blockInstance instanceof \CMS\SharedBundle\Entity\BlockInstance){
+            $this->blockInstance->getBlocks();
+        }
+        return FALSE;        
     }
     
     /**

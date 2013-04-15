@@ -20,13 +20,15 @@ class BlockCRUDController extends FOSRestController
     public function getBlockAction($id){
         $blockManager = $this->get('block_manager');
         if($blockManager->getById($id)){
-            $block = $blockManager->getBlock();            
+            $block = $blockManager->getBlock();
+            
             $response = array(
                 'id' => $block->getId(),
                 'name' => $block->getName(),
                 'created' => $block->getCreated(),
                 'updated' => $block->getUpdated(),                
                 'editor' => $block->getContent()->getEditor()->getUsername(),
+                'children' => $block->getInstances()->count(),
                 'content' => array(
                     'id' => $block->getContent()->getId(), 
                     'content' => $block->getContent()->getContent(),                    
@@ -56,7 +58,7 @@ class BlockCRUDController extends FOSRestController
     } // delete
 
     
-   public function getInstanceAction($id){
+   public function getBlockInstanceAction($id){
         $blockManager = $this->get('block_manager');
         if($blockManager->getByInstanceId($id)){
             $blockInstance = $blockManager->getBlockInstance();            
@@ -86,15 +88,65 @@ class BlockCRUDController extends FOSRestController
     } 
      
     
-    public function postInstanceAction(){
+    public function postBlockInstanceAction(){
         
     } // create
     
-    public function putInstanceAction($id){
+    public function putBlockInstanceAction($id){
         
     } // update
     
-    public function deleteInstanceAction($id){
+    public function deleteBlockInstanceAction($id){
         
     } // delete
+    
+    // block/{$id}/children responses.    
+    public function getBlockChildrenAction($id){
+        $blockManager = $this->get('block_manager');
+        if($blockManager->getById($id)){
+            $response = array();
+            $response = $this->recursivelyProcessChildren($blockManager->getBlock()->getInstances());
+            
+            $view = $this->view($response, 200);            
+                
+        }else{
+            $view = $this->view(FALSE, 404); 
+        }
+                        
+        return $this->handleView($view);           
+    } // get
+    
+    public function postBlockChildrenAction($id){
+        
+    } // create
+    
+    public function putBlockChildrenAction($id){
+        
+    } // update
+    
+    public function deleteBlockChildrenAction($id){
+        
+    } // delete
+    
+    protected function recursivelyProcessChildren($blockInstance){                
+        if($blockInstance){
+            foreach($blockInstance as $instance){
+                $block = $instance->getBlock();
+                $response = array(
+                    'id' => $block->getId(),
+                    'name' => $block->getName(),
+                    'created' => $block->getCreated(),
+                    'updated' => $block->getUpdated(),
+                    'editor' => $block->getContent()->getEditor()->getUsername(),
+                    'content' => array(
+                        'id' => $block->getContent()->getId(),
+                        'content' => $block->getContent()->getContent(),
+                    ),
+                );
+                $response['children'] = $this->recursivelyProcessChildren($block->getInstances());
+                return $response;
+            }
+        }
+        return FALSE;    
+    }
 }
