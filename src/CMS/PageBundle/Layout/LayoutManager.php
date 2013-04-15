@@ -48,6 +48,16 @@ class LayoutManager {
         }
         return FALSE;
     }
+        
+    public function loadById($layoutId) {
+        $this->layout = $this->em->getRepository('CMSSharedBundle:Layout')
+                ->findOneById($layoutId);
+        if ($this->layout) {         
+                return TRUE;
+        }
+        return FALSE;
+    }
+    
     
     public function isLoaded(){
         if($this->layout){
