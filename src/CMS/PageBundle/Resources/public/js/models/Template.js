@@ -1,4 +1,4 @@
-/* 
+/** 
  * Template
  * Model for template data
  * 
@@ -12,6 +12,6 @@ var Template = Backbone.Model.extend({
         name: {type: 'Text', validators: ['required']},
         created: 'Date',
         updated: 'Date',        
-        description: 'Text',        
+        description: 'Text'     
     }
 });

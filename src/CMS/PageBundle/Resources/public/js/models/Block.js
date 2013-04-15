@@ -1,4 +1,4 @@
-/* 
+/** 
  * Block
  * Model for block data
  * 
@@ -14,7 +14,7 @@ var Block = Backbone.Model.extend({
         updated: 'Date',
         content: {model: 'Content'},
         description: 'Text',
-        blockTemplate: {model: 'Template'}, // note that this actually lives in blockInstance in the DB. haxx!        
+        blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!        
     },
     defaults: {
         name: '',
@@ -24,7 +24,7 @@ var Block = Backbone.Model.extend({
         cssClasses: '',
         urlname: '',
         type: 'html',
-        editable: 'true',
+        editable: 'true'
     },
     newBlockSchema: {
         name: {type: 'Text', validators: ['required']},

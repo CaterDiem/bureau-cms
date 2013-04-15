@@ -137,7 +137,7 @@ var CMSPageBlocks = CMSPageBlocks || {
     },
     displayBlockInfo: function(block) {
         var form = new Backbone.Form({
-            model: block,
+            model: block
         }).render();
         return CMSPageCore.blocks.showModalForm(form, block.get('name'));
     },
@@ -188,7 +188,7 @@ var CMSPageBlocks = CMSPageBlocks || {
         // create form based on the model, telling it to use the newBlockSchema instead of the standard block schema.
         newBlockForm = new Backbone.Form({
             model: newBlock,
-            schema: newBlock.newBlockSchema,
+            schema: newBlock.newBlockSchema
         }).render();
                
         return CMSPageCore.blocks.showModalForm(newBlockForm, 'Add a new block', {

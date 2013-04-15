@@ -9,7 +9,6 @@
 
 var BlockView = Backbone.View.extend({
     tag: 'div',
-    template: _.template($('[cms-template-for="html"]').html()),
     
     events: {
       "mouseenter":  "setActive",
