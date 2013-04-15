@@ -1,0 +1,20 @@
+
+        
+# rest routes
+
+blocks:
+  type: rest
+  resource: CMS\PageBundle\Block\BlockCRUDController
+
+layouts:
+  type: rest
+  resource: CMS\PageBundle\Layout\LayoutCRUDController
+  
+pages:
+  type: rest
+  resource: CMS\PageBundle\Page\PageCRUDController
+  
+templates:
+  type: rest
+  resource: CMS\PageBundle\Template\TemplateCRUDController
+  

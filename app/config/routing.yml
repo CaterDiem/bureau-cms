@@ -4,8 +4,8 @@ system_main:
     pattern: /
     defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index' }
 
-CMSPageBundle:
-    resource: "@CMSPageBundle/Resources/config/routing.yml"
+CMSPageBundle:    
+    resource: "@CMSPageBundle/Resources/config/routing.yml"    
     prefix:   /cms/page/
 
 CMSSecurityBundle:

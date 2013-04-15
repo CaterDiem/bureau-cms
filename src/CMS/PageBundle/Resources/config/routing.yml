@@ -1,31 +1,9 @@
-
-        
-# rest routes
-
-blocks:
+#import rest routes
+cms_page_rest:
   type: rest
-  resource: CMS\PageBundle\Block\BlockCRUDController
-
-instances:
-  type: rest
-  resource: CMS\PageBundle\Block\BlockCRUDController
-  
-layouts:
-  type: rest
-  resource: CMS\PageBundle\Layout\LayoutCRUDController
-  
-pages:
-  type: rest
-  resource: CMS\PageBundle\Page\PageCRUDController
-  
-templates:
-  type: rest
-  resource: CMS\PageBundle\Template\TemplateCRUDController
-  
+  resource: "@CMSPageBundle/Resources/config/routing-rest.yml"    
 
 # standard routes
-
-
 cms_page_view:
     pattern: /{pageSlug}/
     defaults: { _controller: CMSPageBundle:RenderPage:view, pageSlug: 'index'}
