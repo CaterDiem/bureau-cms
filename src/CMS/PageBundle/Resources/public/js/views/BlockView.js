@@ -8,7 +8,8 @@
  */
 
 var BlockView = Backbone.View.extend({
-    tag: 'div',
+    //tagName: 'data-cms-block',
+    tagName: 'div',
     
     events: {
       "mouseenter":  "setActive",
@@ -31,12 +32,16 @@ var BlockView = Backbone.View.extend({
     setActive: function() {
         //CMSPageCore.debug.log(this.model.get('name')+': now active');
         this.$el.find('[cms-toolbar-type='+LAYOUT_TOOLBAR+']').show();
-        this.$el.addClass('cms-block-active');
+        if(this.model.get('type') != BLOCK_TYPE_ROOT){
+            this.$el.addClass('cms-block-active');
+        }
     },
     setInactive: function() {
         //CMSPageCore.debug.log(this.model.get('name')+': now inactive');        
         this.$el.find('[cms-toolbar-type='+LAYOUT_TOOLBAR+']').hide();
-        this.$el.removeClass('cms-block-active');
+        if(this.model.get('type') != BLOCK_TYPE_ROOT){
+            this.$el.removeClass('cms-block-active');
+        }
     },
     storeContentChanges: function() {               
         this.model.set('content', this.$el.find('.block-content').html());

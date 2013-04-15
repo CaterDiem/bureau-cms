@@ -74,6 +74,8 @@ var CMSPageUI = CMSPageUI || {
         }
 
         $(element).prepend(newToolbar);
+        newToolbar.hide();
+        
         return newToolbar;
     },
     /**
@@ -90,7 +92,7 @@ var CMSPageUI = CMSPageUI || {
         // add as popup on triggerElement
         newPopup = $(triggerElement).toolbar({
             content: '#' + newToolbar.attr('id'),
-            position: 'right',
+            position: 'bottom',
             hideOnClick: 'true'
         });
 
