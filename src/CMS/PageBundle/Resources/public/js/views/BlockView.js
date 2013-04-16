@@ -22,6 +22,7 @@ var BlockView = Backbone.View.extend({
         this.template = _.template($('[cms-template-for="'+this.model.get('type').toLowerCase()+'"]').html())
     },
     render: function() {        
+        CMSPageCore.debug.log('Rendering: '+this.model.get('name'));
         this.$el.html(this.template({data: this.model.toJSON()}));        
         return this;
     },

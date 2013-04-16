@@ -9,10 +9,10 @@
 
 var BlockCollection = Backbone.Collection.extend({
     model: Block,
+    comparator: 'sortOrder',
     localStorage: new Backbone.LocalStorage("CMSPageCore.blocks.BlocksCollection"),
     initialize: function(){        
          //this.fetch(); // load blocks from local storage.                  
-    }
-    
-    
+    }        
 });
+

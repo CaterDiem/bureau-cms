@@ -19,6 +19,7 @@ var CMSPageBlocks = CMSPageBlocks || {
       
             
     init: function() {
+        
         this.BlockCollection.fetch();
         this.populateInitialBlocksFromPage();                
         return this;
@@ -95,15 +96,19 @@ var CMSPageBlocks = CMSPageBlocks || {
             editable: block.attr('cms-block-editable'),            
             element: block.attr('id')
         });
-
+        
+        
         CMSPageCore.debug.log('Adding block:'+newBlock.get('name')+' to collection.')
-
+        // add to collection and save so that parent<->child relationship doesn't do silly things later on.
+        CMSPageCore.blocks.BlockCollection.add(newBlock);   
+        newBlock.save();
+        
         if (newBlock.get('type') == (BLOCK_TYPE_LAYOUT || BLOCK_TYPE_ROOT) ) {
             // for layout blocks don't set their contents as their contents, they're populated by their models.
             newBlock.set('content', '');
         } else {
             newBlock.set('content', block.children('[cms-content-for=' + block.attr('id') + ']').html());
-        }        
+        }  
 
         // determine and set parent block.        
         if (block.attr('cms-root-block') != 'true') { // not the rootblock           
@@ -114,11 +119,8 @@ var CMSPageBlocks = CMSPageBlocks || {
             newBlock.setParent(parentBlock);
         }
             
-        
-        // add to collection and save.
-        CMSPageCore.blocks.BlockCollection.add(newBlock);        
+        // save the new block 
         newBlock.save();        
-
 
         return newBlock;
     },
@@ -209,8 +211,11 @@ var CMSPageBlocks = CMSPageBlocks || {
                 
         $('#' + block.get('element')).replaceWith(newBlockView.render().el);
                 
-        // now add its children
-        block.get('children').forEach(CMSPageCore.blocks.addBlockToPage);
+        // now add its children        
+        console.log("start adding children");
+        
+        block.children.forEach(CMSPageCore.blocks.addBlockToPage);
+        console.log("end adding children");
     
     },
     addBlockToPage: function(block) {     
@@ -221,8 +226,9 @@ var CMSPageBlocks = CMSPageBlocks || {
             CMSPageCore.debug.log('Replacing block:' + block.get('name') +' on page.');
             $('#' + block.get('element')).replaceWith(newBlockView.render().el);
         }else{
-            CMSPageCore.debug.log('Adding block:' + block.get('name') +' to page element: ' + block.get('parent').first().get('element'));
-            $('#' + block.get('parent').first().get('element')).append(newBlockView.render().el);            
+            CMSPageCore.debug.log('Adding block:' + block.get('name') +
+                    ' to page element: ' + block.parent.get('element'));
+            $('#' + block.parent.get('element')).append(newBlockView.render().el);            
         }        
         
         var events = {};
@@ -247,9 +253,9 @@ var CMSPageBlocks = CMSPageBlocks || {
         popupToolbar = CMSPageCore.ui.attachPopupToolbar(popupToolbarType, toolbar.children(LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON), toolbar.attr('cms-toolbar-target'), popupEvents);
         
         // now add its children
-        children = block.get('children');
-        if(children.length > 0){
-            block.get('children').forEach(CMSPageCore.blocks.addBlockToPage);
+        
+        if(block.children.length > 0){
+            block.children.forEach(CMSPageCore.blocks.addBlockToPage);
         }
     }
 };

@@ -43,9 +43,12 @@ var SELECTOR_EDITABLE_LAYOUT_BLOCKS = '[cms-block-type="Layout"][cms-block-edita
         this.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);
 
         this.debug.log('READY PLAYER ONE!');
+        
+        
     };
     
     // editor functions
     CMSPageCore.attachEditor = function(element) {};
 
 }( window.CMSPageCore = window.CMSPageCore || {}, jQuery));
+

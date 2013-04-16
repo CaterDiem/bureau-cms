@@ -14,6 +14,7 @@ var Block = Backbone.Model.extend({
         updated: 'Date',
         content: {model: 'Content'},
         description: 'Text',
+        sortOrder: 'Number',
         blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!        
     },
     defaults: {
@@ -24,33 +25,48 @@ var Block = Backbone.Model.extend({
         cssClasses: '',
         urlname: '',
         type: 'html',
-        editable: 'true'
+        editable: 'true',
+        sortOrder: 0       
     },
     newBlockSchema: {
         name: {type: 'Text', validators: ['required']},
         description: 'Text',
         blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!
     },    
-    initialize: function() {
+    initialize: function(options) {
 
         //var self = this;
-        this.set('parent', new BlockCollection(this.get('parent')));
-        this.set('children', new BlockCollection(this.get('children')));
+        //console.log("loading kids for "+this.get('name'));
+        this.parent = null;
+        this.set('parent', parent);
+        this.children = new BlockCollection();
+        this.set('children', this.children);
+        //console.log("finished loading kids for "+this.get('name'));
         this.on('sync', this.onSync);
         //this.on('change:parent', this.parentAdded, this);
         //this.on('change:child', this.childAdded, this);
     },
+    parse: function(res){
+        console.log(res, this);
+        res.parent && this.parent; 
+        res.children && this.children.reset(res.children);
+        return res;
+    },
     onSync: function() {
         // backbone.localStorage (on the collection) saving/sync turns our two collections into arrays as they're serialized. we still want these as collections, so undo that.        
-        this.set('parent', new BlockCollection(this.get('parent')));
-        this.set('children', new BlockCollection(this.get('children')));
+        
+        this.parent = this.parent;//.reset(this.parent);
+        //this.children = this.children.reset(this.children);
     },
     setParent: function(parent){
         // this ensures the parent block recognises this as a child block to this block        
         CMSPageCore.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');        
-        this.get('parent').set(parent);
-        //parent.get('children').add(this);
-        
+        this.parent = parent;
+        this.set('parent', parent);
+        parent.children.add(this);  // this causes the object to be persisted to the parent's blockcollection before it's in the global one. then it's not stored properly enough for shit.
+        parent.get('children').add(this);
+        //parent.save();
+        console.log(this);
         return this;
-    }
+    }    
 });
