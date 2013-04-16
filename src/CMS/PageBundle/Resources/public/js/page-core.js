@@ -22,12 +22,11 @@ var TEMPLATE_URI = 'cms/page/templates/';
 var SELECTOR_EDITABLE_HTML_BLOCKS = '[cms-block-type="HTML"][cms-block-editable]';
 var SELECTOR_EDITABLE_LAYOUT_BLOCKS = '[cms-block-type="Layout"][cms-block-editable]';
 
-var CMSPageCore = CMSPageCore || {
+(function( CMSPageCore, $, undefined ) {
     // properties
 
-
     // functions
-    init: function() {        
+    CMSPageCore.init = function() {        
         // instantiate the core objects.
         // this will also set the environment to development if we're on a development url
         this.debug = CMSPageDebug.init();              
@@ -35,24 +34,18 @@ var CMSPageCore = CMSPageCore || {
         this.rest = CMSPageRest;
         this.storage = CMSPageStorage;      
         this.blocks = CMSPageBlocks;
-        
-               
+                       
         // init block things.
         // ensure server-generated blocks are in the BlockCollection        
         this.blocks.init();
         
-         
-                       
         // set the editor deactivation handler to store blocks in localstorage.
         this.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);
 
-
         this.debug.log('READY PLAYER ONE!');
-
-    },
+    };
     
     // editor functions
-    attachEditor: function(element) {
-    }
+    CMSPageCore.attachEditor = function(element) {};
 
-};
+}( window.CMSPageCore = window.CMSPageCore || {}, jQuery));
