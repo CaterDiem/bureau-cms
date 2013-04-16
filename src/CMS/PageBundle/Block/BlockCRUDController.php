@@ -56,9 +56,8 @@ class BlockCRUDController extends FOSRestController
     public function deleteBlockAction($id){
         
     } // delete
-
     
-   public function getBlockInstanceAction($id){
+   public function getInstanceAction($id){
         $blockManager = $this->get('block_manager');
         if($blockManager->getByInstanceId($id)){
             $blockInstance = $blockManager->getBlockInstance();            
@@ -88,15 +87,15 @@ class BlockCRUDController extends FOSRestController
     } 
      
     
-    public function postBlockInstanceAction(){
+    public function postInstanceAction(){
         
     } // create
     
-    public function putBlockInstanceAction($id){
+    public function putInstanceAction($id){
         
     } // update
     
-    public function deleteBlockInstanceAction($id){
+    public function deleteInstanceAction($id){
         
     } // delete
     
