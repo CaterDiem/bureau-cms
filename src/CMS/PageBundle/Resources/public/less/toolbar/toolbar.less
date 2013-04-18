@@ -285,6 +285,7 @@
 text-align: right;
 padding: 4px;
 border-bottom: 1px dotted @bureau-grey-light;
+position: absolute;
 }
 
 /* toolbars for inside the page */
@@ -309,13 +310,14 @@ border-bottom: 1px dotted @bureau-grey-light;
         .border-radius(1px);
 	height: 100%;
         > i {
-            margin-top: 5px;
-            margin-right: 6px;
-            height: 18px;
+            margin-top: 6px;
+            //margin-right: 6px;
+            //height: 18px;
         }             
         .tool-top &, .tool-bottom & {            
             height: 29px;
             float: left;
+            text-align: center;
             border-right: 1px solid #e2dfdf;
             border-left: 1px solid #9f9898;
             &:last-child:hover {
