@@ -31,9 +31,4 @@ CMS\SharedBundle\Entity\Layout:
             gedmo:
               timestampable:
                 on: update                        
-    oneToOne:
-        blockInstance:
-            targetEntity: BlockInstance
-            mappedBy: layout
-            orphanRemoval: false
     lifecycleCallbacks: {  }

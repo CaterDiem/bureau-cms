@@ -30,11 +30,13 @@ CMS\SharedBundle\Entity\Block:
             nullable: false
             gedmo:
               timestampable:
-                on: update                        
+                on: update     
     oneToMany:
         instances: 
             targetEntity: BlockInstance
-            mappedBy: parent            
+            mappedBy: parent  
+            orderBy:
+              sortOrder: asc     
         parents:
             targetEntity: BlockInstance
             mappedBy: block

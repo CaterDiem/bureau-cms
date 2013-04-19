@@ -13,9 +13,7 @@ CMS\SharedBundle\Entity\BlockInstance:
             type: integer
             unsigned: true
             nullable: true
-            column: sort_order        
-            gedmo:
-                - sortablePosition
+            column: sort_order                   
     manyToOne:
         parent:
             targetEntity: Block   
@@ -29,4 +27,5 @@ CMS\SharedBundle\Entity\BlockInstance:
             targetEntity: Block            
             inversedBy: parents
             orphanRemoval: true
+       
     lifecycleCallbacks: {  }
