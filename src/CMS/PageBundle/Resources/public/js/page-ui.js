@@ -140,6 +140,20 @@ var CMSPageUI = CMSPageUI || {
     },
     attachEditor: function(block) {
 
+    },
+            
+    showModalForm: function(form, title, events) {
+        $('#cms-modal .modal-body').html(form.el);
+        $('#cms-modal #cms-modal-header').html(title);
+        $('#cms-modal').modal();
+        for (var ev in events) {            
+            $('[cms-modal-button="' + ev + '"]').unbind('click').bind('click', function() {
+                events[ev]();
+                
+            });
+        }
+
+        return true;
     }
 
 

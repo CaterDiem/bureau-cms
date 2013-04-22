@@ -29,7 +29,7 @@ var CMSPageBlocks = CMSPageBlocks || {
     // load a block from the server-side backend. 
     getBlock: function(block, responseHandler) {
         CMSPageCore.rest.get(
-                BLOCK_URI + block.id,
+                BLOCK_URI +'/'+ block.id,
                 function(response) {
                     // update the block. TODO: Should this be done here? I expect most of this stuff will move to backbone's events eventually.                    
                     var content = new Content(response.content);
@@ -44,7 +44,7 @@ var CMSPageBlocks = CMSPageBlocks || {
     },
     getBlockInstance: function(blockInstanceID) {
         CMSPageCore.rest.get(
-                BLOCK_INSTANCE_URI + blockInstanceID,
+                BLOCK_INSTANCE_URI +'/'+ blockInstanceID,
                 function(data) {
                     $(".cms-page-editable").html(data.html);
                 }
@@ -124,24 +124,11 @@ var CMSPageBlocks = CMSPageBlocks || {
 
         return newBlock;
     },
-    showModalForm: function(form, title, events) {
-        $('#cms-modal .modal-body').html(form.el);
-        $('#cms-modal #cms-modal-header').html(title);
-        $('#cms-modal').modal();
-        for (var ev in events) {            
-            $('[cms-modal-button="' + ev + '"]').unbind('click').one('click', function() {
-                events[ev]();
-                $('#cms-modal').modal('hide');
-            });
-        }
-
-        return true;
-    },
     displayBlockInfo: function(block) {
         var form = new Backbone.Form({
             model: block
         }).render();
-        return CMSPageCore.blocks.showModalForm(form, block.get('name'));
+        return CMSPageCore.ui.showModalForm(form, block.get('name'));
     },
     // event handlers
 
@@ -193,7 +180,7 @@ var CMSPageBlocks = CMSPageBlocks || {
             schema: newBlock.newBlockSchema
         }).render();
                
-        return CMSPageCore.blocks.showModalForm(newBlockForm, 'Add a new block', {
+        return CMSPageCore.ui.showModalForm(newBlockForm, 'Add a new block', {
             confirm: function() {
                 newBlockForm.commit();
                 CMSPageCore.blocks.BlockCollection.add(newBlockForm.model);
