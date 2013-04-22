@@ -9,18 +9,6 @@
  * @date: 2012/02/06
  */
 
- // default to production. 
-var CMS_ENVIRONMENT = 'production';
-var CMS_REST_BASE_URL = '/web/';
-var CMS_DEBUG_STATE = '0';
-
-var BLOCK_URI = 'cms/page/blocks/';
-var BLOCK_INSTANCE_URI = 'cms/page/instances/';
-var PAGE_URI = 'cms/page/pages/';
-var TEMPLATE_URI = 'cms/page/templates/';
-
-var SELECTOR_EDITABLE_HTML_BLOCKS = '[cms-block-type="HTML"][cms-block-editable]';
-var SELECTOR_EDITABLE_LAYOUT_BLOCKS = '[cms-block-type="Layout"][cms-block-editable]';
 
 (function( CMSPageCore, $, undefined ) {
     // properties
@@ -34,6 +22,7 @@ var SELECTOR_EDITABLE_LAYOUT_BLOCKS = '[cms-block-type="Layout"][cms-block-edita
         this.rest = CMSPageRest;
         this.storage = CMSPageStorage;      
         this.blocks = CMSPageBlocks;
+        this.pages = CMSPagePages;
                        
         // init block things.
         // ensure server-generated blocks are in the BlockCollection        
