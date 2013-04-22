@@ -127,6 +127,11 @@ class PageManager {
         return FALSE;
     }
     
+    public function setPage(Page $page){
+        $this->page = $page;
+        return $this;
+    }
+    
     public function getRootBlock(){
         if($this->isLoaded()){
             return $this->currentRevision->getRootBlock();
@@ -139,12 +144,29 @@ class PageManager {
         return $this->generatedContent;
     }       
     
-    public function createInitialPageRevision(Page $page){
-        //$currentUser = $this->container->get('security.context')->getToken()->getUser();
-                
-        $pageRevision = new PageRevision();
-        $pageRevision->setRevision('1');
+    public function createPage($pageValues){        
+        $this->page = new Page();
+        if(array_key_exists('name', $pageValues)){
+            $this->page->setName($pageValues['name']);
+        }
+        
+        if(array_key_exists('slug', $pageValues)){
+            $this->page->setSlug($pageValues['slug']);
+        }
+        
+        $this->createInitialPageRevision($this->page);
+        
+        $this->em->persist($this->page);
+        $this->em->flush();
+        return $this;
+    }
+    
+    public function createInitialPageRevision($page){        
+        //$currentUser = $this->container->get('security.context')->getToken()->getUser();        
+        $pageRevision = new PageRevision();        
+        $pageRevision->setRevision('1');        
         $pageRevision->setRootBlock($this->blockManager->createRootBlock($page->getName()));
+        $pageRevision->setPublishApproved(FALSE);
         //$pageRevision->setEditor($currentUser);
         $this->em->persist($pageRevision);
         $page->setCurrentRevision($pageRevision);

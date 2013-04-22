@@ -25,15 +25,30 @@ class PageCRUDController extends FOSRestController
         return $this->handleView($view);            
     }
     
-    public function postPageAction(){
+    public function postPagesAction(){        
+        $request = $this->get('request');
+        //var_dump($request->request->all());
+        
+        $pageManager = $this->get('PageManager');
+        $pageManager->createPage($request->request->all());
+        $page = $pageManager->getPage();
+        
+        $response = array(        
+            'id' => $page->getId(),       
+            'name' => $page->getName(),
+            'slug' => $page->getSlug()
+        );
+        $view = $this->view($response, 200);            
+        
+        return $this->handleView($view);
         
     }
     
-    public function putPageAction(){
+    public function putPagesAction(){
         
     }
     
-    public function deletePageAction(){
+    public function deletePagesAction(){
         
     }    
 }
