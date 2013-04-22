@@ -8,5 +8,16 @@
  */
 
 var Page = Backbone.Model.extend({
-    
+     schema: {
+        name: {type: 'Text', validators: ['required']},
+        created: 'Date',
+        updated: 'Date',
+        slug: {model: 'Content'},                        
+    },
+    defaults: {        
+    },    
+    newPageSchema: {
+        name: {type: 'Text', validators: ['required']},
+        slug: {type: 'Text', validators: ['required']},        
+    }
 });

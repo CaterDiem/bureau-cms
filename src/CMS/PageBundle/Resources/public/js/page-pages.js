@@ -1,54 +1,64 @@
 /* 
- * CMSPageCore
- * Core functionality for the Page and Block editor. 
+ * CMSPagePages
+ * Core module for Pages
  * 
- * Why's this called Core? Naming things sucks.
+ *
  * 
  * @author: jtemplet
  * @version: 0.1
- * @date: 2012/02/06
+ * @date: 2013/04/22
  */
 
- // default to production. 
-var CMS_ENVIRONMENT = 'production';
-var CMS_REST_BASE_URL = '/web/';
-var CMS_DEBUG_STATE = '0';
-
-var BLOCK_URI = 'cms/page/blocks/';
-var BLOCK_INSTANCE_URI = 'cms/page/instances/';
-var PAGE_URI = 'cms/page/pages/';
-var TEMPLATE_URI = 'cms/page/templates/';
-
-var SELECTOR_EDITABLE_HTML_BLOCKS = '[cms-block-type="HTML"][cms-block-editable]';
-var SELECTOR_EDITABLE_LAYOUT_BLOCKS = '[cms-block-type="Layout"][cms-block-editable]';
-
-(function( CMSPageCore, $, undefined ) {
+(function(CMSPagePages, $, undefined) {
     // properties
 
     // functions
-    CMSPageCore.init = function() {        
-        // instantiate the core objects.
-        // this will also set the environment to development if we're on a development url
-        this.debug = CMSPageDebug.init();              
-        this.ui = CMSPageUI;
-        this.rest = CMSPageRest;
-        this.storage = CMSPageStorage;      
-        this.blocks = CMSPageBlocks;
-                       
-        // init block things.
-        // ensure server-generated blocks are in the BlockCollection        
-        //this.blocks.init();
-        
-        // set the editor deactivation handler to store blocks in localstorage.
-        this.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);
+    CMSPagePages.init = function() {
+    };
 
-        this.debug.log('READY PLAYER ONE!');
-        
+    CMSPagePages.add = function() {    
+       
+        // create form to collect new page information
+        page = new Page();
+        page.urlRoot = CMS_REST_BASE_URL+PAGE_URI ; // have to set this here, and not in model, as its not known til runtime
+                
+        // create form based on the model, telling it to use the newBlockSchema instead of the standard block schema.
+        newPageForm = new Backbone.Form({
+            model: page,
+            schema: page.newPageSchema
+        }).render();
+
+        return CMSPageCore.ui.showModalForm(newPageForm, 'Create a new page', {
+            confirm: function() {
+                results = newPageForm.validate();
+                if(results != null){
+                    // we have an error.                    
+                }else{
+                    newPageForm.commit();
+                    
+                    addPage(newPageForm.model);
+                    $('#cms-modal').modal('hide');
+                }
+            }
+        });
+    };
+
+    CMSPagePages.remove = function() {
         
     };
     
-    // editor functions
-    CMSPageCore.attachEditor = function(element) {};
+    function addPage(page){        
+        CMSPageCore.debug.log("Adding new page:"+page.get('name'));
+        page.save({
+            success: function(model, response, options){
+                console.log(model);
+                console.log('new page at: '+model.slug);
+            }
+        }); // push new page data to the server. 
+        
+    }
 
-}( window.CMSPageCore = window.CMSPageCore || {}, jQuery));
+
+
+}(window.CMSPagePages = window.CMSPagePages || {}, jQuery));
 
