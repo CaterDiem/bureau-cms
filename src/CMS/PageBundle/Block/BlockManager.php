@@ -3,6 +3,8 @@
 namespace CMS\PageBundle\Block;
 
 use CMS\SharedBundle\Entity\Block;
+use CMS\SharedBundle\Entity\BlockInstance;
+use CMS\SharedBundle\Entity\BlockType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Monolog\Logger;
 
@@ -13,6 +15,7 @@ use Symfony\Bridge\Monolog\Logger;
  */
 class BlockManager {
     
+    const DEFAULT_LAYOUT_TEMPLATE = "Standard Bureau Page";
     protected $em;
     protected $engine;
     
@@ -151,10 +154,27 @@ class BlockManager {
         return $this->generatedContent;        
     }
     
-    public function createRootBlock($name){
-        $block = new Block();
-        $block->setName("{$name}Root");
+    public function createRootBlock($name){        
+        $type = $this->em->getRepository('CMSSharedBundle:BlockType')->findOneByName('Layout');
+        // create root block
+        $block = new Block();        
+        $block->setName("{$name}Root");        
+        $block->setType($type);
         $this->em->persist($block);
+        
+        // create layout block to add to rootBlock
+        $layoutBlock = new Block();
+        $layoutBlock->setName("{$name}Layout");
+        $layoutBlock->setType($type);                
+        $this->em->persist($layoutBlock);
+        
+        // create instance, attach child, add parent.
+        $instance = new BlockInstance();
+        $instance->setParent($block);        
+        $instance->setBlock($layoutBlock);                               
+        $instance->setTemplate($this->em->getRepository('CMSSharedBundle:Template')->findOneByName(self::DEFAULT_LAYOUT_TEMPLATE));
+        $this->em->persist($instance);
+        
         return $block;               
     }
     
