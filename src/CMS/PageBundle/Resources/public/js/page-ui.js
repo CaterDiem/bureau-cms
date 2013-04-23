@@ -73,7 +73,9 @@ var CMSPageUI = CMSPageUI || {
             CMSPageCore.ui.bindToolbarEvent(newToolbar.children(ev), events[ev].event, events[ev].type, eventTarget, events[ev].callback); // most confusing line ever.            
         }
 
-        $(element).prepend(newToolbar);
+        CMSPageCore.debug.log(eventTarget+": toolbar attached.");
+        console.log($(element), element);
+        $(element).find('.block-toolbar').first().append(newToolbar);
         newToolbar.hide();
         
         return newToolbar;
