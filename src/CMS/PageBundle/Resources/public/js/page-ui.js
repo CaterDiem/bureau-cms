@@ -7,21 +7,20 @@
  * @date: 2012/02/06
  */
 
-var LAYOUT_TOOLBAR = "layout-toolbar";
-var LAYOUT_TOOLBAR_POPUP = "layout-toolbar-popup";
+var BLOCK_TOOLBAR = "block-toolbar";
+var BLOCK_TOOLBAR_POPUP = "block-toolbar-popup";
 var PAGE_TOOLBAR = "page-toolbar";
 
-var LAYOUT_TOOLBAR_POPUP = "layout-toolbar-popup";
 var EDITABLE_BLOCK_TOOLBAR_POPUP = "editable-block-toolbar-popup";
-
-var LAYOUT_TOOLBAR_MOVE_UP = '[cms-button-action=layout-move-up]';
-var LAYOUT_TOOLBAR_MOVE_DOWN = '[cms-button-action=layout-move-down]';
 var LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON = '[cms-button-action=layout-options]';
 
-var MORE_OPTIONS_EDIT = '[cms-button-action=toolbar-popup-edit]';
-var MORE_OPTIONS_INFO = '[cms-button-action=toolbar-popup-info]';
-var MORE_OPTIONS_DELETE = '[cms-button-action=toolbar-popup-trash]';
-var MORE_OPTIONS_ADD = '[cms-button-action=toolbar-popup-add]';
+var BLOCK_TOOLBAR_MOVE_UP = '[cms-button-action=block-move-up]';
+var BLOCK_TOOLBAR_MOVE_DOWN = '[cms-button-action=block-move-down]';
+
+var BLOCK_TOOLBAR_EDIT = '[cms-button-action=block-edit]';
+var BLOCK_TOOLBAR_INFO = '[cms-button-action=block-info]';
+var BLOCK_TOOLBAR_DELETE = '[cms-button-action=block-trash]';
+var BLOCK_TOOLBAR_ADD = '[cms-button-action=block-add]';
 
 var CMSPageUI = CMSPageUI || {
     // properties
@@ -63,20 +62,13 @@ var CMSPageUI = CMSPageUI || {
      * @returns newToolbar The newly created and attached toolbar
      */
     attachToolbar: function(toolbarType, element, eventTarget, events) {           
-        newToolbar = $("#" + toolbarType).clone();
-        newToolbar.attr('id', eventTarget + toolbarType);
-        newToolbar.attr('cms-toolbar-target', eventTarget);
-        newToolbar.attr('cms-toolbar-type', toolbarType);
-
+        newToolbar = $(element).find('.block-toolbar');
         // bind button events                    
         for (var ev in events) {            
             CMSPageCore.ui.bindToolbarEvent(newToolbar.children(ev), events[ev].event, events[ev].type, eventTarget, events[ev].callback); // most confusing line ever.            
         }
 
         CMSPageCore.debug.log(eventTarget+": toolbar attached.");
-        console.log($(element), element);
-        $(element).find('.block-toolbar').first().append(newToolbar);
-        newToolbar.hide();
         
         return newToolbar;
     },
@@ -104,35 +96,26 @@ var CMSPageUI = CMSPageUI || {
         // all the haxx.        
         $(SELECTOR_EDITABLE_HTML_BLOCKS).each(function() {            
             var events = {};
-            events[LAYOUT_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-            events[LAYOUT_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-            
-            toolbar = CMSPageCore.ui.attachToolbar(LAYOUT_TOOLBAR, this,  this.id, events);
-            
-            // attach popup toolbar
-            var popupEvents = {};
-            popupEvents[MORE_OPTIONS_EDIT] = {event: 'edit', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-            popupEvents[MORE_OPTIONS_INFO] = {event: 'info', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-            popupEvents[MORE_OPTIONS_DELETE] = {event: 'remove', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_ADD] = {event: 'add', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_EDIT] = {event: 'edit', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_INFO] = {event: 'info', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_DELETE] = {event: 'remove', type: 'click', callback: CMSPageCore.blocks.handleEvent};            
 
-            popupToolbar = CMSPageCore.ui.attachPopupToolbar(EDITABLE_BLOCK_TOOLBAR_POPUP, toolbar.children(LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON), toolbar.attr('cms-toolbar-target'), popupEvents);
+            toolbar = CMSPageCore.ui.attachToolbar(BLOCK_TOOLBAR, this,  this.id, events);            
         });
         
         $(SELECTOR_EDITABLE_LAYOUT_BLOCKS).each(function() {            
             var events = {};
-            events[LAYOUT_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-            events[LAYOUT_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_ADD] = {event: 'add', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_EDIT] = {event: 'edit', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_INFO] = {event: 'info', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+            events[BLOCK_TOOLBAR_DELETE] = {event: 'remove', type: 'click', callback: CMSPageCore.blocks.handleEvent};
             
-            toolbar = CMSPageCore.ui.attachToolbar(LAYOUT_TOOLBAR, this, this.id, events);
-            
-            // attach popup toolbar
-            var popupEvents = {};
-            popupEvents[MORE_OPTIONS_ADD] = {event: 'add', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-            popupEvents[MORE_OPTIONS_EDIT] = {event: 'edit', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-            popupEvents[MORE_OPTIONS_INFO] = {event: 'info', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-            popupEvents[MORE_OPTIONS_DELETE] = {event: 'remove', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-
-            popupToolbar = CMSPageUI.attachPopupToolbar(LAYOUT_TOOLBAR_POPUP, toolbar.children(LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON), toolbar.attr('cms-toolbar-target'), popupEvents);
+            toolbar = CMSPageCore.ui.attachToolbar(BLOCK_TOOLBAR, this, this.id, events);                       
         });
     },
     bindToolbarEvent: function(button, event, eventType, eventTarget, callback) {

@@ -4,14 +4,25 @@
 <script type="text/template" cms-template-for="layout">
 <div
     class="<%= data.cssClasses %>"      
-    id="<%= data.name %><%= data.id %>"
+    id="<%= data.name %>-<%= data.id %>"
     cms-block="true"                   
     cms-block-id="<%= data.id %>"
     cms-block-name="<%= data.urlname ? data.urlname : data.name %>"
     cms-block-type="<%= data.type %>"
     cms-block-editable="<%= data.editable %>"    
 >                
-<div class="block-toolbar"></div>
+    <div class="block-toolbar"
+        id="<%= data.name %>-<%= data.id %>-layout-toolbar" 
+        cms-toolbar-target="<%= data.name %>-<%= data.id %>" 
+        cms-toolbar-type="layout-toolbar"
+    >
+        <a href="#" class="btn btn-small" cms-button-action="block-move-up" title='move up'><i class="icon-arrow-up"></i></a>
+        <a href="#" class="btn btn-small" cms-button-action="block-move-down" title='move down'><i class="icon-arrow-down"></i></a>        
+        <a href="#" class="btn btn-small" cms-button-action="block-add" title="add block"><i class="icon-plus"></i></a>
+        <a href="#" class="btn btn-small" cms-button-action="block-info" title="details"><i class="icon-info-sign"></i></a>
+        <a href="#" class="btn btn-small" cms-button-action="block-edit" title="edit"><i class="icon-edit"></i></a>
+        <a href="#" class="btn btn-small" cms-button-action="block-trash" title="delete"><i class="icon-trash"></i></a>        
+    </div>
     <div class="block-content"><%= data.content %></div>
 </div>
 </script>

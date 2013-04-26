@@ -35,13 +35,11 @@ var Block = Backbone.Model.extend({
     },    
     initialize: function(options) {
 
-        //var self = this;
-        //console.log("loading kids for "+this.get('name'));
+        //var self = this;        
         this.parent = null;
         this.set('parent', parent);
         this.children = new BlockCollection();
-        this.set('children', this.children);
-        //console.log("finished loading kids for "+this.get('name'));
+        this.set('children', this.children);        
         this.on('sync', this.onSync);
         //this.on('change:parent', this.parentAdded, this);
         //this.on('change:child', this.childAdded, this);
@@ -65,7 +63,7 @@ var Block = Backbone.Model.extend({
         this.set('parent', parent);
         parent.children.add(this);  // this causes the object to be persisted to the parent's blockcollection before it's in the global one. then it's not stored properly enough for shit.
         parent.get('children').add(this);
-        //parent.save();
+        parent.save();
         console.log(this);
         return this;
     }    

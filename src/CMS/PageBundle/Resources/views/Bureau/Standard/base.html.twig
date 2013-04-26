@@ -131,14 +131,14 @@
                 {% block contentWrapper %}
                 <section
                     class="{{ cssClasses }}"    
-                    id="{{ block.name|lower|replace({' ': '_'}) }}{{ block.id }}"
+                    id="{{ block.name|lower|replace({' ': '_'}) }}-{{ block.id }}"
                     cms-block="true"
                     cms-block-id="{{ block.id }}"
                     cms-block-name="{{ block.name|lower|replace({' ': '_'}) }}"    
                     cms-block-type="{{ type }}"
                     {% if handler.blockIsEditable %}cms-block-editable="true"{% endif %}
                 >
-                    <div class="block-content" cms-content-for="{{ block.name|lower|replace({' ': '_'}) }}{{ block.id }}"> 
+                    <div class="block-content" cms-content-for="{{ block.name|lower|replace({' ': '_'}) }}-{{ block.id }}"> 
                         {% block content %}
                             {{ content|raw }}
                         {% endblock content %}

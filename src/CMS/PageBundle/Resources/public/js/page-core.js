@@ -26,7 +26,7 @@
                        
         // init block things.
         // ensure server-generated blocks are in the BlockCollection        
-        //this.blocks.init();
+        this.blocks.init();
         
         // set the editor deactivation handler to store blocks in localstorage.
         this.ui.setGlobalEditorDeactivationHandler(CMSPageCore.blocks.storeBlockChangesLocally);

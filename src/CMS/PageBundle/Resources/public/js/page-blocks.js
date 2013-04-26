@@ -16,20 +16,18 @@ var BLOCK_TYPE_HTML = 'HTML';
 var CMSPageBlocks = CMSPageBlocks || {
     // properties
     BlockCollection: new BlockCollection(),
-      
-            
     init: function() {
-        
+
         this.BlockCollection.fetch();
-        this.populateInitialBlocksFromPage();                
+        this.populateInitialBlocksFromPage();
         return this;
-    },            
+    },
     // functions
 
     // load a block from the server-side backend. 
     getBlock: function(block, responseHandler) {
         CMSPageCore.rest.get(
-                BLOCK_URI +'/'+ block.id,
+                BLOCK_URI + '/' + block.id,
                 function(response) {
                     // update the block. TODO: Should this be done here? I expect most of this stuff will move to backbone's events eventually.                    
                     var content = new Content(response.content);
@@ -44,7 +42,7 @@ var CMSPageBlocks = CMSPageBlocks || {
     },
     getBlockInstance: function(blockInstanceID) {
         CMSPageCore.rest.get(
-                BLOCK_INSTANCE_URI +'/'+ blockInstanceID,
+                BLOCK_INSTANCE_URI + '/' + blockInstanceID,
                 function(data) {
                     $(".cms-page-editable").html(data.html);
                 }
@@ -54,29 +52,27 @@ var CMSPageBlocks = CMSPageBlocks || {
     populateInitialBlocksFromPage: function() {
         // fetch blocks from local storage
         CMSPageCore.blocks.BlockCollection.fetch();
-        
+
         // populates the BlockCollection. if the block was readded to the page now, all layout blocks would remove their children and shit would go bad.
         $(BLOCK_ALL_BLOCKS).each(function() {
-            block = CMSPageCore.blocks.determineBlock(this.id);            
+            block = CMSPageCore.blocks.determineBlock(this.id);
         });
-        
-        
+
+
         // now grab the rootblock and add it to the page.
-        
-                
-        CMSPageCore.blocks.BlockCollection.forEach(function(aBlock) {  
-            if(aBlock.get('type') == BLOCK_TYPE_ROOT){
+
+
+        CMSPageCore.blocks.BlockCollection.forEach(function(aBlock) {
+            if (aBlock.get('type') == BLOCK_TYPE_ROOT) {
                 CMSPageCore.blocks.addRootBlockToPage(aBlock);
-            }else{
-            CMSPageCore.blocks.addBlockToPage(aBlock);
-            }
-        });
-    },      
-            
-    determineBlock: function(target) {        
+            } else {
+                CMSPageCore.blocks.addBlockToPage(aBlock);
+            }   });
+    },
+    determineBlock: function(target) {
         var block = $('#' + target);
-        
-        if(block.length > 0){
+
+        if (block.length > 0) {
             if (typeof CMSPageCore.blocks.BlockCollection.get({id: block.attr('cms-block-id')}) != 'undefined') {
                 return CMSPageCore.blocks.BlockCollection.get({id: block.attr('cms-block-id')});
             }
@@ -88,39 +84,39 @@ var CMSPageBlocks = CMSPageBlocks || {
         return false;
     },
     addNewBlockFromPage: function(block) {
-        CMSPageCore.debug.log('Processing:'+block.attr('cms-block-name'));
+        CMSPageCore.debug.log('Processing:' + block.attr('cms-block-name'));
         var newBlock = new Block({
             id: block.attr('cms-block-id'),
             name: block.attr('cms-block-name'),
             type: block.attr('cms-block-type'),
-            editable: block.attr('cms-block-editable'),            
+            editable: block.attr('cms-block-editable'),
             element: block.attr('id')
         });
-        
-        
-        CMSPageCore.debug.log('Adding block:'+newBlock.get('name')+' to collection.')
+
+
+        CMSPageCore.debug.log('Adding block:' + newBlock.get('name') + ' to collection.')
         // add to collection and save so that parent<->child relationship doesn't do silly things later on.
-        CMSPageCore.blocks.BlockCollection.add(newBlock);   
+        CMSPageCore.blocks.BlockCollection.add(newBlock);
         newBlock.save();
-        
-        if (newBlock.get('type') == (BLOCK_TYPE_LAYOUT || BLOCK_TYPE_ROOT) ) {
+
+        if (newBlock.get('type') == (BLOCK_TYPE_LAYOUT || BLOCK_TYPE_ROOT)) {
             // for layout blocks don't set their contents as their contents, they're populated by their models.
             newBlock.set('content', '');
         } else {
             newBlock.set('content', block.children('[cms-content-for=' + block.attr('id') + ']').html());
-        }  
+        }
 
         // determine and set parent block.        
         if (block.attr('cms-root-block') != 'true') { // not the rootblock           
             parent = $("#" + newBlock.get('element')).parents('[cms-block]').first();
 
             parentBlock = CMSPageCore.blocks.determineBlock(parent.attr('id'));
-            
+
             newBlock.setParent(parentBlock);
         }
-            
+
         // save the new block 
-        newBlock.save();        
+        newBlock.save();
 
         return newBlock;
     },
@@ -135,7 +131,7 @@ var CMSPageBlocks = CMSPageBlocks || {
     handleEvent: function(target, event, eventType) {
         // determine block details
         block = CMSPageCore.blocks.determineBlock(target);
-        if(block){
+        if (block) {
             var callback = CMSPageCore.blocks[event]; // fuck eval
             if (typeof callback === 'function') {
                 CMSPageCore.debug.log(event + ' event for ' + block.get('name'));
@@ -145,7 +141,7 @@ var CMSPageBlocks = CMSPageBlocks || {
             }
             return true;
         }
-        CMSPageCore.debug.log('Undeterminable event. BlockCollection entry missing for block: '+target);
+        CMSPageCore.debug.log('Undeterminable event. BlockCollection entry missing for block: ' + target);
         return false;
     },
     moveUp: function(block) {
@@ -172,14 +168,14 @@ var CMSPageBlocks = CMSPageBlocks || {
         // create form to collect new block information
         newBlock = new Block();
         // add block as the parent
-        newBlock.setParent(block);        
-                              
+        newBlock.setParent(block);
+
         // create form based on the model, telling it to use the newBlockSchema instead of the standard block schema.
         newBlockForm = new Backbone.Form({
             model: newBlock,
             schema: newBlock.newBlockSchema
         }).render();
-               
+
         return CMSPageCore.ui.showModalForm(newBlockForm, 'Add a new block', {
             confirm: function() {
                 newBlockForm.commit();
@@ -192,56 +188,48 @@ var CMSPageBlocks = CMSPageBlocks || {
     remove: function(block) {
 
     },
-    addRootBlockToPage: function(block){
-        CMSPageCore.debug.log('Replacing rootblock:' + block.get('name') +' on page.');
+    addRootBlockToPage: function(block) {
+        CMSPageCore.debug.log('Replacing rootblock:' + block.get('name') + ' on page.');
         newBlockView = new BlockView({model: block});
-                
+
         $('#' + block.get('element')).replaceWith(newBlockView.render().el);
-                
+
         // now add its children        
         console.log("start adding children");
-        
+
         block.children.forEach(CMSPageCore.blocks.addBlockToPage);
         console.log("end adding children");
-    
+
     },
-    addBlockToPage: function(block) {     
-        
+    addBlockToPage: function(block) {
+
         newBlockView = new BlockView({model: block});
         // if element exists, replace it. otherwise append it to the parent block.
-        if($('#' + block.get('element')).length > 0){
-            CMSPageCore.debug.log('Replacing block:' + block.get('name') +' on page.');
+        if ($('#' + block.get('element')).length > 0) {
+            CMSPageCore.debug.log('Replacing block:' + block.get('name') + ' on page.');
             $('#' + block.get('element')).replaceWith(newBlockView.render().el);
-        }else{
+        } else {
             CMSPageCore.debug.log('Adding block:' + block.get('name') +
                     ' to page element: ' + block.parent.get('element'));
-            $('#' + block.parent.get('element')).append(newBlockView.render().el);            
-        }        
-        
-        var events = {};
-        events[LAYOUT_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-        events[LAYOUT_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-
-        toolbar = CMSPageCore.ui.attachToolbar(LAYOUT_TOOLBAR, newBlockView.$el, block.get('element'), events);
-
-        // attach popup toolbar
-        popupToolbarType = EDITABLE_BLOCK_TOOLBAR_POPUP;
-        var popupEvents = {};
-        
-        if(block.get('type')== BLOCK_TYPE_LAYOUT){
-            popupEvents[MORE_OPTIONS_ADD] = {event: 'add', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-            popupToolbarType = LAYOUT_TOOLBAR_POPUP;
+            $('#' + block.parent.get('element')).append(newBlockView.render().el);
         }
-        
-        popupEvents[MORE_OPTIONS_EDIT] = {event: 'edit', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-        popupEvents[MORE_OPTIONS_INFO] = {event: 'info', type: 'click', callback: CMSPageCore.blocks.handleEvent};
-        popupEvents[MORE_OPTIONS_DELETE] = {event: 'remove', type: 'click', callback: CMSPageCore.blocks.handleEvent};
 
-        popupToolbar = CMSPageCore.ui.attachPopupToolbar(popupToolbarType, toolbar.children(LAYOUT_TOOLBAR_MORE_OPTIONS_BUTTON), toolbar.attr('cms-toolbar-target'), popupEvents);
-        
+        var events = {};
+        events[BLOCK_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+        events[BLOCK_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+        events[BLOCK_TOOLBAR_EDIT] = {event: 'edit', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+        events[BLOCK_TOOLBAR_INFO] = {event: 'info', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+        events[BLOCK_TOOLBAR_DELETE] = {event: 'remove', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+
+        if (block.get('type') == BLOCK_TYPE_LAYOUT) {
+            events[BLOCK_TOOLBAR_ADD] = {event: 'add', type: 'click', callback: CMSPageCore.blocks.handleEvent};
+        }
+
+        toolbar = CMSPageCore.ui.attachToolbar(BLOCK_TOOLBAR, newBlockView.$el, block.get('element'), events);
+
         // now add its children
-        
-        if(block.children.length > 0){
+
+        if (block.children.length > 0) {
             block.children.forEach(CMSPageCore.blocks.addBlockToPage);
         }
     }

@@ -44,7 +44,7 @@
     </head>
     <body>
         <section            
-            id="{{ rootblock.name|lower|replace({' ': '_'}) }}{{ rootblock.id }}"
+            id="{{ rootblock.name|lower|replace({' ': '_'}) }}-{{ rootblock.id }}"
             cms-page="true"
             cms-block="true"
             cms-root-block="true"
@@ -52,7 +52,7 @@
             cms-block-name="{{ rootblock.name|lower|replace({' ': '_'}) }}"    
             cms-block-type="Root"            
         >    
-            <div class="block-content" cms-content-for="{{ rootblock.name|lower|replace({' ': '_'}) }}{{ rootblock.id }}"> 
+            <div class="block-content" cms-content-for="{{ rootblock.name|lower|replace({' ': '_'}) }}-{{ rootblock.id }}"> 
                 {% block content %}
                 {{ content|raw }}
                 {% endblock content %}
