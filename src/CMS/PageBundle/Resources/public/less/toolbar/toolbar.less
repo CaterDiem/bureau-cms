@@ -280,14 +280,27 @@
 .block-toolbar {
     float: right;
     clear: right;
-    min-width: 260px;
+    min-width: 450px;
     #gradient > .horizontal (lighten(@featureBackground, 5%), @bodyBackground);
     text-align: right;
     padding: 4px;
-    border-bottom: 1px dotted @bureau-grey-light;    
-position: absolute;
+    border: 1px dotted @bureau-grey-light;    
+    position: absolute;
+    z-index: 999;
+    display: none;
 }
 
+.block-toolbar-name {   
+    overflow: hidden;
+    font-size: 14px;
+    font-variant: small-caps;
+    font-weight: bold;
+    float: left;
+}
+
+.block-toolbar-buttons {
+    float: right;
+}
 /* toolbars for inside the page */
 .tool-container {	    
 	.border-radius(3px);

@@ -17,13 +17,18 @@ var BlockView = Backbone.View.extend({
       "blur .block-content" : "storeContentChanges"
     },
     initialize: function() {
+        //this.setElement(this.el);
         this.listenTo(this.model, 'change', this.render);
         this.listenTo(this.model, 'destroy', this.remove);
         this.template = _.template($('[cms-template-for="'+this.model.get('type').toLowerCase()+'"]').html())
     },
     render: function() {        
         CMSPageCore.debug.log('Rendering: '+this.model.get('name'));
-        this.$el.html(this.template({data: this.model.toJSON()}));        
+        
+        // element needs triming for whitespace, unless you enjoy syntax errors.
+        element = $.trim(this.template({data: this.model.toJSON()}));        
+        this.setElement(element);
+        
         return this;
     },
     remove: function() {
@@ -32,14 +37,15 @@ var BlockView = Backbone.View.extend({
             
     setActive: function() {
         CMSPageCore.debug.log(this.model.get('name')+': now active');
-        this.$el.find('[cms-toolbar-type='+BLOCK_TOOLBAR+']').show();
+        this.$el.children('[cms-toolbar-type='+BLOCK_TOOLBAR+']').show();        
         if(this.model.get('type') != BLOCK_TYPE_ROOT){
             this.$el.addClass('cms-block-active');
         }
     },
     setInactive: function() {
         CMSPageCore.debug.log(this.model.get('name')+': now inactive');        
-        this.$el.find('[cms-toolbar-type='+BLOCK_TOOLBAR+']').hide();
+        
+        this.$el.children('[cms-toolbar-type='+BLOCK_TOOLBAR+']').hide();
         if(this.model.get('type') != BLOCK_TYPE_ROOT){
             this.$el.removeClass('cms-block-active');
         }
