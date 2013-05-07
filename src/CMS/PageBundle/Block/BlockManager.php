@@ -117,15 +117,17 @@ class BlockManager {
             
             $this->logger->debug("BlockManager:generate - Loaded rootblock {$this->block->getName()}");
             
-            // render all instances in this block. 
+            // render all instances in this block.             
             foreach($this->block->getInstances() as $instance){
                 $blockHandler = $this->container->get('block_handler');
                 $blockHandler->setPageManager($this->pageManager);
                 $instanceHandler = $blockHandler->getHandler($instance->getBlock(), $instance->getTemplate());                
-                if($instanceHandler->render()){
-                    $this->generatedContent .= $instanceHandler->getRenderedContent();
+                if($instanceHandler->render()){                    
+                    $this->generatedContent .= $instanceHandler->getRenderedContent();                    
                 }
+                
             }
+            $this->logger->debug($this->generatedContent);
             
             if($this->generatedContent){
                 return TRUE;

@@ -18,6 +18,7 @@ class HTMLHandler extends BlockHandler{
             $this->variables
         );            
         
+        
         return TRUE;
     }
     

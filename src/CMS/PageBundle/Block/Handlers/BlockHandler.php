@@ -27,7 +27,7 @@ class BlockHandler{
     
     protected $renderedContent = "";
     
-    protected $cssClasses = array('span4', 'test');
+    protected $cssClasses = array('dummy');
     protected $htmlAttributes;
     protected $options;
     
@@ -164,6 +164,7 @@ class BlockHandler{
     public function setContents(){}
     
     public function getRenderedContent(){
+        $this->logger->debug("BlockHandler::getRenderedContent() on {$this->block->getName()}: {$this->renderedContent}");
         return $this->renderedContent;
     }
     

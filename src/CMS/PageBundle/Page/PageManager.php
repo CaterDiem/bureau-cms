@@ -98,13 +98,15 @@ class PageManager {
     public function render(){
         if($this->isLoaded()){
             // check cached page.
-                        
+            $this->logger->info("PageManager:render() - rendering page {$this->page->getName()}");
+            
             // grab the root block and throw it to the mercy of the blockManager!            
             if($this->page->getCurrentRevision()){                
-                
+                $this->logger->debug("PageManager:render() - getting current revision");
                 $this->blockManager->load($this->currentRevision->getRootBlock());            
                 
                 if($this->blockManager->generate()){
+                    $this->logger->debug("PageManager:render() - getGeneratedContent for {$this->blockManager->getBlock()->getName()}");
                     $this->generatedContent .= $this->blockManager->getGeneratedContent();
                 }
                 

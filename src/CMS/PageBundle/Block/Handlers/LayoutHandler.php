@@ -21,13 +21,14 @@ class LayoutHandler extends BlockHandler {
             $content .= $this->renderInstances();
         }
         
+        
         $this->setVariable('content', $content);
         
         $this->renderedContent = $this->engine->render(
             $this->template->getFilepath(),
             $this->variables        
         );            
-                
+                                
         return TRUE;
     }
     
