@@ -13,10 +13,12 @@ var BLOCK_TYPE_ROOT = 'Root';
 var BLOCK_TYPE_LAYOUT = 'Layout';
 var BLOCK_TYPE_HTML = 'HTML';
 
+
 var CMSPageBlocks = CMSPageBlocks || {
     // properties
     BlockCollection: new BlockCollection(),
-    init: function() {
+    
+        init: function() {
 
         this.BlockCollection.fetch();
         this.populateInitialBlocksFromPage();
@@ -51,24 +53,24 @@ var CMSPageBlocks = CMSPageBlocks || {
     // populate Blocks collection with initial blocks from the page. then attach a view for the block to the element
     populateInitialBlocksFromPage: function() {
         // fetch blocks from local storage
-        CMSPageCore.blocks.BlockCollection.fetch();
+        //CMSPageCore.blocks.Blocollection.fetch();
 
         // populates the BlockCollection. if the block was readded to the page now, all layout blocks would remove their children and shit would go bad.
         $(BLOCK_ALL_BLOCKS).each(function() {
             block = CMSPageCore.blocks.determineBlock(this.id);
         });
 
-
         // now grab the rootblock and add it to the page.
-
-
         CMSPageCore.blocks.BlockCollection.forEach(function(aBlock) {
+            //if( aBlock.get('type') !=)
             if (aBlock.get('type') == BLOCK_TYPE_ROOT) {
                 CMSPageCore.blocks.addRootBlockToPage(aBlock);
             } else {
                 CMSPageCore.blocks.addBlockToPage(aBlock);
-            }   });
+            }   
+        });
     },
+            
     determineBlock: function(target) {
         var block = $('#' + target);
 
@@ -83,6 +85,7 @@ var CMSPageBlocks = CMSPageBlocks || {
 
         return false;
     },
+            
     addNewBlockFromPage: function(block) {
         CMSPageCore.debug.log('Processing:' + block.attr('cms-block-name'));
         var newBlock = new Block({
@@ -92,7 +95,6 @@ var CMSPageBlocks = CMSPageBlocks || {
             editable: block.attr('cms-block-editable'),
             element: block.attr('id')
         });
-
 
         CMSPageCore.debug.log('Adding block:' + newBlock.get('name') + ' to collection.')
         // add to collection and save so that parent<->child relationship doesn't do silly things later on.
@@ -194,24 +196,23 @@ var CMSPageBlocks = CMSPageBlocks || {
 
         $('#' + block.get('element')).replaceWith(newBlockView.render().el);
 
-        // now add its children        
-        console.log("start adding children");
-
-        block.children.forEach(CMSPageCore.blocks.addBlockToPage);
-        console.log("end adding children");
-
+        // now add its children                
+        CMSPageCore.debug.log("Working with: ", block);
+        block.get('children').forEach(CMSPageCore.blocks.addBlockToPage);        
     },
     addBlockToPage: function(block) {
 
+        CMSPageCore.debug.log("Working with: ", block);
         newBlockView = new BlockView({model: block});
         // if element exists, replace it. otherwise append it to the parent block.
         if ($('#' + block.get('element')).length > 0) {
             CMSPageCore.debug.log('Replacing block:' + block.get('name') + ' on page.');
             $('#' + block.get('element')).replaceWith(newBlockView.render().el);
         } else {
+            CMSPageCore.debug.log(block);
             CMSPageCore.debug.log('Adding block:' + block.get('name') +
-                    ' to page element: ' + block.parent.get('element'));
-            $('#' + block.parent.get('element')).append(newBlockView.render().el);
+                    ' to page element: ' + block.get('parent').get('element'));
+            $('#' + block.get('parent').get('element')).append(newBlockView.render().el);
         }
 
         var events = {};
@@ -229,8 +230,8 @@ var CMSPageBlocks = CMSPageBlocks || {
 
         // now add its children
 
-        if (block.children.length > 0) {
-            block.children.forEach(CMSPageCore.blocks.addBlockToPage);
+        if (block.get('children').length > 0) {
+            block.get('children').forEach(CMSPageCore.blocks.addBlockToPage);
         }
     }
 };

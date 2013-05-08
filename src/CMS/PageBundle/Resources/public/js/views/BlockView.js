@@ -28,7 +28,7 @@ var BlockView = Backbone.View.extend({
         // element needs triming for whitespace, unless you enjoy syntax errors.
         element = $.trim(this.template({data: this.model.toJSON()}));        
         this.setElement(element);
-        
+        //this.$el.html(element);  
         return this;
     },
     remove: function() {

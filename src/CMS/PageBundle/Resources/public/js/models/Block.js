@@ -7,7 +7,17 @@
  * @date: 2012/03/21
  */
 
-var Block = Backbone.Model.extend({
+var Block = Backbone.RelationalModel.extend({
+    relations: [{
+            type: Backbone.HasMany,
+            key: 'children',
+            relatedModel: 'Block',
+            collectionType: 'BlockCollection',
+            reverseRelation: {
+                key: 'parent',
+                includeInJSON: 'id'
+            }
+        }],    
     schema: {
         name: {type: 'Text', validators: ['required']},
         created: 'Date',
@@ -19,52 +29,35 @@ var Block = Backbone.Model.extend({
     },
     defaults: {
         name: '',
-        content: 'Insert content here.',
+        content: 'block',
         description: '',
         blockTemplate: 'plainHTML',
         cssClasses: '',
         urlname: '',
         type: 'html',
         editable: 'true',
-        sortOrder: 0       
+        sortOrder: 0
     },
     newBlockSchema: {
         name: {type: 'Text', validators: ['required']},
         description: 'Text',
         blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!
-    },    
+    },
     initialize: function(options) {
-
-        //var self = this;        
-        this.parent = null;
-        this.set('parent', parent);
-        this.children = new BlockCollection();
-        this.set('children', this.children);        
-        this.on('sync', this.onSync);
-        //this.on('change:parent', this.parentAdded, this);
-        //this.on('change:child', this.childAdded, this);
+        var self = this;        
+        console.warn("Creating block: " + this.get('cid') + ":" + this.get('name'));        
     },
-    parse: function(res){
-        console.log(res, this);
-        res.parent && this.parent; 
-        res.children && this.children.reset(res.children);
-        return res;
-    },
-    onSync: function() {
-        // backbone.localStorage (on the collection) saving/sync turns our two collections into arrays as they're serialized. we still want these as collections, so undo that.        
+    /**
+     * this ensures the parent block recognises this as a child block to this block.
+     * @todo: refactor this to not be required. now that this is a relational model this is simple.
+     */
+    setParent: function(parent) {
+        // this ensures the parent block recognises this as a child block to this block.
+        // 
+       
+        CMSPageCore.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');
         
-        this.parent = this.parent;//.reset(this.parent);
-        //this.children = this.children.reset(this.children);
-    },
-    setParent: function(parent){
-        // this ensures the parent block recognises this as a child block to this block        
-        CMSPageCore.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');        
-        this.parent = parent;
         this.set('parent', parent);
-        parent.children.add(this);  // this causes the object to be persisted to the parent's blockcollection before it's in the global one. then it's not stored properly enough for shit.
-        parent.get('children').add(this);
-        parent.save();
-        console.log(this);
         return this;
-    }    
+    }
 });
