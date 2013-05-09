@@ -44,8 +44,7 @@ var Block = Backbone.RelationalModel.extend({
         blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!
     },
     initialize: function(options) {
-        var self = this;        
-        console.warn("Creating block: " + this.get('cid') + ":" + this.get('name'));        
+        var self = this;                
     },
     /**
      * this ensures the parent block recognises this as a child block to this block.

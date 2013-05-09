@@ -17,8 +17,7 @@ var BLOCK_TYPE_HTML = 'HTML';
 var CMSPageBlocks = CMSPageBlocks || {
     // properties
     BlockCollection: new BlockCollection(),
-    
-        init: function() {
+    init: function() {
 
         this.BlockCollection.fetch();
         this.populateInitialBlocksFromPage();
@@ -67,10 +66,9 @@ var CMSPageBlocks = CMSPageBlocks || {
                 CMSPageCore.blocks.addRootBlockToPage(aBlock);
             } else {
                 CMSPageCore.blocks.addBlockToPage(aBlock);
-            }   
+            }
         });
     },
-            
     determineBlock: function(target) {
         var block = $('#' + target);
 
@@ -85,7 +83,6 @@ var CMSPageBlocks = CMSPageBlocks || {
 
         return false;
     },
-            
     addNewBlockFromPage: function(block) {
         CMSPageCore.debug.log('Processing:' + block.attr('cms-block-name'));
         var newBlock = new Block({
@@ -198,7 +195,7 @@ var CMSPageBlocks = CMSPageBlocks || {
 
         // now add its children                
         CMSPageCore.debug.log("Working with: ", block);
-        block.get('children').forEach(CMSPageCore.blocks.addBlockToPage);        
+        block.get('children').forEach(CMSPageCore.blocks.addBlockToPage);
     },
     addBlockToPage: function(block) {
 
@@ -208,8 +205,7 @@ var CMSPageBlocks = CMSPageBlocks || {
         if ($('#' + block.get('element')).length > 0) {
             CMSPageCore.debug.log('Replacing block:' + block.get('name') + ' on page.');
             $('#' + block.get('element')).replaceWith(newBlockView.render().el);
-        } else {
-            CMSPageCore.debug.log(block);
+        } else {            
             CMSPageCore.debug.log('Adding block:' + block.get('name') +
                     ' to page element: ' + block.get('parent').get('element'));
             $('#' + block.get('parent').get('element')).append(newBlockView.render().el);
@@ -225,7 +221,10 @@ var CMSPageBlocks = CMSPageBlocks || {
         if (block.get('type') == BLOCK_TYPE_LAYOUT) {
             events[BLOCK_TOOLBAR_ADD] = {event: 'add', type: 'click', callback: CMSPageCore.blocks.handleEvent};
         }
-
+        // add event details to model for future use
+        block.set('events', events);
+        
+        // attach the toolbar
         toolbar = CMSPageCore.ui.attachToolbar(BLOCK_TOOLBAR, newBlockView.$el, block.get('element'), events);
 
         // now add its children

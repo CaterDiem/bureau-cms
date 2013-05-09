@@ -36,14 +36,14 @@ var BlockView = Backbone.View.extend({
     },
             
     setActive: function() {
-        CMSPageCore.debug.log(this.model.get('name')+': now active');
+        //CMSPageCore.debug.log(this.model.get('name')+': now active');
         this.$el.children('[cms-toolbar-type='+BLOCK_TOOLBAR+']').show();        
         if(this.model.get('type') != BLOCK_TYPE_ROOT){
             this.$el.addClass('cms-block-active');
         }
     },
     setInactive: function() {
-        CMSPageCore.debug.log(this.model.get('name')+': now inactive');        
+        //CMSPageCore.debug.log(this.model.get('name')+': now inactive');        
         
         this.$el.children('[cms-toolbar-type='+BLOCK_TOOLBAR+']').hide();
         if(this.model.get('type') != BLOCK_TYPE_ROOT){

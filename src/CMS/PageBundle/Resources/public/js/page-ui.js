@@ -62,10 +62,10 @@ var CMSPageUI = CMSPageUI || {
      * @returns newToolbar The newly created and attached toolbar
      */
     attachToolbar: function(toolbarType, element, eventTarget, events) {           
-        newToolbar = $(element).find('.block-toolbar');
+        newToolbar = $(element).find('.block-toolbar-buttons');
         // bind button events                    
         for (var ev in events) {            
-            CMSPageCore.ui.bindToolbarEvent(newToolbar.children(ev), events[ev].event, events[ev].type, eventTarget, events[ev].callback); // most confusing line ever.            
+            CMSPageCore.ui.bindToolbarEvent(newToolbar.children(ev), events[ev].event, events[ev].type, eventTarget, events[ev].callback); // most confusing line ever.                        
         }
 
         CMSPageCore.debug.log(eventTarget+": toolbar attached.");
