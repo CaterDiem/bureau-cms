@@ -163,8 +163,7 @@ class BlockHandler{
     
     public function setContents(){}
     
-    public function getRenderedContent(){
-        $this->logger->debug("BlockHandler::getRenderedContent() on {$this->block->getName()}: {$this->renderedContent}");
+    public function getRenderedContent(){        
         return $this->renderedContent;
     }
     

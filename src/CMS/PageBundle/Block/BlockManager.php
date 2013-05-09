@@ -126,8 +126,7 @@ class BlockManager {
                     $this->generatedContent .= $instanceHandler->getRenderedContent();                    
                 }
                 
-            }
-            $this->logger->debug($this->generatedContent);
+            }            
             
             if($this->generatedContent){
                 return TRUE;
