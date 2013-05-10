@@ -177,7 +177,7 @@ var CMSPageBlocks = CMSPageBlocks || {
 
         return CMSPageCore.ui.showModalForm(newBlockForm, 'Add a new block', {
             confirm: function() {
-                newBlockForm.commit();
+                newBlockForm.commit();                
                 CMSPageCore.blocks.BlockCollection.add(newBlockForm.model);
                 newBlockForm.model.save();
                 CMSPageCore.blocks.addBlockToPage(newBlockForm.model);

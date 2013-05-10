@@ -20,11 +20,16 @@ var BlockView = Backbone.View.extend({
         //this.setElement(this.el);
         this.listenTo(this.model, 'change', this.render);
         this.listenTo(this.model, 'destroy', this.remove);
+        
+        
         this.template = _.template($('[cms-template-for="'+this.model.get('type').toLowerCase()+'"]').html())
     },
     render: function() {        
         CMSPageCore.debug.log('Rendering: '+this.model.get('name'));
-        
+       
+        // TODO: work out if this is really the place to update the elementId 
+        this.model.generateElementId();
+       
         // element needs triming for whitespace, unless you enjoy syntax errors.
         element = $.trim(this.template({data: this.model.toJSON()}));        
         this.setElement(element);

@@ -36,6 +36,7 @@ var Block = Backbone.RelationalModel.extend({
         urlname: '',
         type: 'html',
         editable: 'true',
+        element: null,
         sortOrder: 0
     },
     newBlockSchema: {
@@ -43,8 +44,18 @@ var Block = Backbone.RelationalModel.extend({
         description: 'Text',
         blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!
     },
-    initialize: function(options) {
-        var self = this;                
+    initialize: function(options) {        
+        //this.on('sync', this.onSync);
+    },
+    onSync: function(){
+        
+    },
+    generateElementId: function(){
+        if(this.get('element') == null){            
+            elementId = this.get('name')+"-"+this.get('id');
+            this.set('element', elementId);
+        }                
+        return this;
     },
     /**
      * this ensures the parent block recognises this as a child block to this block.
