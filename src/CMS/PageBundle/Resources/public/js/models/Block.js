@@ -107,7 +107,7 @@ var Block = Backbone.RelationalModel.extend({
         // this ensures the parent block recognises this as a child block to this block.
         // 
 
-        CMSPageCore.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');
+        CMSPage.debug.log('Block: ' + this.get('name') + ' parent set to: ' + parent.get('name') + '. Adding block as child to parent.');
 
         this.set('parent', parent);
         return this;

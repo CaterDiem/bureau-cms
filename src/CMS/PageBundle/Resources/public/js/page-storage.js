@@ -7,7 +7,7 @@
  * @date: 2012/02/19
  */
 
-var CMSPageStorage = CMSPageStorage || {
+CMSPage.storage = CMSPage.storage|| {
     // properties
     initialise: function() {
         if (Modernizr.localstorage) {

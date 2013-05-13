@@ -9,37 +9,38 @@
 
 var RESPONSE_TYPE = 'json';
 var ALLOWED_REQUEST_TYPES = ['GET', 'PUT', 'POST', 'DELETE'];
-var CMSPageRest = CMSPageRest || { 
+
+CMSPage.rest = CMSPage.rest || { 
     // properties
     
     
     // default handler functions
     
     requestSuccessHandler: function(data){
-        CMSPageCore.debug.log('Requst completed: '+ data);
+        CMSPage.debug.log('Requst completed: '+ data);
     },
     requestFailureHandler: function(jqxhr, statusMessage){
-        CMSPageCore.debug.log('Requst dun fail: '+statusMessage);
+        CMSPage.debug.log('Requst dun fail: '+statusMessage);
     },
     
     // functions
     get: function (target, successCallback, failureCallback){
-        CMSPageCore.debug.log("GETting "+target);        
+        CMSPage.debug.log("GETting "+target);        
         this.ajaxRequest('GET', target, [], successCallback, failureCallback);
     },
         
     post: function (target, payload, successCallback, failureCallback){
-        CMSPageCore.debug.log("POSTting "+target);        
+        CMSPage.debug.log("POSTting "+target);        
         this.ajaxRequest('POST', target, payload, successCallback, failureCallback);
     },
         
     put: function (target, payload, successCallback, failureCallback){
-        CMSPageCore.debug.log("PUTting "+target);        
+        CMSPage.debug.log("PUTting "+target);        
         this.ajaxRequest('PUT', target, payload, successCallback, failureCallback);
     },
         
     remove: function (target, payload, successCallback, failureCallback){
-        CMSPageCore.debug.log("DELETEing "+target);        
+        CMSPage.debug.log("DELETEing "+target);        
         this.ajaxRequest('DELETE', target, payload, successCallback, failureCallback);
     },
         
@@ -70,7 +71,7 @@ var CMSPageRest = CMSPageRest || {
             ;        
         }else{
             // THROW AN EXCEPTION OR SOMETHING.
-            CMSPageCore.debug.log(requestType+'? Invalid valid request type. This is REST, you know.')
+            CMSPage.debug.log(requestType+'? Invalid valid request type. This is REST, you know.')
         }
     }
 

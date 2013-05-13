@@ -7,7 +7,7 @@
  * @date: 2012/03/29
  */
 
-var CMSPageDebug = CMSPageDebug|| {
+CMSPage.debug = CMSPage.debug || {
     // properties
 
 
