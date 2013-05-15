@@ -3,7 +3,7 @@
 
 <script type="text/template" cms-template-for="layout">
 <div
-    class="<%= data.cssClasses %>"      
+    class="layout-block <%= data.cssClasses %>"      
     id="<%= data.name %>-<%= data.id %>"
     cms-block="true"                   
     cms-block-id="<%= data.id %>"
@@ -11,10 +11,10 @@
     cms-block-type="<%= data.type %>"
     cms-block-editable="<%= data.editable %>"    
 >                
-    <div class="block-toolbar"
+    <div class="block-toolbar block-toolbar-right"
         id="<%= data.name %>-<%= data.id %>-layout-toolbar" 
         cms-toolbar-target="<%= data.name %>-<%= data.id %>" 
-        cms-toolbar-type="layout-toolbar"
+        cms-toolbar-type="block-toolbar"
     >
         <div class="block-toolbar-name"><%= data.name %> :: layout</div>
         <div class="block-toolbar-buttons">

@@ -192,24 +192,14 @@ CMSPage.blocks = CMSPage.blocks|| {
         newBlockView = new BlockView({model: block});
 
         $('#' + block.get('element')).replaceWith(newBlockView.render().el);
-
+        newBlockView.delegateEvents();
         // now add its children                
         CMSPage.debug.log("Working with: ", block);
         block.get('children').forEach(CMSPage.blocks.addBlockToPage);
     },
     addBlockToPage: function(block) {
 
-        CMSPage.debug.log("Working with: ", block);
-        newBlockView = new BlockView({model: block});
-        // if element exists, replace it. otherwise append it to the parent block.
-        if ($('#' + block.get('element')).length > 0) {
-            CMSPage.debug.log('Replacing block:' + block.get('name') + ' on page.');
-            $('#' + block.get('element')).replaceWith(newBlockView.render().el);
-        } else {            
-            CMSPage.debug.log('Adding block:' + block.get('name') +
-                    ' to page element: ' + block.get('parent').get('element'));
-            $('#' + block.get('parent').get('element')).append(newBlockView.render().el);
-        }
+        CMSPage.debug.log("Working with: ", block);        
 
         var events = {};
         events[BLOCK_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPage.blocks.handleEvent};
@@ -223,6 +213,21 @@ CMSPage.blocks = CMSPage.blocks|| {
         }
         // add event details to model for future use
         block.set('events', events);
+        
+        newBlockView = new BlockView({model: block});
+        
+        // if element exists, replace it. otherwise append it to the parent block.
+        if ($('#' + block.get('element')).length > 0) {
+            CMSPage.debug.log('Replacing block:' + block.get('name') + ' on page.');
+            $('#' + block.get('element')).replaceWith(newBlockView.render().el);
+        } else {            
+            CMSPage.debug.log('Adding block:' + block.get('name') +
+                    ' to page element: ' + block.get('parent').get('element'));
+            $('#' + block.get('parent').get('element')).append(newBlockView.render().el);
+        }
+        newBlockView.delegateEvents();
+        
+        block.view = newBlockView; // not set() as this prevents object saving.
         
         // attach the toolbar
         toolbar = CMSPage.ui.attachToolbar(BLOCK_TOOLBAR, newBlockView.$el, block.get('element'), events);

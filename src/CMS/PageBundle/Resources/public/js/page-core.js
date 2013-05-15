@@ -33,7 +33,7 @@ var CMSPage = CMSPage || {
     },
     
     // editor functions
-    attachEditor: function(element) {},
+    attachEditor: function(element) {}
 
 }
 

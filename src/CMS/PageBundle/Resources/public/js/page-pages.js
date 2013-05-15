@@ -14,6 +14,7 @@ CMSPage.pages = CMSPage.pages || {
 
     // functions
     init: function() {
+        
     },
     add: function() {
 
@@ -35,7 +36,7 @@ CMSPage.pages = CMSPage.pages || {
                 } else {
                     newPageForm.commit();
 
-                    addPage(newPageForm.model);
+                    CMSPage.pages.addPage(newPageForm.model);
                     $('#cms-modal').modal('hide');
                 }
             }

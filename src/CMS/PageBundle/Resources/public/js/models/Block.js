@@ -16,8 +16,7 @@ var Block = Backbone.RelationalModel.extend({
             deepCloneable: true,
             reverseRelation: {
                 key: 'parent',
-                includeInJSON: 'id',
-            
+                includeInJSON: 'id'            
             }
         }],    
     schema: {
