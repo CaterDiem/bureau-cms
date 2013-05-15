@@ -35,9 +35,9 @@ class Layout
     private $updated;
 
     /**
-     * @var \CMS\SharedBundle\Entity\BlockInstance
+     * @var \CMS\SharedBundle\Entity\Block
      */
-    private $blockInstance;
+    private $rootBlock;
 
 
     /**
@@ -143,25 +143,81 @@ class Layout
     }
 
     /**
-     * Set blockInstance
+     * Set rootBlock
      *
-     * @param \CMS\SharedBundle\Entity\BlockInstance $blockInstance
+     * @param \CMS\SharedBundle\Entity\Block $rootBlock
      * @return Layout
      */
-    public function setBlockInstance(\CMS\SharedBundle\Entity\BlockInstance $blockInstance = null)
+    public function setRootBlock(\CMS\SharedBundle\Entity\Block $rootBlock = null)
     {
-        $this->blockInstance = $blockInstance;
+        $this->rootBlock = $rootBlock;
     
         return $this;
     }
 
     /**
-     * Get blockInstance
+     * Get rootBlock
      *
-     * @return \CMS\SharedBundle\Entity\BlockInstance 
+     * @return \CMS\SharedBundle\Entity\Block 
      */
-    public function getBlockInstance()
+    public function getRootBlock()
     {
-        return $this->blockInstance;
+        return $this->rootBlock;
+    }
+    /**
+     * @var \CMS\SharedBundle\Entity\User
+     */
+    private $author;
+
+
+    /**
+     * Set author
+     *
+     * @param \CMS\SharedBundle\Entity\User $author
+     * @return Layout
+     */
+    public function setAuthor(\CMS\SharedBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+    
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \CMS\SharedBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+    /**
+     * @var \CMS\SharedBundle\Entity\User
+     */
+    private $editor;
+
+
+    /**
+     * Set editor
+     *
+     * @param \CMS\SharedBundle\Entity\User $editor
+     * @return Layout
+     */
+    public function setEditor(\CMS\SharedBundle\Entity\User $editor = null)
+    {
+        $this->editor = $editor;
+    
+        return $this;
+    }
+
+    /**
+     * Get editor
+     *
+     * @return \CMS\SharedBundle\Entity\User 
+     */
+    public function getEditor()
+    {
+        return $this->editor;
     }
 }

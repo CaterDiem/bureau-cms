@@ -134,6 +134,13 @@ class BlockManager {
         }
         return FALSE;
     }
+    
+    public function hasContent(){
+        if($this->block->getContent()){
+            return TRUE;
+        }
+        return FALSE;
+    }
         
     /**
      * Return a HTML fragment rendered from this block.

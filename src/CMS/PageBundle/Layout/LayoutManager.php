@@ -58,6 +58,15 @@ class LayoutManager {
         return FALSE;
     }
     
+    public function loadAll(){
+        $this->layout = $this->em->getRepository('CMSSharedBundle:Layout')
+                ->findAll();
+        if($this->layout){
+            return TRUE;
+        }
+        return FALSE;
+    }
+    
     
     public function isLoaded(){
         if($this->layout){
@@ -79,6 +88,12 @@ class LayoutManager {
         return TRUE;
     }
     
+    public function getLayout(){
+        if($this->isLoaded()){
+            return $this->layout;
+        }
+        return FALSE;
+    }
                   
     /**
      * Render the layout to HTML
