@@ -30,7 +30,9 @@ CMS\SharedBundle\Entity\Block:
             nullable: false
             gedmo:
               timestampable:
-                on: update     
+                on: update  
+    
+    
     oneToMany:
         instances: 
             targetEntity: BlockInstance
@@ -40,6 +42,9 @@ CMS\SharedBundle\Entity\Block:
         parents:
             targetEntity: BlockInstance
             mappedBy: block
+        layouts:
+            targetEntity: Layout
+            mappedBy: rootBlock
         pages:
             targetEntity: PageRevision
             mappedBy: rootBlock        

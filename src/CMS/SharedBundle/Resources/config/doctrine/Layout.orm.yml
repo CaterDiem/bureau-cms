@@ -19,6 +19,7 @@ CMS\SharedBundle\Entity\Layout:
             length: 512
             fixed: false
             nullable: true
+        
         created:
             type: datetime
             nullable: false
@@ -30,5 +31,20 @@ CMS\SharedBundle\Entity\Layout:
             nullable: false
             gedmo:
               timestampable:
-                on: update                        
+                on: update           
+    manyToOne:
+        rootBlock:
+            targetEntity: Block
+            inversedBy: layout
+            joinColumns:
+                root_block_id:
+                    referencedColumnName: id
+            orphanRemoval: false                            
+        author:
+            targetEntity: User
+            orphanRemoval: false               
+        editor:
+            targetEntity: User
+            orphanRemoval: false               
     lifecycleCallbacks: {  }
+    
