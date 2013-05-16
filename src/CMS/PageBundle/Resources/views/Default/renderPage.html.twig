@@ -58,12 +58,8 @@
                 {% endblock content %}
             </div>
         </section>
-
-
         
-               {#Le javascript
-        ================================================== #}
-        {#Placed at the end of the document so the pages load faster #}
+        {# Placed at the end of the document so the pages "load faster". >_>  #}
         <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>               
         
     {% javascripts filter="?closure" output="js/compiled/defence.js"    
@@ -102,13 +98,8 @@
     {# add the toolbars and modal skeletons, interactive editing javascript stuff, etc #}
 
         {% include 'CMSPageBundle:Default:interactiveEditExtras.html.twig' %}
-        
-        <section id="block-templates" class="hidden">
-            {# lack of wildcard importing in twig (understandably) prevents this from beng neater. TODO: consider loading these in a separate include #}
-            {% include 'CMSPageBundle:Default:blockTemplates/root.html.twig' %}        
-            {% include 'CMSPageBundle:Default:blockTemplates/layout.html.twig' %}        
-            {% include 'CMSPageBundle:Default:blockTemplates/html.html.twig' %}                   
-        </section>
+               
+        {% include 'CMSPageBundle:Default:blockTemplatesJS/block-templates.html.twig' %}                            
                         
         {% javascripts filter="?closure" output="js/compiled/cmspage-frontend.js"                          
             '@CMSPageBundle/Resources/public/js/toolbar/jquery.toolbar.js'
@@ -129,7 +120,7 @@
         {% endjavascripts %}                
         
         <script type="text/javascript">
-            // get environment/debug state and initialise CMSPageCore.
+            // get environment/debug state and initialise CMSPag.
             var CMS_ENVIRONMENT  = '{{ app.environment }}';
             var CMS_DEBUG_STATE = '{{ app.debug }}';
             var CMS_PAGE_NAME = '{{ page.getPage().name }}';
