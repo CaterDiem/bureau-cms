@@ -3,8 +3,8 @@
 {% block blockTemplates %}
     <section id="block-templates" class="hidden">
         {# lack of wildcard importing in twig (understandably) prevents this from being neater. TODO: consider loading these in a separate include #}
-        {% include 'CMSPageBundle:Default:blockTemplates/root.html.twig' %}        
-        {% include 'CMSPageBundle:Default:blockTemplates/layout.html.twig' %}        
-        {% include 'CMSPageBundle:Default:blockTemplates/html.html.twig' %}             
+        {% include 'CMSPageBundle:Default:blockTemplatesJS/root.html.twig' %}        
+        {% include 'CMSPageBundle:Default:blockTemplatesJS/layout.html.twig' %}        
+        {% include 'CMSPageBundle:Default:blockTemplatesJS/html.html.twig' %}             
     </section>
 {% endblock blockTemplates %}
