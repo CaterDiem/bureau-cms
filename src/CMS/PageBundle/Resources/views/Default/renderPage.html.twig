@@ -132,7 +132,7 @@
             // get environment/debug state and initialise CMSPageCore.
             var CMS_ENVIRONMENT  = '{{ app.environment }}';
             var CMS_DEBUG_STATE = '{{ app.debug }}';
-            
+            var CMS_PAGE_NAME = '{{ page.getPage().name }}';
 
             CMSPage.init();
         </script>                       

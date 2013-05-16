@@ -31,7 +31,7 @@ CMSPage.ui = CMSPage.ui || {
         var contentId = editable.id;
         var pageId = window.location.pathname;
 
-        CMSPage.debug.log(content, contentId, pageId);
+        //CMSPage.debug.log(content, contentId, pageId);
     },
     initialise: function() {     
     },
@@ -68,7 +68,7 @@ CMSPage.ui = CMSPage.ui || {
             CMSPage.ui.bindToolbarEvent(newToolbar.children(ev), events[ev].event, events[ev].type, eventTarget, events[ev].callback); // most confusing line ever.                        
         }
 
-        CMSPage.debug.log(eventTarget+": toolbar attached.");
+        //CMSPage.debug.log(eventTarget+": toolbar attached.");
         
         return newToolbar;
     },

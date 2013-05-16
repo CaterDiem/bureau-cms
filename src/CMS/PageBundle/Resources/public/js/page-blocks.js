@@ -21,6 +21,7 @@ CMSPage.blocks = CMSPage.blocks|| {
 
         this.BlockCollection.fetch();
         this.populateInitialBlocksFromPage();
+        this.BlockCollection.findWhere({'rootBlock': CMS_PAGE_NAME}).view.render();
         return this;
     },
     // functions
@@ -63,10 +64,11 @@ CMSPage.blocks = CMSPage.blocks|| {
         CMSPage.blocks.BlockCollection.forEach(function(aBlock) {
             //if( aBlock.get('type') !=)
             if (aBlock.get('type') == BLOCK_TYPE_ROOT) {
-                CMSPage.blocks.addRootBlockToPage(aBlock);
-            } else {
-                CMSPage.blocks.addBlockToPage(aBlock);
-            }
+                CMSPage.blocks.createRootBlockView(aBlock); 
+                aBlock.set('rootBlock', CMS_PAGE_NAME);
+            } /*else {
+                CMSPage.blocks.createBlockView(aBlock);
+            }*/
         });
     },
     determineBlock: function(target) {
@@ -180,62 +182,50 @@ CMSPage.blocks = CMSPage.blocks|| {
                 newBlockForm.commit();                
                 CMSPage.blocks.BlockCollection.add(newBlockForm.model);
                 newBlockForm.model.save();
-                CMSPage.blocks.addBlockToPage(newBlockForm.model);
+                CMSPage.blocks.createBlockView(newBlockForm.model);
+                newBlockForm.model.view.render();
             }
         });
     },
     remove: function(block) {
 
     },
-    addRootBlockToPage: function(block) {
+    createRootBlockView: function(block) {
         CMSPage.debug.log('Replacing rootblock:' + block.get('name') + ' on page.');
         newBlockView = new BlockView({model: block});
 
-        $('#' + block.get('element')).replaceWith(newBlockView.render().el);
-        newBlockView.delegateEvents();
-        // now add its children                
-        CMSPage.debug.log("Working with: ", block);
-        block.get('children').forEach(CMSPage.blocks.addBlockToPage);
+        //$('#' + block.get('element')).replaceWith(newBlockView.render().el);
+        //newBlockView.delegateEvents();
+        block.view = newBlockView;
+        
+        // now create its children                        
+        block.get('children').forEach(function (child){
+            CMSPage.blocks.createBlockView(child);
+        });
+        
+        
     },
-    addBlockToPage: function(block) {
-
-        CMSPage.debug.log("Working with: ", block);        
-
-        var events = {};
-        events[BLOCK_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPage.blocks.handleEvent};
-        events[BLOCK_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPage.blocks.handleEvent};
-        events[BLOCK_TOOLBAR_EDIT] = {event: 'edit', type: 'click', callback: CMSPage.blocks.handleEvent};
-        events[BLOCK_TOOLBAR_INFO] = {event: 'info', type: 'click', callback: CMSPage.blocks.handleEvent};
-        events[BLOCK_TOOLBAR_DELETE] = {event: 'remove', type: 'click', callback: CMSPage.blocks.handleEvent};
-
-        if (block.get('type') == BLOCK_TYPE_LAYOUT) {
-            events[BLOCK_TOOLBAR_ADD] = {event: 'add', type: 'click', callback: CMSPage.blocks.handleEvent};
-        }
+    createBlockView: function(block) {
+        
+        CMSPage.debug.log("Creating view for: "+block.get('element'));               
+        
+        var toolbarEvents = {};
+        toolbarEvents[BLOCK_TOOLBAR_MOVE_UP] = {event: 'moveUp', type: 'click', callback: CMSPage.blocks.handleEvent};
+        toolbarEvents[BLOCK_TOOLBAR_MOVE_DOWN] = {event: 'moveDown', type: 'click', callback: CMSPage.blocks.handleEvent};
+        toolbarEvents[BLOCK_TOOLBAR_EDIT] = {event: 'edit', type: 'click', callback: CMSPage.blocks.handleEvent};
+        toolbarEvents[BLOCK_TOOLBAR_INFO] = {event: 'info', type: 'click', callback: CMSPage.blocks.handleEvent};
+        toolbarEvents[BLOCK_TOOLBAR_DELETE] = {event: 'remove', type: 'click', callback: CMSPage.blocks.handleEvent};        
+        toolbarEvents[BLOCK_TOOLBAR_ADD] = {event: 'add', type: 'click', callback: CMSPage.blocks.handleEvent};
+                
         // add event details to model for future use
-        block.set('events', events);
+        block.set('events', toolbarEvents);
         
         newBlockView = new BlockView({model: block});
-        
-        // if element exists, replace it. otherwise append it to the parent block.
-        if ($('#' + block.get('element')).length > 0) {
-            CMSPage.debug.log('Replacing block:' + block.get('name') + ' on page.');
-            $('#' + block.get('element')).replaceWith(newBlockView.render().el);
-        } else {            
-            CMSPage.debug.log('Adding block:' + block.get('name') +
-                    ' to page element: ' + block.get('parent').get('element'));
-            $('#' + block.get('parent').get('element')).append(newBlockView.render().el);
-        }
-        newBlockView.delegateEvents();
-        
         block.view = newBlockView; // not set() as this prevents object saving.
-        
-        // attach the toolbar
-        toolbar = CMSPage.ui.attachToolbar(BLOCK_TOOLBAR, newBlockView.$el, block.get('element'), events);
-
-        // now add its children
-
+        console.log(block)
+        // now add its children        
         if (block.get('children').length > 0) {
-            block.get('children').forEach(CMSPage.blocks.addBlockToPage);
+            block.get('children').forEach(CMSPage.blocks.createBlockView);
         }
     }
 };

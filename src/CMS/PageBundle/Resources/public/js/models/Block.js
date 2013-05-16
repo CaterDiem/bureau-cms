@@ -45,7 +45,7 @@ var Block = Backbone.RelationalModel.extend({
         description: 'Text',
         blockTemplate: {model: 'Template'} // note that this actually lives in blockInstance in the DB. haxx!
     },
-    initialize: function(options) {
+    initialize: function(options) {                        
         //this.on('sync', this.onSync);
     },
     onSync: function() {
