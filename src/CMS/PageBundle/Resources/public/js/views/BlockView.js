@@ -33,27 +33,19 @@ var BlockView = Backbone.View.extend({
 
     },
     render: function() {
-        // element needs triming for whitespace, unless you enjoy syntax errors.
-        
-        
+        // element needs triming for whitespace, unless you enjoy syntax errors.                
         element = $.trim(this.template({data: this.model.toJSON()}));
 
         this.setElement(element);
 
-        
-        //TODO: fix all the below haxx? this does solve the problem, though.
-        
+        //TODO: fix all the below haxx? this does solve the problem, though.       
         // add or replace the element on the page with the updated view. this is needed as I'm probably not nesting my views as subviews properly. >_>
         if ($('#' + this.model.get('element')).length > 0) {
-            CMSPage.debug.log('Replacing block:' + this.model.get('name') + ' on page.');
-            //$('#' + block.get('element')).hide();
+            CMSPage.debug.log('Replacing block:' + this.model.get('name') + ' on page.');            
             $('#' + this.model.get('element')).replaceWith(this.el);
             
         } else {            
-            CMSPage.debug.log('Adding block:' + this.model.get('name') +
-                    ' to page element: ' + this.model.get('parent')
-                    .get('element'));
-            
+            CMSPage.debug.log('Adding block:' + this.model.get('name') + ' to page element: ' + this.model.get('parent').get('element'));            
             $('#' + this.model.get('parent').get('element')).append(this.el);
         }
         
@@ -99,38 +91,5 @@ var BlockView = Backbone.View.extend({
     storeContentChanges: function() {
         this.model.set('content', this.$el.find('.block-content').html());
         this.model.save();
-    }/*,
-    delegateEvents: function(events) {
-        var delegateEventSplitter = /^(\S+)\s*(.*)$/;
-        
-        //console.log((events || (events = _.result(this, 'events'))));
-        if (!(events || (events = _.result(this, 'events')))){
-            return this;
-        }
-        this.undelegateEvents();
-        for (var key in events) {
-            //console.log(key);
-            var method = events[key];
-            if (!_.isFunction(method)){
-                method = this[events[key]];
-            }
-            
-            if (!method){
-                continue;
-            }
-
-            var match = key.match(delegateEventSplitter);
-            console.log(match);
-            var eventName = match[1], selector = match[2];
-            method = _.bind(method, this);
-            eventName += '.delegateEvents' + this.cid;
-            if (selector === '') {
-                this.$el.on(eventName, method);                
-            } else {
-                this.$el.on(eventName, selector, method);
-            }
-            console.log(this.$el.attr('id'), eventName, selector);   
-        }
-        return this;
-    },*/
+    }
 });
