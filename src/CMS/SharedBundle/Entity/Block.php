@@ -354,4 +354,42 @@ class Block
     {
         return $this->content;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $layouts;
+
+
+    /**
+     * Add layouts
+     *
+     * @param \CMS\SharedBundle\Entity\Layout $layouts
+     * @return Block
+     */
+    public function addLayout(\CMS\SharedBundle\Entity\Layout $layouts)
+    {
+        $this->layouts[] = $layouts;
+    
+        return $this;
+    }
+
+    /**
+     * Remove layouts
+     *
+     * @param \CMS\SharedBundle\Entity\Layout $layouts
+     */
+    public function removeLayout(\CMS\SharedBundle\Entity\Layout $layouts)
+    {
+        $this->layouts->removeElement($layouts);
+    }
+
+    /**
+     * Get layouts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLayouts()
+    {
+        return $this->layouts;
+    }
 }

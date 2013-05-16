@@ -35,7 +35,7 @@ CMS\SharedBundle\Entity\Layout:
     manyToOne:
         rootBlock:
             targetEntity: Block
-            inversedBy: layout
+            inversedBy: layouts
             joinColumns:
                 root_block_id:
                     referencedColumnName: id
