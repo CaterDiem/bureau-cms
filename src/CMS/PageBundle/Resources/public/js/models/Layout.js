@@ -8,6 +8,7 @@
  */
 
 var Layout = Backbone.Model.extend({
+    
     initialize: function() {        
         this.set('parent', new BlockCollection(this.get('parent')));
         this.set('children', new BlockCollection(this.get('children')));
