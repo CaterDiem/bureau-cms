@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/entypo.css') }}" />                    
         <link rel="stylesheet" href="{{ asset('bundles/cmsshared/fonts/blokk/blokk.css') }}" />                    
         <link rel="stylesheet" href="{{ asset('bundles/cmspage/css/bureau-new-homepage.css') }}" />            
+        
 
         {% stylesheets filter='?yui_css' output='css/compiled/main.css'                                     
             '@CMSPageBundle/Resources/public/less/core.less'
@@ -119,7 +120,7 @@
         {% endjavascripts %}                
         
         <script type="text/javascript">
-            // get environment/debug state and initialise CMSPag.
+            // get environment/debug state and initialise CMSPage.
             var CMS_ENVIRONMENT  = '{{ app.environment }}';
             var CMS_DEBUG_STATE = '{{ app.debug }}';
             var CMS_PAGE_NAME = '{{ page.getPage().name }}';
