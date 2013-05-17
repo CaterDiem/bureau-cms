@@ -20,7 +20,7 @@ class BlockCRUDController extends FOSRestController {
         if ($blockManager->getById($id)) {
             $block = $blockManager->getBlock();
 
-            $response = $this->blockDetailsToArray();
+            $response = $this->blockDetailsToArray($block);
 
             $view = $this->view($response, 200);
         } else {
@@ -100,6 +100,7 @@ class BlockCRUDController extends FOSRestController {
             'name' => $block->getName(),
             'created' => $block->getCreated(),
             'updated' => $block->getUpdated(),
+            'sortOrder' => $block->getParents()->first()->getSortOrder(),
             'children' => $block->getInstances()->count()
         );
         if ($block->getContent()) {
